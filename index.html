@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalTalent Recruitment</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header (Başlıq) Bölməsi - Ağ fonlu -->
+    <header>
+        <div class="logo">
+            <span class="global">Talent</span><span class="talent">Core</span>
+            <div class="subtitle">RECRUITMENT</div>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#home" class="lang" data-en="Home" data-az="Ana Səhifə">Home</a></li>
+                <li><a href="#about" class="lang" data-en="About Us" data-az="Haqqımızda">About Us</a></li>
+                <li><a href="#services" class="lang" data-en="Services" data-az="Xidmətlər">Services</a></li>
+                <li><a href="#vacancies" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vacancies</a></li>
+                <li><a href="#industries" class="lang" data-en="Industries (Partners)" data-az="Sənayelər (Tərəfdaşlar)">Industries (Partners)</a></li>
+                <li><a href="#contact" class="lang" data-en="Contact" data-az="Əlaqə">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <!-- Dil seçimi üçün qutu -->
+            <select id="lang-switch" onchange="changeLanguage()">
+                <option value="en">EN</option>
+                <option value="az">AZ</option>
+            </select>
+            <button class="send-cv lang" data-en="Send Your CV" data-az="CV Göndər">Send Your CV</button>
+        </div>
+    </header>
+
+    <!-- Hero Section (Əsas Bölmə) - Aşağı sürüşdürüldü -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="tagline lang" data-en="Connecting Talent. Building Success." data-az="İstedadları Birləşdirir. Uğur Qururuq.">Connecting Talent. Building Success.</p>
+            <h1 class="lang" data-en="The Right People<br>for Your Success" data-az="Uğurunuz üçün<br>Doğru İnsanlar">The Right People<br>for Your Success</h1>
+            <p class="description lang" data-en="We help businesses grow by connecting them with highly skilled professionals across various industries." data-az="Biz müxtəlif sənayelər üzrə yüksək ixtisaslı mütəxəssislərlə əlaqələndirərək bizneslərin böyüməsinə kömək edirik.">We help businesses grow by connecting them with highly skilled professionals across various industries.</p>
+            <div class="cta-buttons">
+                <button class="find-talent lang" data-en="Find Top Talent" data-az="İstedadları Tap">Find Top Talent</button>
+                <button class="explore-vacancies lang" data-en="Explore Vacancies" data-az="Vakansiyaları Kəşf Et">Explore Vacancies</button>
+            </div>
+        </div>
+        
+        <div class="side-controls">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="active"></span>
+        </div>
+    </section>
+
+    <!-- Dil dəyişmək üçün JavaScript Kodu -->
+    <script>
+        function changeLanguage() {
+            // Seçilmiş dili alırıq
+            const selectedLang = document.getElementById('lang-switch').value;
+            // .lang class-ı olan bütün elementləri tapırıq
+            const elements = document.querySelectorAll('.lang');
+            
+            // Hər bir elementin mətnini seçilmiş dilə uyğun dəyişirik
+            elements.forEach(el => {
+                if(selectedLang === 'az') {
+                    el.innerHTML = el.getAttribute('data-az');
+                } else {
+                    el.innerHTML = el.getAttribute('data-en');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

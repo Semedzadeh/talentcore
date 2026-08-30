@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #f8f9fa; /* Ümumi açıq arxa fon */
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px; /* Kənar boşluqları 80px-dən 40px-ə endiririk ki, genişlik artsın */
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.logo .global {
+    font-weight: 700;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.logo .talent {
+    font-weight: 700;
+    font-size: 28px;
+    color: #d4a773;
+}
+
+.logo .subtitle {
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: -5px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 10px; /* Menyu elementləri arasındakı məsafəni 15px-dən 10px-ə salırıq */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+    white-space: nowrap; /* ƏSAS HƏLL: Mətnin alt sətrə qaçmasının qarşısını alır */
+}
+
+nav ul li a:hover {
+    color: #d4a773;
+}
+
+/* YENİLƏNDİ: Sağ tərəf (Dil seçimi və CV düyməsi bir yerdə) */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Dil seçimi qutusunun dizaynı */
+#lang-switch {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.send-cv {
+    background-color: #0f172a;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Düymə mətninin bir sətirdə qalmasını təmin edir */
+}
+
+.send-cv:hover {
+    background-color: #1e293b;
+}
+
+/* YENİLƏNDİ: Hero Section - Aşağı sürüşdürüldü */
+.hero {
+    height: calc(100vh - 85px); /* Header-in hündürlüyünü çıxırıq ki, şəkil aşağı düşsün */
+    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
+                url('office-handshake.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.tagline {
+    color: #d4a773;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.hero-content h1 {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.hero-content .description {
+    font-size: 18px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+    color: #e2e8f0;
+}
+
+.cta-buttons {
+    display: flex;
+}
+
+.find-talent {
+    background-color: #d4a773;
+    color: #fff;
+    border: none;
+    padding: 18px 36px;
+    border-radius: 5px;
+    margin-right: 25px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.find-talent:hover {
+    background-color: #c49663;
+}
+
+.explore-vacancies {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 16px 34px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.explore-vacancies:hover {
+    background-color: #fff;
+    color: #0f172a;
+}
+
+.side-controls {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.side-controls span {
+    width: 8px;
+    height: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.side-controls span.active {
+    background-color: #fff;
+    border-color: #fff;
+    height: 20px;
+    border-radius: 10px;
+}
