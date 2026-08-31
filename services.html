@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talentcore - Xidmətlər</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none;">
+                <span class="global">Talent</span><span class="talent">core</span>
+                <div class="subtitle">RECRUITMENT</div>
+            </a>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
+                <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
+                <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
+                <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
+                <li><a href="industries.html" class="lang" data-en="Partners" data-az="Tərəfdaşlar">Tərəfdaşlar</a></li>
+                <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <select id="lang-switch" onchange="changeLanguage()">
+                <option value="az" selected>AZ</option>
+                <option value="en">EN</option>
+            </select>
+            <a href="cv.html" class="send-cv lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+        </div>
+    </header>
+
+    <section class="services-section">
+        <div class="services-header-text">
+            <h2 class="lang" data-en="Our Services" data-az="Xidmətlərimiz">Xidmətlərimiz</h2>
+            <p class="lang" data-en="Comprehensive recruitment solutions tailored to your business needs." data-az="Biznes ehtiyaclarınıza uyğunlaşdırılmış hərtərəfli işəqəbul həlləri.">Biznes ehtiyaclarınıza uyğunlaşdırılmış hərtərəfli işəqəbul həlləri.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">🔍</div>
+                <h3 class="lang" data-en="Executive Search" data-az="İdarəedici Kadrların Axtarışı">İdarəedici Kadrların Axtarışı</h3>
+                <p class="lang" data-en="Finding top-tier leadership and C-level executives to drive your company forward." data-az="Şirkətinizi irəli aparacaq yüksək səviyyəli rəhbər və C-level kadrların tapılması.">Şirkətinizi irəli aparacaq yüksək səviyyəli rəhbər və C-level kadrların tapılması.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="icon">👥</div>
+                <h3 class="lang" data-en="Professional Recruitment" data-az="Peşəkar İşə Qəbul">Peşəkar İşə Qəbul</h3>
+                <p class="lang" data-en="Connecting you with highly skilled professionals across various specialized industries." data-az="Müxtəlif ixtisaslaşmış sənayelər üzrə yüksək bacarıqlı peşəkarlarla əlaqələndirmə.">Müxtəlif ixtisaslaşmış sənayelər üzrə yüksək bacarıqlı peşəkarlarla əlaqələndirmə.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="icon">📊</div>
+                <h3 class="lang" data-en="Talent Assessment" data-az="İstedadların Qiymətləndirilməsi">İstedadların Qiymətləndirilməsi</h3>
+                <p class="lang" data-en="Comprehensive evaluation of candidates to ensure perfect alignment with your organizational goals." data-az="Təşkilati hədəflərinizə tam uyğunluğu təmin etmək üçün namizədlərin hərtərəfli qiymətləndirilməsi.">Təşkilati hədəflərinizə tam uyğunluğu təmin etmək üçün namizədlərin hərtərəfli qiymətləndirilməsi.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function changeLanguage() {
+            const selectedLang = document.getElementById('lang-switch').value;
+            const elements = document.querySelectorAll('.lang');
+            
+            elements.forEach(el => {
+                if(selectedLang === 'az') {
+                    el.innerHTML = el.getAttribute('data-az');
+                } else {
+                    el.innerHTML = el.getAttribute('data-en');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
