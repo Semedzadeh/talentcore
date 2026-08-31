@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talentcore Recruitment</title>
+    <title>Talentcore - Tərəfdaşlar</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Header (Başlıq) Bölməsi -->
     <header>
         <div class="logo">
             <a href="index.html" style="text-decoration: none;">
-                <!-- GlobalTalent əvəzinə Talentcore yazdıq -->
                 <span class="global">Talent</span><span class="talent">core</span>
                 <div class="subtitle">RECRUITMENT</div>
             </a>
@@ -21,7 +19,6 @@
         
         <nav>
             <ul>
-                <!-- Defolt olaraq Azərbaycan dilli mətnləri yazdıq -->
                 <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
                 <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
                 <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
@@ -32,44 +29,48 @@
         </nav>
 
         <div class="header-right">
-            <!-- Dil seçimi qutusunda ilk (selected) olaraq AZ seçdik -->
             <select id="lang-switch" onchange="changeLanguage()">
                 <option value="az" selected>AZ</option>
                 <option value="en">EN</option>
             </select>
-            <!-- Düyməni linkə <a> çevirdik və cv.html-ə yönləndirdik -->
             <a href="cv.html" class="send-cv lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
         </div>
     </header>
 
-    <!-- Hero Section (Əsas Bölmə) -->
-    <section class="hero">
-        <div class="hero-content">
-            <!-- Bütün mətnlər artıq əsasən Azərbaycan dilində daxil edilib -->
-            <p class="tagline lang" data-en="Connecting Talent. Building Success." data-az="İstedadları Birləşdirir. Uğur Qururuq.">İstedadları Birləşdirir. Uğur Qururuq.</p>
-            <h1 class="lang" data-en="The Right People<br>for Your Success" data-az="Uğurunuz üçün<br>Doğru İnsanlar">Uğurunuz üçün<br>Doğru İnsanlar</h1>
-            <p class="description lang" data-en="We help businesses grow by connecting them with highly skilled professionals across various industries." data-az="Biz müxtəlif sənayelər üzrə yüksək ixtisaslı mütəxəssislərlə əlaqələndirərək bizneslərin böyüməsinə kömək edirik.">Biz müxtəlif sənayelər üzrə yüksək ixtisaslı mütəxəssislərlə əlaqələndirərək bizneslərin böyüməsinə kömək edirik.</p>
-            <div class="cta-buttons">
-                <!-- Düyməni linkə <a> çevirdik və vacancies.html-ə yönləndirdik -->
-                <a href="vacancies.html" class="explore-vacancies lang" data-en="Explore Vacancies" data-az="Vakansiyaları Kəşf Et">Vakansiyaları Kəşf Et</a>
-            </div>
+    <section class="partners-section">
+        <div class="partners-header">
+            <h2 class="lang" data-en="Our Partners" data-az="Tərəfdaşlarımız">Tərəfdaşlarımız</h2>
+            <p class="lang" data-en="We collaborate with leading companies to build successful teams." data-az="Uğurlu komandalar qurmaq üçün aparıcı şirkətlərlə əməkdaşlıq edirik.">Uğurlu komandalar qurmaq üçün aparıcı şirkətlərlə əməkdaşlıq edirik.</p>
         </div>
         
-        <div class="side-controls">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span class="active"></span>
+        <div class="partners-grid">
+            <!-- Tərəfdaş 1 -->
+            <div class="partner-card">
+                <div class="icon">💼</div>
+                <h3 class="lang" data-en="Corporate Partner A" data-az="Korporativ Tərəfdaş A">Korporativ Tərəfdaş A</h3>
+            </div>
+            <!-- Tərəfdaş 2 -->
+            <div class="partner-card">
+                <div class="icon">🤝</div>
+                <h3 class="lang" data-en="Corporate Partner B" data-az="Korporativ Tərəfdaş B">Korporativ Tərəfdaş B</h3>
+            </div>
+            <!-- Tərəfdaş 3 -->
+            <div class="partner-card">
+                <div class="icon">📈</div>
+                <h3 class="lang" data-en="Corporate Partner C" data-az="Korporativ Tərəfdaş C">Korporativ Tərəfdaş C</h3>
+            </div>
+            <!-- Tərəfdaş 4 -->
+            <div class="partner-card">
+                <div class="icon">🌐</div>
+                <h3 class="lang" data-en="Corporate Partner D" data-az="Korporativ Tərəfdaş D">Korporativ Tərəfdaş D</h3>
+            </div>
         </div>
     </section>
 
-    <!-- Dil dəyişmək üçün JavaScript Kodu -->
     <script>
         function changeLanguage() {
             const selectedLang = document.getElementById('lang-switch').value;
-            const elements = document.querySelectorAll('.lang');
-            
-            elements.forEach(el => {
+            document.querySelectorAll('.lang').forEach(el => {
                 if(selectedLang === 'az') {
                     el.innerHTML = el.getAttribute('data-az');
                 } else {

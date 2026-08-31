@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talentcore - Vakansiyalar</title>
+    <!-- CSS faylını bura bağlayırıq -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header (Başlıq) Bölməsi eynilə qalır -->
+    <header>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none;">
+                <span class="global">Talent</span><span class="talent">core</span>
+                <div class="subtitle">RECRUITMENT</div>
+            </a>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
+                <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
+                <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
+                <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
+                <li><a href="industries.html" class="lang" data-en="Partners" data-az="Tərəfdaşlar">Tərəfdaşlar</a></li>
+                <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <select id="lang-switch" onchange="changeLanguage()">
+                <option value="az" selected>AZ</option>
+                <option value="en">EN</option>
+            </select>
+            <a href="cv.html" class="send-cv lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+        </div>
+    </header>
+
+    <!-- Vakansiyalar Bölməsi -->
+    <section class="vacancies-section">
+        <div class="vacancies-header">
+            <div class="header-left">
+                <h2>Vakansiyalar</h2>
+                <p>54 / 819 nəticə göstərilir</p>
+            </div>
+            <div class="header-right">
+                <div class="sort-dropdown">
+                    <span>Çeşidlə:</span>
+                    <select>
+                        <option value="new">Əvvəlcə yenilər</option>
+                        <option value="old">Əvvəlcə köhnələr</option>
+                        <option value="az">Əlifba sırası (A-Z)</option>
+                    </select>
+                </div>
+                <div class="view-toggles">
+                    <button class="grid-view active">⊞</button>
+                    <button class="list-view">⊟</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="vacancies-grid">
+            <!-- Kart 1 -->
+            <div class="vacancy-card">
+                <div class="card-top">
+                    <div class="company-logo">
+                        <span class="logo-placeholder" style="color: green;">☘ GREEN</span>
+                    </div>
+                    <span class="pro-badge">Pro</span>
+                </div>
+                <h3 class="job-title">Sürücü (Ford Tranzit)</h3>
+                <p class="company-name">Green Plant MMC • Bakı, Azərbaycan</p>
+                <div class="card-bottom">
+                    <span class="time">🕒 Dünən</span>
+                    <span class="views">👁 26</span>
+                </div>
+            </div>
+
+            <!-- Kart 2 -->
+            <div class="vacancy-card">
+                <div class="card-top">
+                    <div class="company-logo">
+                        <span class="logo-placeholder" style="background:#fcd34d; padding:5px; border-radius:50%;">yelo</span>
+                    </div>
+                </div>
+                <h3 class="job-title">İnzibati işlər üzrə köməkçi</h3>
+                <p class="company-name">Yelo Bank ASC • Bakı, Azərbaycan</p>
+                <div class="card-bottom">
+                    <span class="time">🕒 Bu gün</span>
+                    <span class="views">👁 1K</span>
+                </div>
+            </div>
+            
+            <!-- Kart 3 -->
+            <div class="vacancy-card">
+                <div class="card-top">
+                    <div class="company-logo">
+                        <span class="logo-placeholder" style="color: blue;">🌐 PMD</span>
+                    </div>
+                </div>
+                <h3 class="job-title">Dizayn menecer</h3>
+                <p class="company-name">PMD Group MMC • Bakı, Azərbaycan</p>
+                <div class="card-bottom">
+                    <span class="time">🕒 Bu gün</span>
+                    <span class="views">👁 2.1K</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dil Dəyişmək Üçün Script -->
+    <script>
+        function changeLanguage() {
+            const selectedLang = document.getElementById('lang-switch').value;
+            const elements = document.querySelectorAll('.lang');
+            
+            elements.forEach(el => {
+                if(selectedLang === 'az') {
+                    el.innerHTML = el.getAttribute('data-az');
+                } else {
+                    el.innerHTML = el.getAttribute('data-en');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

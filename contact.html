@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talentcore - Əlaqə</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none;">
+                <span class="global">Talent</span><span class="talent">core</span>
+                <div class="subtitle">RECRUITMENT</div>
+            </a>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
+                <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
+                <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
+                <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
+                <li><a href="industries.html" class="lang" data-en="Partners" data-az="Tərəfdaşlar">Tərəfdaşlar</a></li>
+                <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <select id="lang-switch" onchange="changeLanguage()">
+                <option value="az" selected>AZ</option>
+                <option value="en">EN</option>
+            </select>
+            <a href="cv.html" class="send-cv lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</h2>
+                <p class="lang" data-en="Have questions about our recruitment services? We are here to help." data-az="İşəqəbul xidmətlərimizlə bağlı suallarınız var? Biz kömək etməyə hazırıq.">İşəqəbul xidmətlərimizlə bağlı suallarınız var? Biz kömək etməyə hazırıq.</p>
+                <div class="info-item">
+                    <span>📧</span>
+                    <a href="mailto:info@talentcore.az">info@talentcore.az</a>
+                </div>
+                <div class="info-item">
+                    <span>📍</span>
+                    <span class="lang" data-en="Baku, Azerbaijan" data-az="Bakı, Azərbaycan">Bakı, Azərbaycan</span>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form>
+                    <input type="text" class="lang-placeholder" data-en="Your Name" data-az="Adınız" placeholder="Adınız">
+                    <input type="email" class="lang-placeholder" data-en="Your Email" data-az="E-poçt ünvanınız" placeholder="E-poçt ünvanınız">
+                    <textarea rows="5" class="lang-placeholder" data-en="Your Message" data-az="Mesajınız" placeholder="Mesajınız"></textarea>
+                    <button type="button" class="lang" data-en="Send Message" data-az="Mesajı Göndər">Mesajı Göndər</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function changeLanguage() {
+            const selectedLang = document.getElementById('lang-switch').value;
+            
+            // Standart mətnlər üçün
+            document.querySelectorAll('.lang').forEach(el => {
+                if(selectedLang === 'az') el.innerHTML = el.getAttribute('data-az');
+                else el.innerHTML = el.getAttribute('data-en');
+            });
+            
+            // Form placeholder-ləri üçün əlavə
+            document.querySelectorAll('.lang-placeholder').forEach(el => {
+                if(selectedLang === 'az') el.setAttribute('placeholder', el.getAttribute('data-az'));
+                else el.setAttribute('placeholder', el.getAttribute('data-en'));
+            });
+        }
+    </script>
+</body>
+</html>
