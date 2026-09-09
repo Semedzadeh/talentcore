@@ -5,76 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talentcore Recruitment</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="dark-theme">
 
-    <!-- Header (Başlıq) Bölməsi -->
-    <header>
+    <!-- Header -->
+    <header class="glass-header">
         <div class="logo">
-            <a href="index.html" style="text-decoration: none;">
-                <!-- GlobalTalent əvəzinə Talentcore yazdıq -->
-                <span class="global">Talent</span><span class="talent">core</span>
-                <div class="subtitle">RECRUITMENT</div>
+            <a href="index.html">
+                <span class="icon">🌱</span>
+                <div class="logo-text">
+                    <span class="talent">Talent</span>
+                    <span class="core">Core</span>
+                </div>
             </a>
         </div>
         
         <nav>
             <ul>
-                <!-- Defolt olaraq Azərbaycan dilli mətnləri yazdıq -->
                 <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
                 <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
                 <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
                 <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
-                <li><a href="industries.html" class="lang" data-en="Partners" data-az="Tərəfdaşlar">Tərəfdaşlar</a></li>
+                <!-- Tərəfdaşlar dəyişdirildi -->
+                <li><a href="industries.html" class="lang" data-en="Areas of Expertise" data-az="İxtisaslaşdığımız sahələr">İxtisaslaşdığımız sahələr</a></li>
                 <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
             </ul>
         </nav>
 
         <div class="header-right">
-            <!-- Dil seçimi qutusunda ilk (selected) olaraq AZ seçdik -->
             <select id="lang-switch" onchange="changeLanguage()">
                 <option value="az" selected>AZ</option>
                 <option value="en">EN</option>
             </select>
-            <!-- Düyməni linkə <a> çevirdik və cv.html-ə yönləndirdik -->
-            <a href="cv.html" class="send-cv lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+            <a href="cv.html" class="send-cv-btn lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
         </div>
     </header>
 
-    <!-- Hero Section (Əsas Bölmə) -->
-    <section class="hero">
-        <div class="hero-content">
-            <!-- Bütün mətnlər artıq əsasən Azərbaycan dilində daxil edilib -->
-            <p class="tagline lang" data-en="Connecting Talent. Building Success." data-az="İstedadları Birləşdirir. Uğur Qururuq.">İstedadları Birləşdirir. Uğur Qururuq.</p>
-            <h1 class="lang" data-en="The Right People<br>for Your Success" data-az="Uğurunuz üçün<br>Doğru İnsanlar">Uğurunuz üçün<br>Doğru İnsanlar</h1>
-            <p class="description lang" data-en="We help businesses grow by connecting them with highly skilled professionals across various industries." data-az="Biz müxtəlif sənayelər üzrə yüksək ixtisaslı mütəxəssislərlə əlaqələndirərək bizneslərin böyüməsinə kömək edirik.">Biz müxtəlif sənayelər üzrə yüksək ixtisaslı mütəxəssislərlə əlaqələndirərək bizneslərin böyüməsinə kömək edirik.</p>
-            <div class="cta-buttons">
-                <!-- Düyməni linkə <a> çevirdik və vacancies.html-ə yönləndirdik -->
-                <a href="vacancies.html" class="explore-vacancies lang" data-en="Explore Vacancies" data-az="Vakansiyaları Kəşf Et">Vakansiyaları Kəşf Et</a>
+    <!-- Hero Section -->
+    <section class="hero-modern">
+        <div class="hero-content-modern">
+            <p class="hero-tags">İstedad Seçirik | Executive Search | Professional Recruitment | Talent Assessment</p>
+            <h1>"Gələcəyi Quracaq Liderləri Və<br>Peşəkarları Tapırıq"<br><span>(Building Leadership Teams That Build Great Companies).</span></h1>
+            <p class="hero-description">"Biz sadəcə vakansiya doldurmuruq. Şirkətlərin sürətli və davamlı böyüməsini təmin edən yüksək performanslı komandalar təşkil edirik." (We Don't Just Fill Vacancies. We Build High-Performing Teams).</p>
+            
+            <div class="hero-buttons">
+                <a href="contact.html" class="btn-consult lang" data-en="Get Consultation" data-az="Məsləhətləşmə alın">Məsləhətləşmə alın</a>
+                <a href="vacancies.html" class="btn-explore lang" data-en="Explore Vacancies" data-az="Vakansiyaları kəşf et">Vakansiyaları kəşf et</a>
             </div>
-        </div>
-        
-        <div class="side-controls">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span class="active"></span>
         </div>
     </section>
 
-    <!-- Dil dəyişmək üçün JavaScript Kodu -->
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <h2>Today’s Hiring Challenges</h2>
+        <div class="stats-grid">
+            <!-- Kart 1 -->
+            <div class="stat-card">
+                <div class="stat-number">3-6</div>
+                <div class="stat-title">MONTHS</div>
+                <p>months on average for executive hiring.</p>
+                <div class="stat-icon">🌍 🕒</div>
+            </div>
+            
+            <!-- Kart 2 -->
+            <div class="stat-card">
+                <div class="stat-number">30%</div>
+                <div class="stat-title">BAD HIRES</div>
+                <p>Bad hires cost up to 30% of annual salary.</p>
+                <div class="stat-graph">📉</div>
+            </div>
+            
+            <!-- Kart 3 -->
+            <div class="stat-card">
+                <div class="stat-number">75%</div>
+                <div class="stat-title">STRUGGLE</div>
+                <p>Bad hires cost to 75% of annual salary.</p>
+                <div class="stat-graph">📊</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dil Scripti -->
     <script>
         function changeLanguage() {
             const selectedLang = document.getElementById('lang-switch').value;
-            const elements = document.querySelectorAll('.lang');
-            
-            elements.forEach(el => {
-                if(selectedLang === 'az') {
-                    el.innerHTML = el.getAttribute('data-az');
-                } else {
-                    el.innerHTML = el.getAttribute('data-en');
-                }
+            document.querySelectorAll('.lang').forEach(el => {
+                if(selectedLang === 'az') el.innerHTML = el.getAttribute('data-az');
+                else el.innerHTML = el.getAttribute('data-en');
             });
         }
     </script>
