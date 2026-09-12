@@ -1,0 +1,53 @@
+.hero-baku {
+    min-height: 100vh; 
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 120px 20px 60px 20px; 
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    box-shadow: inset 0 0 150px rgba(0,0,0,0.8);
+    margin-top: -100px;
+}
+.hero-content { max-width: 900px; margin: 0 auto; z-index: 10; width: 100%; }
+.tagline { color: #d97742; font-size: 16px; font-weight: 600; margin-bottom: 15px; letter-spacing: 1px; }
+.hero-content h1 { font-size: 58px; font-weight: 700; line-height: 1.2; margin-bottom: 15px; color: #fff; }
+.subtitle-text { font-size: 20px; font-weight: 600; color: #cbd5e1; margin-bottom: 25px; }
+.description { font-size: 16px; margin-bottom: 40px; line-height: 1.7; color: #e2e8f0; }
+.cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+.btn-transparent {
+    background-color: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5);
+    padding: 12px 30px; border-radius: 8px; font-weight: 600; font-size: 16px;
+    text-decoration: none; transition: all 0.3s; text-align: center; display: inline-block;
+}
+.btn-transparent:hover { background-color: #fff; color: #0b1120; }
+
+.stats-section { padding: 80px 5%; text-align: center; background-color: var(--bg-color); transition: background-color 0.4s; }
+.section-title { font-size: 32px; margin-bottom: 50px; font-weight: 700; color: var(--text-color); }
+.stats-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; width: 100%; }
+
+.stat-card {
+    background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-color);
+    padding: 30px; border-radius: 15px; width: 100%; max-width: 320px; text-align: left; position: relative;
+    transition: transform 0.3s, border-color 0.3s, background 0.4s;
+    flex: 1 1 300px; /* Ekran kiçildikcə kartların elastik hərəkəti */
+}
+.stat-card:hover { transform: translateY(-5px); border-color: #d97742; background: var(--card-hover); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+.stat-number { font-size: 42px; font-weight: 700; color: #d97742; margin-bottom: 5px; }
+.stat-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: var(--text-color); }
+.stat-card p { font-size: 14px; color: var(--text-muted); }
+.stat-icon { position: absolute; right: 20px; bottom: 20px; font-size: 40px; opacity: 0.3; }
+
+/* Planşet və Mobil Uyğunluq */
+@media (max-width: 1024px) {
+    .hero-content h1 { font-size: 46px; }
+    .hero-baku { padding-top: 200px; } /* Header dikinə böyüdüyü üçün boşluq artırılır */
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 34px; }
+    .tagline { font-size: 14px; }
+    .subtitle-text { font-size: 17px; }
+    .description { font-size: 15px; }
+    .cta-buttons { flex-direction: column; gap: 15px; }
+    .cta-buttons a { width: 100%; }
+    .stat-card { max-width: 100%; }
+}
