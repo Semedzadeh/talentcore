@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talentcore Recruitment</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Talentcore | Gələcəyin Liderlərini Tapırıq</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-theme">
 
-    <!-- Header -->
     <header class="glass-header">
-        <div class="logo">
+        <div class="logo-container">
             <a href="index.html">
-                <span class="icon">🌱</span>
-                <div class="logo-text">
-                    <span class="talent">Talent</span>
-                    <span class="core">Core</span>
-                </div>
+                <img src="logo.png" alt="Talentcore Logo" class="site-logo">
             </a>
         </div>
         
@@ -27,74 +23,69 @@
                 <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
                 <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
                 <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
-                <!-- Tərəfdaşlar dəyişdirildi -->
                 <li><a href="industries.html" class="lang" data-en="Areas of Expertise" data-az="İxtisaslaşdığımız sahələr">İxtisaslaşdığımız sahələr</a></li>
                 <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
             </ul>
         </nav>
 
         <div class="header-right">
-            <select id="lang-switch" onchange="changeLanguage()">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round">
+                    <span class="icon moon">🌙</span>
+                    <span class="icon sun">☀️</span>
+                </span>
+            </label>
+
+            <select id="lang-switch" class="lang-dropdown">
                 <option value="az" selected>AZ</option>
                 <option value="en">EN</option>
             </select>
-            <a href="cv.html" class="send-cv-btn lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+            
+            <a href="cv.html" class="btn-primary btn-sm lang" data-en="Send CV" data-az="CV Göndər">CV Göndər</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-modern">
-        <div class="hero-content-modern">
-            <p class="hero-tags">İstedad Seçirik | Executive Search | Professional Recruitment | Talent Assessment</p>
-            <h1>"Gələcəyi Quracaq Liderləri Və<br>Peşəkarları Tapırıq"<br><span>(Building Leadership Teams That Build Great Companies).</span></h1>
-            <p class="hero-description">"Biz sadəcə vakansiya doldurmuruq. Şirkətlərin sürətli və davamlı böyüməsini təmin edən yüksək performanslı komandalar təşkil edirik." (We Don't Just Fill Vacancies. We Build High-Performing Teams).</p>
+    <section class="hero-baku">
+        <div class="hero-content">
+            <p class="tagline lang" data-en="Identifying Talent | Executive Search | Professional Recruitment" data-az="İstedad Seçirik | Executive Search | Professional Recruitment">İstedad Seçirik | Executive Search | Professional Recruitment</p>
+            <h1 class="lang" data-en="We Find Leaders and Professionals<br>Who Will Build the Future" data-az="Gələcəyi Quracaq Liderləri Və<br>Peşəkarları Tapırıq">Gələcəyi Quracaq Liderləri Və<br>Peşəkarları Tapırıq</h1>
+            <p class="subtitle-text lang" data-en="(Building Leadership Teams That Build Great Companies)." data-az="(Building Leadership Teams That Build Great Companies).">(Building Leadership Teams That Build Great Companies).</p>
+            <p class="description lang" data-en="We don't just fill a vacancy. We organize high-performance teams that ensure rapid and sustained growth for companies." data-az="Biz sadəcə vakansiya doldurmuruq. Şirkətlərin sürətli və davamlı böyüməsinə təkan verən yüksək performanslı komandalar təşkil edirik.">Biz sadəcə vakansiya doldurmuruq. Şirkətlərin sürətli və davamlı böyüməsinə təkan verən yüksək performanslı komandalar təşkil edirik.</p>
             
-            <div class="hero-buttons">
-                <a href="contact.html" class="btn-consult lang" data-en="Get Consultation" data-az="Məsləhətləşmə alın">Məsləhətləşmə alın</a>
-                <a href="vacancies.html" class="btn-explore lang" data-en="Explore Vacancies" data-az="Vakansiyaları kəşf et">Vakansiyaları kəşf et</a>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary lang" data-en="Get a Consultation" data-az="Məsləhətləşmə alın">Məsləhətləşmə alın</a>
+                <a href="vacancies.html" class="btn-transparent lang" data-en="Explore Vacancies" data-az="Vakansiyaları kəşf et">Vakansiyaları kəşf et</a>
             </div>
         </div>
     </section>
 
-    <!-- Statistics Section -->
     <section class="stats-section">
-        <h2>Today’s Hiring Challenges</h2>
+        <h2 class="section-title lang" data-en="Today's Hiring Challenges" data-az="Bugünkü İşəqəbul Çətinlikləri">Bugünkü İşəqəbul Çətinlikləri</h2>
         <div class="stats-grid">
-            <!-- Kart 1 -->
-            <div class="stat-card">
+            <div class="stat-card glass-effect">
                 <div class="stat-number">3-6</div>
-                <div class="stat-title">MONTHS</div>
-                <p>months on average for executive hiring.</p>
-                <div class="stat-icon">🌍 🕒</div>
+                <div class="stat-title lang" data-en="MONTHS" data-az="AY">AY</div>
+                <p class="lang" data-en="months on average for executive hiring." data-az="rəhbər vəziyyətə işə qəbul üçün orta müddət.">rəhbər vəziyyətə işə qəbul üçün orta müddət.</p>
+                <div class="stat-icon">🕒</div>
             </div>
             
-            <!-- Kart 2 -->
-            <div class="stat-card">
+            <div class="stat-card glass-effect">
                 <div class="stat-number">30%</div>
-                <div class="stat-title">BAD HIRES</div>
-                <p>Bad hires cost up to 30% of annual salary.</p>
-                <div class="stat-graph">📉</div>
+                <div class="stat-title lang" data-en="BAD HIRES" data-az="YANLIŞ SEÇİM">YANLIŞ SEÇİM</div>
+                <p class="lang" data-en="Bad hires cost up to 30% of annual salary." data-az="Yanlış işə qəbul illik maaşın 30%-nə qədər başa gəlir.">Yanlış işə qəbul illik maaşın 30%-nə qədər başa gəlir.</p>
+                <div class="stat-icon">📉</div>
             </div>
             
-            <!-- Kart 3 -->
-            <div class="stat-card">
+            <div class="stat-card glass-effect">
                 <div class="stat-number">75%</div>
-                <div class="stat-title">STRUGGLE</div>
-                <p>Bad hires cost to 75% of annual salary.</p>
-                <div class="stat-graph">📊</div>
+                <div class="stat-title lang" data-en="STRUGGLE" data-az="ÇƏTİNLİK">ÇƏTİNLİK</div>
+                <p class="lang" data-en="75% of companies struggle to find the right leadership." data-az="Şirkətlərin 75%-i uyğun lideri tapmaqda çətinlik çəkir.">Şirkətlərin 75%-i uyğun lideri tapmaqda çətinlik çəkir.</p>
+                <div class="stat-icon">📊</div>
             </div>
         </div>
     </section>
 
-    <!-- Dil Scripti -->
-    <script>
-        function changeLanguage() {
-            const selectedLang = document.getElementById('lang-switch').value;
-            document.querySelectorAll('.lang').forEach(el => {
-                if(selectedLang === 'az') el.innerHTML = el.getAttribute('data-az');
-                else el.innerHTML = el.getAttribute('data-en');
-            });
-        }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
