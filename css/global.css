@@ -30,7 +30,7 @@ body {
 }
 
 .btn-primary {
-    background-color: #d97742;
+    background-color: #c4642f; /* Parlaqlığı azaldılmış daha dolğun bürünc-narıncı */
     color: #fff;
     padding: 14px 30px;
     border-radius: 8px;
@@ -40,25 +40,34 @@ body {
     transition: all 0.3s;
     display: inline-block;
     text-align: center;
+    box-shadow: 0 6px 20px rgba(196, 100, 47, 0.3); /* İşıltı azaldıldı */
+    border: 1px solid #b35624; /* Kənar xətt bir az daha tündləşdirildi */
+}
+
+.btn-primary:hover {
+    background-color: #b35624; /* Üzərinə gəldikdə daha da tündləşir */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(179, 86, 36, 0.4);
 }
 .btn-primary:hover { background-color: #b86235; transform: translateY(-2px); }
 .btn-primary.btn-sm { padding: 8px 18px; font-size: 14px; }
 
-/* Yığcam və Şəffaf Header */
 .glass-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 25px; /* Daha yığcam boşluqlar */
+    padding: 8px 25px; 
     background: var(--header-bg);
     backdrop-filter: blur(15px);
-    position: sticky;
-    top: 15px;
+    position: absolute ; /* Səhifə sürüşəndə daim yuxarıda sabit qalır */
+    top: 15px; /* Yuxarıdan boşluq */
+    left: 0;
+    right: 0;
+    margin: 0 auto; /* Ekranın mərkəzində saxlayır */
     width: 95%;
     max-width: 1400px;
-    margin: 15px auto;
     z-index: 1000;
-    border-radius: 15px;
+    border-radius: 15px; /* Künclər yenidən oval edildi */
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: background 0.4s, border 0.4s;
@@ -121,11 +130,21 @@ input:checked + .slider .sun { opacity: 1; }
 
 /* Planşet və Kiçik Noutbuklar (1024px) */
 @media (max-width: 1024px) {
-    .glass-header { flex-direction: column; padding: 15px; gap: 15px; }
+    .glass-header { 
+        flex-direction: column; 
+        padding: 15px; 
+        gap: 15px; 
+        width: 95%; /* Mobil/Planşetdə də kənar boşluqları qoruyur */
+        border-radius: 15px; 
+    }
     .site-logo { height: 60px; }
-    .logo-container, nav, .header-right { flex: unset; justify-content: center; width: 100%; text-align: center; }
+    .logo-container, nav, .header-right { 
+        flex: unset; 
+        justify-content: center; 
+        width: 100%; 
+        text-align: center; 
+    }
 }
-
 /* Mobil Ekranlar (768px və aşağısı) */
 @media (max-width: 768px) {
     .site-logo { height: 45px; }
