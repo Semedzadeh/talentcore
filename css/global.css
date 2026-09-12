@@ -41,11 +41,11 @@ body {
     display: inline-block;
     text-align: center;
     box-shadow: 0 6px 20px rgba(196, 100, 47, 0.3); /* İşıltı azaldıldı */
-    border: 1px solid #b35624; /* Kənar xətt bir az daha tündləşdirildi */
+    border: 1px solid #b35624; 
 }
 
 .btn-primary:hover {
-    background-color: #b35624; /* Üzərinə gəldikdə daha da tündləşir */
+    background-color: #b35624; 
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(179, 86, 36, 0.4);
 }
