@@ -2,8 +2,7 @@
     --bg-color: #0b1120;
     --text-color: #ffffff;
     --text-muted: #cbd5e1;
-    /* Menyu arxalığı daha şəffaf edildi */
-    --header-bg: rgba(15, 23, 42, 0.4); 
+    --header-bg: rgba(15, 23, 42, 0.2); 
     --border-color: rgba(255, 255, 255, 0.2);
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-hover: rgba(255, 255, 255, 0.08);
@@ -13,7 +12,7 @@ body.light-theme {
     --bg-color: #f8f9fa;
     --text-color: #1e293b;
     --text-muted: #475569;
-    --header-bg: rgba(255, 255, 255, 0.6);
+    --header-bg: rgba(255, 255, 255, 0.4);
     --border-color: rgba(0, 0, 0, 0.1);
     --card-bg: rgba(255, 255, 255, 0.9);
     --card-hover: #ffffff;
@@ -30,17 +29,17 @@ body {
 }
 
 .btn-primary {
-    background-color: #c4642f; /* Parlaqlığı azaldılmış daha dolğun bürünc-narıncı */
+    background-color: #c4642f; 
     color: #fff;
-    padding: 14px 30px;
+    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 30px);
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 16px;
+    font-size: clamp(14px, 1.5vw, 16px);
     transition: all 0.3s;
     display: inline-block;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(196, 100, 47, 0.3); /* İşıltı azaldıldı */
+    box-shadow: 0 6px 20px rgba(196, 100, 47, 0.3);
     border: 1px solid #b35624; 
 }
 
@@ -49,48 +48,57 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(179, 86, 36, 0.4);
 }
-.btn-primary:hover { background-color: #b86235; transform: translateY(-2px); }
 .btn-primary.btn-sm { padding: 8px 18px; font-size: 14px; }
 
+/* Absolute Header */
 .glass-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 25px; 
-    background: var(--header-bg);
-    backdrop-filter: blur(15px);
-    position: absolute ; /* Səhifə sürüşəndə daim yuxarıda sabit qalır */
-    top: 15px; /* Yuxarıdan boşluq */
-    left: 0;
-    right: 0;
-    margin: 0 auto; /* Ekranın mərkəzində saxlayır */
+    padding: 10px 20px;
+    background: var(--header-bg, rgba(15, 23, 42, 0.2));
+    backdrop-filter: blur(20px);
+    position: absolute; 
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 95%;
     max-width: 1400px;
     z-index: 1000;
-    border-radius: 15px; /* Künclər yenidən oval edildi */
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: background 0.4s, border 0.4s;
+    border-radius: 12px;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.15));
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.logo-container { flex: 1; display: flex; align-items: center; }
-/* Loqo ölçüsü minimum 75px edildi */
-.site-logo { height: 75px; object-fit: contain; transition: height 0.3s; }
+.logo-container { margin-right: auto; }
+.site-logo { height: clamp(40px, 4vw, 55px); object-fit: contain; }
 
-nav { flex: 2; display: flex; justify-content: center; }
-nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; justify-content: center; }
+/* Hamburger İkonu - Kompüterdə gizlidir */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+.hamburger span {
+    width: 100%; height: 2px; background-color: var(--text-color, #fff);
+    transition: all 0.3s;
+}
+
+nav { flex-grow: 2; display: flex; justify-content: center; }
+nav ul { display: flex; list-style: none; gap: clamp(10px, 1.2vw, 22px); align-items: center; }
 nav ul li a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.3s;
-    padding-bottom: 5px;
-    white-space: nowrap;
+    text-decoration: none; color: var(--text-muted, #cbd5e1);
+    font-size: clamp(12px, 1vw, 14px); font-weight: 500; white-space: nowrap;
 }
 nav ul li a:hover { color: #d97742; }
 
-.header-right { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 12px; flex-wrap: wrap; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: clamp(8px, 1vw, 15px); }
 
 .lang-dropdown {
     background: transparent;
@@ -105,6 +113,28 @@ nav ul li a:hover { color: #d97742; }
     transition: border 0.4s, color 0.4s;
 }
 .lang-dropdown option { color: #000; }
+
+/* CV Göndər (Kompüter və Noutbuklar üçün əsas dizayn) */
+.send-cv-btn {
+    background-color: #c4642f; 
+    color: #fff !important; 
+    padding: 8px 18px; 
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(196, 100, 47, 0.3);
+    border: 1px solid #b35624; 
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.send-cv-btn:hover {
+    background-color: #b35624; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(179, 86, 36, 0.4);
+}
 
 .theme-switch { position: relative; display: inline-block; width: 60px; height: 30px; margin-right: 5px; }
 .theme-switch input { opacity: 0; width: 0; height: 0; }
@@ -128,28 +158,69 @@ input:checked + .slider:before { transform: translateX(30px); }
 input:checked + .slider .moon { opacity: 0; }
 input:checked + .slider .sun { opacity: 1; }
 
-/* Planşet və Kiçik Noutbuklar (1024px) */
+/* Noutbuk/Planşet Uyğunlaşması */
 @media (max-width: 1024px) {
-    .glass-header { 
-        flex-direction: column; 
-        padding: 15px; 
-        gap: 15px; 
-        width: 95%; /* Mobil/Planşetdə də kənar boşluqları qoruyur */
-        border-radius: 15px; 
-    }
-    .site-logo { height: 60px; }
-    .logo-container, nav, .header-right { 
-        flex: unset; 
-        justify-content: center; 
-        width: 100%; 
-        text-align: center; 
-    }
+    .glass-header { padding: 8px 10px; width: 98%; }
+    nav ul { gap: 10px; }
+    nav ul li a { font-size: 11px; }
 }
-/* Mobil Ekranlar (768px və aşağısı) */
+
+/* Mobil Üçün - Açılan Hamburger Menyu */
 @media (max-width: 768px) {
-    .site-logo { height: 45px; }
-    nav ul { gap: 12px; }
-    nav ul li a { font-size: 13px; }
-    .header-right { justify-content: center; }
-    .btn-primary.btn-sm { width: 100%; }
+    .hamburger { display: flex; } 
+    
+    nav, .header-right {
+        display: none; 
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .glass-header.active {
+        flex-wrap: wrap; 
+        background: rgba(15, 23, 42, 0.75); 
+        backdrop-filter: blur(25px); 
+        border-radius: 12px;
+    }
+
+    .glass-header.active nav {
+        display: flex;
+        order: 3;
+        margin-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 15px;
+    }
+
+    .glass-header.active .header-right {
+        display: flex;
+        order: 2;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+        gap: 15px; 
+    }
+
+    .glass-header.active .send-cv-btn {
+        background-color: #c4642f; 
+        color: #fff !important;
+        border: 1px solid #b35624;
+        box-shadow: 0 4px 15px rgba(196, 100, 47, 0.3);
+        border-radius: 8px;
+        margin: 0; 
+    }
+    
+    .glass-header.active .send-cv-btn:hover {
+        background-color: #b35624;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(179, 86, 36, 0.4);
+    }
+
+    nav ul { flex-direction: column; gap: 15px; padding-bottom: 15px; }
+    nav ul li a { font-size: 15px; padding: 5px 0; }
+    
+    /* Hamburger ikonunun X şəklinə düşməsi */
+    .glass-header.active .hamburger span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .glass-header.active .hamburger span:nth-child(2) { opacity: 0; }
+    .glass-header.active .hamburger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 }
