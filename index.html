@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="dark-theme">
+<body class="light-theme">
 
     <header class="glass-header">
         <div class="logo-container">
@@ -17,7 +17,14 @@
             </a>
         </div>
         
-        <nav>
+        <!-- Mobil üçün 3 xətt ikonu -->
+        <button class="hamburger" id="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="nav-menu">
             <ul>
                 <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
                 <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
@@ -28,12 +35,12 @@
             </ul>
         </nav>
 
-        <div class="header-right">
+        <div class="header-right" id="header-right">
             <label class="theme-switch" for="theme-toggle">
                 <input type="checkbox" id="theme-toggle">
                 <span class="slider round">
-                    <span class="icon moon">🌙</span>
                     <span class="icon sun">☀️</span>
+                    <span class="icon moon">🌙</span>
                 </span>
             </label>
 
@@ -41,8 +48,7 @@
                 <option value="az" selected>AZ</option>
                 <option value="en">EN</option>
             </select>
-            
-            <a href="cv.html" class="btn-primary btn-sm lang" data-en="Send CV" data-az="CV Göndər">CV Göndər</a>
+            <a href="cv.html" class="send-cv-btn lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
         </div>
     </header>
 
@@ -62,9 +68,9 @@
             </p>
             
             <div class="cta-buttons">
-    <a href="contact.html" class="btn-primary lang" data-en="Get a Consultation" data-az="Məsləhətləşmə alın">Məsləhətləşmə alın</a>
-    <a href="vacancies.html" class="btn-primary lang" data-en="Explore Vacancies" data-az="Vakansiyaları kəşf et">Vakansiyaları kəşf et</a>
-</div>
+                <a href="contact.html" class="btn-primary lang" data-en="Get a Consultation" data-az="Məsləhətləşmə alın">Məsləhətləşmə alın</a>
+                <a href="vacancies.html" class="btn-primary lang" data-en="Explore Vacancies" data-az="Vakansiyaları kəşf et">Vakansiyaları kəşf et</a>
+            </div>
         </div>
 
         <!-- Statistika Bölməsi (Şəklin ən aşağısında) -->
