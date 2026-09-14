@@ -53,7 +53,7 @@ body {
 /* Absolute Header */
 .glass-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around; /* Dəyişdirildi */
     align-items: center;
     padding: 10px 20px;
     background: var(--header-bg, rgba(15, 23, 42, 0.2));
