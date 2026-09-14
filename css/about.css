@@ -1,0 +1,183 @@
+/* --- HAQQIMIZDA SƏHİFƏSİ --- */
+.about-page {
+    /* Header-in hündürlüyünə uyğun olaraq səhifənin yuxarısında kifayət qədər boşluq (padding-top) buraxılır */
+    padding: 160px 5% 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Başlıq və Sitat */
+.about-hero {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.about-hero h1 {
+    font-size: clamp(36px, 4vw, 48px);
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-color); /* Gecə/Gündüz rejimində avtomatik dəyişəcək */
+}
+
+.about-hero .quote {
+    font-size: clamp(20px, 2.5vw, 28px);
+    color: #d97742;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.about-hero .about-desc {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* Ortaq Şüşə (Glassmorphism) Kart Dizaynı */
+.glass-effect {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform 0.3s, border-color 0.3s, background 0.4s;
+}
+
+.glass-effect:hover {
+    transform: translateY(-5px);
+    border-color: #d97742;
+    background: var(--card-hover);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Missiya və Vizyon */
+.mv-grid {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 80px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mv-card {
+    flex: 1 1 400px;
+    text-align: center;
+}
+
+.mv-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.mv-card h3 {
+    color: #d97742;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.mv-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Metodologiya (Yol Xəritəsi - Roadmap) */
+.methodology-section {
+    margin-bottom: 80px;
+}
+
+.section-title {
+    text-align: left;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    font-size: clamp(24px, 2.5vw, 32px);
+}
+
+.roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    position: relative;
+}
+
+.roadmap-step {
+    position: relative;
+    border-top: 3px solid #d97742;
+    padding-top: 40px;
+}
+
+/* Yol xəritəsi üçün rəqəm indikatoru */
+.step-number {
+    background: #d97742;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    position: absolute;
+    top: -16.5px; /* Xəttin tam tən ortasında oturması üçün */
+    left: 20px;
+}
+
+.roadmap-step h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.roadmap-step ul {
+    list-style: none;
+    padding: 0;
+}
+
+.roadmap-step ul li {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 15px;
+    line-height: 1.5;
+}
+
+.roadmap-step ul li::before {
+    content: "•";
+    color: #d97742;
+    position: absolute;
+    left: 0;
+}
+
+/* Dəyərlərimiz */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.value-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.val-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.value-card h3 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.value-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    text-align: justify;
+}
