@@ -1,9 +1,19 @@
 /* --- HAQQIMIZDA SƏHİFƏSİ --- */
 .about-page {
-    /* Header-in hündürlüyünə uyğun olaraq səhifənin yuxarısında kifayət qədər boşluq (padding-top) buraxılır */
-    padding: 160px 5% 60px 5%;
+    /* Header-in hündürlüyünə uyğun boşluq */
+    padding: 160px 0 60px 0;
+    min-height: 100vh;
+    width: 100%;
+    /* Arxa fon şəkli və tünd qradiyent */
+    background: linear-gradient(135deg, rgba(11, 17, 32, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+}
+
+/* Məzmunun tam kənarlara yapışmaması üçün daxili məhdudiyyət */
+.about-page > section {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 5%;
 }
 
 /* Başlıq və Sitat */
