@@ -1,12 +1,14 @@
-/* Hero Bölməsi (Fon və Ümumi Konteyner) */
+/* --- ANA SƏHİFƏ VƏ HERO BÖLMƏSİ --- */
 .hero-baku {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 130px 2% 40px 2%; /* Mobildə menyunun altına düşməməsi üçün padding-top */
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(11, 17, 32, 0.95) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    padding: 130px 2% 40px 2%;
+    background: var(--hero-bg);
     background-position: top center;
+    background-attachment: fixed;
+    transition: background 0.4s ease;
 }
 
 .hero-content {
@@ -15,7 +17,6 @@
     text-align: left;
 }
 
-/* Dinamik Şrift Ölçüləri (clamp) */
 .tagline { 
     color: #d97742; 
     font-size: clamp(14px, 1.2vw, 16px); 
@@ -24,18 +25,17 @@
     letter-spacing: 1px; 
 }
 
-
 .hero-content h1 {
-    font-size: clamp(32px, 4vw, 54px); /* Dinamik H1 başlığı */
+    font-size: clamp(32px, 4vw, 54px);
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 20px;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .subtitle-text {
     font-size: clamp(16px, 1.5vw, 20px);
-    color: #cbd5e1;
+    color: var(--text-muted);
     margin-bottom: 25px;
 }
 
@@ -43,10 +43,10 @@
     font-size: clamp(14px, 1.1vw, 16px); 
     margin-bottom: 40px; 
     line-height: 1.7; 
-    color: #e2e8f0; 
+    color: var(--text-muted); 
 }
 
-/* Düymələrin düzülüşü */
+/* --- DÜYMƏLƏR (Tam eyni ölçüdə simmetrik) --- */
 .cta-buttons { 
     display: flex; 
     gap: 15px; 
@@ -54,26 +54,44 @@
     flex-wrap: wrap; 
 }
 
-.btn-transparent {
-    background-color: transparent; 
-    color: #fff; 
-    border: 2px solid rgba(255,255,255,0.5);
-    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 30px); 
-    border-radius: 8px; 
-    font-weight: 600; 
-    font-size: clamp(14px, 1.5vw, 16px);
-    text-decoration: none; 
-    transition: all 0.3s; 
-    text-align: center; 
+.btn-primary, .btn-transparent {
     display: inline-block;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: clamp(14px, 1.5vw, 16px);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 15px 30px;
+    min-width: 220px; /* Hər iki düymə eyni genişlikdə olacaq */
+}
+
+.btn-primary {
+    background-color: #d97742; 
+    color: #ffffff; 
+    border: 1px solid #d97742;
+}
+
+.btn-primary:hover { 
+    background-color: #b86235; 
+    border-color: #b86235;
+    transform: translateY(-3px);
+}
+
+.btn-transparent {
+    background-color: var(--card-bg); 
+    color: var(--text-color); 
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
 }
 
 .btn-transparent:hover { 
-    background-color: #fff; 
-    color: #0b1120; 
+    background-color: var(--card-hover); 
+    border-color: #d97742; 
+    transform: translateY(-3px);
 }
 
-/* Statistika Bölməsi */
+/* --- STATİSTİKA BÖLMƏSİ --- */
 .stats-section { 
     padding: 30px 2% 0 2%; 
     text-align: center; 
@@ -85,7 +103,7 @@
     font-size: clamp(24px, 2.5vw, 32px); 
     margin-bottom: 35px; 
     font-weight: 700; 
-    color: #fff; 
+    color: var(--text-color); 
 }
 
 .stats-grid { 
@@ -96,11 +114,10 @@
     width: 100%; 
 }
 
-/* Statistika Kartları */
 .stat-card {
-    background: var(--card-bg, rgba(255, 255, 255, 0.04)); 
+    background: var(--card-bg); 
     backdrop-filter: blur(15px); 
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.15));
+    border: 1px solid var(--border-color);
     padding: 25px; 
     border-radius: 15px; 
     width: 100%; 
@@ -108,13 +125,13 @@
     text-align: left; 
     position: relative;
     transition: transform 0.3s, border-color 0.3s, background 0.4s;
-    flex: 1 1 250px; /* Ekran kiçildikcə kartlar elastik formalaşır */
+    flex: 1 1 250px; 
 }
 
 .stat-card:hover { 
     transform: translateY(-5px); 
     border-color: #d97742; 
-    background: var(--card-hover, rgba(255, 255, 255, 0.08)); 
+    background: var(--card-hover); 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
 }
 
@@ -129,12 +146,12 @@
     font-size: clamp(15px, 1.3vw, 18px); 
     font-weight: 600; 
     margin-bottom: 12px; 
-    color: #fff; 
+    color: var(--text-color); 
 }
 
 .stat-card p { 
     font-size: clamp(13px, 1vw, 14px); 
-    color: #cbd5e1; 
+    color: var(--text-muted); 
 }
 
 .stat-icon { 
@@ -142,75 +159,14 @@
     right: 20px; 
     bottom: 20px; 
     font-size: 40px; 
-    opacity: 0.3; 
-}
-/* --- GÜNDÜZ REJİMİ ÜÇÜN MENYU (HEADER) DİZAYNI --- */
-body.light-theme .glass-header {
-    background: rgba(255, 255, 255, 0.7); 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    opacity: 0.15; 
 }
 
-body.light-theme nav ul li a,
-body.light-theme .logo a,
-body.light-theme #lang-switch {
-    color: #0f172a; /* Yazılar qara rəngdə olacaq */
-}
-
-body.light-theme nav ul li a:hover {
-    color: #d97742; 
-}
-
-body.light-theme #lang-switch {
-    border-color: rgba(0, 0, 0, 0.2);
-}
-
-body.light-theme .send-cv-btn {
-    background-color: #0f172a; 
-    color: #ffffff; 
-    border-color: transparent;
-}
-
-body.light-theme .send-cv-btn:hover {
-    background-color: #d97742; 
-}
-
-/* --- GÜNDÜZ REJİMİ ÜÇÜN STATİSTİKA BÖLMƏSİ (AĞ KARTLAR) --- */
-body.light-theme .stats-section {
-    background-color: transparent; /* Arxadakı Hero fonunu pozmaması üçün */
-}
-
-body.light-theme .section-title {
-    color: #ffffff; /* Hero qradiyenti qaranlıq qaldığı üçün başlıq ağ qaldı */
-}
-
-body.light-theme .stat-card {
-    background: rgba(255, 255, 255, 0.9); /* Kartlar tam ağ oldu */
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-body.light-theme .stat-title {
-    color: #0f172a; /* Qara başlıq */
-}
-
-body.light-theme .stat-card p {
-    color: #475569; /* Tünd boz açıqlama */
-}
-
-body.light-theme .stat-icon {
-    opacity: 0.05; /* İkonların həddən artıq parlamasının qarşısı alındı */
-}
-
-body.light-theme .stat-card:hover {
-    background: #ffffff;
-    border-color: #d97742;
-}
+/* --- MOBİL UYĞUNLAŞDIRMA --- */
 @media (max-width: 1024px) {
     .hero-baku {
-        /* iPad-də menyu ilə kəsişməməsi üçün üst boşluğu 180px-ə qaldırırıq */
         padding: 180px 3% 40px 3%; 
-        justify-content: space-around; /* Elementləri mərkəzə sıxmaq əvəzinə ekrana düzgün yayırıq */
+        justify-content: space-around; 
         gap: 30px;
     }
 
@@ -218,18 +174,18 @@ body.light-theme .stat-card:hover {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        margin-top: 10px; /* Təhlükəsizlik üçün kiçik əlavə boşluq */
+        margin-top: 10px; 
     }
 
     .cta-buttons {
         justify-content: center;
     }
 }
-/* Kiçik Mobil Ekranlar (768px və aşağısı) */
+
 @media (max-width: 768px) {
     .hero-baku {
-        padding-top: 150px; /* Mobildə menyu açıldığı üçün boşluq bir az çox qalır */
-        justify-content: space-around; /* Mobildə yenidən alt-alta yayırıq */
+        padding-top: 150px; 
+        justify-content: space-around; 
         gap: 20px;
     }
 
@@ -238,8 +194,9 @@ body.light-theme .stat-card:hover {
         gap: 12px;
     }
 
-    .cta-buttons a {
+    .btn-primary, .btn-transparent {
         width: 100%;
+        min-width: unset;
     }
 
     .stat-card {
