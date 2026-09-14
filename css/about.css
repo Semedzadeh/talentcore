@@ -71,6 +71,7 @@
 .mv-grid {
     display: flex;
     gap: 30px;
+    margin-top: 30px;  
     margin-bottom: 80px;
     justify-content: center;
     flex-wrap: wrap;
@@ -234,7 +235,7 @@
 
 /* Dəyərlər daxilindəki başlıqlar (Şəkildəki kimi AĞ) */
 .value-card h3 {
-    color: #ffffff;
+    color: #d97742;
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: 600;
