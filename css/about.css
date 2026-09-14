@@ -3,8 +3,10 @@
     padding: 160px 0 60px 0;
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(135deg, rgba(11, 17, 32, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    /* Sabit şəkil əvəzinə mövzuya görə dəyişən (Light/Dark) fon */
+    background: var(--hero-bg);
     background-attachment: fixed;
+    transition: background 0.4s ease; /* Keçid zamanı vizual yumşaqlıq */
 }
 
 .about-page > section {
@@ -52,18 +54,19 @@
 
 /* Ortaq Şüşə Kart Dizaynı */
 .glass-effect {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--card-bg, rgba(255, 255, 255, 0.03));
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color); /* Burada birbaşa dəyişəni istifadə edirik */
     border-radius: 12px;
     padding: 30px;
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.4s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.4s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Yüngül kölgə kartı fondan ayırır */
 }
 
 .glass-effect:hover {
     transform: translateY(-5px);
-    border-color: #d97742;
-    background: rgba(255, 255, 255, 0.08);
+    border-color: #d97742; /* Hover zamanı narıncı olur */
+    background: var(--card-hover, rgba(255, 255, 255, 0.08));
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
