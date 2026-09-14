@@ -1,19 +1,26 @@
 /* --- HAQQIMIZDA SƏHİFƏSİ --- */
 .about-page {
-    /* Header-in hündürlüyünə uyğun boşluq */
     padding: 160px 0 60px 0;
     min-height: 100vh;
     width: 100%;
-    /* Arxa fon şəkli və tünd qradiyent */
     background: linear-gradient(135deg, rgba(11, 17, 32, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%), url('../baku_light.jpg') no-repeat center center/cover;
     background-attachment: fixed;
 }
 
-/* Məzmunun tam kənarlara yapışmaması üçün daxili məhdudiyyət */
 .about-page > section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 5%;
+}
+
+/* Ortaq Vahid Başlıq Stili (Şəkildəki kimi AĞ RƏNGDƏ) */
+.centered-title {
+    text-align: center;
+    margin-bottom: 60px;
+    color: #ffffff !important; 
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 /* Başlıq və Sitat */
@@ -26,7 +33,7 @@
     font-size: clamp(36px, 4vw, 48px);
     font-weight: 700;
     margin-bottom: 10px;
-    color: var(--text-color); /* Gecə/Gündüz rejimində avtomatik dəyişəcək */
+    color: #ffffff;
 }
 
 .about-hero .quote {
@@ -43,21 +50,21 @@
     line-height: 1.7;
 }
 
-/* Ortaq Şüşə (Glassmorphism) Kart Dizaynı */
+/* Ortaq Şüşə Kart Dizaynı */
 .glass-effect {
-    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 30px;
-    transition: transform 0.3s, border-color 0.3s, background 0.4s;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.4s ease;
 }
 
 .glass-effect:hover {
     transform: translateY(-5px);
     border-color: #d97742;
-    background: var(--card-hover);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Missiya və Vizyon */
@@ -77,13 +84,13 @@
 .mv-icon {
     font-size: 40px;
     margin-bottom: 15px;
-    opacity: 0.8;
 }
 
 .mv-card h3 {
     color: #d97742;
     font-size: 22px;
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .mv-card p {
@@ -91,78 +98,124 @@
     line-height: 1.6;
 }
 
-/* Metodologiya (Yol Xəritəsi - Roadmap) */
+/* --- METODOLOGİYA YOL XƏRİTƏSİ --- */
 .methodology-section {
-    margin-bottom: 80px;
+    margin-bottom: 20px; 
 }
 
-.section-title {
-    text-align: left;
-    margin-bottom: 30px;
-    color: var(--text-color);
-    font-size: clamp(24px, 2.5vw, 32px);
-}
-
-.roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.horizontal-roadmap {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.horizontal-line {
+    position: absolute;
+    top: 20px; 
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #d97742;
+    z-index: 0;
+}
+
+.horizontal-line::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: -4.5px;
+    border-width: 5px 0 5px 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #d97742;
 }
 
 .roadmap-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    border-top: 3px solid #d97742;
-    padding-top: 40px;
+    padding-top: 70px; 
 }
 
-/* Yol xəritəsi üçün rəqəm indikatoru */
-.step-number {
-    background: #d97742;
-    color: #fff;
-    width: 30px;
-    height: 30px;
+.step-circle {
+    position: absolute;
+    top: 0;
+    width: 42px;
+    height: 42px;
+    background-color: #0b1120; 
+    border: 2px solid #d97742;
+    border-radius: 50%;
+    color: #d97742;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.step-circle::after {
+    content: '';
     position: absolute;
-    top: -16.5px; /* Xəttin tam tən ortasında oturması üçün */
-    left: 20px;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 30px;
+    background-color: #d97742;
 }
 
-.roadmap-step h4 {
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: var(--text-color);
+.process-card {
+    width: 100%;
+    height: 100%;
+    padding: 30px 20px;
+    text-align: center;
 }
 
-.roadmap-step ul {
+/* Metodologiya daxilindəki başlıqlar (Şəkildəki kimi NARINCI) */
+.process-card h4 {
+    color: #d97742;
+    font-size: 16px;
+    margin-bottom: 20px;
+    min-height: 45px; 
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.process-card ul {
     list-style: none;
     padding: 0;
+    text-align: left;
 }
 
-.roadmap-step ul li {
+.process-card ul li {
     color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 8px;
-    position: relative;
-    padding-left: 15px;
+    font-size: 13.5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
     line-height: 1.5;
 }
 
-.roadmap-step ul li::before {
-    content: "•";
+.process-card ul li .tick {
     color: #d97742;
-    position: absolute;
-    left: 0;
+    margin-right: 12px;
+    font-weight: bold;
+    font-size: 15px;
 }
 
-/* Dəyərlərimiz */
+/* --- DƏYƏRLƏRİMİZ BÖLMƏSİ --- */
+.values-section {
+    margin-top: 120px; /* Bölmələr arası geniş boşluq */
+    margin-bottom: 100px;
+}
+
 .values-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -171,23 +224,61 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 40px 30px;
 }
 
 .val-icon {
     font-size: 40px;
-    margin-bottom: 15px;
-    opacity: 0.8;
+    margin-bottom: 25px;
 }
 
+/* Dəyərlər daxilindəki başlıqlar (Şəkildəki kimi AĞ) */
 .value-card h3 {
-    color: var(--text-color);
-    margin-bottom: 15px;
+    color: #ffffff;
     font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .value-card p {
     color: var(--text-muted);
     font-size: 14px;
-    line-height: 1.7;
-    text-align: justify;
+    line-height: 1.8;
+    text-align: center; 
+}
+
+/* --- MOBİL VƏ PLANŞET --- */
+@media screen and (max-width: 1024px) {
+    .horizontal-roadmap {
+        flex-wrap: wrap;
+    }
+    .horizontal-line {
+        display: none; 
+    }
+    .roadmap-step {
+        flex: 1 1 45%;
+        padding-top: 0;
+        align-items: flex-start;
+        margin-bottom: 30px;
+    }
+    .step-circle {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .step-circle::after {
+        display: none;
+    }
+    .process-card h4 {
+        text-align: left;
+        min-height: auto;
+    }
+    .values-section {
+        margin-top: 80px; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .roadmap-step {
+        flex: 1 1 100%;
+    }
 }
