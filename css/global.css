@@ -14,6 +14,7 @@ body.light-theme {
     /* Təmiz, aydın fon */
     --bg-color: #f8fafc; 
     
+    --hero-bg: linear-gradient(135deg, rgba(235, 240, 245, 0.9) 0%, rgba(215, 225, 235, 0.95) 100%), url('../baku_light.jpg') no-repeat center center/cover;
     /* Mətnlərin tam qara olaraq daha yaxşı oxunması üçün */
     --text-color: #0f172a; 
     --text-muted: #334155; 
@@ -30,6 +31,12 @@ body.light-theme {
     
     /* ŞƏFFAFLIQ DAHA DA ARTIRILDI (0.4 və 0.5 dəyərləri ilə mənzərə tam aydınlaşır) */
     --hero-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(240, 244, 248, 0.5) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+}
+body.light-theme .stat-card {
+    background: rgba(255, 255, 255, 0.75); /* Tam ağ deyil, bir az şəffaf */
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(15, 23, 42, 0.15); /* Tünd və dəqiq çərçivə */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Kartı havaya qaldıran kölgə */
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -127,6 +134,18 @@ nav ul li a:hover { color: #d97742; }
 }
 body.light-theme .lang-dropdown {
     background-color: #ffffff;
+}
+/* Gündüz rejimində menyu daha mat və göz yormayan formada */
+body.light-theme .glass-header {
+    background: rgba(248, 250, 252, 0.85); /* Tam ağ yox, çox açıq boz/mat */
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Yüngül kölgə ayırıcılığı artırır */
+}
+
+/* YALNIZ gündüz rejimində ağ loqonu tündləşdirib oxunaqlı edirik */
+body.light-theme .site-logo {
+    filter: brightness(0.1) invert(1); 
 }
 .lang-dropdown option { color: #000; }
 
