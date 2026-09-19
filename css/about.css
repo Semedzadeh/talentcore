@@ -19,7 +19,7 @@
 .centered-title {
     text-align: center;
     margin-bottom: 60px;
-    color: #ffffff !important; 
+    color: var(--text-color);
     font-size: clamp(28px, 3vw, 36px);
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -35,7 +35,7 @@
     font-size: clamp(36px, 4vw, 48px);
     font-weight: 700;
     margin-bottom: 10px;
-    color: #ffffff;
+    color: var(--text-color);
 }
 
 .about-hero .quote {
@@ -50,24 +50,6 @@
     margin: 0 auto;
     color: var(--text-muted);
     line-height: 1.7;
-}
-
-/* Ortaq Şüşə Kart Dizaynı */
-.glass-effect {
-    background: var(--card-bg, rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--border-color); /* Burada birbaşa dəyişəni istifadə edirik */
-    border-radius: 12px;
-    padding: 30px;
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.4s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Yüngül kölgə kartı fondan ayırır */
-}
-
-.glass-effect:hover {
-    transform: translateY(-5px);
-    border-color: #d97742; /* Hover zamanı narıncı olur */
-    background: var(--card-hover, rgba(255, 255, 255, 0.08));
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Missiya və Vizyon */

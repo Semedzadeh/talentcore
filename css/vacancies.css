@@ -1,0 +1,424 @@
+/* --- VAKANSİYALAR SƏHİFƏSİ --- */
+.vacancies-page {
+    padding: 150px 0 80px 0;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg-color);
+}
+
+.vacancies-hero {
+    max-width: 1600px;
+    margin: 0 auto 40px auto;
+    padding: 0 5%;
+    text-align: center;
+}
+
+.vacancies-hero h1 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.vacancies-hero p {
+    color: var(--text-muted);
+    font-size: clamp(14px, 1.1vw, 16px);
+}
+
+/* --- 3 SÜTUNLU DÜZÜLÜŞ ---
+   Orta və sağ sütunlar (siyahı + detal) sol sütundan (sahələr) daha hündürdür
+   və eyni hündürlükdə DEYİL — "align-items:center" sayəsində sol sütun bu
+   ikisinə nisbətən şaquli ORTADA qalır, orta/sağ isə undan həm yuxarı, həm
+   aşağı kənara çıxır (heç biri sticky deyil, sadə və 100% sabitdir). */
+.vacancies-layout {
+    max-width: 1600px;
+    margin: 12px auto 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 230px minmax(340px, 1.15fr) minmax(400px, 1.65fr);
+    gap: 28px;
+    align-items: center;
+}
+
+/* Grid övladları default olaraq min-width:auto alır, bu da uzun mətnli
+   elementləri (sahə adları, vakansiya başlıqları) konteynerdən kənara çıxarır
+   (məşhur "grid blowout" problemi). min-width:0 bunun qarşısını alır. */
+.vacancies-sidebar,
+.vacancies-list,
+.vacancy-detail {
+    min-width: 0;
+}
+
+/* Sol: Sahələr — sabit (position: sticky YOXDUR ki, digər iki sütunla "yapışma"
+   nöqtəsi uyğunsuzluğundan yaranan oynama olmasın). Grid-in "align-items:start"
+   xassəsi elə onsuz da üç sütunu eyni yuxarı xəttə hizalayır. */
+.vacancies-sidebar {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 22px 18px;
+}
+
+.vacancies-sidebar h3 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-color);
+    opacity: 0.55;
+    margin-bottom: 14px;
+}
+
+.cat-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    border-left: 3px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cat-item:hover {
+    background: var(--card-hover);
+    color: var(--text-color);
+}
+
+.cat-item.active {
+    background: rgba(217, 119, 66, 0.12);
+    color: #d97742;
+    border-left-color: #d97742;
+    font-weight: 600;
+}
+
+.cat-count {
+    font-size: 11px;
+    opacity: 0.75;
+    flex-shrink: 0;
+}
+
+/* Orta: Vakansiya siyahısı — sabit hündürlük, öz müstəqil daxili scroll-u var.
+   Siçan bu sütunun üzərindəysə, yalnız bu sütun sürüşür (adi overflow davranışı).
+   (position:sticky YOXDUR — "grid blowout"un əksi olaraq, sütunun hündürlüyü
+   elə cərgənin hündürlüyünü təyin etdiyi üçün sticky-nin "yapışma diapazonu"
+   sıfıra enirdi və nəticədə sabit deyil, "oynayan" görüntü yaranırdı.) */
+.vacancies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    overscroll-behavior: contain; /* sona çatanda əsas səhifəni "itələməsin" */
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.vacancy-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid transparent;
+    border-radius: 12px;
+    padding: 22px 24px;
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.vacancy-card:hover {
+    background: var(--card-hover);
+    border-color: #d97742;
+}
+
+.vacancy-card.active {
+    background: var(--card-hover);
+    border-left-color: #d97742;
+    border-color: #d97742;
+}
+
+.vacancy-card h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.vacancy-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.vacancy-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.vacancy-tag {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--border-color);
+    color: var(--text-muted);
+}
+
+.vacancy-posted {
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Sağ: Detal paneli — orta sütunla TAM EYNİ hündürlük (fərqli vakansiyaların
+   mətni fərqli uzunluqda olsa da qutu ölçüsü heç vaxt dəyişmir, deməli üç
+   sütun da həmişə eyni cərgədə, sabit qalır). position:sticky YOXDUR —
+   səbəb yuxarıdakı .vacancies-list şərhində izah olunub. */
+.vacancy-detail {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 42px;
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+/* Dizaynlı, nazik scrollbar (WebKit: Chrome/Edge/Safari) — normalda çox açıq,
+   hover-də brend rənginə keçir ki, "ağır" görünməsin amma seçilsin */
+.vacancies-list::-webkit-scrollbar,
+.vacancy-detail::-webkit-scrollbar {
+    width: 6px;
+}
+
+.vacancies-list::-webkit-scrollbar-track,
+.vacancy-detail::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.vacancies-list::-webkit-scrollbar-thumb,
+.vacancy-detail::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.vacancies-list:hover::-webkit-scrollbar-thumb,
+.vacancy-detail:hover::-webkit-scrollbar-thumb {
+    background: #d97742;
+}
+
+.vacancy-detail h2 {
+    font-size: clamp(24px, 2.4vw, 30px);
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    line-height: 1.25;
+}
+
+.vacancy-detail .company-row {
+    color: #d97742;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 26px;
+}
+
+.detail-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.detail-meta-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+.detail-meta-item .value {
+    font-size: 15px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.detail-section h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-color);
+    opacity: 0.55;
+    margin: 26px 0 14px 0;
+}
+
+.detail-section:first-of-type h4 {
+    margin-top: 0;
+}
+
+.detail-section p {
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 15px;
+}
+
+.detail-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.detail-section ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-bottom: 11px;
+}
+
+.detail-section ul li .tick {
+    color: #d97742;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.detail-apply-btn {
+    margin-top: 16px;
+}
+
+.vacancy-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 50px 15px;
+    font-size: 14px;
+}
+
+/* --- MOBİL VƏ PLANŞET --- */
+@media (max-width: 1150px) {
+    .vacancies-layout {
+        grid-template-columns: 200px 1fr 1.15fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .vacancies-page {
+        padding-top: 140px;
+    }
+    .vacancies-layout {
+        grid-template-columns: 1fr;
+    }
+    .vacancies-sidebar {
+        position: static;
+        margin-bottom: 20px;
+    }
+    /* Kateqoriyalar mobil ekranda müxtəlif enlərdə səliqəsiz cərgələrə "wrap"
+       olmaq əvəzinə TƏK SIRADA, üfüqi sürüşən pill-lərə çevrilir (səliqəli,
+       proqnozlaşdırıla bilən görünüş — Instagram/LinkedIn filtr çipləri kimi). */
+    .cat-list {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 2px 2px 8px 2px;
+        margin-bottom: -4px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-color) transparent;
+    }
+    .cat-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+        border: 1px solid var(--border-color);
+        border-left: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 8px 14px;
+        gap: 6px;
+    }
+    .cat-item.active {
+        border-color: #d97742;
+    }
+    .vacancies-list {
+        position: static;
+        height: auto;
+        overflow: visible;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+    .vacancy-detail {
+        position: static;
+        height: auto;
+        overflow: visible;
+    }
+
+    /* Mobildə vakansiya sayı çox olduqda siyahı sonsuz uzanmasın deyə,
+       js/vacancies.js hər səhifədə maksimum 10 elan göstərir və bu idarəetməni
+       əlavə edir (yalnız mobildə görünür — desktopda siyahı öz daxili scroll-u
+       ilə tam işləyir, bu blok heç render olunmur). */
+    .vacancies-mobile-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 6px;
+        padding-top: 4px;
+    }
+
+    .mobile-page-btn {
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        color: var(--text-color);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .mobile-page-btn:hover:not(:disabled) {
+        border-color: #d97742;
+    }
+
+    .mobile-page-btn.primary {
+        background: #c4642f;
+        border-color: #b35624;
+        color: #fff;
+    }
+
+    .mobile-page-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .mobile-page-info {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+}

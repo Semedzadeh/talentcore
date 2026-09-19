@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talentcore | Əlaqə</title>
+    <meta name="description" content="Talentcore ilə əlaqə saxlayın — işə qəbul üzrə məsləhətləşmə üçün bizə yazın, zəng edin və ya formu doldurun.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Talentcore | Əlaqə">
+    <meta property="og:description" content="İşə qəbul üzrə məsləhətləşmə üçün Talentcore komandası ilə əlaqə saxlayın.">
+    <meta property="og:image" content="https://talentcore.az/logo.png">
+    <meta property="og:url" content="https://talentcore.az/contact.html">
+    <link rel="canonical" href="https://talentcore.az/contact.html">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // Tema DOM render olunmazdan əvvəl tətbiq olunur ki, səhifə açılanda
+        // yanlış tema anlıq görünüb sonra dəyişməsin (FOUC problemi).
+        (function () {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+
+    <header class="glass-header">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="logo.png" alt="Talentcore Logo" class="site-logo">
+            </a>
+        </div>
+
+        <button class="hamburger" id="hamburger-btn" aria-label="Menyu" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
+                <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
+                <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
+                <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
+                <li><a href="industries.html" class="lang" data-en="Areas of Expertise" data-az="İxtisaslaşdığımız sahələr">İxtisaslaşdığımız sahələr</a></li>
+                <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right" id="header-right">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" aria-label="Tünd / Açıq rejim">
+                <span class="slider round">
+                    <span class="icon sun">☀️</span>
+                    <span class="icon moon">🌙</span>
+                </span>
+            </label>
+
+            <select id="lang-switch" class="lang-dropdown" aria-label="Dil seçimi">
+                <option value="az" selected>AZ</option>
+                <option value="en">EN</option>
+            </select>
+            <a href="cv.html" class="send-cv-btn lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-page">
+            <div class="contact-container">
+
+                <div class="contact-hero">
+                    <h1 class="lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</h1>
+                    <p class="lang"
+                       data-en="Whether you're hiring or looking for your next role — write to us."
+                       data-az="İstər işə qəbul üçün, istərsə də növbəti karyera addımınız üçün — bizə yazın.">
+                       İstər işə qəbul üçün, istərsə də növbəti karyera addımınız üçün — bizə yazın.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+
+                    <!-- Sol: Əlaqə Məlumatları -->
+                    <div class="contact-info glass-effect">
+                        <h3 class="lang" data-en="Contact Details" data-az="Əlaqə Məlumatları">Əlaqə Məlumatları</h3>
+
+                        <!-- Aşağıdakı ünvan/telefon/email nümunə məlumatlardır — real
+                             detallarla əvəzlənməlidir. -->
+                        <ul class="contact-info-list">
+                            <li>
+                                <span class="contact-info-icon">📍</span>
+                                <div>
+                                    <span class="contact-info-label lang" data-en="Address" data-az="Ünvan">Ünvan</span>
+                                    <span class="contact-info-value lang" data-en="Baku, Azerbaijan" data-az="Bakı, Azərbaycan">Bakı, Azərbaycan</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contact-info-icon">📞</span>
+                                <div>
+                                    <span class="contact-info-label lang" data-en="Phone" data-az="Telefon">Telefon</span>
+                                    <a class="contact-info-value" href="tel:+994120000000">+994 12 000 00 00</a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contact-info-icon">✉️</span>
+                                <div>
+                                    <span class="contact-info-label lang" data-en="Email" data-az="Email">Email</span>
+                                    <a class="contact-info-value" href="mailto:info@talentcore.az">info@talentcore.az</a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="contact-info-icon">🕘</span>
+                                <div>
+                                    <span class="contact-info-label lang" data-en="Working Hours" data-az="İş Saatları">İş Saatları</span>
+                                    <span class="contact-info-value lang" data-en="Mon–Fri, 09:00–18:00" data-az="B.e–Cümə, 09:00–18:00">B.e–Cümə, 09:00–18:00</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Sağ: Əlaqə Formu -->
+                    <div class="contact-form-card glass-effect">
+                        <h3 class="lang" data-en="Send a Message" data-az="Mesaj Göndərin">Mesaj Göndərin</h3>
+
+                        <form id="contact-form" novalidate>
+                            <!-- Web3Forms (web3forms.com) — hesab/backend tələb etmir, formu
+                                 birbaşa info@talentcore.az ünvanına ötürür. "YOUR_WEB3FORMS_ACCESS_KEY"
+                                 dəyərini web3forms.com saytında info@talentcore.az ilə qeydiyyatdan
+                                 sonra emailə gələn əsl access key ilə əvəz et (CLAUDE.md-də qeyd var). -->
+                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                            <input type="hidden" name="subject" value="Talentcore.az — Yeni Əlaqə Formu Müraciəti">
+                            <input type="checkbox" name="botcheck" class="botcheck-field" tabindex="-1" autocomplete="off">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cf-name" class="lang" data-en="Full Name" data-az="Ad Soyad">Ad Soyad</label>
+                                    <input type="text" id="cf-name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cf-email" class="lang" data-en="Email" data-az="Email">Email</label>
+                                    <input type="email" id="cf-email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cf-phone" class="lang" data-en="Phone" data-az="Telefon">Telefon</label>
+                                    <input type="tel" id="cf-phone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cf-subject" class="lang" data-en="I am contacting as" data-az="Müraciət edirəm">Müraciət edirəm</label>
+                                    <select id="cf-subject" name="inquiry_type">
+                                        <option value="company" class="lang" data-en="A Company" data-az="Şirkət kimi">Şirkət kimi</option>
+                                        <option value="candidate" class="lang" data-en="A Candidate" data-az="Namizəd kimi">Namizəd kimi</option>
+                                        <option value="other" class="lang" data-en="Other" data-az="Digər">Digər</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cf-message" class="lang" data-en="Message" data-az="Mesajınız">Mesajınız</label>
+                                <textarea id="cf-message" name="message" rows="5" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary lang" id="contact-submit-btn" data-en="Send Message" data-az="Mesajı Göndər">Mesajı Göndər</button>
+                            <p class="form-note" id="contact-form-status" aria-live="polite"></p>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
