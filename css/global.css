@@ -11,26 +11,26 @@
 }
 
 body.light-theme {
-    /* Təmiz, aydın fon */
-    --bg-color: #f8fafc; 
-    
-    --hero-bg: linear-gradient(135deg, rgba(235, 240, 245, 0.9) 0%, rgba(215, 225, 235, 0.95) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    /* Tam ağ deyil, yumşaq boz-mavi (slate) fon — göz üçün daha rahatdır */
+    --bg-color: #eef2f6;
+
+    /* Foto üzərinə mülayim örtük: nə xam foto (əvvəlki 0.4/0.5 — çox parlaq idi),
+       nə də tam ağ vərəq (0.88/0.92 — çox yastı və "ağ" görünürdü). Slate tonlu,
+       orta şəffaflıqda örtük fotonun dərinliyini saxlayır, amma göz yormur. */
+    --hero-bg: linear-gradient(150deg, rgba(226, 232, 240, 0.74) 0%, rgba(203, 213, 225, 0.82) 100%), url('../baku_light.jpg') no-repeat center center/cover;
     /* Mətnlərin tam qara olaraq daha yaxşı oxunması üçün */
-    --text-color: #0f172a; 
-    --text-muted: #334155; 
-    
+    --text-color: #0f172a;
+    --text-muted: #334155;
+
     /* Header-in daha aydın və səliqəli olması üçün */
-    --header-bg: rgba(255, 255, 255, 0.95); 
-    
+    --header-bg: rgba(248, 250, 252, 0.9);
+
     /* Kartların arxa fondan seçilməsi üçün nəzərəçarpacaq tünd kənar xətti */
     --border-color: rgba(15, 23, 42, 0.15);
-    
+
     /* Kartların ağ və kənarlarının yüngülcə seçilməsi üçün */
-    --card-bg: rgba(255, 255, 255, 0.85); 
+    --card-bg: rgba(255, 255, 255, 0.85);
     --card-hover: rgba(255, 255, 255, 0.95);
-    
-    /* ŞƏFFAFLIQ DAHA DA ARTIRILDI (0.4 və 0.5 dəyərləri ilə mənzərə tam aydınlaşır) */
-    --hero-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(240, 244, 248, 0.5) 100%), url('../baku_light.jpg') no-repeat center center/cover;
 }
 body.light-theme .stat-card {
     background: rgba(255, 255, 255, 0.75); /* Tam ağ deyil, bir az şəffaf */
@@ -40,27 +40,39 @@ body.light-theme .stat-card {
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Səhifənin ÖZÜ heç vaxt üfüqi sürüşməsin (yalnız şaquli scroll) — html-ə də
+   overflow-x:hidden lazımdır, təkcə body kifayət etmir və bəzi mobil
+   brauzerlərdə "yan-yana sürüşmə/bounce" effekti yarada bilir. Səhifə daxilindəki
+   qəsdən edilmiş üfüqi scroll-lar (məs. .cat-list) buna görə məhdudlaşmır,
+   çünki onlar öz overflow-x:auto sərhədləri daxilində qalır. */
+html {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     overflow-x: hidden;
+    overscroll-behavior-x: none;
     background-color: var(--bg-color);
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .btn-primary {
-    background-color: #c4642f; 
+    background-color: #c4642f;
     color: #fff;
     padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 30px);
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     font-size: clamp(14px, 1.5vw, 16px);
+    font-family: 'Poppins', sans-serif;
     transition: all 0.3s;
     display: inline-block;
     text-align: center;
     box-shadow: 0 6px 20px rgba(196, 100, 47, 0.3);
-    border: 1px solid #b35624; 
+    border: 1px solid #b35624;
+    cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -69,6 +81,104 @@ body {
     box-shadow: 0 8px 25px rgba(179, 86, 36, 0.4);
 }
 .btn-primary.btn-sm { padding: 8px 18px; font-size: 14px; }
+
+/* Ortaq Şüşə Kart Dizaynı (about.css və services.css-də istifadə olunur) */
+.glass-effect {
+    background: var(--card-bg, rgba(255, 255, 255, 0.03));
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.4s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.glass-effect:hover {
+    transform: translateY(-5px);
+    border-color: #d97742;
+    background: var(--card-hover, rgba(255, 255, 255, 0.08));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Ortaq Form Komponentləri (contact.css və cv.css-də istifadə olunur) */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text-color);
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.25s;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #d97742;
+}
+
+/* Fayl seçimi (CV yükləmə) — brauzerin standart "Choose file" görünüşünü
+   dizaynla üst-üstə salmaq üçün yüngül üslublaşdırma */
+.form-group input[type="file"] {
+    padding: 9px 14px;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
+    background: #c4642f;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background: #b35624;
+}
+
+.form-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.75;
+    min-height: 16px;
+}
+
+.form-note.status-success { color: #2e9e5b; opacity: 1; font-weight: 600; }
+.form-note.status-error { color: #d9534f; opacity: 1; font-weight: 600; }
+
+/* Spam-bot tələsi — insan istifadəçiyə görünmür, botlar isə adətən doldurur */
+.botcheck-field {
+    display: none;
+}
 
 /* Absolute Header */
 .glass-header {
@@ -143,10 +253,8 @@ body.light-theme .glass-header {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Yüngül kölgə ayırıcılığı artırır */
 }
 
-/* YALNIZ gündüz rejimində ağ loqonu tündləşdirib oxunaqlı edirik */
-body.light-theme .site-logo {
-    filter: brightness(0.1) invert(1); 
-}
+/* Gündüz rejimində loqo artıq JS tərəfindən logo_light.png ilə əvəz olunur,
+   ona görə burda əlavə filter tətbiq etmirik (əks halda loqo yenidən invert olub itir) */
 .lang-dropdown option { color: #000; }
 
 /* CV Göndər (Kompüter və Noutbuklar üçün əsas dizayn) */

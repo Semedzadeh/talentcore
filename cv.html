@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talentcore | CV Göndər</title>
+    <meta name="description" content="CV-nizi Talentcore namizəd bazasına göndərin — sizə uyğun vakansiya olduqda birbaşa əlaqə saxlayaq.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Talentcore | CV Göndər">
+    <meta property="og:description" content="CV-nizi göndərin, Talentcore namizəd bazasının bir hissəsi olun.">
+    <meta property="og:image" content="https://talentcore.az/logo.png">
+    <meta property="og:url" content="https://talentcore.az/cv.html">
+    <link rel="canonical" href="https://talentcore.az/cv.html">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/cv.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // Tema DOM render olunmazdan əvvəl tətbiq olunur ki, səhifə açılanda
+        // yanlış tema anlıq görünüb sonra dəyişməsin (FOUC problemi).
+        (function () {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+
+    <header class="glass-header">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="logo.png" alt="Talentcore Logo" class="site-logo">
+            </a>
+        </div>
+
+        <button class="hamburger" id="hamburger-btn" aria-label="Menyu" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
+                <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
+                <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
+                <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
+                <li><a href="industries.html" class="lang" data-en="Areas of Expertise" data-az="İxtisaslaşdığımız sahələr">İxtisaslaşdığımız sahələr</a></li>
+                <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right" id="header-right">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" aria-label="Tünd / Açıq rejim">
+                <span class="slider round">
+                    <span class="icon sun">☀️</span>
+                    <span class="icon moon">🌙</span>
+                </span>
+            </label>
+
+            <select id="lang-switch" class="lang-dropdown" aria-label="Dil seçimi">
+                <option value="az" selected>AZ</option>
+                <option value="en">EN</option>
+            </select>
+            <a href="cv.html" class="send-cv-btn lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="cv-page">
+            <div class="cv-container">
+
+                <div class="cv-hero">
+                    <h1 class="lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</h1>
+                    <p class="lang"
+                       data-en="Join our candidate database — we'll reach out when a matching role opens up."
+                       data-az="Namizəd bazamıza qoşulun — sizə uyğun vakansiya açılan kimi birbaşa əlaqə saxlayırıq.">
+                       Namizəd bazamıza qoşulun — sizə uyğun vakansiya açılan kimi birbaşa əlaqə saxlayırıq.
+                    </p>
+                </div>
+
+                <div class="cv-grid">
+
+                    <!-- Sol: Proses izahı -->
+                    <div class="cv-info glass-effect">
+                        <h3 class="lang" data-en="How It Works" data-az="Necə İşləyir?">Necə İşləyir?</h3>
+
+                        <ol class="cv-steps">
+                            <li>
+                                <span class="cv-step-number">1</span>
+                                <span class="cv-step-text lang"
+                                      data-en="Fill in the form and upload your CV (PDF or Word)."
+                                      data-az="Formu doldurun və CV-nizi (PDF və ya Word) yükləyin.">
+                                      Formu doldurun və CV-nizi (PDF və ya Word) yükləyin.
+                                </span>
+                            </li>
+                            <li>
+                                <span class="cv-step-number">2</span>
+                                <span class="cv-step-text lang"
+                                      data-en="Our team reviews it and adds you to our candidate database."
+                                      data-az="Komandamız CV-ni nəzərdən keçirir və namizəd bazamıza əlavə edir.">
+                                      Komandamız CV-ni nəzərdən keçirir və namizəd bazamıza əlavə edir.
+                                </span>
+                            </li>
+                            <li>
+                                <span class="cv-step-number">3</span>
+                                <span class="cv-step-text lang"
+                                      data-en="When a matching vacancy opens up, we contact you directly."
+                                      data-az="Sizə uyğun vakansiya olduqda birbaşa sizinlə əlaqə saxlayırıq.">
+                                      Sizə uyğun vakansiya olduqda birbaşa sizinlə əlaqə saxlayırıq.
+                                </span>
+                            </li>
+                        </ol>
+
+                        <p class="cv-privacy-note lang"
+                           data-en="Your CV is stored confidentially and used only for matching you with relevant roles."
+                           data-az="CV-niz məxfi saxlanılır və yalnız sizə uyğun vakansiyaları müəyyən etmək üçün istifadə olunur.">
+                           CV-niz məxfi saxlanılır və yalnız sizə uyğun vakansiyaları müəyyən etmək üçün istifadə olunur.
+                        </p>
+                    </div>
+
+                    <!-- Sağ: CV Formu -->
+                    <div class="cv-form-card glass-effect">
+                        <h3 class="lang" data-en="Candidate Form" data-az="Namizəd Formu">Namizəd Formu</h3>
+
+                        <form id="cv-form" novalidate>
+                            <!-- Web3Forms (web3forms.com) — contact.html-dəki eyni access key
+                                 istifadə olunur, fayl (CV) əlavəsi ilə birlikdə info@talentcore.az-a
+                                 ötürülür. Access key üçün CLAUDE.md-yə bax. -->
+                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                            <input type="hidden" name="subject" value="Talentcore.az — Yeni CV Müraciəti">
+                            <input type="checkbox" name="botcheck" class="botcheck-field" tabindex="-1" autocomplete="off">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cv-name" class="lang" data-en="Full Name" data-az="Ad Soyad">Ad Soyad</label>
+                                    <input type="text" id="cv-name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cv-email" class="lang" data-en="Email" data-az="Email">Email</label>
+                                    <input type="email" id="cv-email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cv-phone" class="lang" data-en="Phone" data-az="Telefon">Telefon</label>
+                                    <input type="tel" id="cv-phone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cv-field" class="lang" data-en="Area of Interest" data-az="Maraqlandığınız Sahə">Maraqlandığınız Sahə</label>
+                                    <select id="cv-field" name="field_of_interest">
+                                        <option value="it" class="lang" data-en="IT & Technology" data-az="İT və Texnologiya">İT və Texnologiya</option>
+                                        <option value="finance" class="lang" data-en="Finance & Accounting" data-az="Maliyyə və Mühasibatlıq">Maliyyə və Mühasibatlıq</option>
+                                        <option value="marketing" class="lang" data-en="Marketing & Sales" data-az="Marketinq və Satış">Marketinq və Satış</option>
+                                        <option value="construction" class="lang" data-en="Construction & Engineering" data-az="Tikinti və Mühəndislik">Tikinti və Mühəndislik</option>
+                                        <option value="logistics" class="lang" data-en="Logistics & Warehousing" data-az="Logistika və Anbar">Logistika və Anbar</option>
+                                        <option value="banking" class="lang" data-en="Banking & Insurance" data-az="Bank və Sığorta">Bank və Sığorta</option>
+                                        <option value="hr" class="lang" data-en="Human Resources" data-az="İnsan Resursları">İnsan Resursları</option>
+                                        <option value="other" class="lang" data-en="Other" data-az="Digər">Digər</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cv-position" class="lang" data-en="Desired Position (optional)" data-az="İstədiyiniz Vəzifə (istəyə bağlı)">İstədiyiniz Vəzifə (istəyə bağlı)</label>
+                                <input type="text" id="cv-position" name="desired_position">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cv-file" class="lang" data-en="Your CV (PDF or Word, max 5MB)" data-az="CV-niz (PDF və ya Word, maks. 5MB)">CV-niz (PDF və ya Word, maks. 5MB)</label>
+                                <input type="file" id="cv-file" name="attachment" accept=".pdf,.doc,.docx" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cv-message" class="lang" data-en="Note (optional)" data-az="Qeyd (istəyə bağlı)">Qeyd (istəyə bağlı)</label>
+                                <textarea id="cv-message" name="message" rows="3"></textarea>
+                            </div>
+
+                            <label class="cv-consent">
+                                <input type="checkbox" id="cv-consent" required>
+                                <span class="lang"
+                                      data-en="I agree that my personal data may be processed for recruitment purposes."
+                                      data-az="Şəxsi məlumatlarımın işə qəbul məqsədilə işlənməsinə razıyam.">
+                                      Şəxsi məlumatlarımın işə qəbul məqsədilə işlənməsinə razıyam.
+                                </span>
+                            </label>
+
+                            <button type="submit" class="btn-primary lang" id="cv-submit-btn" data-en="Send CV" data-az="CV Göndər">CV Göndər</button>
+                            <p class="form-note" id="cv-form-status" aria-live="polite"></p>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/cv.js"></script>
+</body>
+</html>
