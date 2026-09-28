@@ -286,11 +286,20 @@
     z-index: 20;
     min-width: 190px;
     list-style: none;
-    background: var(--card-bg);
+    /* --card-bg burda İŞLƏMİR — o, tünd rejimdə rgba(255,255,255,0.04) kimi
+       demək olar tam şəffafdır (yanaşı duran kartlar üçün nəzərdə tutulub,
+       arxa fon şəkli/rəngi ilə birlikdə görünsün deyə). Amma bu menyu digər
+       elementlərin ÜSTÜNDƏ üzən popup-dır — şəffaf olanda altındakı kartlarla
+       qarışıb oxunaqsız görünür, ona görə tam solid (qeyri-şəffaf) fon lazımdır. */
+    background: #141c30;
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 6px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+body.light-theme .vacancy-sort-menu {
+    background: #ffffff;
 }
 
 .vacancy-sort-menu.collapsed {
