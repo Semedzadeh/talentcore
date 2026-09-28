@@ -355,6 +355,30 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeCategory = isValidCategory ? requestedCategory : 'all';
     let activeVacancyId = VACANCIES[0].id;
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
+    let searchQuery = '';
+    let sortMode = 'newest'; // 'newest' | 'oldest' | 'az'
+
+    // "posted" sahəsi ("2 gün əvvəl", "1 həftə əvvəl") sabit mətn kimi
+    // saxlanılır (UI-də göstərilən budur), amma sıralama üçün ondan təxmini
+    // gün sayı çıxarırıq — ayrıca bir tarix sahəsi saxlamağa ehtiyac qalmır.
+    function getPostedDaysAgo(postedText) {
+        const match = postedText.match(/(\d+)\s*(gün|həftə)/);
+        if (!match) return 0;
+        const amount = parseInt(match[1], 10);
+        return match[2] === 'həftə' ? amount * 7 : amount;
+    }
+
+    function sortVacancies(vacancies) {
+        const sorted = [...vacancies];
+        if (sortMode === 'oldest') {
+            sorted.sort((a, b) => getPostedDaysAgo(b.posted) - getPostedDaysAgo(a.posted));
+        } else if (sortMode === 'az') {
+            sorted.sort((a, b) => a.title.localeCompare(b.title, 'az'));
+        } else {
+            sorted.sort((a, b) => getPostedDaysAgo(a.posted) - getPostedDaysAgo(b.posted));
+        }
+        return sorted;
+    }
 
     function highlightActiveCard() {
         listEl.querySelectorAll('.vacancy-card').forEach(card => {
@@ -405,9 +429,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderList() {
-        const filtered = activeCategory === 'all'
+        let filtered = activeCategory === 'all'
             ? VACANCIES
             : VACANCIES.filter(v => v.category === activeCategory);
+
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            filtered = filtered.filter(v => v.title.toLowerCase().includes(q) || v.company.toLowerCase().includes(q));
+        }
+
+        filtered = sortVacancies(filtered);
 
         if (filtered.length === 0) {
             listEl.innerHTML = '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
@@ -475,6 +506,29 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(renderList, 150);
     });
+
+    // Orta sütunun başındakı axtarış + sıralama paneli
+    const searchInput = document.getElementById('vacancy-search');
+    const sortSelect = document.getElementById('vacancy-sort');
+
+    if (searchInput) {
+        let searchTimer;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => {
+                searchQuery = searchInput.value.trim();
+                mobilePage = 1;
+                renderList();
+            }, 150);
+        });
+    }
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            sortMode = sortSelect.value;
+            renderList();
+        });
+    }
 
     renderCompanyFilter();
     renderList();
