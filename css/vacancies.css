@@ -1,6 +1,9 @@
-/* --- VAKANSİYALAR SƏHİFƏSİ --- */
+/* --- VAKANSİYALAR SƏHİFƏSİ ---
+   Üst/alt boşluqlar qəsdən sıxlaşdırılıb (əvvəlki 150/80px-dən) ki, 3 sütun
+   ekranın daha çox hissəsini tutsun — bax aşağıdakı sütun hündürlüyü
+   düsturuna (calc(100vh - 110px)), bu ölçülərlə əl-ələ işləyir. */
 .vacancies-page {
-    padding: 150px 0 80px 0;
+    padding: 125px 0 30px 0;
     min-height: 100vh;
     width: 100%;
     background: var(--bg-color);
@@ -8,7 +11,7 @@
 
 .vacancies-hero {
     max-width: 1600px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 24px auto;
     padding: 0 5%;
     text-align: center;
 }
@@ -32,7 +35,7 @@
    aşağı kənara çıxır (heç biri sticky deyil, sadə və 100% sabitdir). */
 .vacancies-layout {
     max-width: 1600px;
-    margin: 12px auto 0 auto;
+    margin: 10px auto 0 auto;
     padding: 0 5%;
     display: grid;
     grid-template-columns: 270px minmax(340px, 1.15fr) minmax(400px, 1.65fr);
@@ -44,7 +47,7 @@
    elementləri (sahə adları, vakansiya başlıqları) konteynerdən kənara çıxarır
    (məşhur "grid blowout" problemi). min-width:0 bunun qarşısını alır. */
 .vacancies-sidebar,
-.vacancies-list,
+.vacancies-list-panel,
 .vacancy-detail {
     min-width: 0;
 }
@@ -57,7 +60,7 @@
     border: 1px solid var(--border-color);
     border-radius: 14px;
     padding: 22px 18px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 110px);
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: thin;
@@ -173,16 +176,73 @@
     font-weight: 600;
 }
 
-/* Orta: Vakansiya siyahısı — sabit hündürlük, öz müstəqil daxili scroll-u var.
-   Siçan bu sütunun üzərindəysə, yalnız bu sütun sürüşür (adi overflow davranışı).
+/* Orta: Vakansiya siyahısı paneli — üstdə axtarış+sıralama paneli sabit qalır,
+   altdakı kartlar isə öz müstəqil daxili scroll-una malikdir (flex:1 + öz
+   overflow-y-si). Panel özü sol/sağ sütunlarla eyni sabit hündürlükdə
    (position:sticky YOXDUR — "grid blowout"un əksi olaraq, sütunun hündürlüyü
    elə cərgənin hündürlüyünü təyin etdiyi üçün sticky-nin "yapışma diapazonu"
    sıfıra enirdi və nəticədə sabit deyil, "oynayan" görüntü yaranırdı.) */
+.vacancies-list-panel {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 110px);
+}
+
+.vacancies-list-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+}
+
+.vacancy-search-input {
+    flex: 1;
+    min-width: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13.5px;
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.25s;
+}
+
+.vacancy-search-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.75;
+}
+
+.vacancy-search-input:focus {
+    border-color: #d97742;
+}
+
+.vacancy-sort-select {
+    flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 11px 12px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+.vacancy-sort-select:focus {
+    border-color: #d97742;
+}
+
 .vacancies-list {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    height: calc(100vh - 150px);
+    flex: 1;
+    min-height: 0; /* flex sütununda scroll işləməsi üçün vacibdir */
     overflow-y: auto;
     overscroll-behavior: contain; /* sona çatanda əsas səhifəni "itələməsin" */
     padding-right: 6px;
@@ -259,7 +319,7 @@
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 42px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 110px);
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: thin;
@@ -409,12 +469,15 @@
         overflow: visible;
         margin-bottom: 20px;
     }
+    .vacancies-list-panel {
+        height: auto;
+        margin-bottom: 20px;
+    }
     .vacancies-list {
         position: static;
         height: auto;
         overflow: visible;
         padding-right: 0;
-        margin-bottom: 20px;
     }
     .vacancy-detail {
         position: static;

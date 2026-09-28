@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.lang').forEach(el => {
                 el.innerHTML = selectedLang === 'az' ? el.getAttribute('data-az') : el.getAttribute('data-en');
             });
+            // input/textarea placeholder-ləri innerHTML ilə tərcümə oluna bilmir,
+            // ona görə eyni data-az/data-en məntiqi placeholder atributu üçün
+            // ayrıca .lang-placeholder klassı ilə təkrarlanır (bax: vacancies.html)
+            document.querySelectorAll('.lang-placeholder').forEach(el => {
+                el.placeholder = selectedLang === 'az' ? el.getAttribute('data-az-placeholder') : el.getAttribute('data-en-placeholder');
+            });
             document.documentElement.lang = selectedLang; // <html lang> də yenilənir (əlçatanlıq/SEO üçün)
         });
     }
