@@ -15,7 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Tünd / Açıq Rejim və LOQO idarəetməsi
     const themeCheckbox = document.getElementById('theme-toggle');
     const body = document.body;
-    const siteLogo = document.querySelector('.site-logo'); // Loqonu tapırıq
+    // querySelectorAll: header-dəki loqodan başqa footer-də də eyni .site-logo
+    // klassı ilə bir loqo var (css/global.css-də .footer-logo ilə ölçüləndirilir),
+    // ikisi də tema dəyişəndə birlikdə yenilənməlidir.
+    const siteLogos = document.querySelectorAll('.site-logo');
+    function setLogoSrc(src) {
+        siteLogos.forEach(logo => { logo.src = src; });
+    }
 
     if (themeCheckbox) {
         // Yaddaşdan mövzunu oxuyuruq (Əgər yoxdursa 'dark' qəbul edirik)
@@ -25,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedTheme === 'light') {
             body.classList.add('light-theme');
             themeCheckbox.checked = true;
-            if (siteLogo) siteLogo.src = 'logo_light.png'; // Gündüz rejimindəki loqo
+            setLogoSrc('logo_light.png'); // Gündüz rejimindəki loqo
         } else {
             body.classList.remove('light-theme');
             themeCheckbox.checked = false;
-            if (siteLogo) siteLogo.src = 'logo.png'; // Gecə rejimindəki standart ağ loqo
+            setLogoSrc('logo.png'); // Gecə rejimindəki standart ağ loqo
         }
 
         // İstiafdəçi düyməyə basdıqda anında dəyişdiririk
@@ -38,12 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Gündüz rejiminə keçid
                 body.classList.add('light-theme');
                 localStorage.setItem('theme', 'light');
-                if (siteLogo) siteLogo.src = 'logo_light.png'; 
+                setLogoSrc('logo_light.png');
             } else {
                 // Gecə rejiminə keçid
                 body.classList.remove('light-theme');
                 localStorage.setItem('theme', 'dark');
-                if (siteLogo) siteLogo.src = 'logo.png';
+                setLogoSrc('logo.png');
             }
         });
     }
