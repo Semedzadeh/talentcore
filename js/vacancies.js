@@ -2,23 +2,38 @@
 // sağ paneldə detallı göstərilməsi. Yalnız vacancies.html-də işə düşür.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Sol paneldəki "Fəaliyyət sahəsi" filtr qrupunun aç/bağla oxu — hələlik
-    // yalnız UI davranışıdır (aç/bağla), vakansiya siyahısını filtrləmir.
-    // Bu, köhnə "Sahələr" siyahısını (7 sahə) əvəz edən yeni 15 sahəlik
-    // checkbox filtridir; siyahını ona bağlamaq ayrıca addımdır (CATEGORIES
-    // massivi hələ köhnə 7 sahə ilə işləyir, aşağıda toxunulmayıb).
-    const sectorFilterToggle = document.getElementById('sector-filter-toggle');
-    const sectorFilterList = document.getElementById('sector-filter-list');
-    if (sectorFilterToggle && sectorFilterList) {
-        sectorFilterToggle.addEventListener('click', () => {
-            const isExpanded = sectorFilterToggle.getAttribute('aria-expanded') === 'true';
-            sectorFilterToggle.setAttribute('aria-expanded', String(!isExpanded));
-            sectorFilterList.classList.toggle('collapsed', isExpanded);
+    // Sol paneldəki bütün filtr qruplarının (Fəaliyyət sahəsi, Şirkətlər,
+    // Kateqoriyalar, Vəzifə dərəcəsi, Region, İş qrafiki, İş formatı) aç/bağla
+    // oxu — hələlik yalnız UI davranışıdır (aç/bağla + çoxlu seçim), vakansiya
+    // siyahısını filtrləmir. Bu checkbox-ları real filtrə bağlamaq ayrıca
+    // addımdır (CATEGORIES massivi hələ köhnə 7 sahə ilə işləyir, aşağıda
+    // toxunulmayıb) — bax CLAUDE.md.
+    document.querySelectorAll('.filter-group-header').forEach(header => {
+        const list = document.getElementById(header.getAttribute('aria-controls'));
+        if (!list) return;
+        header.addEventListener('click', () => {
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', String(!isExpanded));
+            list.classList.toggle('collapsed', isExpanded);
         });
-    }
+    });
 
     const listEl = document.getElementById('vacancies-list');
     const detailEl = document.getElementById('vacancy-detail');
+
+    // "Şirkətlər" filtri statik deyil — yalnız aktiv elanı olan şirkətlər
+    // göstərilməlidir, ona görə VACANCIES-dən (aşağıda təyin olunur) törəmə
+    // siyahı kimi qurulur. VACANCIES elan olunmazdan əvvəl çağırıla bilməz,
+    // ona görə bu funksiya faylın sonunda, VACANCIES artıq mövcud olanda
+    // işə salınır.
+    function renderCompanyFilter() {
+        const companyListEl = document.getElementById('company-filter-list');
+        if (!companyListEl) return;
+        const companies = [...new Set(VACANCIES.map(v => v.company))].sort((a, b) => a.localeCompare(b, 'az'));
+        companyListEl.innerHTML = companies.map(company => `
+            <li><label class="filter-option"><input type="checkbox" value="${company}"><span>${company}</span></label></li>
+        `).join('');
+    }
 
     if (!listEl || !detailEl) return;
 
@@ -461,5 +476,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeTimer = setTimeout(renderList, 150);
     });
 
+    renderCompanyFilter();
     renderList();
 });

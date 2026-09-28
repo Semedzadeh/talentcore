@@ -64,7 +64,21 @@
     scrollbar-color: var(--border-color) transparent;
 }
 
-/* Filtr Qrupu — başlığa (oxa) basanda checkbox siyahısı aç/bağlanır */
+/* Filtr Qrupu — sidebar-da 7 qrup (Fəaliyyət sahəsi, Şirkətlər, Kateqoriyalar,
+   Vəzifə dərəcəsi, Region, İş qrafiki, İş formatı) alt-alta düzülür, hər biri
+   arasında incə ayırıcı xətt; başlığa (oxa) basanda checkbox siyahısı aç/bağlanır */
+.filter-group {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filter-group:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
 .filter-group-header {
     width: 100%;
     display: flex;

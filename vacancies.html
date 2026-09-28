@@ -106,6 +106,145 @@
                             <li><label class="filter-option"><input type="checkbox" value="public-social-nonprofit"><span class="lang" data-en="Public, Social & Non-profit Sector" data-az="Dövlət, Sosial və Qeyri-kommersiya Sektoru">Dövlət, Sosial və Qeyri-kommersiya Sektoru</span></label></li>
                         </ul>
                     </div>
+
+                    <!-- Şirkətlər — statik deyil, yalnız aktiv elanı olan şirkətlər
+                         göstərilməlidir, ona görə siyahı js/vacancies.js tərəfindən
+                         VACANCIES-dən doldurulur (bax: renderCompanyFilter()). -->
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="company-filter-toggle" aria-expanded="false" aria-controls="company-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Companies" data-az="Şirkətlər">Şirkətlər</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options collapsed" id="company-filter-list">
+                            <!-- JS ilə doldurulur: js/vacancies.js -->
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="function-filter-toggle" aria-expanded="false" aria-controls="function-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Categories" data-az="Kateqoriyalar">Kateqoriyalar</span>
+                                <span class="filter-group-hint lang" data-en="(select as many as you like)" data-az="(eyni anda bir neçə seçim edə bilsin)">(eyni anda bir neçə seçim edə bilsin)</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options collapsed" id="function-filter-list">
+                            <li><label class="filter-option"><input type="checkbox" value="economic-finance"><span class="lang" data-en="Economic & Financial Fields" data-az="İqtisadi və Maliyyə Sahələri">İqtisadi və Maliyyə Sahələri</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="legal-management"><span class="lang" data-en="Law & Management" data-az="Hüquq və İdarəetmə">Hüquq və İdarəetmə</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="technical-engineering"><span class="lang" data-en="Technical & Engineering Fields" data-az="Texniki və Mühəndislik Sahələri">Texniki və Mühəndislik Sahələri</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="it-digital"><span class="lang" data-en="IT & Digital Technologies" data-az="İT və Rəqəmsal Texnologiyalar">İT və Rəqəmsal Texnologiyalar</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="sales-marketing-comms"><span class="lang" data-en="Sales, Marketing & Communication" data-az="Satış, Marketinq və Kommunikasiya">Satış, Marketinq və Kommunikasiya</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="supply-operations"><span class="lang" data-en="Supply Chain & Operations" data-az="Təchizat və Əməliyyatlar">Təchizat və Əməliyyatlar</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="humanitarian-social"><span class="lang" data-en="Humanitarian & Social Fields" data-az="Humanitar və Sosial Sahələr">Humanitar və Sosial Sahələr</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="health-medicine"><span class="lang" data-en="Healthcare & Medicine" data-az="Səhiyyə və Tibb">Səhiyyə və Tibb</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="service-other"><span class="lang" data-en="Services & Other Fields" data-az="Xidmət və Digər Sahələr">Xidmət və Digər Sahələr</span></label></li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="level-filter-toggle" aria-expanded="false" aria-controls="level-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Position Level" data-az="Vəzifə dərəcəsi">Vəzifə dərəcəsi</span>
+                                <span class="filter-group-hint lang" data-en="(select as many as you like)" data-az="(eyni anda bir neçə seçim edə bilsin)">(eyni anda bir neçə seçim edə bilsin)</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options collapsed" id="level-filter-list">
+                            <li><label class="filter-option"><input type="checkbox" value="team-lead"><span class="lang" data-en="Team Lead" data-az="Qrup rəhbəri">Qrup rəhbəri</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="manager"><span class="lang" data-en="Manager" data-az="Menecer">Menecer</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="division-head"><span class="lang" data-en="Division Head" data-az="Şöbə müdiri">Şöbə müdiri</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="department-head"><span class="lang" data-en="Department Head" data-az="Departament müdiri">Departament müdiri</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="deputy"><span class="lang" data-en="Deputy" data-az="Müavin">Müavin</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="director"><span class="lang" data-en="Director" data-az="Direktor">Direktor</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="advisor"><span class="lang" data-en="Advisor" data-az="Müşavir">Müşavir</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="chief-administrator"><span class="lang" data-en="Chief Administrator" data-az="Baş inzibatçı">Baş inzibatçı</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="ceo"><span class="lang" data-en="CEO" data-az="CEO">CEO</span></label></li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="region-filter-toggle" aria-expanded="false" aria-controls="region-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Region" data-az="Region">Region</span>
+                                <span class="filter-group-hint lang" data-en="(select as many as you like)" data-az="(eyni anda bir neçə seçim edə bilsin)">(eyni anda bir neçə seçim edə bilsin)</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options collapsed" id="region-filter-list">
+                            <li><label class="filter-option"><input type="checkbox" value="baku"><span class="lang" data-en="Baku" data-az="Bakı">Bakı</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="sumgait"><span class="lang" data-en="Sumgait" data-az="Sumqayıt">Sumqayıt</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="ganja"><span class="lang" data-en="Ganja" data-az="Gəncə">Gəncə</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="khirdalan"><span class="lang" data-en="Khirdalan" data-az="Xırdalan">Xırdalan</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="mingachevir"><span class="lang" data-en="Mingachevir" data-az="Mingəçevir">Mingəçevir</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="lankaran"><span class="lang" data-en="Lankaran" data-az="Lənkəran">Lənkəran</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="tovuz"><span class="lang" data-en="Tovuz" data-az="Tovuz">Tovuz</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="hajigabul"><span class="lang" data-en="Hajigabul" data-az="Hacıqabul">Hacıqabul</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="shamakhi"><span class="lang" data-en="Shamakhi" data-az="Şamaxı">Şamaxı</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="shamkir"><span class="lang" data-en="Shamkir" data-az="Şəmkir">Şəmkir</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="barda"><span class="lang" data-en="Barda" data-az="Bərdə">Bərdə</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="jalilabad"><span class="lang" data-en="Jalilabad" data-az="Cəlilabad">Cəlilabad</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="gazakh"><span class="lang" data-en="Gazakh" data-az="Qazax">Qazax</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="guba"><span class="lang" data-en="Guba" data-az="Quba">Quba</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="gusar"><span class="lang" data-en="Gusar" data-az="Qusar">Qusar</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="khachmaz"><span class="lang" data-en="Khachmaz" data-az="Xaçmaz">Xaçmaz</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="salyan"><span class="lang" data-en="Salyan" data-az="Salyan">Salyan</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="shirvan"><span class="lang" data-en="Shirvan" data-az="Şirvan">Şirvan</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="goychay"><span class="lang" data-en="Goychay" data-az="Göyçay">Göyçay</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="imishli"><span class="lang" data-en="Imishli" data-az="İmişli">İmişli</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="gabala"><span class="lang" data-en="Gabala" data-az="Qəbələ">Qəbələ</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="masally"><span class="lang" data-en="Masally" data-az="Masallı">Masallı</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="beylagan"><span class="lang" data-en="Beylagan" data-az="Beyləqan">Beyləqan</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="khizi"><span class="lang" data-en="Khizi" data-az="Xızı">Xızı</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="nakhchivan"><span class="lang" data-en="Nakhchivan" data-az="Naxçıvan">Naxçıvan</span></label></li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="schedule-filter-toggle" aria-expanded="false" aria-controls="schedule-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Work Schedule" data-az="İş qrafiki">İş qrafiki</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options collapsed" id="schedule-filter-list">
+                            <li><label class="filter-option"><input type="checkbox" value="part-time"><span class="lang" data-en="Part-time" data-az="Yarım ştat">Yarım ştat</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="full-time"><span class="lang" data-en="Full-time" data-az="Tam ştat">Tam ştat</span></label></li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="format-filter-toggle" aria-expanded="false" aria-controls="format-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Work Format" data-az="İş formatı">İş formatı</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options collapsed" id="format-filter-list">
+                            <li><label class="filter-option"><input type="checkbox" value="office"><span class="lang" data-en="Office" data-az="Ofis">Ofis</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="hybrid"><span class="lang" data-en="Hybrid" data-az="Hibrid">Hibrid</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="remote"><span class="lang" data-en="Remote" data-az="Məsafədən">Məsafədən</span></label></li>
+                        </ul>
+                    </div>
                 </aside>
 
                 <div class="vacancies-list" id="vacancies-list">
