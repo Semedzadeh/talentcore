@@ -166,6 +166,34 @@
     font-weight: 600;
 }
 
+/* "Vakansiya yerləşdir" menyusu — checkbox yox, digər səhifəyə keçid */
+.sidebar-menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 6px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #d97742;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.sidebar-menu-link:hover {
+    background: var(--card-hover);
+}
+
+.sidebar-menu-link .arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.sidebar-menu-link:hover .arrow {
+    transform: translateX(3px);
+}
+
 /* Orta: Vakansiya siyahısı paneli — üstdə axtarış+sıralama paneli sabit qalır,
    altdakı kartlar isə öz müstəqil daxili scroll-una malikdir (flex:1 + öz
    overflow-y-si). Panel özü sol/sağ sütunlarla eyni sabit hündürlükdə
@@ -221,6 +249,15 @@
     outline: none;
     cursor: pointer;
     transition: border-color 0.25s;
+    /* Brauzerin native açılan siyahısı (popup) rəngi bu olmasa defolt ağ
+       açılır (tünd rejimdə səhifə ilə ziddiyyət təşkil edir) — color-scheme
+       Chromium/Edge/Firefox-da native popup-un fon/mətn rəngini tema ilə
+       uyğunlaşdırır. */
+    color-scheme: dark;
+}
+
+body.light-theme .vacancy-sort-select {
+    color-scheme: light;
 }
 
 .vacancy-sort-select:focus {
