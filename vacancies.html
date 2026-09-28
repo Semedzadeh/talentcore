@@ -77,10 +77,35 @@
 
             <div class="vacancies-layout">
                 <aside class="vacancies-sidebar">
-                    <h3 class="lang" data-en="Fields" data-az="Sahələr">Sahələr</h3>
-                    <ul class="cat-list" id="category-list">
-                        <!-- JS ilə doldurulur: js/vacancies.js -->
-                    </ul>
+                    <div class="filter-group">
+                        <button type="button" class="filter-group-header" id="sector-filter-toggle" aria-expanded="true" aria-controls="sector-filter-list">
+                            <span class="filter-group-title">
+                                <span class="lang" data-en="Field of Activity" data-az="Fəaliyyət sahəsi">Fəaliyyət sahəsi</span>
+                                <span class="filter-group-hint lang" data-en="(select as many as you like)" data-az="(eyni anda bir neçə seçim edə bilsin)">(eyni anda bir neçə seçim edə bilsin)</span>
+                            </span>
+                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        <ul class="filter-options" id="sector-filter-list">
+                            <li><label class="filter-option"><input type="checkbox" value="banking-finance"><span class="lang" data-en="Banking & Financial Services" data-az="Bankçılıq və Maliyyə Xidmətləri">Bankçılıq və Maliyyə Xidmətləri</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="real-estate-construction"><span class="lang" data-en="Real Estate & Construction" data-az="Daşınmaz Əmlak və Tikinti">Daşınmaz Əmlak və Tikinti</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="oil-gas-energy"><span class="lang" data-en="Oil, Gas & Energy" data-az="Neft, Qaz və Energetika">Neft, Qaz və Energetika</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="mining-metallurgy"><span class="lang" data-en="Mining & Metallurgy" data-az="Mədənçilik və Metallurgiya">Mədənçilik və Metallurgiya</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="manufacturing-industry"><span class="lang" data-en="Manufacturing & Industry" data-az="İstehsalat və Sənaye">İstehsalat və Sənaye</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="fmcg"><span class="lang" data-en="FMCG" data-az="FMCG">FMCG</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="retail-ecommerce"><span class="lang" data-en="Retail & E-commerce" data-az="Pərakəndə Ticarət və E-ticarət">Pərakəndə Ticarət və E-ticarət</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="tech-telecom"><span class="lang" data-en="Technology & Telecommunications" data-az="Texnologiya və Telekommunikasiya">Texnologiya və Telekommunikasiya</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="healthcare-pharma"><span class="lang" data-en="Healthcare & Pharmaceuticals" data-az="Səhiyyə və Əczaçılıq">Səhiyyə və Əczaçılıq</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="transport-logistics"><span class="lang" data-en="Transport & Logistics" data-az="Nəqliyyat və Logistika">Nəqliyyat və Logistika</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="agriculture"><span class="lang" data-en="Agriculture" data-az="Kənd Təsərrüfatı">Kənd Təsərrüfatı</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="tourism-hospitality"><span class="lang" data-en="Tourism & Hospitality" data-az="Turizm və Qonaqpərvərlik">Turizm və Qonaqpərvərlik</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="education-training"><span class="lang" data-en="Education & Training" data-az="Təhsil və Təlim">Təhsil və Təlim</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="marketing-advertising"><span class="lang" data-en="Marketing, Advertising & Communication" data-az="Marketinq, Reklam və Kommunikasiya">Marketinq, Reklam və Kommunikasiya</span></label></li>
+                            <li><label class="filter-option"><input type="checkbox" value="public-social-nonprofit"><span class="lang" data-en="Public, Social & Non-profit Sector" data-az="Dövlət, Sosial və Qeyri-kommersiya Sektoru">Dövlət, Sosial və Qeyri-kommersiya Sektoru</span></label></li>
+                        </ul>
+                    </div>
                 </aside>
 
                 <div class="vacancies-list" id="vacancies-list">
