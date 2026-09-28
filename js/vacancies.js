@@ -511,7 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Orta sütunun başındakı axtarış + sıralama paneli
     const searchInput = document.getElementById('vacancy-search');
-    const sortSelect = document.getElementById('vacancy-sort');
 
     if (searchInput) {
         let searchTimer;
@@ -525,10 +524,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (sortSelect) {
-        sortSelect.addEventListener('change', () => {
-            sortMode = sortSelect.value;
-            renderList();
+    // Fərdi sıralama dropdown-u (native <select> deyil — bax vacancies.html-dəki şərhə)
+    const sortToggle = document.getElementById('vacancy-sort-toggle');
+    const sortMenu = document.getElementById('vacancy-sort-menu');
+    const sortLabel = document.getElementById('vacancy-sort-label');
+
+    if (sortToggle && sortMenu && sortLabel) {
+        const closeSortMenu = () => {
+            sortMenu.classList.add('collapsed');
+            sortToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        sortToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = sortToggle.getAttribute('aria-expanded') === 'true';
+            sortMenu.classList.toggle('collapsed', isOpen);
+            sortToggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        sortMenu.querySelectorAll('li').forEach(option => {
+            option.addEventListener('click', () => {
+                sortMode = option.dataset.value;
+
+                // Seçilmiş sıralamanın adını toggle düyməsində göstəririk və
+                // .lang atributlarını da köçürürük ki, dil dəyişəndə (AZ/EN)
+                // bu etiket də düzgün tərcümə olunsun.
+                const optionSpan = option.querySelector('.lang');
+                sortLabel.textContent = optionSpan.textContent;
+                sortLabel.setAttribute('data-az', optionSpan.getAttribute('data-az'));
+                sortLabel.setAttribute('data-en', optionSpan.getAttribute('data-en'));
+
+                sortMenu.querySelectorAll('li').forEach(li => li.classList.toggle('active', li === option));
+                closeSortMenu();
+                renderList();
+            });
+        });
+
+        // Menyudan kənara klikləndikdə bağlanır
+        document.addEventListener('click', (e) => {
+            if (!sortToggle.contains(e.target) && !sortMenu.contains(e.target)) {
+                closeSortMenu();
+            }
         });
     }
 

@@ -236,8 +236,20 @@
     border-color: #d97742;
 }
 
-.vacancy-sort-select {
+/* Fərdi sıralama dropdown-u — native <select> əvəzinə (səbəb yuxarıda,
+   vacancies.html-də şərh olunub). Toggle düyməsi köhnə native select-in
+   görünüşünü təkrarlayır, siyahı isə tam öz CSS-imizlə idarə olunur, ona
+   görə tema rəngi hər zaman 100% doğrudur. */
+.vacancy-sort-dropdown {
+    position: relative;
     flex-shrink: 0;
+}
+
+.vacancy-sort-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -248,20 +260,60 @@
     padding: 11px 12px;
     outline: none;
     cursor: pointer;
+    white-space: nowrap;
     transition: border-color 0.25s;
-    /* Brauzerin native açılan siyahısı (popup) rəngi bu olmasa defolt ağ
-       açılır (tünd rejimdə səhifə ilə ziddiyyət təşkil edir) — color-scheme
-       Chromium/Edge/Firefox-da native popup-un fon/mətn rəngini tema ilə
-       uyğunlaşdırır. */
-    color-scheme: dark;
 }
 
-body.light-theme .vacancy-sort-select {
-    color-scheme: light;
+.vacancy-sort-toggle .filter-chevron {
+    width: 14px;
+    height: 14px;
+    margin-top: 0;
+    transition: transform 0.2s;
 }
 
-.vacancy-sort-select:focus {
+.vacancy-sort-toggle[aria-expanded="true"] {
     border-color: #d97742;
+}
+
+.vacancy-sort-toggle[aria-expanded="true"] .filter-chevron {
+    transform: rotate(180deg);
+}
+
+.vacancy-sort-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 20;
+    min-width: 190px;
+    list-style: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.vacancy-sort-menu.collapsed {
+    display: none;
+}
+
+.vacancy-sort-menu li {
+    padding: 9px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.vacancy-sort-menu li:hover {
+    background: var(--card-hover);
+    color: var(--text-color);
+}
+
+.vacancy-sort-menu li.active {
+    color: #d97742;
+    font-weight: 600;
 }
 
 .vacancies-list {
