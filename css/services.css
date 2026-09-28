@@ -34,10 +34,11 @@
     margin: 0 auto;
 }
 
-/* Xidmət Kartları */
+/* Xidmət Kartları — 4 kart eyni ölçüdə 2x2 şəbəkədə (auto-fit-in 3+1 kimi
+   qeyri-bərabər sətirlərə bölünməsinin qarşısını almaq üçün sabit 2 sütun) */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin-bottom: 60px;
 }
@@ -128,5 +129,8 @@
     }
     .services-hero {
         margin-bottom: 50px;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
     }
 }
