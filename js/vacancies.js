@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sol paneldəki bütün filtr qruplarının (Fəaliyyət sahəsi, Şirkətlər,
     // Kateqoriyalar, Vəzifə dərəcəsi, Region, İş qrafiki, İş formatı) aç/bağla
-    // oxu — hələlik yalnız UI davranışıdır (aç/bağla + çoxlu seçim), vakansiya
-    // siyahısını filtrləmir. Bu checkbox-ları real filtrə bağlamaq ayrıca
-    // addımdır (CATEGORIES massivi hələ köhnə 7 sahə ilə işləyir, aşağıda
-    // toxunulmayıb) — bax CLAUDE.md.
+    // oxu. Checkbox-ların özünün siyahını filtrləmə məntiqi aşağıda,
+    // passesSidebarFilters() və "sidebarFiltersEl.addEventListener('change', ...)"
+    // bölümlərindədir — statik VACANCIES üzərində TEST məqsədilədir, real
+    // backend gələndə eyni taksonomiya (sector/jobCategory/level sahələri)
+    // real data ilə doldurulmalıdır, bax CLAUDE.md.
     document.querySelectorAll('.filter-group-header').forEach(header => {
         const list = document.getElementById(header.getAttribute('aria-controls'));
         if (!list) return;
@@ -55,6 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Senior Backend Developer',
             company: 'TechCore Solutions',
             category: 'it',
+            sector: 'tech-telecom',
+            jobCategory: 'it-digital',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Hibrid',
@@ -73,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Frontend Developer (React)',
             company: 'TechCore Solutions',
             category: 'it',
+            sector: 'tech-telecom',
+            jobCategory: 'it-digital',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -91,6 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Maliyyə Meneceri',
             company: 'Baku Finance Group',
             category: 'finance',
+            sector: 'banking-finance',
+            jobCategory: 'economic-finance',
+            level: 'manager',
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -109,6 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Baş Mühasib',
             company: 'Baku Finance Group',
             category: 'finance',
+            sector: 'banking-finance',
+            jobCategory: 'economic-finance',
+            level: 'division-head',
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -127,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Rəqəmsal Marketinq Mütəxəssisi',
             company: 'BrightWave Agency',
             category: 'marketing',
+            sector: 'marketing-advertising',
+            jobCategory: 'sales-marketing-comms',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Uzaqdan',
@@ -145,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Satış Təmsilçisi',
             company: 'BrightWave Agency',
             category: 'marketing',
+            sector: 'marketing-advertising',
+            jobCategory: 'sales-marketing-comms',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -163,6 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Layihə Meneceri (Tikinti)',
             company: 'NorthBuild MMC',
             category: 'construction',
+            sector: 'real-estate-construction',
+            jobCategory: 'technical-engineering',
+            level: 'manager',
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -181,6 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Anbar Nəzarətçisi',
             company: 'LogiFlow Az',
             category: 'logistics',
+            sector: 'transport-logistics',
+            jobCategory: 'supply-operations',
+            level: 'division-head',
             location: 'Sumqayıt',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -199,6 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Kredit Analitiki',
             company: 'AtlasBank',
             category: 'banking',
+            sector: 'banking-finance',
+            jobCategory: 'economic-finance',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -217,6 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'HR Business Partner',
             company: 'TalentCore Partner Co.',
             category: 'hr',
+            sector: 'service-other',
+            jobCategory: 'humanitarian-social',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Hibrid',
@@ -235,6 +266,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'UI/UX Dizayner',
             company: 'DesignHub Creative',
             category: 'it',
+            sector: 'marketing-advertising',
+            jobCategory: 'it-digital',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Uzaqdan',
@@ -253,6 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Anbar Operatoru',
             company: 'LogiFlow Az',
             category: 'logistics',
+            sector: 'transport-logistics',
+            jobCategory: 'supply-operations',
+            level: null,
             location: 'Sumqayıt',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -271,6 +308,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Sığorta Məhsulları üzrə Menecer',
             company: 'AtlasBank',
             category: 'banking',
+            sector: 'banking-finance',
+            jobCategory: 'economic-finance',
+            level: 'manager',
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -289,6 +329,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Tikinti Mühəndisi',
             company: 'NorthBuild MMC',
             category: 'construction',
+            sector: 'real-estate-construction',
+            jobCategory: 'technical-engineering',
+            level: null,
             location: 'Gəncə',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -307,6 +350,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'İnsan Resursları üzrə Mütəxəssis',
             company: 'TalentCore Partner Co.',
             category: 'hr',
+            sector: 'service-other',
+            jobCategory: 'humanitarian-social',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Hibrid',
@@ -325,6 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Maliyyə Analitiki',
             company: 'Baku Finance Group',
             category: 'finance',
+            sector: 'banking-finance',
+            jobCategory: 'economic-finance',
+            level: null,
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
@@ -357,6 +406,61 @@ document.addEventListener('DOMContentLoaded', () => {
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
     let searchQuery = '';
     let sortMode = 'newest'; // 'newest' | 'oldest' | 'az'
+
+    // Sol paneldəki "Region" və "İş qrafiki"/"İş formatı" filtrləri üçün ayrıca
+    // sahə saxlamırıq — VACANCIES-də onsuz da olan location/type/mode
+    // mətnlərini filtr checkbox-larının value-larına uyğunlaşdırırıq. Yalnız
+    // "Fəaliyyət sahəsi" (sector) və "Kateqoriyalar" (jobCategory) köhnə
+    // 7-lik `category`-dən fərqli, tamamilə yeni taksonomiyalar olduğu üçün
+    // hər VACANCIES elanına ayrıca sahə kimi əlavə olunub (bax yuxarı).
+    const REGION_BY_LOCATION = {
+        'Bakı': 'baku', 'Sumqayıt': 'sumgait', 'Gəncə': 'ganja', 'Xırdalan': 'khirdalan',
+        'Mingəçevir': 'mingachevir', 'Lənkəran': 'lankaran', 'Tovuz': 'tovuz',
+        'Hacıqabul': 'hajigabul', 'Şamaxı': 'shamakhi', 'Şəmkir': 'shamkir', 'Bərdə': 'barda',
+        'Cəlilabad': 'jalilabad', 'Qazax': 'gazakh', 'Quba': 'guba', 'Qusar': 'gusar',
+        'Xaçmaz': 'khachmaz', 'Salyan': 'salyan', 'Şirvan': 'shirvan', 'Göyçay': 'goychay',
+        'İmişli': 'imishli', 'Qəbələ': 'gabala', 'Masallı': 'masally', 'Beyləqan': 'beylagan',
+        'Xızı': 'khizi', 'Naxçıvan': 'nakhchivan'
+    };
+    const SCHEDULE_BY_TYPE = { 'Tam ştat': 'full-time', 'Yarım ştat': 'part-time' };
+    const FORMAT_BY_MODE = { 'Ofisdən': 'office', 'Hibrid': 'hybrid', 'Uzaqdan': 'remote' };
+
+    // Bir filtr qrupunda seçilmiş checkbox-ların value-larını qaytarır.
+    function getCheckedValues(listId) {
+        const listEl2 = document.getElementById(listId);
+        if (!listEl2) return [];
+        return [...listEl2.querySelectorAll('input[type="checkbox"]:checked')].map(cb => cb.value);
+    }
+
+    // Sol paneldəki 7 filtr qrupu — qrup daxilində OR (istənilən seçilmiş
+    // qutuya uyğun gəlsə kifayətdir), qruplar arasında AND (hər aktiv qrupun
+    // şərtinə uyğun gəlməlidir). Heç nə seçilməyibsə, həmin qrup filtrləməyə
+    // təsir etmir. Bu, real backend gələnə qədər statik VACANCIES üzərində
+    // test üçündür — real data ilə eyni taksonomiya saxlanılmalıdır.
+    function passesSidebarFilters(v) {
+        const sectors = getCheckedValues('sector-filter-list');
+        if (sectors.length && !sectors.includes(v.sector)) return false;
+
+        const companies = getCheckedValues('company-filter-list');
+        if (companies.length && !companies.includes(v.company)) return false;
+
+        const jobCategories = getCheckedValues('function-filter-list');
+        if (jobCategories.length && !jobCategories.includes(v.jobCategory)) return false;
+
+        const levels = getCheckedValues('level-filter-list');
+        if (levels.length && !levels.includes(v.level)) return false;
+
+        const regions = getCheckedValues('region-filter-list');
+        if (regions.length && !regions.includes(REGION_BY_LOCATION[v.location])) return false;
+
+        const schedules = getCheckedValues('schedule-filter-list');
+        if (schedules.length && !schedules.includes(SCHEDULE_BY_TYPE[v.type])) return false;
+
+        const formats = getCheckedValues('format-filter-list');
+        if (formats.length && !formats.includes(FORMAT_BY_MODE[v.mode])) return false;
+
+        return true;
+    }
 
     // "posted" sahəsi ("2 gün əvvəl", "1 həftə əvvəl") sabit mətn kimi
     // saxlanılır (UI-də göstərilən budur), amma sıralama üçün ondan təxmini
@@ -435,6 +539,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ? VACANCIES
             : VACANCIES.filter(v => v.category === activeCategory);
 
+        filtered = filtered.filter(passesSidebarFilters);
+
         if (searchQuery) {
             const q = searchQuery.toLowerCase();
             filtered = filtered.filter(v => v.title.toLowerCase().includes(q) || v.company.toLowerCase().includes(q));
@@ -508,6 +614,22 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(renderList, 150);
     });
+
+    // Sol paneldəki 7 filtr qrupundan hər hansı checkbox dəyişəndə siyahını
+    // yenidən çəkirik — delegasiya sayəsində dinamik doldurulan Şirkətlər
+    // siyahısı (renderCompanyFilter) daxil olmaqla bütün checkbox-lar üçün
+    // işləyir, ayrıca listener lazım deyil. "Vakansiya yerləşdir" paneli
+    // (.vacancies-post-panel) bu konteynerin XARİCİNDƏdir, ona görə linklərə
+    // toxunulmur.
+    const sidebarFiltersEl = document.querySelector('.vacancies-sidebar');
+    if (sidebarFiltersEl) {
+        sidebarFiltersEl.addEventListener('change', (e) => {
+            if (e.target.matches('input[type="checkbox"]')) {
+                mobilePage = 1;
+                renderList();
+            }
+        });
+    }
 
     // Orta sütunun başındakı axtarış + sıralama paneli
     const searchInput = document.getElementById('vacancy-search');
