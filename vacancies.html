@@ -76,7 +76,8 @@
             </div>
 
             <div class="vacancies-layout">
-                <aside class="vacancies-sidebar">
+                <aside class="vacancies-sidebar-wrap">
+                    <div class="vacancies-sidebar">
                     <div class="filter-group">
                         <button type="button" class="filter-group-header" id="sector-filter-toggle" aria-expanded="true" aria-controls="sector-filter-list">
                             <span class="filter-group-title">
@@ -242,34 +243,40 @@
                         </ul>
                     </div>
 
-                    <!-- Filtr deyil, naviqasiya menyusudur — eyni .filter-group görünüşü
-                         saxlanılır (aç/bağla oxu js/vacancies.js-dəki ümumi
-                         .filter-group-header handler-i ilə avtomatik işləyir), amma
-                         içindəki sətirlər checkbox yox, digər səhifəyə keçid linkidir. -->
-                    <div class="filter-group">
-                        <button type="button" class="filter-group-header" id="post-menu-toggle" aria-expanded="false" aria-controls="post-menu-list">
-                            <span class="filter-group-title">
-                                <span class="lang" data-en="Post a Vacancy" data-az="Vakansiya yerləşdir">Vakansiya yerləşdir</span>
-                            </span>
-                            <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
+                    </div>
 
-                        <ul class="filter-options collapsed" id="post-menu-list">
-                            <li>
-                                <a href="post-job.html" class="sidebar-menu-link">
-                                    <span class="lang" data-en="Publishing Job Listings" data-az="İş elanlarının dərc olunması">İş elanlarının dərc olunması</span>
-                                    <span class="arrow">→</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="ad-banners.html" class="sidebar-menu-link">
-                                    <span class="lang" data-en="Advertising Banner Placement" data-az="Reklam bannerlərinin yerləşdirilməsi">Reklam bannerlərinin yerləşdirilməsi</span>
-                                    <span class="arrow">→</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <!-- Filtr deyil, naviqasiya menyusudur — eyni xidmətə qulluq
+                         etmədiyi üçün yuxarıdakı scroll olan filtr blokundan ayrı,
+                         sol sütunun ən alt hissəsində öz qutusunda sabit qalır (aç/bağla
+                         oxu js/vacancies.js-dəki ümumi .filter-group-header handler-i
+                         ilə avtomatik işləyir), içindəki sətirlər checkbox yox, digər
+                         səhifəyə keçid linkidir. -->
+                    <div class="vacancies-post-panel">
+                        <div class="filter-group">
+                            <button type="button" class="filter-group-header" id="post-menu-toggle" aria-expanded="false" aria-controls="post-menu-list">
+                                <span class="filter-group-title">
+                                    <span class="lang" data-en="Post a Vacancy" data-az="Vakansiya yerləşdir">Vakansiya yerləşdir</span>
+                                </span>
+                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+
+                            <ul class="filter-options collapsed" id="post-menu-list">
+                                <li>
+                                    <a href="post-job.html" class="sidebar-menu-link">
+                                        <span class="lang" data-en="Publishing Job Listings" data-az="İş elanlarının dərc olunması">İş elanlarının dərc olunması</span>
+                                        <span class="arrow">→</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="ad-banners.html" class="sidebar-menu-link">
+                                        <span class="lang" data-en="Advertising Banner Placement" data-az="Reklam bannerlərinin yerləşdirilməsi">Reklam bannerlərinin yerləşdirilməsi</span>
+                                        <span class="arrow">→</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </aside>
 
