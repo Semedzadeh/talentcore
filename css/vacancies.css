@@ -112,13 +112,6 @@
     opacity: 0.55;
 }
 
-.filter-group-hint {
-    font-size: 10.5px;
-    font-weight: 400;
-    color: var(--text-muted);
-    opacity: 0.75;
-}
-
 .filter-chevron {
     width: 16px;
     height: 16px;
