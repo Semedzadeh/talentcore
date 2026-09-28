@@ -2,11 +2,25 @@
 // sağ paneldə detallı göstərilməsi. Yalnız vacancies.html-də işə düşür.
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Sol paneldəki "Fəaliyyət sahəsi" filtr qrupunun aç/bağla oxu — hələlik
+    // yalnız UI davranışıdır (aç/bağla), vakansiya siyahısını filtrləmir.
+    // Bu, köhnə "Sahələr" siyahısını (7 sahə) əvəz edən yeni 15 sahəlik
+    // checkbox filtridir; siyahını ona bağlamaq ayrıca addımdır (CATEGORIES
+    // massivi hələ köhnə 7 sahə ilə işləyir, aşağıda toxunulmayıb).
+    const sectorFilterToggle = document.getElementById('sector-filter-toggle');
+    const sectorFilterList = document.getElementById('sector-filter-list');
+    if (sectorFilterToggle && sectorFilterList) {
+        sectorFilterToggle.addEventListener('click', () => {
+            const isExpanded = sectorFilterToggle.getAttribute('aria-expanded') === 'true';
+            sectorFilterToggle.setAttribute('aria-expanded', String(!isExpanded));
+            sectorFilterList.classList.toggle('collapsed', isExpanded);
+        });
+    }
+
     const listEl = document.getElementById('vacancies-list');
     const detailEl = document.getElementById('vacancy-detail');
-    const catListEl = document.getElementById('category-list');
 
-    if (!listEl || !detailEl || !catListEl) return;
+    if (!listEl || !detailEl) return;
 
     // --- SAHƏLƏR (nümunə) ---
     const CATEGORIES = [
@@ -327,21 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeVacancyId = VACANCIES[0].id;
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
 
-    function countByCategory(catId) {
-        return VACANCIES.filter(v => v.category === catId).length;
-    }
-
-    function renderCategories() {
-        const items = [{ id: 'all', az: 'Bütün Sahələr' }, ...CATEGORIES];
-        catListEl.innerHTML = items.map(cat => {
-            const count = cat.id === 'all' ? VACANCIES.length : countByCategory(cat.id);
-            const activeClass = cat.id === activeCategory ? ' active' : '';
-            return `<li class="cat-item${activeClass}" data-category="${cat.id}">
-                <span>${cat.az}</span><span class="cat-count">${count}</span>
-            </li>`;
-        }).join('');
-    }
-
     function highlightActiveCard() {
         listEl.querySelectorAll('.vacancy-card').forEach(card => {
             card.classList.toggle('active', Number(card.dataset.id) === activeVacancyId);
@@ -434,16 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
     }
 
-    catListEl.addEventListener('click', (e) => {
-        const item = e.target.closest('.cat-item');
-        if (!item) return;
-        activeCategory = item.dataset.category;
-        mobilePage = 1;
-        renderCategories();
-        renderList();
-        listEl.scrollTop = 0;
-    });
-
     listEl.addEventListener('click', (e) => {
         const pageBtn = e.target.closest('.mobile-page-btn');
         if (pageBtn && !pageBtn.disabled) {
@@ -472,6 +461,5 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeTimer = setTimeout(renderList, 150);
     });
 
-    renderCategories();
     renderList();
 });
