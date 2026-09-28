@@ -402,7 +402,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const isValidCategory = CATEGORIES.some(cat => cat.id === requestedCategory);
 
     let activeCategory = isValidCategory ? requestedCategory : 'all';
-    let activeVacancyId = VACANCIES[0].id;
+    // Səhifə açılanda/yenilənəndə sağ paneldə heç bir vakansiya default
+    // seçilməmiş olmalıdır (istifadəçi özü vakansiya kartına basmayınca) —
+    // ona görə null-dan başlayır, VACANCIES[0]-dan yox.
+    let activeVacancyId = null;
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
     let searchQuery = '';
     let sortMode = 'newest'; // 'newest' | 'oldest' | 'az'
@@ -492,11 +495,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Sağ paneldə default görünüş — heç bir vakansiya seçilməyibsə, xidmətlərimizi
+    // 5 saniyədən bir növbə ilə göstəririk (services.html-dəki eyni 4 xidmət).
+    // "sağa lazım olsa sonra reklam qoyacağıq" — ona görə bu, ayrıca funksiya kimi
+    // saxlanılıb ki, gələcəkdə asanlıqla bir statik reklam bloku ilə əvəzlənsin.
+    const SERVICES_SHOWCASE = [
+        { icon: '🔍', az: { title: 'Executive Search', desc: 'Gələcəyi quracaq liderlərin və C-level rəhbərlərin tapılması.' }, en: { title: 'Executive Search', desc: 'Finding the leaders who will build the future.' } },
+        { icon: '🤝', az: { title: 'Professional Recruitment', desc: 'Peşəkar komandaların səmərəli və sürətli formalaşdırılması.' }, en: { title: 'Professional Recruitment', desc: 'Building professional teams, efficiently and fast.' } },
+        { icon: '📊', az: { title: 'Talent Assessment', desc: 'Namizədlərin və komandaların bacarıq və potensialına görə qiymətləndirilməsi.' }, en: { title: 'Talent Assessment', desc: 'Evaluating candidates and teams against their true potential.' } },
+        { icon: '🌟', az: { title: 'Employer Branding', desc: 'İstedadları cəlb edən və özündə saxlayan güclü işəgötürən imicinin formalaşdırılması.' }, en: { title: 'Employer Branding', desc: 'Building an employer image that attracts and retains top talent.' } }
+    ];
+    let showcaseIndex = 0;
+    let showcaseTimer = null;
+
+    function renderServicesShowcase() {
+        const item = SERVICES_SHOWCASE[showcaseIndex];
+        const lang = document.documentElement.lang === 'en' ? 'en' : 'az';
+        const ctaText = lang === 'en' ? 'Explore Our Services' : 'Xidmətlərimizə baxın';
+        const hintText = lang === 'en' ? 'Select a vacancy on the left to see its details.' : 'Ətraflı məlumat üçün soldan bir vakansiya seçin.';
+        detailEl.innerHTML = `
+            <div class="detail-placeholder">
+                <div class="detail-placeholder-icon">${item.icon}</div>
+                <h3>${item[lang].title}</h3>
+                <p>${item[lang].desc}</p>
+                <a href="services.html" class="btn-primary">${ctaText}</a>
+                <div class="detail-placeholder-hint">${hintText}</div>
+            </div>
+        `;
+    }
+
+    function startShowcaseRotation() {
+        stopShowcaseRotation();
+        renderServicesShowcase();
+        showcaseTimer = setInterval(() => {
+            showcaseIndex = (showcaseIndex + 1) % SERVICES_SHOWCASE.length;
+            renderServicesShowcase();
+        }, 5000);
+    }
+
+    function stopShowcaseRotation() {
+        if (showcaseTimer) {
+            clearInterval(showcaseTimer);
+            showcaseTimer = null;
+        }
+    }
+
     function renderDetail(v) {
         if (!v) {
+            stopShowcaseRotation();
             detailEl.innerHTML = '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
             return;
         }
+        stopShowcaseRotation();
         const catLabel = (CATEGORIES.find(c => c.id === v.category) || {}).az || '';
         detailEl.innerHTML = `
             <h2>${v.title}</h2>
@@ -580,11 +630,19 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('') + renderMobilePagination(totalPages);
 
-        if (!pageItems.find(v => v.id === activeVacancyId)) {
-            activeVacancyId = pageItems[0].id;
+        // Əvvəl seçilmiş vakansiya filtrdən sonra siyahıda qalmayıbsa seçimi
+        // ləğv edirik (sağ panel default xidmətlər vitrininə qayıdır) —
+        // ONU ƏVƏZ ETMƏK ÜÇÜN başqa vakansiyanı MƏCBURİ seçmirik, çünki
+        // istifadəçi özü klikləməyənə qədər default heç nə açılmamalıdır.
+        if (activeVacancyId !== null && !pageItems.find(v => v.id === activeVacancyId)) {
+            activeVacancyId = null;
         }
         highlightActiveCard();
-        renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
+        if (activeVacancyId === null) {
+            startShowcaseRotation();
+        } else {
+            renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
+        }
     }
 
     listEl.addEventListener('click', (e) => {

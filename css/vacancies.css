@@ -568,6 +568,58 @@ body.light-theme .vacancy-sort-menu {
     font-size: 14px;
 }
 
+/* Sağ panelin default görünüşü — heç bir vakansiya seçilməyibsə, xidmətlərimiz
+   5 saniyədən bir növbə ilə göstərilir (js/vacancies.js: renderServicesShowcase).
+   Hər dövriyyədə #vacancy-detail-in innerHTML-i yenidən yazıldığı üçün animasiya
+   avtomatik təkrarlanır, ayrıca JS tetikləməsinə ehtiyac yoxdur. */
+.detail-placeholder {
+    height: 100%;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    animation: detailPlaceholderFade 0.4s ease;
+}
+
+@keyframes detailPlaceholderFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-placeholder-icon {
+    font-size: 46px;
+}
+
+.detail-placeholder h3 {
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 700;
+    color: #d97742;
+}
+
+.detail-placeholder p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 380px;
+}
+
+.detail-placeholder .btn-primary {
+    margin-top: 4px;
+}
+
+.detail-placeholder-hint {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    opacity: 0.7;
+    max-width: 300px;
+}
+
 /* --- MOBİL VƏ PLANŞET --- */
 @media (max-width: 1150px) {
     .vacancies-layout {
