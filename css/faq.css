@@ -1,0 +1,65 @@
+/* --- TEZ-TEZ VERİLƏN SUALLAR SƏHİFƏSİ --- */
+.faq-page {
+    padding: 160px 0 100px 0;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--hero-bg);
+    background-attachment: fixed;
+    transition: background 0.4s ease;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.faq-hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.faq-hero h1 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.faq-hero p {
+    color: var(--text-muted);
+    font-size: clamp(14px, 1.1vw, 16px);
+}
+
+/* .faq-item-in özü (summary/açılan cavab) css/global.css-də ortaq
+   komponent kimi təyin olunub — burda yalnız siyahını kart kimi çərçivəyə alırıq */
+.faq-list {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 6px 24px;
+}
+
+.faq-list .faq-item {
+    max-width: none;
+}
+
+.faq-list .faq-item:last-child {
+    border-bottom: none;
+}
+
+/* --- MOBİL VƏ PLANŞET --- */
+@media (max-width: 1024px) {
+    .faq-page {
+        padding: 140px 0 80px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-page {
+        padding-top: 150px;
+    }
+    .faq-list {
+        padding: 4px 16px;
+    }
+}

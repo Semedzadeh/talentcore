@@ -1,10 +1,14 @@
-/* --- ANA SƏHİFƏ VƏ HERO BÖLMƏSİ --- */
+/* --- ANA SƏHİFƏ VƏ HERO BÖLMƏSİ ---
+   Statistika bölməsi ləğv olunduğundan hero-content indi bu bölmənin yeganə
+   övladıdır — "center" onu şaquli olaraq ortalayır, hero-content-ə verilən
+   margin-top isə onu tam mərkəzdən bir az aşağı, daha "yerləşmiş" görünsün
+   deyə itələyir (dizayn header-in altına yapışıb qalmasın deyə). */
 .hero-baku {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around; /* Elementlər bərabər aralıqla yuxarıdan-aşağıya paylanacaq */
-    padding: 130px 2% 40px 2%; /* Mobildə menyunun altına düşməməsi üçün padding-top */
+    justify-content: center;
+    padding: 130px 2% 60px 2%; /* Mobildə menyunun altına düşməməsi üçün padding-top */
     background: var(--hero-bg); /* Arxa fon global.css-dən (Light/Dark) avtomatik gəlir */
     background-position: top center;
     background-attachment: fixed;
@@ -14,6 +18,7 @@
 .hero-content {
     max-width: 850px;
     margin-left: 5%;
+    margin-top: clamp(20px, 6vh, 70px);
     text-align: left;
 }
 
@@ -76,92 +81,17 @@
     transform: translateY(-3px);
 }
 
-/* --- STATİSTİKA BÖLMƏSİ --- */
-.stats-section {
-    padding: 30px 2% 0 2%;
-    text-align: center;
-    background-color: transparent;
-    width: 100%;
-}
-
-.section-title {
-    font-size: clamp(24px, 2.5vw, 32px);
-    margin-bottom: 35px;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-.stats-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-/* Statistika Kartları */
-.stat-card {
-    background: var(--card-bg, rgba(255, 255, 255, 0.04));
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.15));
-    padding: 25px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 320px;
-    text-align: left;
-    position: relative;
-    transition: transform 0.3s, border-color 0.3s, background 0.4s;
-    flex: 1 1 250px; /* Ekran kiçildikcə kartlar elastik formalaşır */
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    border-color: #d97742;
-    background: var(--card-hover, rgba(255, 255, 255, 0.08));
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.stat-number {
-    font-size: clamp(34px, 3.5vw, 42px);
-    font-weight: 700;
-    color: #d97742;
-    margin-bottom: 5px;
-}
-
-.stat-title {
-    font-size: clamp(15px, 1.3vw, 18px);
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--text-color);
-}
-
-.stat-card p {
-    font-size: clamp(13px, 1vw, 14px);
-    color: var(--text-muted);
-}
-
-.stat-icon {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    font-size: 40px;
-    opacity: 0.15;
-}
-
 /* --- MOBİL VƏ PLANŞET UYĞUNLAŞDIRMA --- */
 @media (max-width: 1024px) {
     .hero-baku {
         /* iPad-də menyu ilə kəsişməməsi üçün üst boşluğu qaldırırıq */
-        padding: 180px 3% 40px 3%;
-        justify-content: space-around; /* Elementləri ekrana düzgün yayırıq */
-        gap: 30px;
+        padding: 180px 3% 60px 3%;
     }
 
     .hero-content {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        margin-top: 10px; /* Təhlükəsizlik üçün kiçik əlavə boşluq */
     }
 
     .cta-buttons {
@@ -173,8 +103,6 @@
 @media (max-width: 768px) {
     .hero-baku {
         padding-top: 150px; /* Mobildə menyu açıldığı üçün boşluq bir az çox qalır */
-        justify-content: space-around; /* Mobildə yenidən alt-alta yayırıq */
-        gap: 20px;
     }
 
     .cta-buttons {
@@ -184,9 +112,5 @@
 
     .cta-buttons a {
         width: 100%;
-    }
-
-    .stat-card {
-        max-width: 100%;
     }
 }

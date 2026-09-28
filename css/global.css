@@ -32,12 +32,6 @@ body.light-theme {
     --card-bg: rgba(255, 255, 255, 0.85);
     --card-hover: rgba(255, 255, 255, 0.95);
 }
-body.light-theme .stat-card {
-    background: rgba(255, 255, 255, 0.75); /* Tam ağ deyil, bir az şəffaf */
-    backdrop-filter: blur(25px);
-    border: 1px solid rgba(15, 23, 42, 0.15); /* Tünd və dəqiq çərçivə */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Kartı havaya qaldıran kölgə */
-}
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* Səhifənin ÖZÜ heç vaxt üfüqi sürüşməsin (yalnız şaquli scroll) — html-ə də
@@ -258,27 +252,6 @@ body.light-theme .glass-header {
 .lang-dropdown option { color: #000; }
 
 /* CV Göndər (Kompüter və Noutbuklar üçün əsas dizayn) */
-.send-cv-btn {
-    background-color: #c4642f; 
-    color: #fff !important; 
-    padding: 8px 18px; 
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(196, 100, 47, 0.3);
-    border: 1px solid #b35624; 
-    white-space: nowrap;
-    display: inline-block;
-}
-
-.send-cv-btn:hover {
-    background-color: #b35624; 
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(179, 86, 36, 0.4);
-}
-
 .theme-switch { position: relative; display: inline-block; width: 60px; height: 30px; margin-right: 5px; }
 .theme-switch input { opacity: 0; width: 0; height: 0; }
 .slider {
@@ -344,21 +317,6 @@ input:checked + .slider .sun { opacity: 1; }
         gap: 15px; 
     }
 
-    .glass-header.active .send-cv-btn {
-        background-color: #c4642f; 
-        color: #fff !important;
-        border: 1px solid #b35624;
-        box-shadow: 0 4px 15px rgba(196, 100, 47, 0.3);
-        border-radius: 8px;
-        margin: 0; 
-    }
-    
-    .glass-header.active .send-cv-btn:hover {
-        background-color: #b35624;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(179, 86, 36, 0.4);
-    }
-
     nav ul { flex-direction: column; gap: 15px; padding-bottom: 15px; }
     nav ul li a { font-size: 15px; padding: 5px 0; }
     
@@ -366,4 +324,161 @@ input:checked + .slider .sun { opacity: 1; }
     .glass-header.active .hamburger span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
     .glass-header.active .hamburger span:nth-child(2) { opacity: 0; }
     .glass-header.active .hamburger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+}
+
+/* --- FOOTER (ortaq komponent, bütün səhifələrdə eyni görünəcək) --- */
+.site-footer {
+    width: 100%;
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 5% 30px 5%;
+}
+
+/* --- FAQ Akkordeonu (faq.html-in özündə istifadə olunur, native
+   <details>/<summary> ilə — JS-ə ehtiyac yoxdur) --- */
+.faq-item {
+    max-width: 800px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 4px;
+    cursor: pointer;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '+';
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 400;
+    color: #d97742;
+    transition: transform 0.25s;
+}
+
+.faq-item[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq-item p {
+    padding: 0 26px 18px 4px;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    height: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer-faq-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.footer-faq-link:hover {
+    color: #d97742;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.footer-social-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: border-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.social-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.social-icon:hover {
+    border-color: #d97742;
+    color: #d97742;
+    transform: translateY(-2px);
+}
+
+.footer-copyright {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-brand {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-social {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .footer-social-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
