@@ -280,12 +280,25 @@
                                data-az-placeholder="Vakansiya və ya şirkət axtar..."
                                data-en-placeholder="Search job title or company..."
                                aria-label="Vakansiya axtar">
-                        <select id="vacancy-sort" class="vacancy-sort-select" aria-label="Sırala">
-                            <option value="newest" class="lang" data-en="Newest" data-az="Ən yeni">Ən yeni</option>
-                            <option value="oldest" class="lang" data-en="Oldest" data-az="Ən köhnə">Ən köhnə</option>
-                            <option value="az" class="lang" data-en="A-Z" data-az="Əlifba sırası (A-Z)">Əlifba sırası (A-Z)</option>
-                            <option value="za" class="lang" data-en="Z-A" data-az="Əlifba sırası (Z-A)">Əlifba sırası (Z-A)</option>
-                        </select>
+                        <!-- Native <select> qəsdən istifadə olunmur — açılan siyahının
+                             fon rəngi brauzerin öz native popup-u tərəfindən idarə olunur
+                             və color-scheme ilə belə tünd temaya həmişə tabe olmur (real
+                             brauzerdə test edildi, ağ açılırdı). Ona görə tam JS-idarəli
+                             fərdi dropdown istifadə olunur ki, rəng 100% temaya uysun. -->
+                        <div class="vacancy-sort-dropdown">
+                            <button type="button" class="vacancy-sort-toggle" id="vacancy-sort-toggle" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="lang" id="vacancy-sort-label" data-en="Newest" data-az="Ən yeni">Ən yeni</span>
+                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <ul class="vacancy-sort-menu collapsed" id="vacancy-sort-menu" role="listbox" aria-label="Sırala">
+                                <li role="option" data-value="newest" class="active"><span class="lang" data-en="Newest" data-az="Ən yeni">Ən yeni</span></li>
+                                <li role="option" data-value="oldest"><span class="lang" data-en="Oldest" data-az="Ən köhnə">Ən köhnə</span></li>
+                                <li role="option" data-value="az"><span class="lang" data-en="A-Z" data-az="Əlifba sırası (A-Z)">Əlifba sırası (A-Z)</span></li>
+                                <li role="option" data-value="za"><span class="lang" data-en="Z-A" data-az="Əlifba sırası (Z-A)">Əlifba sırası (Z-A)</span></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="vacancies-list" id="vacancies-list">
