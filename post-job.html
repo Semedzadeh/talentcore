@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talentcore | İş Elanlarının Dərc Olunması</title>
+    <meta name="description" content="Talentcore-da iş elanı yerləşdirin — Standart və Premium paketlərlə şirkətinizə uyğun namizədlərə çatın.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Talentcore | İş Elanlarının Dərc Olunması">
+    <meta property="og:description" content="Standart və Premium paketlərlə iş elanınızı Talentcore-da dərc edin.">
+    <meta property="og:image" content="https://talentcore.az/logo.png">
+    <meta property="og:url" content="https://talentcore.az/post-job.html">
+    <link rel="canonical" href="https://talentcore.az/post-job.html">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/post-job.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // Tema DOM render olunmazdan əvvəl tətbiq olunur ki, səhifə açılanda
+        // yanlış tema anlıq görünüb sonra dəyişməsin (FOUC problemi).
+        (function () {
+            var savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+
+    <header class="glass-header">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="logo.png" alt="Talentcore Logo" class="site-logo">
+            </a>
+        </div>
+
+        <button class="hamburger" id="hamburger-btn" aria-label="Menyu" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html" class="lang" data-en="Home" data-az="Ana Səhifə">Ana Səhifə</a></li>
+                <li><a href="about.html" class="lang" data-en="About Us" data-az="Haqqımızda">Haqqımızda</a></li>
+                <li><a href="services.html" class="lang" data-en="Services" data-az="Xidmətlər">Xidmətlər</a></li>
+                <li><a href="vacancies.html" class="lang" data-en="Vacancies" data-az="Vakansiyalar">Vakansiyalar</a></li>
+                <li><a href="industries.html" class="lang" data-en="Areas of Expertise" data-az="İxtisaslaşdığımız sahələr">İxtisaslaşdığımız sahələr</a></li>
+                <li><a href="contact.html" class="lang" data-en="Contact" data-az="Əlaqə">Əlaqə</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right" id="header-right">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" aria-label="Tünd / Açıq rejim">
+                <span class="slider round">
+                    <span class="icon sun">☀️</span>
+                    <span class="icon moon">🌙</span>
+                </span>
+            </label>
+
+            <select id="lang-switch" class="lang-dropdown" aria-label="Dil seçimi">
+                <option value="az" selected>AZ</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <section class="post-job-page">
+            <div class="post-job-container">
+
+                <div class="post-job-hero">
+                    <h1 class="lang" data-en="Publishing Job Listings" data-az="İş Elanlarının Dərc Olunması">İş Elanlarının Dərc Olunması</h1>
+                    <p class="lang"
+                       data-en="Choose the package that fits your hiring needs."
+                       data-az="İşə qəbul ehtiyacınıza uyğun paketi seçin.">
+                       İşə qəbul ehtiyacınıza uyğun paketi seçin.
+                    </p>
+                </div>
+
+                <div class="pricing-grid">
+
+                    <div class="pricing-card glass-effect">
+                        <h3 class="lang" data-en="Standard" data-az="Standart">Standart</h3>
+                        <ul>
+                            <li><span class="tick">✓</span><span class="lang" data-en="1 job listing published on the site" data-az="1 iş elanının saytda dərc olunması">1 iş elanının saytda dərc olunması</span></li>
+                            <li><span class="tick">✓</span><span class="lang" data-en="Listing stays active for 30 days" data-az="Elanın 30 gün müddətində aktiv qalması">Elanın 30 gün müddətində aktiv qalması</span></li>
+                            <li><span class="tick">✓</span><span class="lang" data-en="Company profile creation (logo, images and company info)" data-az="Şirkət profilinin yaradılması (loqo, şəkillər və şirkət haqqında məlumat)">Şirkət profilinin yaradılması (loqo, şəkillər və şirkət haqqında məlumat)</span></li>
+                        </ul>
+                        <a href="contact.html" class="btn-primary pricing-cta lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</a>
+                    </div>
+
+                    <div class="pricing-card pricing-card-premium glass-effect">
+                        <span class="pricing-badge lang" data-en="Recommended" data-az="Tövsiyə olunur">Tövsiyə olunur</span>
+                        <h3 class="lang" data-en="Premium" data-az="Premium">Premium</h3>
+                        <ul>
+                            <li><span class="tick">✓</span><span class="lang" data-en="Everything included in the Standard package" data-az="Standart paketə daxil olan bütün xidmətlər">Standart paketə daxil olan bütün xidmətlər</span></li>
+                            <li><span class="tick">✓</span><span class="lang" data-en="“Premium” status, featured at the top for 3 days" data-az="Elanın “Premium” statusu ilə 3 gün ərzində ön sıralarda yerləşdirilməsi">Elanın "Premium" statusu ilə 3 gün ərzində ön sıralarda yerləşdirilməsi</span></li>
+                        </ul>
+                        <a href="contact.html" class="btn-primary pricing-cta lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-bottom">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="Talentcore Logo" class="site-logo footer-logo">
+                    <a href="faq.html" class="footer-faq-link lang" data-en="Frequently Asked Questions" data-az="Tez-tez Verilən Suallar">Tez-tez Verilən Suallar</a>
+                </div>
+
+                <!-- Aşağıdakı sosial media linkləri nümunədir (#) — real profil ünvanları ilə əvəzlənməlidir. -->
+                <div class="footer-social">
+                    <span class="footer-social-label lang" data-en="Follow Us" data-az="Bizi İzləyin">Bizi İzləyin</span>
+                    <div class="footer-social-icons">
+                        <a href="#" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7" r="0.6" fill="currentColor"/><path d="M11.5 16.5v-3.6c0-1.6 1-2.4 2.3-2.4 1.3 0 2.2.8 2.2 2.4v3.6"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14 8.5h-1.6c-.9 0-1.4.5-1.4 1.5v2h3l-.4 3h-2.6v6.9"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Telegram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><polygon points="22 2 15 22 11 13 2 9 22 2"/><line x1="22" y1="2" x2="11" y2="13"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3C7 3 3 6.8 3 11.5c0 1.8.6 3.5 1.7 4.9L3.5 21l4.8-1.3c1.1.5 2.4.8 3.7.8 5 0 9-3.8 9-8.5S17 3 12 3z"/><path d="M9 10.3c.2 2.6 2.3 4.7 4.9 4.9.6 0 1-.5.9-1l-.2-1c0-.2-.2-.4-.4-.5l-1.3-.5c-.2-.1-.5 0-.6.2l-.3.5c-1-.4-1.7-1.1-2.1-2.1l.5-.3c.2-.1.3-.4.2-.6l-.5-1.3c-.1-.2-.3-.4-.5-.4l-1 .1c-.5 0-.9.5-.6 1.1z" fill="currentColor" stroke="none"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-copyright">
+                <p>&copy; 2026 Talentcore. <span class="lang" data-en="All rights reserved." data-az="Bütün hüquqlar qorunur.">Bütün hüquqlar qorunur.</span></p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

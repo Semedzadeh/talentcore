@@ -374,6 +374,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sorted.sort((a, b) => getPostedDaysAgo(b.posted) - getPostedDaysAgo(a.posted));
         } else if (sortMode === 'az') {
             sorted.sort((a, b) => a.title.localeCompare(b.title, 'az'));
+        } else if (sortMode === 'za') {
+            sorted.sort((a, b) => b.title.localeCompare(a.title, 'az'));
         } else {
             sorted.sort((a, b) => getPostedDaysAgo(a.posted) - getPostedDaysAgo(b.posted));
         }

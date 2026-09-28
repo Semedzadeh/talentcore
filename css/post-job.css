@@ -1,0 +1,123 @@
+/* --- İŞ ELANLARININ DƏRC OLUNMASI SƏHİFƏSİ --- */
+.post-job-page {
+    padding: 160px 0 100px 0;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--hero-bg);
+    background-attachment: fixed;
+    transition: background 0.4s ease;
+}
+
+.post-job-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.post-job-hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.post-job-hero h1 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.post-job-hero p {
+    color: var(--text-muted);
+    font-size: clamp(14px, 1.1vw, 16px);
+}
+
+/* İki paket yan-yana */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+    align-items: stretch;
+}
+
+.pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.pricing-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 22px;
+}
+
+.pricing-card-premium {
+    border-color: #d97742;
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -13px;
+    right: 24px;
+    background: #c4642f;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(196, 100, 47, 0.35);
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 28px;
+    flex-grow: 1;
+}
+
+.pricing-card ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.pricing-card ul li:last-child {
+    margin-bottom: 0;
+}
+
+.pricing-card ul li .tick {
+    color: #d97742;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.pricing-cta {
+    align-self: flex-start;
+}
+
+/* --- MOBİL VƏ PLANŞET --- */
+@media (max-width: 1024px) {
+    .post-job-page {
+        padding: 140px 0 80px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-job-page {
+        padding-top: 150px;
+    }
+    .post-job-hero {
+        margin-bottom: 40px;
+    }
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}
