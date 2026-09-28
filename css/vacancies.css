@@ -43,25 +43,56 @@
 /* Grid övladları default olaraq min-width:auto alır, bu da uzun mətnli
    elementləri (sahə adları, vakansiya başlıqları) konteynerdən kənara çıxarır
    (məşhur "grid blowout" problemi). min-width:0 bunun qarşısını alır. */
-.vacancies-sidebar,
+.vacancies-sidebar-wrap,
 .vacancies-list-panel,
 .vacancy-detail {
     min-width: 0;
 }
 
-/* Sol: Fəaliyyət sahəsi filtri — orta/sağ sütunlarla eyni hündürlükdə, öz
-   daxili scroll-u ilə (15 sahə siyahısı uzun olduğu üçün; position:sticky
-   YOXDUR, səbəb aşağıdakı .vacancies-list şərhində izah olunub). */
+/* Sol sütun — grid xanasının özü indi bir "wrap"dır (əvvəlki ümumi hündürlük
+   BURADA qalır ki, sütun sırf öz daxilində iki hissəyə bölünsün, amma 3
+   sütunun bir-birinə görə düzülüşü/hündürlüyü DƏYİŞMƏSİN): yuxarıda scroll
+   olan filtr blokları (.vacancies-sidebar), altında isə ayrıca, sabit
+   "Vakansiya yerləşdir" qutusu (.vacancies-post-panel) — bunlar eyni
+   xidmətə qulluq etmədiyi üçün fiziki olaraq ayrılıb. */
+.vacancies-sidebar-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: calc(100vh + 50px);
+}
+
+/* Fəaliyyət sahəsi və digər filtrlər — orta/sağ sütunlarla eyni hündürlükdə
+   olan wrap-in içində qalan yeri tutur, öz daxili scroll-u ilə (15 sahə
+   siyahısı uzun olduğu üçün; position:sticky YOXDUR, səbəb aşağıdakı
+   .vacancies-list şərhində izah olunub). */
 .vacancies-sidebar {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 14px;
     padding: 22px 18px;
-    height: calc(100vh + 50px);
+    flex: 1;
+    min-height: 0; /* flex sütununda daxili scroll işləməsi üçün vacibdir */
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) transparent;
+}
+
+/* "Vakansiya yerləşdir" — yuxarıdakı scroll olan filtr blokundan ayrı, sol
+   sütunun lap altında sabit qalan öz qutusu. */
+.vacancies-post-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 18px;
+    flex-shrink: 0;
+}
+
+.vacancies-post-panel .filter-group {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
 }
 
 /* Filtr Qrupu — sidebar-da 7 qrup (Fəaliyyət sahəsi, Şirkətlər, Kateqoriyalar,
@@ -551,11 +582,14 @@ body.light-theme .vacancy-sort-menu {
     .vacancies-layout {
         grid-template-columns: 1fr;
     }
+    .vacancies-sidebar-wrap {
+        height: auto;
+        margin-bottom: 20px;
+    }
     .vacancies-sidebar {
         position: static;
         height: auto;
         overflow: visible;
-        margin-bottom: 20px;
     }
     .vacancies-list-panel {
         height: auto;
