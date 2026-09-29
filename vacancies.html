@@ -253,6 +253,30 @@
 
                     </div>
 
+                    <!-- Yaddaşa verilmiş (save edilmiş) vakansiyalar — filtr deyil,
+                         istifadəçinin bu seansda hər vakansiya kartındakı ⭐ düyməsi
+                         ilə işarətlədiyi vakansiyaların siyahısıdır, ona görə "Vakansiya
+                         yerləşdir" kimi yuxarıdakı scroll olan filtr blokundan ayrı, öz
+                         qutusunda. sessionStorage-də saxlanılır (bax js/vacancies.js
+                         SAVED_KEY) — localStorage YOX, çünki istifadəçi bunun məhz bu
+                         seans/tab bağlanana qədər yadda qalmasını istəyib. -->
+                    <div class="vacancies-saved-panel">
+                        <div class="filter-group">
+                            <button type="button" class="filter-group-header" id="saved-menu-toggle" aria-expanded="false" aria-controls="saved-vacancies-list">
+                                <span class="filter-group-title">
+                                    <span class="lang" data-en="Saved Vacancies" data-az="Yaddaşa verilmiş vakansiyalar">Yaddaşa verilmiş vakansiyalar</span>
+                                </span>
+                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+
+                            <ul class="filter-options collapsed" id="saved-vacancies-list">
+                                <!-- JS ilə doldurulur: js/vacancies.js (renderSavedVacancies) -->
+                            </ul>
+                        </div>
+                    </div>
+
                     <!-- Filtr deyil, naviqasiya menyusudur — eyni xidmətə qulluq
                          etmədiyi üçün yuxarıdakı scroll olan filtr blokundan ayrı,
                          sol sütunun ən alt hissəsində öz qutusunda sabit qalır (aç/bağla
