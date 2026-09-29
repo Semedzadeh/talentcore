@@ -62,33 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return getSavedIds().includes(id);
     }
 
-    function renderSavedVacancies() {
-        const savedListEl = document.getElementById('saved-vacancies-list');
-        if (!savedListEl) return;
-
-        const savedVacancies = getSavedIds()
-            .map(id => VACANCIES.find(v => v.id === id))
-            .filter(Boolean);
-
-        if (savedVacancies.length === 0) {
-            savedListEl.innerHTML = '<li class="saved-vacancies-empty lang" data-en="No vacancies saved yet." data-az="Hələ heç bir vakansiya yadda saxlanmayıb.">Hələ heç bir vakansiya yadda saxlanmayıb.</li>';
-            return;
-        }
-
-        savedListEl.innerHTML = savedVacancies.map(v => `
-            <li class="saved-vacancy-item">
-                <a class="saved-vacancy-link" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
-                    <span class="saved-vacancy-title">${v.title}</span>
-                    <span class="saved-vacancy-company">${v.company}</span>
-                </a>
-                <button type="button" class="saved-vacancy-remove" data-id="${v.id}" aria-label="Siyahıdan sil">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </li>
-        `).join('');
+    // Sol paneldəki "Yaddaşa verilmiş vakansiyalar" düyməsinin üstündəki say
+    // nişanı — neçə vakansiya save edilibsə onu göstərir, heç biri yoxdursa gizlənir.
+    function updateSavedCount() {
+        const countEl = document.getElementById('saved-count');
+        if (!countEl) return;
+        const count = getSavedIds().length;
+        countEl.textContent = count;
+        countEl.hidden = count === 0;
     }
 
     function toggleSaved(id) {
@@ -100,7 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
             savedIds.splice(idx, 1);
         }
         setSavedIds(savedIds);
-        renderSavedVacancies();
+        updateSavedCount();
+
+        // "Yalnız save edilənlər" görünüşü aktivdirsə, save/un-save olunan
+        // vakansiya siyahıya girib-çıxmalıdır, ona görə tam yenidən çəkilir.
+        // Əks halda sadəcə həmin kartın öz ⭐ düyməsinin görünüşünü çeviririk —
+        // bütöv siyahını lazımsız yerə yenidən çəkməyə ehtiyac yoxdur.
+        if (showSavedOnly) {
+            renderList();
+            return;
+        }
 
         const btn = listEl.querySelector(`.vacancy-save-btn[data-id="${id}"]`);
         if (btn) btn.classList.toggle('saved', savedIds.includes(id));
@@ -493,6 +483,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
     let searchQuery = '';
     let sortMode = 'newest'; // 'newest' | 'oldest' | 'az'
+    // "Yaddaşa verilmiş vakansiyalar" düyməsi bir filtr checkbox-u kimi işləyir:
+    // aktiv olanda orta sütunun siyahısı yalnız save edilmiş vakansiyaları
+    // göstərir (digər aktiv filtrlərlə birgə, AND məntiqi ilə) — bax renderList().
+    let showSavedOnly = false;
 
     // Sol paneldəki "Region" və "İş qrafiki"/"İş formatı" filtrləri üçün ayrıca
     // sahə saxlamırıq — VACANCIES-də onsuz da olan location/type/mode
@@ -675,6 +669,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filtered = filtered.filter(passesSidebarFilters);
 
+        if (showSavedOnly) {
+            const savedIds = getSavedIds();
+            filtered = filtered.filter(v => savedIds.includes(v.id));
+        }
+
         if (searchQuery) {
             const q = searchQuery.toLowerCase();
             filtered = filtered.filter(v => v.title.toLowerCase().includes(q) || v.company.toLowerCase().includes(q));
@@ -683,7 +682,9 @@ document.addEventListener('DOMContentLoaded', () => {
         filtered = sortVacancies(filtered);
 
         if (filtered.length === 0) {
-            listEl.innerHTML = '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
+            listEl.innerHTML = showSavedOnly
+                ? '<p class="vacancy-empty">Hələ heç bir vakansiya yadda saxlanmayıb.</p>'
+                : '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
             renderDetail(null);
             return;
         }
@@ -773,35 +774,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // "Yaddaşa verilmiş vakansiyalar" panelindəki sətirlər. ✕ düyməsi vakansiyanı
-    // siyahıdan silir (kartın öz ⭐ düyməsini basmaqla eynidir, sadəcə əks tərəfdən).
-    // Başlığa klikləndikdə isə — vakansiya kartı ilə EYNİ davranış: adi (sol,
-    // dəyişdirici düyməsiz) klikdə səhifə dəyişmir, detal elə bu səhifədə sağ
-    // paneldə açılır (ayrıca "fokuslanmış" səhifəyə keçid YOX — əvvəllər belə
-    // idi, "altına yığılır" kimi hiss olunurdu, ona görə vacancy-card-dakı
-    // eyni preventDefault+in-page-render məntiqi bura da köçürüldü). Sağ
-    // klik/orta klik/Ctrl+klik native "yeni tabda aç" davranışını saxlayır.
-    const savedListEl = document.getElementById('saved-vacancies-list');
-    if (savedListEl) {
-        savedListEl.addEventListener('click', (e) => {
-            const removeBtn = e.target.closest('.saved-vacancy-remove');
-            if (removeBtn) {
-                toggleSaved(Number(removeBtn.dataset.id));
-                return;
-            }
-
-            const link = e.target.closest('.saved-vacancy-link');
-            if (!link) return;
-            if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
-            e.preventDefault();
-
-            activeVacancyId = Number(link.dataset.id);
-            highlightActiveCard();
-            renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
-            detailEl.scrollTop = 0;
-            if (window.innerWidth <= 1024) {
-                detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+    // "Yaddaşa verilmiş vakansiyalar" düyməsi — sol paneldə ayrıca altına
+    // yığılan bir siyahı YOXDUR, sadəcə bir filtr açarı kimi işləyir: basılanda
+    // orta sütunun siyahısı yalnız save edilmiş vakansiyaları göstərir (necə
+    // ki "Şirkətlər" filtri seçiləndə orta sütun ona uyğun nəticələri göstərir),
+    // yenidən basılanda normal görünüşə qayıdır.
+    const savedToggleBtn = document.getElementById('saved-vacancies-toggle');
+    if (savedToggleBtn) {
+        savedToggleBtn.addEventListener('click', () => {
+            showSavedOnly = !showSavedOnly;
+            savedToggleBtn.classList.toggle('active', showSavedOnly);
+            savedToggleBtn.setAttribute('aria-pressed', String(showSavedOnly));
+            mobilePage = 1;
+            renderList();
         });
     }
 
@@ -889,6 +874,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderCompanyFilter();
-    renderSavedVacancies();
+    updateSavedCount();
     renderList();
 });
