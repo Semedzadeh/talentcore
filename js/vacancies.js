@@ -406,6 +406,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // seçilməmiş olmalıdır (istifadəçi özü vakansiya kartına basmayınca) —
     // ona görə null-dan başlayır, VACANCIES[0]-dan yox.
     let activeVacancyId = null;
+
+    // Vakansiya kartına "sağ klik → yeni tabda aç" edildikdə (və ya orta
+    // klik / Ctrl+klik) "?vacancy=<id>" ilə buraya gəlinir — bu halda səhifə
+    // sırf həmin vakansiyanın detayını göstərən "fokuslanmış" görünüşə keçir
+    // (sol/orta sütunlar gizlənir, bax css/vacancies.css-də body.vacancy-focused-mode).
+    // Adi (dəyişdirici düyməsiz) klik ilə heç vaxt bura keçilmir — o hələ də
+    // köhnə davranışı (sağ paneldə açmaq) saxlayır, bax listEl click handler-i.
+    const requestedVacancyId = Number(new URLSearchParams(window.location.search).get('vacancy'));
+    const requestedVacancy = VACANCIES.find(v => v.id === requestedVacancyId);
+    if (requestedVacancy) {
+        activeVacancyId = requestedVacancy.id;
+        document.body.classList.add('vacancy-focused-mode');
+        document.title = `Talentcore | ${requestedVacancy.title}`;
+    }
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
     let searchQuery = '';
     let sortMode = 'newest'; // 'newest' | 'oldest' | 'az'
@@ -616,7 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         listEl.innerHTML = pageItems.map(v => `
-            <div class="vacancy-card" data-id="${v.id}">
+            <a class="vacancy-card" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
                 <h4>${v.title}</h4>
                 <div class="vacancy-meta">
                     <span>🏢 ${v.company}</span>
@@ -627,14 +641,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="vacancy-tag">${v.mode}</span>
                 </div>
                 <div class="vacancy-posted">${v.posted}</div>
-            </div>
+            </a>
         `).join('') + renderMobilePagination(totalPages);
 
         // Əvvəl seçilmiş vakansiya filtrdən sonra siyahıda qalmayıbsa seçimi
         // ləğv edirik (sağ panel default xidmətlər vitrininə qayıdır) —
         // ONU ƏVƏZ ETMƏK ÜÇÜN başqa vakansiyanı MƏCBURİ seçmirik, çünki
         // istifadəçi özü klikləməyənə qədər default heç nə açılmamalıdır.
-        if (activeVacancyId !== null && !pageItems.find(v => v.id === activeVacancyId)) {
+        // Fokuslanmış rejimdə (bax "?vacancy=" yuxarıda) bu yoxlamanı ötürürük —
+        // orada siyahı/səhifələmə heç göstərilmir, ona görə vakansiyanın mobil
+        // pageItems-in hansı səhifəsinə düşdüyü seçimi ləğv etməməlidir.
+        if (activeVacancyId !== null && !document.body.classList.contains('vacancy-focused-mode') && !pageItems.find(v => v.id === activeVacancyId)) {
             activeVacancyId = null;
         }
         highlightActiveCard();
@@ -656,6 +673,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const card = e.target.closest('.vacancy-card');
         if (!card) return;
+
+        // Kart indi əsl <a href="...">-dır ki, sağ klik → "Yeni tabda aç"
+        // (və ya orta klik / Ctrl+Cmd+klik) native işləsin. Adi (dəyişdirici
+        // düyməsiz, sol) klikdə isə köhnə davranış davam edir: səhifə
+        // dəyişmir, detal elə bu səhifədə sağ paneldə açılır.
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+
         activeVacancyId = Number(card.dataset.id);
         highlightActiveCard();
         renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
