@@ -1,4 +1,5 @@
 :root {
+    --container-max: 1840px; /* ümumi maksimal eni — geniş ekranlarda yanlarda boşluq çox qalmasın */
     /* DARK MODE (Mövcud Gecə Rejimi) */
     --bg-color: #0b1120;
     --text-color: #ffffff;
@@ -187,7 +188,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 95%;
-    max-width: 1400px;
+    max-width: var(--container-max);
     z-index: 1000;
     border-radius: 12px;
     border: 1px solid var(--border-color, rgba(255, 255, 255, 0.15));
@@ -334,9 +335,10 @@ input:checked + .slider .sun { opacity: 1; }
 }
 
 .footer-container {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 40px 5% 30px 5%;
+    width: 95%;
+    padding: 40px 0 30px 0;
 }
 
 /* --- FAQ Akkordeonu (faq.html-in özündə istifadə olunur, native
