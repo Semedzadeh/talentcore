@@ -253,28 +253,24 @@
 
                     </div>
 
-                    <!-- Yaddaşa verilmiş (save edilmiş) vakansiyalar — filtr deyil,
-                         istifadəçinin bu seansda hər vakansiya kartındakı ⭐ düyməsi
-                         ilə işarətlədiyi vakansiyaların siyahısıdır, ona görə "Vakansiya
-                         yerləşdir" kimi yuxarıdakı scroll olan filtr blokundan ayrı, öz
-                         qutusunda. sessionStorage-də saxlanılır (bax js/vacancies.js
-                         SAVED_KEY) — localStorage YOX, çünki istifadəçi bunun məhz bu
-                         seans/tab bağlanana qədər yadda qalmasını istəyib. -->
+                    <!-- Yaddaşa verilmiş (save edilmiş) vakansiyalar — altına açılan
+                         ayrıca siyahı YOXDUR (bu, əvvəlki versiyada belə idi, sonra
+                         "altına yığmasın" — istəkli deyildi). Bunun əvəzinə sadə bir
+                         filtr açarı düyməsidir: basılanda orta sütunun siyahısı
+                         yalnız save edilmiş vakansiyaları göstərir (necə ki başqa
+                         filtrlər seçiləndə orta sütun ona uyğun nəticələri göstərir),
+                         bax js/vacancies.js-dəki showSavedOnly. Save/un-save əməliyyatı
+                         hər kartın öz ⭐ düyməsi ilə edilir, sessionStorage-də saxlanılır
+                         (localStorage YOX — istifadəçi bunun məhz bu seans/tab bağlanana
+                         qədər yadda qalmasını istəyib). -->
                     <div class="vacancies-saved-panel">
-                        <div class="filter-group">
-                            <button type="button" class="filter-group-header" id="saved-menu-toggle" aria-expanded="false" aria-controls="saved-vacancies-list">
-                                <span class="filter-group-title">
-                                    <span class="lang" data-en="Saved Vacancies" data-az="Yaddaşa verilmiş vakansiyalar">Yaddaşa verilmiş vakansiyalar</span>
-                                </span>
-                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-
-                            <ul class="filter-options collapsed" id="saved-vacancies-list">
-                                <!-- JS ilə doldurulur: js/vacancies.js (renderSavedVacancies) -->
-                            </ul>
-                        </div>
+                        <button type="button" class="saved-toggle-btn" id="saved-vacancies-toggle" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="lang" data-en="Saved Vacancies" data-az="Yaddaşa verilmiş vakansiyalar">Yaddaşa verilmiş vakansiyalar</span>
+                            <span class="saved-count" id="saved-count" hidden>0</span>
+                        </button>
                     </div>
 
                     <!-- Filtr deyil, naviqasiya menyusudur — eyni xidmətə qulluq
