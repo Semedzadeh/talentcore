@@ -10,9 +10,10 @@
 }
 
 .about-page > section {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 5%;
+    width: 95%;
+    padding: 0;
 }
 
 /* Ortaq Vahid Başlıq Stili (Şəkildəki kimi AĞ RƏNGDƏ) */

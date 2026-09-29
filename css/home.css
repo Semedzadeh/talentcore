@@ -17,7 +17,7 @@
 
 .hero-content {
     max-width: 850px;
-    margin-left: 5%;
+    margin-left: 3%;
     margin-top: clamp(20px, 6vh, 70px);
     text-align: left;
 }
