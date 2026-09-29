@@ -569,7 +569,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h4>Bizim Təklifimiz</h4>
                 <ul>${v.offer.map(o => `<li><span class="tick">✓</span><span>${o}</span></li>`).join('')}</ul>
             </div>
-            <a href="cv.html" class="btn-primary detail-apply-btn">Müraciət Et</a>
+            <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">Müraciət Et</a>
         `;
     }
 

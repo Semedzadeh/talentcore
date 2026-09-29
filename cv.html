@@ -73,8 +73,8 @@
             <div class="cv-container">
 
                 <div class="cv-hero">
-                    <h1 class="lang" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</h1>
-                    <p class="lang"
+                    <h1 class="lang" id="cv-hero-title" data-en="Send Your CV" data-az="CV Göndər">CV Göndər</h1>
+                    <p class="lang" id="cv-hero-text"
                        data-en="Join our candidate database — we'll reach out when a matching role opens up."
                        data-az="Namizəd bazamıza qoşulun — sizə uyğun vakansiya açılan kimi birbaşa əlaqə saxlayırıq.">
                        Namizəd bazamıza qoşulun — sizə uyğun vakansiya açılan kimi birbaşa əlaqə saxlayırıq.
@@ -85,7 +85,7 @@
 
                     <!-- Sol: Proses izahı -->
                     <div class="cv-info glass-effect">
-                        <h3 class="lang" data-en="How It Works" data-az="Necə İşləyir?">Necə İşləyir?</h3>
+                        <h3 class="lang" id="cv-info-title" data-en="How It Works" data-az="Necə İşləyir?">Necə İşləyir?</h3>
 
                         <ol class="cv-steps">
                             <li>
@@ -114,7 +114,7 @@
                             </li>
                         </ol>
 
-                        <p class="cv-privacy-note lang"
+                        <p class="cv-privacy-note lang" id="cv-privacy-note"
                            data-en="Your CV is stored confidentially and used only for matching you with relevant roles."
                            data-az="CV-niz məxfi saxlanılır və yalnız sizə uyğun vakansiyaları müəyyən etmək üçün istifadə olunur.">
                            CV-niz məxfi saxlanılır və yalnız sizə uyğun vakansiyaları müəyyən etmək üçün istifadə olunur.
@@ -123,7 +123,19 @@
 
                     <!-- Sağ: CV Formu -->
                     <div class="cv-form-card glass-effect">
-                        <h3 class="lang" data-en="Candidate Form" data-az="Namizəd Formu">Namizəd Formu</h3>
+                        <h3 class="lang" id="cv-form-title" data-en="Candidate Form" data-az="Namizəd Formu">Namizəd Formu</h3>
+
+                        <!-- Yalnız vakansiyanın "Müraciət Et" düyməsindən gəlinəndə görünür (js/cv.js doldurur) -->
+                        <div class="cv-apply-target" id="cv-apply-target" hidden>
+                            <span class="cv-apply-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                            </span>
+                            <div class="cv-apply-text">
+                                <span class="cv-apply-label lang" id="cv-apply-label" data-en="You are applying for" data-az="Müraciət etdiyiniz vakansiya">Müraciət etdiyiniz vakansiya</span>
+                                <strong class="cv-apply-title" id="cv-apply-title"></strong>
+                                <span class="cv-apply-company" id="cv-apply-company"></span>
+                            </div>
+                        </div>
 
                         <form id="cv-form" novalidate>
                             <!-- Web3Forms (web3forms.com) — contact.html-dəki eyni access key
@@ -144,29 +156,21 @@
                                 </div>
                             </div>
 
-                            <div class="form-row">
+                            <!-- Vakansiyadan gəlinəndə (?company=&vacancy=) js/cv.js bu iki gizli sahəni
+                                 doldurur — istifadəçi dəyişə bilməz, yalnız yuxarıdakı kartda görür -->
+                            <input type="hidden" id="cv-company" name="company">
+                            <input type="hidden" id="cv-vacancy" name="vacancy">
+
+                            <div class="form-row cv-row-phone">
                                 <div class="form-group">
                                     <label for="cv-phone" class="lang" data-en="Phone" data-az="Telefon">Telefon</label>
                                     <input type="tel" id="cv-phone" name="phone" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="cv-field" class="lang" data-en="Area of Interest" data-az="Maraqlandığınız Sahə">Maraqlandığınız Sahə</label>
-                                    <select id="cv-field" name="field_of_interest">
-                                        <option value="it" class="lang" data-en="IT & Technology" data-az="İT və Texnologiya">İT və Texnologiya</option>
-                                        <option value="finance" class="lang" data-en="Finance & Accounting" data-az="Maliyyə və Mühasibatlıq">Maliyyə və Mühasibatlıq</option>
-                                        <option value="marketing" class="lang" data-en="Marketing & Sales" data-az="Marketinq və Satış">Marketinq və Satış</option>
-                                        <option value="construction" class="lang" data-en="Construction & Engineering" data-az="Tikinti və Mühəndislik">Tikinti və Mühəndislik</option>
-                                        <option value="logistics" class="lang" data-en="Logistics & Warehousing" data-az="Logistika və Anbar">Logistika və Anbar</option>
-                                        <option value="banking" class="lang" data-en="Banking & Insurance" data-az="Bank və Sığorta">Bank və Sığorta</option>
-                                        <option value="hr" class="lang" data-en="Human Resources" data-az="İnsan Resursları">İnsan Resursları</option>
-                                        <option value="other" class="lang" data-en="Other" data-az="Digər">Digər</option>
-                                    </select>
+                                <!-- Ümumi CV göndərişində (vakansiyasız) görünür; vakansiyaya müraciətdə gizlədilir -->
+                                <div class="form-group" id="cv-position-group">
+                                    <label for="cv-position" class="lang" data-en="Desired Position (optional)" data-az="İstədiyiniz Vəzifə (istəyə bağlı)">İstədiyiniz Vəzifə (istəyə bağlı)</label>
+                                    <input type="text" id="cv-position" name="desired_position">
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cv-position" class="lang" data-en="Desired Position (optional)" data-az="İstədiyiniz Vəzifə (istəyə bağlı)">İstədiyiniz Vəzifə (istəyə bağlı)</label>
-                                <input type="text" id="cv-position" name="desired_position">
                             </div>
 
                             <div class="form-group">
