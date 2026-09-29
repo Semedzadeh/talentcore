@@ -76,7 +76,6 @@
     flex: 1;
     min-height: 0; /* flex sütununda daxili scroll işləməsi üçün vacibdir */
     overflow-y: auto;
-    overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) transparent;
 }
@@ -379,7 +378,6 @@ body.light-theme .vacancy-sort-menu {
     flex: 1;
     min-height: 0; /* flex sütununda scroll işləməsi üçün vacibdir */
     overflow-y: auto;
-    overscroll-behavior: contain; /* sona çatanda əsas səhifəni "itələməsin" */
     padding-right: 6px;
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) transparent;
@@ -456,7 +454,6 @@ body.light-theme .vacancy-sort-menu {
     padding: 42px;
     height: calc(100vh + 50px);
     overflow-y: auto;
-    overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) transparent;
 }
