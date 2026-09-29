@@ -631,12 +631,80 @@ body.light-theme .vacancy-sort-menu {
     background: #d97742;
 }
 
+.detail-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
 .vacancy-detail h2 {
     font-size: clamp(24px, 2.4vw, 30px);
     font-weight: 700;
     color: var(--text-color);
-    margin-bottom: 10px;
     line-height: 1.25;
+}
+
+/* Paylaş düyməsi — native Web Share dəstəklənən (əsasən mobil) brauzerlərdə
+   sistem paylaşma pəncərəsini açır, dəstəklənmirsə linki mübadilə buferinə
+   kopyalayır (bax js/vacancies.js: shareVacancy()). ".copied" siniflə açılan
+   balonvari ipucu köçürmənin uğurlu olduğunu göstərir. */
+.vacancy-share-btn {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--card-hover);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.vacancy-share-btn:hover {
+    color: #d97742;
+    border-color: #d97742;
+}
+
+.vacancy-share-btn svg {
+    width: 17px;
+    height: 17px;
+}
+
+.vacancy-share-btn::after {
+    content: 'Link kopyalandı';
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 20;
+    background: #141c30;
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+body.light-theme .vacancy-share-btn::after {
+    background: #ffffff;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.vacancy-share-btn.copied::after {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .vacancy-detail .company-row {
