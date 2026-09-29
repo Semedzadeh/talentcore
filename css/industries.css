@@ -6,6 +6,10 @@
     background: var(--hero-bg);
     background-attachment: fixed;
     transition: background 0.4s ease;
+    /* Kartlar az olanda səhifənin altı boş qalmasın — məzmun görünən sahədə şaquli ortalanır */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .industries-container {
@@ -35,79 +39,175 @@
     margin: 0 auto;
 }
 
-/* Sahə Kartları */
-.industries-grid {
+/* Ekspertiza kartları — 6 sütunlu şəbəkə: üst sırada 3 kart (hər biri 2 sütun),
+   alt sırada 2 geniş kart (hər biri 3 sütun). Bütün sahələrin hündürlüyü sırada bərabərdir. */
+.expertise-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: clamp(20px, 1.6vw, 32px);
+    /* Geniş/hündür ekranlarda kartlar boş fona itib qalmasın deyə hündürlük ekrana görə böyüyür */
+    grid-template-rows: minmax(clamp(230px, 27vh, 360px), auto) minmax(clamp(180px, 20vh, 270px), auto);
 }
 
-.industry-card {
+.expertise-card {
+    position: relative;
+    grid-column: span 2;
     display: flex;
     flex-direction: column;
-    text-align: left;
+    gap: clamp(20px, 2vh, 30px);
+    justify-content: center;
+    padding: clamp(24px, 2.4vw, 44px);
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
-.industry-icon {
-    font-size: 38px;
-    margin-bottom: 20px;
+.expertise-card-wide {
+    grid-column: span 3;
 }
 
-.industry-card h3 {
+/* Yuxarıdan aşağı böyüyən narıncı zolaq — hover-də görünür */
+.expertise-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #c4642f, #e0a05f);
+    transform: scaleX(0.18);
+    transform-origin: left;
+    transition: transform 0.45s ease;
+}
+
+.expertise-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(217, 119, 66, 0.55);
+}
+
+.expertise-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Fon rəqəmi — dekorativ, oxunmağa mane olmasın deyə çox solğun */
+.expertise-number {
+    position: absolute;
+    bottom: -8px;
+    right: 16px;
+    font-size: clamp(64px, 6vw, 130px);
+    font-weight: 800;
+    line-height: 1;
     color: #d97742;
-    font-size: 20px;
+    opacity: 0.09;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.expertise-card:hover .expertise-number {
+    opacity: 0.18;
+    transform: translateY(-4px);
+}
+
+.expertise-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+
+.expertise-icon {
+    flex-shrink: 0;
+    width: clamp(52px, 3.6vw, 72px);
+    height: clamp(52px, 3.6vw, 72px);
+    border-radius: clamp(14px, 1vw, 20px);
+    background: linear-gradient(135deg, #c4642f, #e0a05f);
+    box-shadow: 0 6px 16px rgba(196, 100, 47, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s ease;
+}
+
+.expertise-icon svg {
+    width: 50%;
+    height: 50%;
+}
+
+.expertise-card:hover .expertise-icon {
+    transform: rotate(-6deg) scale(1.08);
+}
+
+.expertise-card h3 {
+    color: #d97742;
+    font-size: clamp(18px, 1.35vw, 30px);
     font-weight: 700;
     line-height: 1.3;
-    margin-bottom: 10px;
 }
 
-.industry-card p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 22px;
+/* Alt sahələr — bullet əvəzinə "çip"lər */
+.expertise-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(10px, 0.8vw, 14px);
+    position: relative;
 }
 
-.industry-link {
-    margin-top: auto;
+.expertise-list li {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: #d97742;
-    font-weight: 600;
-    font-size: 13.5px;
-    text-decoration: none;
-    width: fit-content;
+    gap: 8px;
+    padding: clamp(8px, 0.6vw, 12px) clamp(16px, 1.2vw, 22px);
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: clamp(14px, 0.95vw, 18px);
+    font-weight: 500;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
 
-.industry-link .arrow {
-    transition: transform 0.25s;
+.expertise-list li::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d97742;
+    flex-shrink: 0;
 }
 
-.industry-link:hover .arrow {
-    transform: translateX(4px);
-}
-
-/* Alt CTA */
-.industries-cta {
-    text-align: center;
-}
-
-.industries-cta p {
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    font-size: clamp(14px, 1.1vw, 16px);
+.expertise-list li:hover {
+    border-color: #d97742;
+    background: rgba(217, 119, 66, 0.12);
+    transform: translateY(-2px);
 }
 
 /* --- MOBİL VƏ PLANŞET --- */
 @media (max-width: 1024px) {
+    .expertise-grid {
+        grid-template-rows: none;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .expertise-card,
+    .expertise-card-wide {
+        grid-column: span 1;
+    }
+    /* 5 kart 2 sütunda: sonuncu tək qalan kart tam eni tutsun */
+    .expertise-card:last-child {
+        grid-column: 1 / -1;
+    }
     .industries-page {
         padding: 140px 0 80px 0;
     }
 }
 
 @media (max-width: 768px) {
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+    .expertise-card:last-child {
+        grid-column: auto;
+    }
     .industries-page {
         padding-top: 150px;
     }
