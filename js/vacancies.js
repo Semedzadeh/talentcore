@@ -96,6 +96,38 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn) btn.classList.toggle('saved', savedIds.includes(id));
     }
 
+    // Detal panelindəki "Paylaş" düyməsi — hər vakansiyanın "?vacancy=<id>"
+    // linkini (bax focused mode, yuxarıda) mobil/dəstəklənən brauzerlərdə
+    // native paylaşma pəncərəsi ilə, əks halda mübadilə buferinə kopyalayaraq
+    // paylaşmağa imkan verir. "hardasa paylaşa bilsin" tələbinə görə sabit bir
+    // platforma (WhatsApp/Telegram və s.) seçilmədi — link haradasa yapışdırıla bilsin deyə.
+    async function shareVacancy(v, btn) {
+        const shareUrl = `${window.location.origin}${window.location.pathname}?vacancy=${v.id}`;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({ title: v.title, text: `${v.title} — ${v.company}`, url: shareUrl });
+            } catch {
+                // İstifadəçi paylaşma pəncərəsini bağlayıb/imtina edib — sükutla keçirik
+            }
+            return;
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            try {
+                await navigator.clipboard.writeText(shareUrl);
+                btn.classList.add('copied');
+                clearTimeout(btn._copiedTimer);
+                btn._copiedTimer = setTimeout(() => btn.classList.remove('copied'), 1800);
+                return;
+            } catch {
+                // aşağıdakı prompt fallback-inə keçir
+            }
+        }
+
+        window.prompt('Linki kopyalayın:', shareUrl);
+    }
+
     if (!listEl || !detailEl) return;
 
     // --- SAHƏLƏR (nümunə) ---
@@ -627,7 +659,18 @@ document.addEventListener('DOMContentLoaded', () => {
         stopShowcaseRotation();
         const catLabel = (CATEGORIES.find(c => c.id === v.category) || {}).az || '';
         detailEl.innerHTML = `
-            <h2>${v.title}</h2>
+            <div class="detail-title-row">
+                <h2>${v.title}</h2>
+                <button type="button" class="vacancy-share-btn" data-id="${v.id}" aria-label="Paylaş">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
+            </div>
             <div class="company-row">${v.company} · ${catLabel}</div>
             <div class="detail-meta-row">
                 <div class="detail-meta-item"><span class="label">Yer</span><span class="value">📍 ${v.location}</span></div>
@@ -772,6 +815,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth <= 1024) {
             detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    });
+
+    // Detal panelinin başlığının yanındakı "Paylaş" düyməsi — renderDetail() hər
+    // dəfə detailEl-in innerHTML-ini bütünlüklə yenidən yazdığı üçün düyməyə
+    // birbaşa listener bağlamaq mənasızdır (hər render-də silinərdi), ona görə
+    // detailEl-in özünə delegasiya edilir.
+    detailEl.addEventListener('click', (e) => {
+        const shareBtn = e.target.closest('.vacancy-share-btn');
+        if (!shareBtn) return;
+        const v = VACANCIES.find(vac => vac.id === Number(shareBtn.dataset.id));
+        if (v) shareVacancy(v, shareBtn);
     });
 
     // "Yaddaşa verilmiş vakansiyalar" düyməsi — sol paneldə ayrıca altına
