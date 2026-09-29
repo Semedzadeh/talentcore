@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         savedListEl.innerHTML = savedVacancies.map(v => `
             <li class="saved-vacancy-item">
-                <a class="saved-vacancy-link" href="vacancies.html?vacancy=${v.id}">
+                <a class="saved-vacancy-link" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
                     <span class="saved-vacancy-title">${v.title}</span>
                     <span class="saved-vacancy-company">${v.company}</span>
                 </a>
@@ -773,14 +773,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // "Yaddaşa verilmiş vakansiyalar" panelindəki ✕ düyməsi — vakansiyanı
+    // "Yaddaşa verilmiş vakansiyalar" panelindəki sətirlər. ✕ düyməsi vakansiyanı
     // siyahıdan silir (kartın öz ⭐ düyməsini basmaqla eynidir, sadəcə əks tərəfdən).
+    // Başlığa klikləndikdə isə — vakansiya kartı ilə EYNİ davranış: adi (sol,
+    // dəyişdirici düyməsiz) klikdə səhifə dəyişmir, detal elə bu səhifədə sağ
+    // paneldə açılır (ayrıca "fokuslanmış" səhifəyə keçid YOX — əvvəllər belə
+    // idi, "altına yığılır" kimi hiss olunurdu, ona görə vacancy-card-dakı
+    // eyni preventDefault+in-page-render məntiqi bura da köçürüldü). Sağ
+    // klik/orta klik/Ctrl+klik native "yeni tabda aç" davranışını saxlayır.
     const savedListEl = document.getElementById('saved-vacancies-list');
     if (savedListEl) {
         savedListEl.addEventListener('click', (e) => {
             const removeBtn = e.target.closest('.saved-vacancy-remove');
-            if (!removeBtn) return;
-            toggleSaved(Number(removeBtn.dataset.id));
+            if (removeBtn) {
+                toggleSaved(Number(removeBtn.dataset.id));
+                return;
+            }
+
+            const link = e.target.closest('.saved-vacancy-link');
+            if (!link) return;
+            if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+            e.preventDefault();
+
+            activeVacancyId = Number(link.dataset.id);
+            highlightActiveCard();
+            renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
+            detailEl.scrollTop = 0;
+            if (window.innerWidth <= 1024) {
+                detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
     }
 
