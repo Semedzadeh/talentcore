@@ -132,6 +132,99 @@ body.vacancy-focused-mode .vacancies-layout {
     border-bottom: none;
 }
 
+/* "Yaddaşa verilmiş vakansiyalar" — "Vakansiya yerləşdir" ilə eyni səbəbdən
+   (filtr deyil) öz ayrıca sabit qutusunda, filtr blokunun altında. */
+.vacancies-saved-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 18px;
+    flex-shrink: 0;
+}
+
+.vacancies-saved-panel .filter-group {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.saved-vacancies-empty {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.75;
+    padding: 8px 6px;
+    line-height: 1.5;
+}
+
+.saved-vacancy-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 6px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.saved-vacancy-item:hover {
+    background: var(--card-hover);
+}
+
+.saved-vacancy-link {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+}
+
+.saved-vacancy-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saved-vacancy-link:hover .saved-vacancy-title {
+    color: #d97742;
+}
+
+.saved-vacancy-company {
+    font-size: 11px;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saved-vacancy-remove {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.saved-vacancy-remove:hover {
+    background: var(--border-color);
+    color: #d97742;
+}
+
+.saved-vacancy-remove svg {
+    width: 13px;
+    height: 13px;
+}
+
 /* Filtr blokunun başlığı — "Fəaliyyət sahəsi"nin üstündə, sidebar-ın lap
    yuxarısında, bu bölmənin nə üçün olduğunu izah edir. */
 .vacancies-sidebar-heading {
@@ -424,15 +517,58 @@ body.light-theme .vacancy-sort-menu {
        ona görə brauzerin default keçid stilini (mavi/altı xətli, inline)
        sıfırlayırıq. */
     display: block;
+    position: relative;
     text-decoration: none;
     color: inherit;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-left: 3px solid transparent;
     border-radius: 12px;
-    padding: 22px 24px;
+    padding: 22px 50px 22px 24px;
     cursor: pointer;
     transition: background 0.25s, border-color 0.25s;
+}
+
+/* Yadda saxla (bookmark) düyməsi — kartın daxilindəki əsl <button>, ona görə
+   klik zamanı js/vacancies.js-də preventDefault+stopPropagation ilə kartın
+   öz keçid/seçim davranışından ayrılır. */
+.vacancy-save-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.vacancy-save-btn:hover {
+    background: var(--border-color);
+    color: #d97742;
+}
+
+.vacancy-save-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: fill 0.2s, stroke 0.2s;
+}
+
+.vacancy-save-btn.saved {
+    color: #d97742;
+}
+
+.vacancy-save-btn.saved svg {
+    fill: #d97742;
 }
 
 .vacancy-card:hover {

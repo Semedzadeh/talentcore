@@ -36,6 +36,76 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // "Yaddaşa verilmiş vakansiyalar" — hər kartdakı ⭐ düyməsi ilə işarətlənən
+    // id-lər. sessionStorage istifadə olunur (localStorage YOX): istifadəçi
+    // bunun məhz bu tab/seans bağlanana qədər yadda qalmasını istəyib, sonra
+    // avtomatik silinsin.
+    const SAVED_KEY = 'talentcore_saved_vacancies';
+
+    function getSavedIds() {
+        try {
+            return JSON.parse(sessionStorage.getItem(SAVED_KEY)) || [];
+        } catch {
+            return [];
+        }
+    }
+
+    function setSavedIds(ids) {
+        try {
+            sessionStorage.setItem(SAVED_KEY, JSON.stringify(ids));
+        } catch {
+            // sessionStorage bloklanıbsa (məs. private rejim) sükutla keçirik
+        }
+    }
+
+    function isSaved(id) {
+        return getSavedIds().includes(id);
+    }
+
+    function renderSavedVacancies() {
+        const savedListEl = document.getElementById('saved-vacancies-list');
+        if (!savedListEl) return;
+
+        const savedVacancies = getSavedIds()
+            .map(id => VACANCIES.find(v => v.id === id))
+            .filter(Boolean);
+
+        if (savedVacancies.length === 0) {
+            savedListEl.innerHTML = '<li class="saved-vacancies-empty lang" data-en="No vacancies saved yet." data-az="Hələ heç bir vakansiya yadda saxlanmayıb.">Hələ heç bir vakansiya yadda saxlanmayıb.</li>';
+            return;
+        }
+
+        savedListEl.innerHTML = savedVacancies.map(v => `
+            <li class="saved-vacancy-item">
+                <a class="saved-vacancy-link" href="vacancies.html?vacancy=${v.id}">
+                    <span class="saved-vacancy-title">${v.title}</span>
+                    <span class="saved-vacancy-company">${v.company}</span>
+                </a>
+                <button type="button" class="saved-vacancy-remove" data-id="${v.id}" aria-label="Siyahıdan sil">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </li>
+        `).join('');
+    }
+
+    function toggleSaved(id) {
+        const savedIds = getSavedIds();
+        const idx = savedIds.indexOf(id);
+        if (idx === -1) {
+            savedIds.push(id);
+        } else {
+            savedIds.splice(idx, 1);
+        }
+        setSavedIds(savedIds);
+        renderSavedVacancies();
+
+        const btn = listEl.querySelector(`.vacancy-save-btn[data-id="${id}"]`);
+        if (btn) btn.classList.toggle('saved', savedIds.includes(id));
+    }
+
     if (!listEl || !detailEl) return;
 
     // --- SAHƏLƏR (nümunə) ---
@@ -631,6 +701,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         listEl.innerHTML = pageItems.map(v => `
             <a class="vacancy-card" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
+                <button type="button" class="vacancy-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-label="Yadda saxla">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </button>
                 <h4>${v.title}</h4>
                 <div class="vacancy-meta">
                     <span>🏢 ${v.company}</span>
@@ -671,6 +746,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const saveBtn = e.target.closest('.vacancy-save-btn');
+        if (saveBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSaved(Number(saveBtn.dataset.id));
+            return;
+        }
+
         const card = e.target.closest('.vacancy-card');
         if (!card) return;
 
@@ -689,6 +772,17 @@ document.addEventListener('DOMContentLoaded', () => {
             detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
+
+    // "Yaddaşa verilmiş vakansiyalar" panelindəki ✕ düyməsi — vakansiyanı
+    // siyahıdan silir (kartın öz ⭐ düyməsini basmaqla eynidir, sadəcə əks tərəfdən).
+    const savedListEl = document.getElementById('saved-vacancies-list');
+    if (savedListEl) {
+        savedListEl.addEventListener('click', (e) => {
+            const removeBtn = e.target.closest('.saved-vacancy-remove');
+            if (!removeBtn) return;
+            toggleSaved(Number(removeBtn.dataset.id));
+        });
+    }
 
     // Ekran mobil ↔ desktop sərhədini keçəndə (məs. cihazı çevirəndə) siyahını
     // yenidən çəkirik ki, səhifələmə vəziyyəti düzgün tətbiq/ləğv olunsun.
@@ -774,5 +868,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderCompanyFilter();
+    renderSavedVacancies();
     renderList();
 });
