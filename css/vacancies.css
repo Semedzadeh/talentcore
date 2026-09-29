@@ -262,12 +262,13 @@ body.light-theme .vacancies-post-panel {
 
 /* Qutunun (yuxarıdakı .vacancies-post-panel) fonu döndərildiyi üçün içindəki
    bütün mətn/ikon da uyğun ("əks") rəngə keçir ki, oxuna bilsin: qara
-   rejimdə (qutu ağdır) bizim standart accent rəngimiz (Detaylı axtarış
-   başlığı ilə eyni #d97742), ağ rejimdə (qutu qaradır) ağ. Bura başlıq
-   (Vakansiya yerləşdir), açılış oxu (chevron) və altındakı 2 keçid linki
-   (İş elanları / Reklam bannerləri) daxildir — hamısı eyni "iç yazı" kimi
-   nəzərdən keçirilib. Başlıq və linklərin şrifti də digər filtr
-   qruplarından bir az böyüdülüb ki, qutu daha çox seçilsin. */
+   rejimdə (qutu ağdır) səhifənin ümumi arxa fon rəngi (--bg-color, qara
+   rejimdə #0b1120) — belə ki mətn sanki qutunun "arxasındakı" səhifəni
+   göstərir, ağ rejimdə (qutu qaradır) isə ağ. Bura başlıq (Vakansiya
+   yerləşdir), açılış oxu (chevron) və altındakı 2 keçid linki (İş elanları
+   / Reklam bannerləri) daxildir — hamısı eyni "iç yazı" kimi nəzərdən
+   keçirilib. Başlıq və linklərin şrifti də digər filtr qruplarından bir az
+   böyüdülüb ki, qutu daha çox seçilsin. */
 .vacancies-post-panel .filter-group-title > span:first-child,
 .vacancies-post-panel .sidebar-menu-link {
     font-size: 14px;
@@ -276,7 +277,7 @@ body.light-theme .vacancies-post-panel {
 .vacancies-post-panel .filter-group-title > span:first-child,
 .vacancies-post-panel .filter-chevron,
 .vacancies-post-panel .sidebar-menu-link {
-    color: #d97742;
+    color: var(--bg-color);
     opacity: 1;
 }
 
