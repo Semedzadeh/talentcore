@@ -117,13 +117,21 @@ body.vacancy-focused-mode .vacancies-layout {
 }
 
 /* "Vakansiya yerləşdir" — yuxarıdakı scroll olan filtr blokundan ayrı, sol
-   sütunun lap altında sabit qalan öz qutusu. */
+   sütunun lap altında sabit qalan öz qutusu. Rəngi qəsdən DÖNDƏRİLİB (əksinə
+   çevrilib) ki, səhifənin qalan hissəsindən seçilsin: qara rejimdə ağ qutu
+   (+ içi sarı yazı), ağ rejimdə isə qara qutu (+ içi ağ yazı) — bax aşağıda
+   body.light-theme override-i və "iç yazı" rəngləri üçün digər qaydalar. */
 .vacancies-post-panel {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.15);
     border-radius: 14px;
     padding: 18px;
     flex-shrink: 0;
+}
+
+body.light-theme .vacancies-post-panel {
+    background: #0f172a;
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .vacancies-post-panel .filter-group {
@@ -252,16 +260,34 @@ body.vacancy-focused-mode .vacancies-layout {
     opacity: 0.55;
 }
 
-/* "Vakansiya yerləşdir" başlığı — yuxarıdakı 7 filtr qrupunun solğun/boz
-   başlıqlarından fərqlənsin deyə: qara rejimdə "Detaylı axtarış" başlığı
-   ilə eyni accent rəngdə, ağ rejimdə isə yaşıl. */
-.vacancies-post-panel .filter-group-title > span:first-child {
-    color: #d97742;
+/* Qutunun (yuxarıdakı .vacancies-post-panel) fonu döndərildiyi üçün içindəki
+   bütün mətn/ikon da uyğun ("əks") rəngə keçir ki, oxuna bilsin: qara
+   rejimdə (qutu ağdır) sarı, ağ rejimdə (qutu qaradır) ağ. Bura başlıq
+   (Vakansiya yerləşdir), açılış oxu (chevron) və altındakı 2 keçid linki
+   (İş elanları / Reklam bannerləri) daxildir — hamısı eyni "iç yazı" kimi
+   nəzərdən keçirilib. */
+.vacancies-post-panel .filter-group-title > span:first-child,
+.vacancies-post-panel .filter-chevron,
+.vacancies-post-panel .sidebar-menu-link {
+    color: #facc15;
     opacity: 1;
 }
 
-body.light-theme .vacancies-post-panel .filter-group-title > span:first-child {
-    color: #1f9d55;
+body.light-theme .vacancies-post-panel .filter-group-title > span:first-child,
+body.light-theme .vacancies-post-panel .filter-chevron,
+body.light-theme .vacancies-post-panel .sidebar-menu-link {
+    color: #ffffff;
+}
+
+/* Linklərin hover fonu --card-hover əvəzinə buradadır — --card-hover tünd/ağ
+   qutuların ÖZ rənginə görə ayarlanıb, amma bu qutu artıq əksinə çevrilib,
+   ona görə --card-hover üzərində demək olar görünməz qalardı. */
+.vacancies-post-panel .sidebar-menu-link:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .vacancies-post-panel .sidebar-menu-link:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .filter-chevron {
