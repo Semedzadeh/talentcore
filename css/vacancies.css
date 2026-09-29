@@ -252,6 +252,18 @@ body.vacancy-focused-mode .vacancies-layout {
     opacity: 0.55;
 }
 
+/* "Vakansiya yerləşdir" başlığı — yuxarıdakı 7 filtr qrupunun solğun/boz
+   başlıqlarından fərqlənsin deyə: qara rejimdə "Detaylı axtarış" başlığı
+   ilə eyni accent rəngdə, ağ rejimdə isə yaşıl. */
+.vacancies-post-panel .filter-group-title > span:first-child {
+    color: #d97742;
+    opacity: 1;
+}
+
+body.light-theme .vacancies-post-panel .filter-group-title > span:first-child {
+    color: #1f9d55;
+}
+
 .filter-chevron {
     width: 16px;
     height: 16px;
