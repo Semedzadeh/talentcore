@@ -14,10 +14,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const MESSAGES = {
         sending: { az: 'Göndərilir...', en: 'Sending...' },
         success: { az: 'CV-niz uğurla göndərildi. Sizə uyğun vakansiya olduqda əlaqə saxlayacağıq.', en: 'Your CV has been sent. We will contact you when a matching role opens up.' },
+        successApply: { az: 'Müraciətiniz uğurla göndərildi. Uyğun olduqda sizinlə əlaqə saxlayacağıq.', en: 'Your application has been sent. We will contact you if you are a match.' },
         error: { az: 'Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', en: 'Something went wrong, please try again shortly.' },
         missingKey: { az: 'Form hələ qoşulmayıb (access key əlavə olunmayıb).', en: 'The form is not connected yet (missing access key).' },
         tooLarge: { az: 'Fayl 5MB-dan böyükdür, zəhmət olmasa daha kiçik fayl seçin.', en: 'File is larger than 5MB, please choose a smaller file.' }
     };
+
+    // vacancies.html-dəki "Müraciət Et" düyməsi ?company=...&vacancy=... ilə gəlir —
+    // bu halda səhifə "vakansiyaya müraciət" məntiqinə keçir: hansı vakansiyaya
+    // müraciət edildiyi kartda görünür, mətnlər/başlıq uyğunlaşır, "İstədiyiniz Vəzifə"
+    // gizlənir. Parametr yoxdursa (menyudan gəliş) səhifə ümumi CV formu kimi qalır.
+    const params = new URLSearchParams(window.location.search);
+    const company = (params.get('company') || '').trim();
+    const vacancy = (params.get('vacancy') || '').trim();
+
+    // .lang mexanizmi data-az/data-en oxuyur (main.js) — mətni dəyişəndə hər ikisini yazırıq
+    const setLang = (id, az, en) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.setAttribute('data-az', az);
+        el.setAttribute('data-en', en);
+        el.innerHTML = az;
+    };
+
+    const isApplyMode = Boolean(company && vacancy);
+    if (isApplyMode) {
+        document.body.classList.add('cv-apply-mode');
+
+        // Gizli sahələr göndərişə düşür; defaultValue — formEl.reset() onları silməsin
+        const companyInput = document.getElementById('cv-company');
+        const vacancyInput = document.getElementById('cv-vacancy');
+        companyInput.value = companyInput.defaultValue = company;
+        vacancyInput.value = vacancyInput.defaultValue = vacancy;
+
+        // textContent — URL-dən gələn dəyər HTML kimi şərh olunmasın
+        document.getElementById('cv-apply-title').textContent = vacancy;
+        document.getElementById('cv-apply-company').textContent = company;
+        document.getElementById('cv-apply-target').hidden = false;
+
+        // Vakansiyaya müraciətdə "İstədiyiniz Vəzifə" mənasızdır
+        document.getElementById('cv-position-group').hidden = true;
+        document.getElementById('cv-position').disabled = true;
+
+        // Email-in mövzusu hansı vakansiyaya müraciət olduğunu göstərsin
+        formEl.subject.value = formEl.subject.defaultValue = `Talentcore.az — Vakansiyaya Müraciət: ${vacancy} (${company})`;
+
+        setLang('cv-hero-title', 'Vakansiyaya Müraciət', 'Apply for the Role');
+        setLang('cv-hero-text',
+            'CV-nizi göndərin — müraciətiniz seçdiyiniz vakansiya üzrə komandamıza çatacaq.',
+            'Send your CV — your application will reach our team for the role you selected.');
+        setLang('cv-form-title', 'Müraciət Formu', 'Application Form');
+        setLang('cv-info-title', 'Müraciət Necə Baxılır?', 'What Happens Next?');
+        const stepTexts = document.querySelectorAll('.cv-step-text');
+        [
+            ['Formu doldurun və CV-nizi (PDF və ya Word) əlavə edin.', 'Fill in the form and attach your CV (PDF or Word).'],
+            ['Komandamız müraciətinizi vakansiyanın tələbləri ilə müqayisə edərək nəzərdən keçirir.', 'Our team reviews your application against the requirements of the role.'],
+            ['Uyğun olduqda sizinlə birbaşa əlaqə saxlayırıq.', 'If you are a match, we contact you directly.']
+        ].forEach(([az, en], i) => {
+            if (!stepTexts[i]) return;
+            stepTexts[i].setAttribute('data-az', az);
+            stepTexts[i].setAttribute('data-en', en);
+            stepTexts[i].innerHTML = az;
+        });
+        setLang('cv-privacy-note',
+            'Müraciətiniz məxfi saxlanılır və yalnız bu vakansiya üzrə seçim prosesi üçün istifadə olunur.',
+            'Your application is kept confidential and used only for this role’s selection process.');
+        setLang('cv-submit-btn', 'Müraciət Et', 'Apply');
+    }
 
     const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -54,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.success) {
-                setStatus(MESSAGES.success[isAz() ? 'az' : 'en'], 'success');
+                setStatus(MESSAGES[isApplyMode ? 'successApply' : 'success'][isAz() ? 'az' : 'en'], 'success');
                 formEl.reset();
             } else {
                 setStatus(MESSAGES.error[isAz() ? 'az' : 'en'], 'error');
