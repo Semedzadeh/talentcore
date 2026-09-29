@@ -97,6 +97,27 @@
     border-bottom: none;
 }
 
+/* Filtr blokunun başlığı — "Fəaliyyət sahəsi"nin üstündə, sidebar-ın lap
+   yuxarısında, bu bölmənin nə üçün olduğunu izah edir. */
+.vacancies-sidebar-heading {
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.vacancies-sidebar-heading h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #d97742;
+    margin-bottom: 6px;
+}
+
+.vacancies-sidebar-heading p {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
 /* Filtr Qrupu — sidebar-da 7 qrup (Fəaliyyət sahəsi, Şirkətlər, Kateqoriyalar,
    Vəzifə dərəcəsi, Region, İş qrafiki, İş formatı) alt-alta düzülür, hər biri
    arasında incə ayırıcı xətt; başlığa (oxa) basanda checkbox siyahısı aç/bağlanır */
