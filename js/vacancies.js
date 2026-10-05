@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const VACANCIES = [
         {
             id: 1,
+            premium: true,
             title: 'Senior Backend Developer',
             company: 'TechCore Solutions',
             category: 'it',
@@ -187,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 3,
+            premium: true,
             title: 'Maliyyə Meneceri',
             company: 'Baku Finance Group',
             category: 'finance',
@@ -271,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 7,
+            premium: true,
             title: 'Layihə Meneceri (Tikinti)',
             company: 'NorthBuild MMC',
             category: 'construction',
@@ -313,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 9,
+            premium: true,
             title: 'Kredit Analitiki',
             company: 'AtlasBank',
             category: 'banking',
@@ -737,6 +741,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filtered = sortVacancies(filtered);
 
+        // Premium elanlar həmişə siyahının ən başında sabitlənir. Filtr/axtarış
+        // yuxarıda artıq tətbiq olunub, deməli açılışda (filtrsiz) bütün sahələrin
+        // premium-ları, filtr seçiləndə isə yalnız həmin filtrə uyğun premium-lar
+        // qalır. Array.sort stabildir — hər qrupun daxilində seçilmiş sıralama saxlanır.
+        filtered = [...filtered.filter(v => v.premium), ...filtered.filter(v => !v.premium)];
+
         if (filtered.length === 0) {
             listEl.innerHTML = showSavedOnly
                 ? '<p class="vacancy-empty">Hələ heç bir vakansiya yadda saxlanmayıb.</p>'
@@ -757,7 +767,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         listEl.innerHTML = pageItems.map(v => `
-            <a class="vacancy-card" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
+            <a class="vacancy-card${v.premium ? ' premium' : ''}" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
+                ${v.premium ? '<span class="vacancy-premium-badge">PREMIUM</span>' : ''}
                 <button type="button" class="vacancy-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-label="Yadda saxla">
                     <svg viewBox="0 0 24 24">
                         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
