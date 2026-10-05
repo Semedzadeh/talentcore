@@ -620,17 +620,17 @@ body.light-theme .vacancy-sort-menu {
 }
 
 /* Premium elan — siyahının başında sabitlənir (js/vacancies.js renderList);
-   yaşıl üst xətt + yuxarıdan "asılan" PREMIUM nişanı. Hover/active border-color-u
-   bütün kənarlara yazdığı üçün bu qayda onlardan SONRA gəlməlidir ki, üst
-   xətt yaşıl qalsın. */
+   saytın accent rəngində (narıncı) üst xətt + yuxarıdan "asılan" PREMIUM nişanı
+   (ikon/başlıq badge-ləri ilə eyni #c4642f→#e0a05f qradiyent). Hover/active
+   border-color-u bütün kənarlara yazdığı üçün bu qayda onlardan SONRA gəlməlidir. */
 .vacancy-card.premium {
-    border-top: 2px solid #a3e635;
+    border-top: 2px solid #d97742;
     padding-top: 20px;
 }
 
 .vacancy-card.premium:hover,
 .vacancy-card.premium.active {
-    border-top-color: #a3e635;
+    border-top-color: #d97742;
 }
 
 .vacancy-premium-badge {
@@ -639,8 +639,8 @@ body.light-theme .vacancy-sort-menu {
     right: 46px;
     padding: 2px 12px 3px;
     border-radius: 0 0 8px 8px;
-    background: #a3e635;
-    color: #14210a;
+    background: linear-gradient(135deg, #c4642f, #e0a05f);
+    color: #fff;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.5px;
