@@ -655,28 +655,28 @@ body.light-theme .vacancy-sort-menu {
     line-height: 1.3;
 }
 
-/* Kiçildilmiş kart: şirkət · yer · ştat · format bir sətirdə nöqtə ilə
-   ayrılır, tarix isə eyni sətrin sağında (margin-left:auto). Əvvəlki ayrıca
-   "tag" sırası və alt tarix sətri ləğv edilib. */
+/* Kart: başlıq + altında bir sətir — solda şirkət (detal paneldəki .company-row
+   kimi accent rəngdə), sağda tarix. Yer / ştat / iş formatı kartdan çıxarılıb
+   (yalnız sağ detal panelində göstərilir). */
 .vacancy-meta {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    column-gap: 8px;
-    row-gap: 2px;
-    font-size: 11.5px;
-    color: var(--text-muted);
+    justify-content: space-between;
+    gap: 12px;
 }
 
-.vacancy-meta > span:not(.vacancy-posted) + span:not(.vacancy-posted)::before {
-    content: "·";
-    margin-right: 8px;
-    font-weight: 700;
+.vacancy-company {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12.5px;
+    font-weight: 600;
     color: #d97742;
 }
 
 .vacancy-posted {
-    margin-left: auto;
+    flex-shrink: 0;
     font-size: 11px;
     font-weight: 600;
     white-space: nowrap;

@@ -785,10 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </button>
                 <h4>${v.title}</h4>
                 <div class="vacancy-meta">
-                    <span>🏢 ${v.company}</span>
-                    <span>📍 ${v.location}</span>
-                    <span>${v.type}</span>
-                    <span>${v.mode}</span>
+                    <span class="vacancy-company">${v.company}</span>
                     <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
                 </div>
             </a>
