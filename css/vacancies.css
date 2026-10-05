@@ -665,6 +665,11 @@ body.light-theme .vacancy-sort-menu {
     color: var(--text-color);
     margin-bottom: 6px;
     line-height: 1.3;
+    /* Uzun başlıq alta düşüb kartı hündürləşdirmir/dizaynı pozmur — tək sətir,
+       sonu "…" ilə kəsilir (tam ad hover-də title atributunda görünür) */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Kart: başlıq + altında bir sətir — solda şirkət (detal paneldəki .company-row

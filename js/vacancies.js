@@ -932,7 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="vacancy-card-main">
                     ${companyLogoHtml(v)}
                     <div class="vacancy-card-body">
-                        <h4>${v.title}</h4>
+                        <h4 title="${v.title}">${v.title}</h4>
                         <div class="vacancy-meta">
                             <span class="vacancy-company">${v.company}</span>
                             <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
