@@ -522,6 +522,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Detallara diqqətlilik'
             ],
             offer: ['Rəqabətqabiliyyətli maaş', 'İllik təlim büdcəsi', 'Karyera inkişafı imkanları']
+        },
+        {
+            id: 17,
+            premium: true,
+            title: 'Rəqəmsal Marketinq üzrə Aparıcı Mütəxəssis',
+            company: 'BrightWave Agency',
+            category: 'marketing',
+            sector: 'marketing-advertising',
+            jobCategory: 'sales-marketing-comms',
+            level: null,
+            location: 'Bakı',
+            type: 'Tam ştat',
+            mode: 'Hibrid',
+            posted: 'Bu gün',
+            deadlineIn: 21,
+            description: 'Müştərilərimizin rəqəmsal kanallar üzrə marketinq strategiyasını qurmaq və icrasına rəhbərlik etmək üçün təcrübəli Rəqəmsal Marketinq üzrə Aparıcı Mütəxəssis axtarırıq. Bu rol brendlərin onlayn görünürlüyünü və satış göstəricilərini artırmaq məqsədi daşıyır.',
+            responsibilities: [
+                'Rəqəmsal marketinq strategiyasının hazırlanması və müştəri hədəflərinə uyğun icrası',
+                'Google Ads, Meta Ads və digər ödənişli kanalların idarə olunması və büdcənin optimallaşdırılması',
+                'SEO, kontent və e-poçt marketinq fəaliyyətlərinin koordinasiyası',
+                'Kampaniya nəticələrinin analitika alətləri ilə izlənməsi və hesabatların hazırlanması',
+                'Kiçik marketinq komandasına mentorluq və iş bölgüsü'
+            ],
+            requirements: [
+                'Rəqəmsal marketinq sahəsində 4+ il təcrübə',
+                'Google Analytics, Google Ads və Meta Business Suite biliyi',
+                'Data əsaslı qərar vermə və A/B test təcrübəsi',
+                'Azərbaycan və ingilis dillərində yazılı və şifahi kommunikasiya',
+                'Layihələri müstəqil idarə etmək bacarığı'
+            ],
+            offer: ['Rəqabətqabiliyyətli maaş və illik bonus', 'Hibrid iş qrafiki', 'Sertifikasiya və təlim büdcəsi', 'Sağlamlıq sığortası']
         }
     ];
 
@@ -563,7 +594,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'TechCore Solutions': 'TechCore Solutions bank və telekommunikasiya sektoru üçün rəqəmsal məhsullar hazırlayan texnologiya şirkətidir. Komandamız 60-dan çox mühəndis və dizayner birləşdirir.',
         'Baku Finance Group': 'Baku Finance Group Azərbaycanda korporativ maliyyə və investisiya xidmətləri göstərən qrupdur. Müştərilərimizə büdcələmə, risk idarəçiliyi və maliyyə məsləhəti təqdim edirik.',
         'AtlasBank': 'AtlasBank fiziki və hüquqi şəxslərə geniş çeşiddə bank və sığorta məhsulları təklif edən universal banklardan biridir.',
-        'NorthBuild MMC': 'NorthBuild MMC yaşayış və kommersiya tikinti layihələrinin icrası ilə məşğul olan inşaat şirkətidir.'
+        'BrightWave Agency': 'BrightWave Agency brendlərə rəqəmsal marketinq, kontent və performans reklamı üzrə xidmət göstərən kreativ agentlikdir.',
+        'NorthBuild MMC':'NorthBuild MMC yaşayış və kommersiya tikinti layihələrinin icrası ilə məşğul olan inşaat şirkətidir.'
     };
 
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
