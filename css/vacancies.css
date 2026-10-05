@@ -97,7 +97,13 @@ body.vacancy-focused-mode .vacancies-layout {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    height: calc(100vh + 50px);
+    /* Hündürlük sabit DEYİL, məzmuna görədir — filtrlər bağlı/yığcam olanda
+       qutuların altında boş yer qalmır. Yuxarı hədd sağdakı sütunların
+       hündürlüyüdür (calc(100vh + 50px)); məzmun ondan çox olarsa
+       .vacancies-sidebar öz daxili scroll-u ilə açılır. align-self:start —
+       qısa sütun grid-in mərkəzində üzmür, yuxarıdan başlayır. */
+    max-height: calc(100vh + 50px);
+    align-self: start;
 }
 
 /* Fəaliyyət sahəsi və digər filtrlər — orta/sağ sütunlarla eyni hündürlükdə
@@ -109,7 +115,7 @@ body.vacancy-focused-mode .vacancies-layout {
     border: 1px solid var(--border-color);
     border-radius: 14px;
     padding: 22px 18px;
-    flex: 1;
+    flex: 0 1 auto; /* məzmun qədər; yer çatmayanda kiçilib scroll olur */
     min-height: 0; /* flex sütununda daxili scroll işləməsi üçün vacibdir */
     overflow-y: auto;
     scrollbar-width: thin;
@@ -909,6 +915,7 @@ body.light-theme .vacancy-share-btn::after {
     }
     .vacancies-sidebar-wrap {
         height: auto;
+        max-height: none;
         margin-bottom: 20px;
     }
     .vacancies-sidebar {
