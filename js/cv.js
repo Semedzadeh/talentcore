@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
         successApply: { az: 'Müraciətiniz uğurla göndərildi. Uyğun olduqda sizinlə əlaqə saxlayacağıq.', en: 'Your application has been sent. We will contact you if you are a match.' },
         error: { az: 'Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', en: 'Something went wrong, please try again shortly.' },
         missingKey: { az: 'Form hələ qoşulmayıb (access key əlavə olunmayıb).', en: 'The form is not connected yet (missing access key).' },
-        tooLarge: { az: 'Fayl 5MB-dan böyükdür, zəhmət olmasa daha kiçik fayl seçin.', en: 'File is larger than 5MB, please choose a smaller file.' }
+        tooLarge: { az: 'Fayl 5MB-dan böyükdür, zəhmət olmasa daha kiçik fayl seçin.', en: 'File is larger than 5MB, please choose a smaller file.' },
+        requiredFields: { az: 'Zəhmət olmasa məcburi sahələri doldurun: ad soyad, email, telefon və CV.', en: 'Please fill in the required fields: full name, email, phone and CV.' },
+        invalidEmail: { az: 'Zəhmət olmasa düzgün email ünvanı daxil edin.', en: 'Please enter a valid email address.' },
+        invalidPhone: { az: 'Zəhmət olmasa düzgün telefon nömrəsi daxil edin.', en: 'Please enter a valid phone number.' }
     };
 
     // vacancies.html-dəki "Müraciət Et" düyməsi ?company=...&vacancy=... ilə gəlir —
@@ -99,9 +102,41 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Məcburi sahələr: ad soyad, email, telefon, CV. Form `novalidate`-dir,
+        // ona görə yoxlama burada edilir. Motivasiya məktubu qəsdən məcburi DEYİL.
+        const lang = isAz() ? 'az' : 'en';
+        const nameEl = document.getElementById('cv-name');
+        const emailEl = document.getElementById('cv-email');
+        const phoneEl = document.getElementById('cv-phone');
         const fileInput = document.getElementById('cv-file');
-        if (fileInput.files[0] && fileInput.files[0].size > MAX_FILE_SIZE) {
-            setStatus(MESSAGES.tooLarge[isAz() ? 'az' : 'en'], 'error');
+        const motivationInput = document.getElementById('cv-motivation');
+
+        [nameEl, emailEl, phoneEl, fileInput].forEach(el => el.classList.remove('invalid'));
+
+        const missing = [nameEl, emailEl, phoneEl].filter(el => !el.value.trim());
+        if (!fileInput.files[0]) missing.push(fileInput);
+        if (missing.length) {
+            missing.forEach(el => el.classList.add('invalid'));
+            missing[0].focus();
+            setStatus(MESSAGES.requiredFields[lang], 'error');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+            emailEl.classList.add('invalid');
+            emailEl.focus();
+            setStatus(MESSAGES.invalidEmail[lang], 'error');
+            return;
+        }
+        if (phoneEl.value.replace(/\D/g, '').length < 7) {
+            phoneEl.classList.add('invalid');
+            phoneEl.focus();
+            setStatus(MESSAGES.invalidPhone[lang], 'error');
+            return;
+        }
+
+        if ((fileInput.files[0] && fileInput.files[0].size > MAX_FILE_SIZE) ||
+            (motivationInput.files[0] && motivationInput.files[0].size > MAX_FILE_SIZE)) {
+            setStatus(MESSAGES.tooLarge[lang], 'error');
             return;
         }
 
@@ -109,10 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus(MESSAGES.sending[isAz() ? 'az' : 'en'], null);
 
         try {
+            const formData = new FormData(formEl);
+            // Boş seçilmiş motivasiya məktubu sahəsi boş fayl kimi göndərilməsin
+            if (!motivationInput.files[0]) formData.delete('motivation_letter');
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Accept': 'application/json' },
-                body: new FormData(formEl)
+                body: formData
             });
             const result = await response.json();
 

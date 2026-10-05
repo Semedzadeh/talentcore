@@ -137,9 +137,10 @@
     gap: 16px;
     padding: 16px 18px;
     margin-bottom: 22px;
-    border-radius: 12px;
-    border: 1px solid rgba(217, 119, 66, 0.45);
-    background: rgba(217, 119, 66, 0.1);
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    border-left: 3px solid #d97742;
+    background: var(--card-hover);
 }
 
 .cv-apply-target[hidden] {
@@ -148,10 +149,15 @@
 
 .cv-apply-icon {
     flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #c4642f;
+    /* Vakansiya siyahısı/detalındakı .vacancy-logo ilə eyni dil: parlaq narıncı
+       dairə əvəzinə sakit neytral qutu + incə xətli bina ikonu (real logo
+       gələndə burada şirkət loqosu olacaq) */
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,6 +188,11 @@
 .cv-apply-company {
     font-size: 13.5px;
     color: var(--text-muted);
+}
+
+/* CV + Motivasiya məktubu yan-yana; fayl inputunun öz eni sütunu şişirtməsin */
+.cv-files-row .form-group {
+    min-width: 0;
 }
 
 /* Vəzifə sahəsi gizlənəndə telefon tam eni tutsun */
