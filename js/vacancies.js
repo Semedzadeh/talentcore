@@ -929,13 +929,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                     </svg>
                 </button>
+                <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
                 <div class="vacancy-card-main">
                     ${companyLogoHtml(v)}
                     <div class="vacancy-card-body">
                         <h4 title="${v.title}">${v.title}</h4>
                         <div class="vacancy-meta">
                             <span class="vacancy-company">${v.company}</span>
-                            <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
                         </div>
                     </div>
                 </div>
