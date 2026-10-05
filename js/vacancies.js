@@ -156,7 +156,14 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Hibrid',
             posted: '2 gün əvvəl',
+            deadlineIn: 13,
             description: 'Məhsul komandamızda backend infrastrukturunun dizaynı və inkişafı üçün təcrübəli Backend Developer axtarırıq. Yüksək yüklənməyə davamlı sistemlər üzərində işləyəcəksiniz.',
+            responsibilities: [
+                'Backend servislərinin və API-lərin dizaynı, inkişafı və dəstəyi',
+                'Kod nəzarəti (code review) və komanda daxilində texniki standartların qorunması',
+                'Sistemin performansının izlənməsi və optimallaşdırılması',
+                'Məhsul komandası ilə birgə yeni funksionallıqların planlaşdırılması'
+            ],
             requirements: [
                 'Node.js və ya Java ilə 4+ il təcrübə',
                 'PostgreSQL / MySQL ilə verilənlər bazası dizaynı',
@@ -177,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '5 gün əvvəl',
+            deadlineIn: 18,
             description: 'İstifadəçi interfeyslərinin React əsasında qurulması və mövcud məhsulun inkişaf etdirilməsi üçün Frontend Developer axtarırıq.',
             requirements: [
                 'React.js ilə 3+ il təcrübə',
@@ -199,7 +207,14 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '1 gün əvvəl',
+            deadlineIn: 23,
             description: 'Şirkətin maliyyə planlaşdırılması, büdcələşdirmə və hesabatlılıq proseslərinə rəhbərlik edəcək təcrübəli Maliyyə Meneceri axtarırıq.',
+            responsibilities: [
+                'Şirkətin maliyyə planlaşdırılması və büdcə proseslərinin idarə olunması',
+                'Aylıq və illik maliyyə hesabatlarının hazırlanması və təhlili',
+                'Pul vəsaitlərinin hərəkətinə nəzarət və risklərin qiymətləndirilməsi',
+                'Rəhbərliyə qərarvermə üçün analitik hesabatların təqdim edilməsi'
+            ],
             requirements: [
                 'Maliyyə/Mühasibatlıq üzrə ali təhsil',
                 '5+ il müvafiq iş təcrübəsi',
@@ -220,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '1 həftə əvvəl',
+            deadlineIn: 9,
             description: 'Bütün mühasibat uçotu proseslərinin aparılması və vergi hesabatlarının vaxtında təqdim edilməsinə görə məsuliyyət daşıyacaq Baş Mühasib axtarırıq.',
             requirements: [
                 'Mühasibatlıq üzrə 7+ il təcrübə, 2+ il rəhbər vəzifədə',
@@ -241,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Uzaqdan',
             posted: '3 gün əvvəl',
+            deadlineIn: 14,
             description: 'Sosial media, SEO və performans reklamları üzrə strategiyaların hazırlanması və icrası üçün Rəqəmsal Marketinq Mütəxəssisi axtarırıq.',
             requirements: [
                 'Rəqəmsal marketinqdə 2+ il təcrübə',
@@ -262,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '4 gün əvvəl',
+            deadlineIn: 19,
             description: 'Yeni müştərilərin cəlb edilməsi və mövcud müştəri portfelinin inkişaf etdirilməsi üçün nəticəyönümlü Satış Təmsilçisi axtarırıq.',
             requirements: [
                 'Satışda 1+ il təcrübə',
@@ -284,7 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '6 gün əvvəl',
+            deadlineIn: 24,
             description: 'Tikinti layihələrinin planlaşdırılması, büdcəyə və müddətə uyğun icrasının təmin edilməsi üçün təcrübəli Layihə Meneceri axtarırıq.',
+            responsibilities: [
+                'Tikinti layihələrinin planlaşdırılması, icrası və müddətində təhvil verilməsi',
+                'Podratçılar və təchizatçılarla əlaqələrin idarə olunması',
+                'Layihə büdcəsinə, keyfiyyətə və təhlükəsizlik normalarına nəzarət',
+                'Layihə komandasının koordinasiyası və müntəzəm hesabatlılıq'
+            ],
             requirements: [
                 'İnşaat mühəndisliyi üzrə ali təhsil',
                 '5+ il layihə idarəetməsi təcrübəsi',
@@ -305,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '3 gün əvvəl',
+            deadlineIn: 10,
             description: 'Anbar əməliyyatlarının səmərəli təşkili, ehtiyatların uçotu və komandanın rəhbərliyi üçün Anbar Nəzarətçisi axtarırıq.',
             requirements: [
                 'Anbar/logistika sahəsində 2+ il təcrübə',
@@ -327,7 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '2 gün əvvəl',
+            deadlineIn: 15,
             description: 'Kredit müraciətlərinin qiymətləndirilməsi və risk analizinin aparılması üçün Kredit Analitiki axtarırıq.',
+            responsibilities: [
+                'Korporativ müştərilərin kredit müraciətlərinin maliyyə təhlili',
+                'Kredit risklərinin qiymətləndirilməsi və kredit komitəsi üçün rəyin hazırlanması',
+                'Mövcud kredit portfelinin monitorinqi',
+                'Daxili qaydalara və tənzimləyici tələblərə uyğunluğun təmin edilməsi'
+            ],
             requirements: [
                 'Maliyyə/İqtisadiyyat üzrə ali təhsil',
                 '2+ il bank sektorunda təcrübə',
@@ -348,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Hibrid',
             posted: '1 gün əvvəl',
+            deadlineIn: 20,
             description: 'Biznes bölmələri ilə sıx əməkdaşlıq edərək işə qəbul, işçi təcrübəsi və təşkilati inkişaf proseslərinə dəstək olacaq HR Business Partner axtarırıq.',
             requirements: [
                 'HR sahəsində 3+ il təcrübə',
@@ -369,6 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Uzaqdan',
             posted: '4 gün əvvəl',
+            deadlineIn: 25,
             description: 'Məhsul komandası ilə birgə istifadəçi interfeyslərinin dizaynını hazırlayacaq, prototip qurulmasında iştirak edəcək UI/UX Dizayner axtarırıq.',
             requirements: [
                 'Figma ilə 2+ il təcrübə',
@@ -390,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '5 gün əvvəl',
+            deadlineIn: 11,
             description: 'Anbarda malların qəbulu, yerləşdirilməsi və sifarişlərin hazırlanması proseslərində iştirak edəcək Anbar Operatoru axtarırıq.',
             requirements: [
                 'Fiziki aktivliyə açıqlıq',
@@ -411,6 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '2 gün əvvəl',
+            deadlineIn: 16,
             description: 'Yeni sığorta məhsullarının hazırlanması və mövcud məhsul xəttinin bazar tələblərinə uyğun inkişaf etdirilməsi üçün Menecer axtarırıq.',
             requirements: [
                 'Sığorta və ya bank sektorunda 3+ il təcrübə',
@@ -432,6 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '1 həftə əvvəl',
+            deadlineIn: 21,
             description: 'Tikinti sahəsində texniki nəzarəti həyata keçirəcək, layihə sənədləri ilə sahə işlərinin uyğunluğunu təmin edəcək Tikinti Mühəndisi axtarırıq.',
             requirements: [
                 'İnşaat mühəndisliyi üzrə ali təhsil',
@@ -453,6 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Hibrid',
             posted: '3 gün əvvəl',
+            deadlineIn: 26,
             description: 'İşə qəbul prosesləri, işçi sənədləşməsi və HR sistemlərinin aparılmasında məsul olacaq İnsan Resursları üzrə Mütəxəssis axtarırıq.',
             requirements: [
                 'HR sahəsində 1+ il təcrübə',
@@ -474,6 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: '6 gün əvvəl',
+            deadlineIn: 12,
             description: 'Maliyyə hesabatlarının hazırlanması, büdcə təhlili və proqnozlaşdırma proseslərində iştirak edəcək Maliyyə Analitiki axtarırıq.',
             requirements: [
                 'Maliyyə/İqtisadiyyat üzrə ali təhsil',
@@ -516,6 +556,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('vacancy-focused-mode');
         document.title = `Talentcore | ${requestedVacancy.title}`;
     }
+    // Şirkət haqqında məlumat (nümunə) — şirkət adı ilə uyğunlaşdırılır. Qəsdən
+    // yalnız bəzi şirkətlər üçün doldurulub: məlumat verməyən şirkətin vakansiyasında
+    // "Şirkət haqqında" bölməsi boş qalmır, tamamilə gizlənir (bax renderDetail).
+    const COMPANY_ABOUT = {
+        'TechCore Solutions': 'TechCore Solutions bank və telekommunikasiya sektoru üçün rəqəmsal məhsullar hazırlayan texnologiya şirkətidir. Komandamız 60-dan çox mühəndis və dizayner birləşdirir.',
+        'Baku Finance Group': 'Baku Finance Group Azərbaycanda korporativ maliyyə və investisiya xidmətləri göstərən qrupdur. Müştərilərimizə büdcələmə, risk idarəçiliyi və maliyyə məsləhəti təqdim edirik.',
+        'AtlasBank': 'AtlasBank fiziki və hüquqi şəxslərə geniş çeşiddə bank və sığorta məhsulları təklif edən universal banklardan biridir.',
+        'NorthBuild MMC': 'NorthBuild MMC yaşayış və kommersiya tikinti layihələrinin icrası ilə məşğul olan inşaat şirkətidir.'
+    };
+
     let mobilePage = 1; // yalnız mobil görünüşdə istifadə olunur
     let searchQuery = '';
     let sortMode = 'newest'; // 'newest' | 'oldest' | 'az'
@@ -589,17 +639,34 @@ document.addEventListener('DOMContentLoaded', () => {
         return match[2] === 'həftə' ? amount * 7 : amount;
     }
 
-    // Kartdakı tarix: "2 gün əvvəl" əvəzinə "Bu gün" / "Dünən" / "30 sentyabr".
+    // Kartın solundakı şirkət loqosu. Hələ real loqo faylları yoxdur — vakansiyada
+    // ixtiyari `logo` (şəkil yolu) sahəsi varsa o göstərilir, yoxdursa şirkət
+    // adı əvəzinə sakit, tək rəngli bina ikonu (placeholder) çəkilir. Real loqolar
+    // gələndə sadəcə VACANCIES-ə logo: 'yol.png' əlavə etmək kifayətdir.
+    function companyLogoHtml(v) {
+        if (v.logo) {
+            return `<span class="vacancy-logo"><img src="${v.logo}" alt="${v.company}"></span>`;
+        }
+        return `<span class="vacancy-logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="3" width="11" height="18" rx="1.5"></rect>
+                <path d="M15 9h4a1 1 0 0 1 1 1v11h-5"></path>
+                <path d="M8 7h3M8 11h3M8 15h3"></path>
+            </svg>
+        </span>`;
+    }
+
+    // Kartdakı tarix: "2 gün əvvəl" əvəzinə "Bu gün" / "Dünən" / "03 okt" (qısa, 3 hərfli ay).
     // Real tarix sahəsi yoxdur, ona görə posted mətnindən hesablanan gün sayı
     // bu günkü tarixdən çıxılır (getPostedDaysAgo ilə eyni təxmini məntiq).
-    const AZ_MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avqust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr'];
+    const AZ_MONTHS = ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'];
     function formatPostedDate(postedText) {
         const daysAgo = getPostedDaysAgo(postedText);
         if (daysAgo === 0) return 'Bu gün';
         if (daysAgo === 1) return 'Dünən';
         const d = new Date();
         d.setDate(d.getDate() - daysAgo);
-        return `${d.getDate()} ${AZ_MONTHS[d.getMonth()]}`;
+        return `${String(d.getDate()).padStart(2, '0')} ${AZ_MONTHS[d.getMonth()]}`;
     }
 
     function sortVacancies(vacancies) {
@@ -667,6 +734,64 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const AZ_MONTHS_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avqust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr'];
+
+    // Son müraciət tarixi — real tarix sahəsi yoxdur, `deadlineIn` (bu gündən neçə gün
+    // sonra) saxlanılır, nümunə datadır. Verilməyibsə sətir ümumiyyətlə göstərilmir.
+    function deadlineHtml(v) {
+        if (typeof v.deadlineIn !== 'number') return '';
+        const d = new Date();
+        d.setDate(d.getDate() + v.deadlineIn);
+        const text = `${d.getDate()} ${AZ_MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+        const left = v.deadlineIn === 0 ? 'Bu gün son gündür' : `${v.deadlineIn} gün qalıb`;
+        return `<div class="detail-meta-item detail-deadline"><span class="label">Son müraciət tarixi</span><span class="value">${text} <span class="deadline-left">${left}</span></span></div>`;
+    }
+
+    // Bölmələr İXTİYARİDİR: şirkət/vakansiya həmin məlumatı verməyibsə (boş, undefined,
+    // boş massiv) bölmə başlığı ilə birlikdə tamamilə gizlənir — boş başlıq qalmır.
+    function textSectionHtml(title, text) {
+        const t = String(text || '').trim();
+        return t ? `<div class="detail-section"><h4>${title}</h4><p>${t}</p></div>` : '';
+    }
+
+    function listSectionHtml(title, items) {
+        const list = (items || []).map(x => String(x || '').trim()).filter(Boolean);
+        if (!list.length) return '';
+        return `<div class="detail-section"><h4>${title}</h4><ul>${list.map(i => `<li><span class="tick">✓</span><span>${i}</span></li>`).join('')}</ul></div>`;
+    }
+
+    // Oxşar vakansiyalar: eyni kateqoriya (ən güclü siqnal), eyni iş kateqoriyası və
+    // ya eyni fəaliyyət sahəsi. Ən çox üst-üstə düşən 3 elan.
+    function getSimilarVacancies(v) {
+        const score = o => (o.category === v.category ? 2 : 0)
+            + (o.jobCategory && o.jobCategory === v.jobCategory ? 1 : 0)
+            + (o.sector && o.sector === v.sector ? 1 : 0);
+        return VACANCIES
+            .filter(o => o.id !== v.id)
+            .map(o => ({ o, s: score(o) }))
+            .filter(x => x.s > 0)
+            .sort((a, b) => b.s - a.s || a.o.id - b.o.id)
+            .slice(0, 3)
+            .map(x => x.o);
+    }
+
+    function similarSectionHtml(v) {
+        const similar = getSimilarVacancies(v);
+        if (!similar.length) return '';
+        return `<div class="detail-section detail-similar">
+            <h4>Oxşar vakansiyalar</h4>
+            <div class="similar-list">${similar.map(o => `
+                <a class="similar-vacancy" data-id="${o.id}" href="vacancies.html?vacancy=${o.id}">
+                    ${companyLogoHtml(o)}
+                    <span class="similar-body">
+                        <span class="similar-title">${o.title}</span>
+                        <span class="similar-meta">${o.company} · ${formatPostedDate(o.posted)}</span>
+                    </span>
+                </a>`).join('')}
+            </div>
+        </div>`;
+    }
+
     function renderDetail(v) {
         if (!v) {
             stopShowcaseRotation();
@@ -676,38 +801,27 @@ document.addEventListener('DOMContentLoaded', () => {
         stopShowcaseRotation();
         const catLabel = (CATEGORIES.find(c => c.id === v.category) || {}).az || '';
         detailEl.innerHTML = `
-            <div class="detail-title-row">
-                <h2>${v.title}</h2>
-                <button type="button" class="vacancy-share-btn" data-id="${v.id}" aria-label="Paylaş">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="18" cy="5" r="3"></circle>
-                        <circle cx="6" cy="12" r="3"></circle>
-                        <circle cx="18" cy="19" r="3"></circle>
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                    </svg>
-                </button>
+            <div class="detail-header">
+                ${companyLogoHtml(v)}
+                <div class="detail-header-text">
+                    <h2>${v.title}</h2>
+                    <div class="company-row">${v.company}${catLabel ? ' · ' + catLabel : ''}</div>
+                </div>
             </div>
-            <div class="company-row">${v.company} · ${catLabel}</div>
             <div class="detail-meta-row">
                 <div class="detail-meta-item"><span class="label">Yer</span><span class="value">📍 ${v.location}</span></div>
                 <div class="detail-meta-item"><span class="label">Məşğulluq</span><span class="value">${v.type}</span></div>
                 <div class="detail-meta-item"><span class="label">İş forması</span><span class="value">${v.mode}</span></div>
                 <div class="detail-meta-item"><span class="label">Maaş</span><span class="value">Razılaşma yolu ilə</span></div>
+                ${deadlineHtml(v)}
             </div>
-            <div class="detail-section">
-                <h4>Vəzifə Haqqında</h4>
-                <p>${v.description}</p>
-            </div>
-            <div class="detail-section">
-                <h4>Tələblər</h4>
-                <ul>${v.requirements.map(r => `<li><span class="tick">✓</span><span>${r}</span></li>`).join('')}</ul>
-            </div>
-            <div class="detail-section">
-                <h4>Bizim Təklifimiz</h4>
-                <ul>${v.offer.map(o => `<li><span class="tick">✓</span><span>${o}</span></li>`).join('')}</ul>
-            </div>
+            ${textSectionHtml('Vəzifənin təsviri / məqsədi', v.description)}
+            ${listSectionHtml('Öhdəliklər', v.responsibilities)}
+            ${listSectionHtml('Tələblər', v.requirements)}
+            ${listSectionHtml('Təkliflərimiz', v.offer)}
+            ${textSectionHtml('Şirkət haqqında məlumat', COMPANY_ABOUT[v.company] || v.companyAbout)}
             <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">Müraciət Et</a>
+            ${similarSectionHtml(v)}
         `;
     }
 
@@ -783,10 +897,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                     </svg>
                 </button>
-                <h4>${v.title}</h4>
-                <div class="vacancy-meta">
-                    <span class="vacancy-company">${v.company}</span>
-                    <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
+                <div class="vacancy-card-main">
+                    ${companyLogoHtml(v)}
+                    <div class="vacancy-card-body">
+                        <h4>${v.title}</h4>
+                        <div class="vacancy-meta">
+                            <span class="vacancy-company">${v.company}</span>
+                            <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
+                        </div>
+                    </div>
                 </div>
             </a>
         `).join('') + renderMobilePagination(totalPages);
@@ -854,15 +973,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Detal panelinin başlığının yanındakı "Paylaş" düyməsi — renderDetail() hər
-    // dəfə detailEl-in innerHTML-ini bütünlüklə yenidən yazdığı üçün düyməyə
-    // birbaşa listener bağlamaq mənasızdır (hər render-də silinərdi), ona görə
-    // detailEl-in özünə delegasiya edilir.
+    // Detal panelindəki "Oxşar vakansiyalar" — renderDetail() hər dəfə detailEl-in
+    // innerHTML-ini bütünlüklə yenidən yazdığı üçün listener birbaşa elementə yox,
+    // detailEl-in özünə delegasiya edilir. Adi sol klik elə həmin paneldə həmin
+    // vakansiyanı açır (vacancy-card ilə eyni davranış); Ctrl/orta/sağ klik native
+    // "yeni tabda aç" qalır. Fokuslanmış rejimdə (siyahı gizlidir, URL ?vacancy=
+    // ilə sabitdir) isə link adi keçid kimi işləyir ki, URL ilə göstərilən vakansiya
+    // uyğun qalsın.
     detailEl.addEventListener('click', (e) => {
-        const shareBtn = e.target.closest('.vacancy-share-btn');
-        if (!shareBtn) return;
-        const v = VACANCIES.find(vac => vac.id === Number(shareBtn.dataset.id));
-        if (v) shareVacancy(v, shareBtn);
+        const link = e.target.closest('.similar-vacancy');
+        if (!link) return;
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+        if (document.body.classList.contains('vacancy-focused-mode')) return;
+        e.preventDefault();
+
+        activeVacancyId = Number(link.dataset.id);
+        highlightActiveCard();
+        renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
+        detailEl.scrollTop = 0;
+        const activeCard = listEl.querySelector('.vacancy-card.active');
+        if (activeCard) activeCard.scrollIntoView({ block: 'nearest' });
     });
 
     // "Yaddaşa verilmiş vakansiyalar" düyməsi — sol paneldə ayrıca altına

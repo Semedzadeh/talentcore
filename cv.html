@@ -130,7 +130,7 @@
                         <!-- Yalnız vakansiyanın "Müraciət Et" düyməsindən gəlinəndə görünür (js/cv.js doldurur) -->
                         <div class="cv-apply-target" id="cv-apply-target" hidden>
                             <span class="cv-apply-icon" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1.5"/><path d="M15 9h4a1 1 0 0 1 1 1v11h-5"/><path d="M8 7h3M8 11h3M8 15h3"/></svg>
                             </span>
                             <div class="cv-apply-text">
                                 <span class="cv-apply-label lang" id="cv-apply-label" data-en="You are applying for" data-az="Müraciət etdiyiniz vakansiya">Müraciət etdiyiniz vakansiya</span>
@@ -149,11 +149,11 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="cv-name" class="lang" data-en="Full Name" data-az="Ad Soyad">Ad Soyad</label>
+                                    <label for="cv-name" class="lang req" data-en="Full Name" data-az="Ad Soyad">Ad Soyad</label>
                                     <input type="text" id="cv-name" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cv-email" class="lang" data-en="Email" data-az="Email">Email</label>
+                                    <label for="cv-email" class="lang req" data-en="Email" data-az="Email">Email</label>
                                     <input type="email" id="cv-email" name="email" required>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
 
                             <div class="form-row cv-row-phone">
                                 <div class="form-group">
-                                    <label for="cv-phone" class="lang" data-en="Phone" data-az="Telefon">Telefon</label>
+                                    <label for="cv-phone" class="lang req" data-en="Phone" data-az="Telefon">Telefon</label>
                                     <input type="tel" id="cv-phone" name="phone" required>
                                 </div>
                                 <!-- Ümumi CV göndərişində (vakansiyasız) görünür; vakansiyaya müraciətdə gizlədilir -->
@@ -175,9 +175,17 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="cv-file" class="lang" data-en="Your CV (PDF or Word, max 5MB)" data-az="CV-niz (PDF və ya Word, maks. 5MB)">CV-niz (PDF və ya Word, maks. 5MB)</label>
-                                <input type="file" id="cv-file" name="attachment" accept=".pdf,.doc,.docx" required>
+                            <!-- Fayl sahəsi 2 yerə bölünüb: CV (məcburi) + Motivasiya məktubu (məcburi DEYİL).
+                                 Məcburilik js/cv.js-də yoxlanılır (form novalidate-dir). -->
+                            <div class="form-row cv-files-row">
+                                <div class="form-group">
+                                    <label for="cv-file" class="lang req" data-en="Your CV (PDF or Word, max 5MB)" data-az="CV-niz (PDF və ya Word, maks. 5MB)">CV-niz (PDF və ya Word, maks. 5MB)</label>
+                                    <input type="file" id="cv-file" name="attachment" accept=".pdf,.doc,.docx" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cv-motivation" class="lang" data-en="Motivation Letter (optional, max 5MB)" data-az="Motivasiya məktubu (istəyə bağlı, maks. 5MB)">Motivasiya məktubu (istəyə bağlı, maks. 5MB)</label>
+                                    <input type="file" id="cv-motivation" name="motivation_letter" accept=".pdf,.doc,.docx">
+                                </div>
                             </div>
 
                             <div class="form-group">
