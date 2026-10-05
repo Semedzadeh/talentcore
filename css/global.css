@@ -223,6 +223,18 @@ nav ul li a {
 }
 nav ul li a:hover { color: #d97742; }
 
+/* FAQ linki — tema düyməsinin (gecə/gündüz) yanında, əvvəl footer-də idi.
+   Əsas nav linkləri ilə eyni üslubda, ona görə eyni ölçü/rəng/hover. */
+.header-faq-link {
+    text-decoration: none;
+    color: var(--text-muted, #cbd5e1);
+    font-size: clamp(12px, 1vw, 14px);
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.25s;
+}
+.header-faq-link:hover { color: #d97742; }
+
 .header-right { margin-left: auto; display: flex; align-items: center; gap: clamp(8px, 1vw, 15px); }
 
 .lang-dropdown {
@@ -404,18 +416,6 @@ input:checked + .slider .sun { opacity: 1; }
     height: 34px;
     object-fit: contain;
     flex-shrink: 0;
-}
-
-.footer-faq-link {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.25s;
-}
-
-.footer-faq-link:hover {
-    color: #d97742;
 }
 
 .footer-social {
