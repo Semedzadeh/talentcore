@@ -44,7 +44,7 @@
     max-width: none;
 }
 
-.faq-list .faq-item:last-child {
+.faq-list .faq-item:last-child:not([open]) {
     border-bottom: none;
 }
 
