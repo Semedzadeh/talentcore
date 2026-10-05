@@ -391,6 +391,22 @@ input:checked + .slider .sun { opacity: 1; }
     transform: rotate(45deg);
 }
 
+/* Açılmış sual çərçivəyə alınır ki, cavabın hansı suala aid olduğu digərlərindən
+   dərhal seçilsin. Mənfi margin padding-i kompensasiya edir — mətn açılanda
+   yerindən oynamır, çərçivə sadəcə onun ətrafına "çıxır". */
+.faq-item[open] {
+    margin: 8px -14px;
+    padding: 0 14px 4px;
+    border: 1px solid #d97742;
+    border-radius: 12px;
+    background: rgba(217, 119, 66, 0.08);
+    box-shadow: 0 6px 18px rgba(217, 119, 66, 0.12);
+}
+
+.faq-item[open] summary {
+    color: #d97742;
+}
+
 .faq-item p {
     padding: 0 26px 18px 4px;
     color: var(--text-muted);
