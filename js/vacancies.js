@@ -585,6 +585,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return match[2] === 'həftə' ? amount * 7 : amount;
     }
 
+    // Kartdakı tarix: "2 gün əvvəl" əvəzinə "Bu gün" / "Dünən" / "30 sentyabr".
+    // Real tarix sahəsi yoxdur, ona görə posted mətnindən hesablanan gün sayı
+    // bu günkü tarixdən çıxılır (getPostedDaysAgo ilə eyni təxmini məntiq).
+    const AZ_MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avqust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr'];
+    function formatPostedDate(postedText) {
+        const daysAgo = getPostedDaysAgo(postedText);
+        if (daysAgo === 0) return 'Bu gün';
+        if (daysAgo === 1) return 'Dünən';
+        const d = new Date();
+        d.setDate(d.getDate() - daysAgo);
+        return `${d.getDate()} ${AZ_MONTHS[d.getMonth()]}`;
+    }
+
     function sortVacancies(vacancies) {
         const sorted = [...vacancies];
         if (sortMode === 'oldest') {
@@ -750,16 +763,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                     </svg>
                 </button>
+                <button type="button" class="vacancy-share-btn" data-id="${v.id}" aria-label="Paylaş">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
                 <h4>${v.title}</h4>
                 <div class="vacancy-meta">
                     <span>🏢 ${v.company}</span>
                     <span>📍 ${v.location}</span>
+                    <span>${v.type}</span>
+                    <span>${v.mode}</span>
+                    <span class="vacancy-posted">${formatPostedDate(v.posted)}</span>
                 </div>
-                <div class="vacancy-tags">
-                    <span class="vacancy-tag">${v.type}</span>
-                    <span class="vacancy-tag">${v.mode}</span>
-                </div>
-                <div class="vacancy-posted">${v.posted}</div>
             </a>
         `).join('') + renderMobilePagination(totalPages);
 
@@ -795,6 +815,15 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             e.stopPropagation();
             toggleSaved(Number(saveBtn.dataset.id));
+            return;
+        }
+
+        const shareBtn = e.target.closest('.vacancy-share-btn');
+        if (shareBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const vac = VACANCIES.find(x => x.id === Number(shareBtn.dataset.id));
+            if (vac) shareVacancy(vac, shareBtn);
             return;
         }
 
