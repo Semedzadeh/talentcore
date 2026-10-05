@@ -548,7 +548,12 @@ body.light-theme .vacancy-sort-menu {
     /* Əsl <a href> elementidir (sağ klik → "Yeni tabda aç" işləsin deyə) —
        ona görə brauzerin default keçid stilini (mavi/altı xətli, inline)
        sıfırlayırıq. */
-    display: block;
+    /* flex+center: sağ sütunda (save, paylaş, tarix) 3 element üst-üstə düzüldüyü
+       üçün kartın min hündürlüyü var, məzmun isə onda şaquli ortalanır */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 88px;
     position: relative;
     text-decoration: none;
     color: inherit;
@@ -566,7 +571,7 @@ body.light-theme .vacancy-sort-menu {
    öz keçid/seçim davranışından ayrılır. */
 .vacancy-save-btn {
     position: absolute;
-    top: 8px;
+    top: 6px;
     right: 10px;
     display: flex;
     align-items: center;
@@ -585,7 +590,7 @@ body.light-theme .vacancy-sort-menu {
    sinfidir (detal panelindəki ilə), sadəcə kartın daxilində kiçik/çərçivəsiz. */
 .vacancy-card .vacancy-share-btn {
     position: absolute;
-    top: 38px;
+    top: 34px;
     right: 10px;
     width: 28px;
     height: 28px;
@@ -747,9 +752,15 @@ body.light-theme .vacancy-sort-menu {
     background: #fff;
 }
 
+/* Tarix indi sağ düymə sütununda, paylaş düyməsinin ALTINDA (kartın özündə
+   absolute) — məzmun sətrində deyil. Sütun eni = divider-ə qədər 48px. */
 .vacancy-posted {
-    flex-shrink: 0;
-    font-size: 11px;
+    position: absolute;
+    top: 64px;
+    right: 0;
+    width: 48px;
+    text-align: center;
+    font-size: 10.5px;
     font-weight: 600;
     white-space: nowrap;
     color: var(--text-muted);
