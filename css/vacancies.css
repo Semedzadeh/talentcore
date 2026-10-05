@@ -544,7 +544,7 @@ body.light-theme .vacancy-sort-menu {
     border: 1px solid var(--border-color);
     border-left: 3px solid transparent;
     border-radius: 12px;
-    padding: 22px 50px 22px 24px;
+    padding: 14px 46px 14px 18px;
     cursor: pointer;
     transition: background 0.25s, border-color 0.25s;
 }
@@ -554,19 +554,36 @@ body.light-theme .vacancy-sort-menu {
    öz keçid/seçim davranışından ayrılır. */
 .vacancy-save-btn {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 8px;
+    right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 8px;
     background: none;
     border: none;
     color: var(--text-muted);
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+}
+
+/* Kartdakı paylaş düyməsi — save düyməsinin altında. Eyni .vacancy-share-btn
+   sinfidir (detal panelindəki ilə), sadəcə kartın daxilində kiçik/çərçivəsiz. */
+.vacancy-card .vacancy-share-btn {
+    position: absolute;
+    top: 38px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+}
+
+.vacancy-card .vacancy-share-btn svg {
+    width: 15px;
+    height: 15px;
 }
 
 .vacancy-save-btn:hover {
@@ -603,42 +620,40 @@ body.light-theme .vacancy-sort-menu {
 }
 
 .vacancy-card h4 {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--text-color);
-    margin-bottom: 10px;
-    line-height: 1.35;
+    margin-bottom: 6px;
+    line-height: 1.3;
 }
 
+/* Kiçildilmiş kart: şirkət · yer · ştat · format bir sətirdə nöqtə ilə
+   ayrılır, tarix isə eyni sətrin sağında (margin-left:auto). Əvvəlki ayrıca
+   "tag" sırası və alt tarix sətri ləğv edilib. */
 .vacancy-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    font-size: 12px;
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 2px;
+    font-size: 11.5px;
     color: var(--text-muted);
-    margin-bottom: 12px;
 }
 
-.vacancy-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-}
-
-.vacancy-tag {
-    font-size: 10.5px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    background: var(--border-color);
-    color: var(--text-muted);
+.vacancy-meta > span:not(.vacancy-posted) + span:not(.vacancy-posted)::before {
+    content: "·";
+    margin-right: 8px;
+    font-weight: 700;
+    color: #d97742;
 }
 
 .vacancy-posted {
+    margin-left: auto;
     font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
     color: var(--text-muted);
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 /* Sağ: Detal paneli — orta sütunla TAM EYNİ hündürlük (fərqli vakansiyaların
