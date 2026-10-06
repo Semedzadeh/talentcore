@@ -9,10 +9,19 @@
     flex-direction: column;
     justify-content: center;
     padding: 130px 2% 60px 2%; /* Mobildə menyunun altına düşməməsi üçün padding-top */
-    background: var(--hero-bg); /* Arxa fon global.css-dən (Light/Dark) avtomatik gəlir */
+    /* Yalnız ana səhifə: örtük soldan sağa şəffaflaşır — mətn olan sol tərəf tünd
+       (oxunaqlı), sağ tərəf isə Bakı fotosunu aydın göstərir. Digər səhifələr
+       global.css-dəki ümumi --hero-bg ilə qalır. */
+    background: linear-gradient(to right, rgba(11, 17, 32, 0.95) 0%, rgba(11, 17, 32, 0.88) 40%, rgba(11, 17, 32, 0.75) 70%, rgba(11, 17, 32, 0.6) 100%), url('../baku_light.jpg') no-repeat center center/cover;
     background-position: top center;
     background-attachment: fixed;
     transition: background 0.4s ease;
+}
+
+body.light-theme .hero-baku {
+    background: linear-gradient(to right, rgba(226, 232, 240, 0.9) 0%, rgba(226, 232, 240, 0.82) 40%, rgba(226, 232, 240, 0.68) 70%, rgba(226, 232, 240, 0.52) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    background-position: top center;
+    background-attachment: fixed;
 }
 
 .hero-content {
