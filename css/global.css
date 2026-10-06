@@ -440,7 +440,8 @@ input:checked + .slider .sun { opacity: 1; }
 }
 
 .footer-logo {
-    height: 34px;
+    /* Ekrana görə böyüyür: telefonda ~56px, noutbukda ~72px, böyük monitorda 96px-ə qədər */
+    height: clamp(56px, 5vw, 96px);
     object-fit: contain;
     flex-shrink: 0;
 }
