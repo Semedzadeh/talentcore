@@ -731,6 +731,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { icon: '📊', az: { title: 'Talent Assessment', desc: 'Namizədlərin və komandaların bacarıq və potensialına görə qiymətləndirilməsi.' }, en: { title: 'Talent Assessment', desc: 'Evaluating candidates and teams against their true potential.' } },
         { icon: '🌟', az: { title: 'Employer Branding', desc: 'İstedadları cəlb edən və özündə saxlayan güclü işəgötürən imicinin formalaşdırılması.' }, en: { title: 'Employer Branding', desc: 'Building an employer image that attracts and retains top talent.' } }
     ];
+    // SaÄ panelin default illÃ¼strasiyasÄ± (CV + bÃ¶yÃ¼dÃ¼cÃ¼ ÅÃ¼ÅÉ) â dÃ¶rd xidmÉtin hamÄ±sÄ± Ã¼Ã§Ã¼n eynidir.
+    const PLACEHOLDER_ILLUSTRATION = `<svg class="placeholder-illustration" viewBox="0 0 220 200" fill="none" aria-hidden="true"><g transform="rotate(-8 90 90)"><rect x="34" y="40" width="110" height="130" rx="14" fill="#dbe8fb" stroke="#bcd3f5" stroke-width="2"/><rect x="48" y="54" width="82" height="102" rx="8" fill="#fff" opacity=".9"/></g><rect x="58" y="62" width="104" height="76" rx="10" fill="#fff" stroke="#c6d9f7" stroke-width="2"/><circle cx="82" cy="88" r="11" fill="#2563eb"/><path d="M64 118c2-11 10-16 18-16s16 5 18 16z" fill="#2563eb"/><rect x="108" y="80" width="42" height="7" rx="3.500" fill="#b7cdf3"/><rect x="108" y="95" width="34" height="7" rx="3.500" fill="#cfdef7"/><rect x="108" y="110" width="40" height="7" rx="3.500" fill="#cfdef7"/><circle cx="150" cy="128" r="30" fill="#e6f0ff" stroke="#1d4ed8" stroke-width="9"/><path d="M172 150l24 24" stroke="#1d4ed8" stroke-width="12" stroke-linecap="round"/><path d="M172 50l8-14M186 62l14-6M162 40l2-16" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/></svg>`;
     let showcaseIndex = 0;
     let showcaseTimer = null;
 
@@ -741,11 +743,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const hintText = lang === 'en' ? 'Select a vacancy on the left to see its details.' : 'Ətraflı məlumat üçün soldan bir vakansiya seçin.';
         detailEl.innerHTML = `
             <div class="detail-placeholder">
-                <div class="detail-placeholder-icon">${item.icon}</div>
+                <div class="detail-placeholder-icon">${PLACEHOLDER_ILLUSTRATION}</div>
                 <h3>${item[lang].title}</h3>
                 <p>${item[lang].desc}</p>
                 <a href="services.html" class="btn-primary">${ctaText}</a>
-                <div class="detail-placeholder-hint">${hintText}</div>
+                <div class="detail-placeholder-hint"><div class="hint-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3"/><circle cx="5.500" cy="10" r="2"/><circle cx="18.500" cy="10" r="2"/><path d="M7 20v-1.500a5 5 0 0 1 10 0V20M1.500 19v-1a3 3 0 0 1 3-3M22.500 19v-1a3 3 0 0 0-3-3"/></svg></div><span>${hintText}</span></div>
             </div>
         `;
     }

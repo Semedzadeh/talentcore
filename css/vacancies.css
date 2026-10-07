@@ -673,7 +673,7 @@ body.light-theme .vacancy-sort-menu {
     background: linear-gradient(135deg, #c4642f, #e0a05f);
     color: #fff;
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.5px;
     line-height: 1.3;
 }
@@ -1197,4 +1197,199 @@ body.light-theme .vacancy-share-btn::after {
         color: var(--text-muted);
         white-space: nowrap;
     }
+}
+
+/* =====================================================================
+   YENİ DİZAYN — açıq mavi "panel" stili (hero banner + sağ detal paneli),
+   ikonlu filtr qrupları, lupa ilə axtarış sahəsi.
+   --panel-grad həm yuxarıdakı hero bannerinin, həm də sağdakı detal
+   panelinin fonudur — ikisi eyni görünsün deyə bir yerdə təyin olunub.
+   ===================================================================== */
+.vacancies-page {
+    --panel-grad: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+    --heading-navy: var(--text-color);
+}
+
+body.light-theme .vacancies-page {
+    --panel-grad: linear-gradient(135deg, #e3eefd 0%, #eff5fd 55%, #f6f9ff 100%);
+    --heading-navy: #14296b;
+    background: linear-gradient(180deg, #f2f7fd 0%, #fbfdff 100%);
+}
+
+/* Açıq rejimdə kartlar/sahələr ağ və yumşaq mavi-boz çərçivə + yüngül kölgə ilə */
+body.light-theme .vacancies-sidebar,
+body.light-theme .vacancies-saved-panel,
+body.light-theme .vacancy-search-input,
+body.light-theme .vacancy-sort-toggle,
+body.light-theme .vacancy-card {
+    background: #ffffff;
+    border-color: #e1e9f4;
+    box-shadow: 0 2px 10px rgba(30, 64, 120, 0.05);
+}
+
+/* --- Hero banner --- */
+.vacancies-hero {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 26px 40px;
+    margin-bottom: 28px;
+    text-align: left;
+    background: var(--panel-grad);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+}
+
+body.light-theme .vacancies-hero {
+    border-color: #dbe7f8;
+}
+
+.vacancies-hero-icon {
+    flex-shrink: 0;
+    color: var(--heading-navy);
+}
+
+.vacancies-hero-icon svg {
+    display: block;
+    width: clamp(56px, 5.2vw, 84px);
+    height: auto;
+}
+
+.vacancies-hero p {
+    margin: 0;
+    padding-left: 28px;
+    border-left: 3px solid #d97742;
+    font-size: clamp(20px, 2.4vw, 38px);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--heading-navy);
+}
+
+/* --- Sol sütun: ikonlar --- */
+.vacancies-sidebar-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar-heading-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: #d97742;
+}
+
+.filter-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: -1px;
+    color: var(--heading-navy);
+}
+
+.filter-group-title {
+    flex: 1;
+    min-width: 0;
+}
+
+.vacancies-post-panel .filter-icon {
+    color: var(--bg-color);
+}
+
+body.light-theme .vacancies-post-panel .filter-icon {
+    color: #ffffff;
+}
+
+/* --- Axtarış sahəsi: içində lupa --- */
+.vacancy-search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.vacancy-search-wrap .vacancy-search-input {
+    width: 100%;
+    padding-left: 42px;
+}
+
+.vacancy-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+/* --- Sağ detal paneli: eyni mavi fon + illüstrasiyalı boş vəziyyət --- */
+.vacancy-detail {
+    background: var(--panel-grad);
+}
+
+body.light-theme .vacancy-detail {
+    border-color: #dbe7f8;
+}
+
+.detail-placeholder-icon {
+    font-size: 0;
+    line-height: 0;
+}
+
+.placeholder-illustration {
+    width: clamp(160px, 15vw, 230px);
+    height: auto;
+}
+
+body.light-theme .detail-placeholder h3 {
+    color: var(--heading-navy);
+}
+
+.detail-placeholder-hint {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 22px;
+    max-width: 280px;
+}
+
+.hint-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+}
+
+.hint-divider::before,
+.hint-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.hint-divider svg {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 640px) {
+    .vacancies-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 22px 20px;
+        gap: 16px;
+    }
+    .vacancies-hero p {
+        padding-left: 0;
+        border-left: none;
+        padding-top: 14px;
+        border-top: 3px solid #d97742;
+    }
+}
+
+/* Açıq rejimdə filtr başlıqları daha qatı oxunsun */
+body.light-theme .vacancies-sidebar .filter-group-title > span:first-child {
+    opacity: 0.85;
 }
