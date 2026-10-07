@@ -707,7 +707,7 @@ body.light-theme .vacancy-sort-menu {
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--text-color); /* vakansiya başlığı ilə eyni rəng */
 }
 
@@ -1392,4 +1392,47 @@ body.light-theme .detail-placeholder h3 {
 /* Açıq rejimdə filtr başlıqları daha qatı oxunsun */
 body.light-theme .vacancies-sidebar .filter-group-title > span:first-child {
     opacity: 0.85;
+}
+
+/* "Vakansiya yerləşdir" bir sətirdə qalsın (alt-alta düşməsin) */
+.vacancies-post-panel .filter-group-title > span:first-child {
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+/* Dar sol sütunda (≤1150px, 230px) sığmaya bilər — orada yenə sətirə düşməyə icazə */
+@media (min-width: 1025px) and (max-width: 1150px) {
+    .vacancies-post-panel .filter-group-title > span:first-child {
+        white-space: normal;
+    }
+}
+
+/* Sol (Detallı axtarış) və sağ (Detallı baxış) bölmələr kənarlara doğru çəkilib —
+   ümumi en 95%-dən 98%-ə artdı, əlavə yer sol/sağ sütunlara düşür. Hero banner
+   da eyni enə gətirilib ki, kənarları düz xətt üzərində qalsın. */
+.vacancies-layout,
+.vacancies-hero,
+.vacancy-back-link {
+    width: 98%;
+}
+
+.vacancies-layout {
+    grid-template-columns: 265px minmax(340px, 1.3fr) minmax(400px, 1.62fr);
+}
+
+body.vacancy-focused-mode .vacancies-layout {
+    grid-template-columns: 1fr;
+}
+
+@media (max-width: 1150px) {
+    .vacancies-layout {
+        grid-template-columns: 230px 1fr 1.15fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .vacancies-layout {
+        grid-template-columns: 1fr;
+    }
 }
