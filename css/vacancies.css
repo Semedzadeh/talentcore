@@ -1436,3 +1436,12 @@ body.vacancy-focused-mode .vacancies-layout {
         grid-template-columns: 1fr;
     }
 }
+
+/* Hero banner menyuya doğru qaldırıldı (150px → 122px yuxarı boşluq) — menyu ilə
+   arasında ~30px nəfəs qalır ki, bitişik görünməsin. Planşet/mobil dəyərləri
+   (aşağıdakı media qaydaları) dəyişməyib. */
+@media (min-width: 1025px) {
+    .vacancies-page {
+        padding-top: 122px;
+    }
+}
