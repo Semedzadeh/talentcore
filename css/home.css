@@ -19,7 +19,7 @@
 }
 
 body.light-theme .hero-baku {
-    background: linear-gradient(to right, rgba(226, 232, 240, 0.9) 0%, rgba(226, 232, 240, 0.82) 40%, rgba(226, 232, 240, 0.68) 70%, rgba(226, 232, 240, 0.52) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    background: linear-gradient(to right, rgba(226, 232, 240, 0.95) 0%, rgba(226, 232, 240, 0.86) 40%, rgba(226, 232, 240, 0.6) 70%, rgba(226, 232, 240, 0.3) 100%), url('../baku_light.jpg') no-repeat center center/cover;
     background-position: top center;
     background-attachment: fixed;
 }
