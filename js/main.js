@@ -21,9 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Tünd / Açıq Rejim və LOQO idarəetməsi
     const themeCheckbox = document.getElementById('theme-toggle');
     const body = document.body;
-    // querySelectorAll: header-dəki loqodan başqa footer-də də eyni .site-logo
-    // klassı ilə bir loqo var (css/global.css-də .footer-logo ilə ölçüləndirilir),
-    // ikisi də tema dəyişəndə birlikdə yenilənməlidir.
+    // querySelectorAll: yeni .site-logo əlavə olunsa, tema dəyişəndə avtomatik yenilənsin.
     const siteLogos = document.querySelectorAll('.site-logo');
     function setLogoSrc(src) {
         siteLogos.forEach(logo => { logo.src = src; });
