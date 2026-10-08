@@ -1445,3 +1445,16 @@ body.vacancy-focused-mode .vacancies-layout {
         padding-top: 122px;
     }
 }
+
+/* Ağ rejim kart çərçivəsi (yuxarıda) premium xəttini, hover və aktiv kənarı
+   üstələyirdi — spesifiklik eyni səviyyəyə gətirilib ki, narıncı üst xətt qalsın. */
+body.light-theme .vacancy-card:hover,
+body.light-theme .vacancy-card.active {
+    border-color: #d97742;
+}
+
+body.light-theme .vacancy-card.premium,
+body.light-theme .vacancy-card.premium:hover,
+body.light-theme .vacancy-card.premium.active {
+    border-top-color: #d97742;
+}
