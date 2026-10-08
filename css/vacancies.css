@@ -1458,3 +1458,43 @@ body.light-theme .vacancy-card.premium:hover,
 body.light-theme .vacancy-card.premium.active {
     border-top-color: #d97742;
 }
+
+/* "Seçimləri sıfırla" — filtr qruplarının ən altında, sakit konturlu düymə.
+   Seçim olmayanda gizlidir (hidden), ona görə sidebar-ın görünüşü dəyişmir. */
+.filter-reset-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+    padding: 10px 12px;
+    background: none;
+    border: 1px dashed var(--border-color);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.filter-reset-btn[hidden] {
+    display: none;
+}
+
+.filter-reset-btn svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.filter-reset-btn:hover {
+    color: #d97742;
+    border-color: #d97742;
+    background: rgba(217, 119, 66, 0.06);
+}
+
+.filter-reset-count {
+    color: #d97742;
+}

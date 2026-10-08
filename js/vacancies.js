@@ -1373,12 +1373,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // (.vacancies-post-panel) bu konteynerin XARİCİNDƏdir, ona görə linklərə
     // toxunulmur.
     const sidebarFiltersEl = document.querySelector('.vacancies-sidebar');
+    // "Seçimləri sıfırla" — yalnız sol paneldəki filtr checkbox-larını təmizləyir
+    // (axtarış sahəsinə və "Yaddaşa verilmiş" açarına toxunmur). Heç bir seçim
+    // yoxdursa düymə gizlidir; varsa neçə seçim olduğunu göstərir.
+    const resetBtn = document.getElementById('filter-reset-btn');
+    const resetCount = document.getElementById('filter-reset-count');
+    function updateResetBtn() {
+        if (!resetBtn || !sidebarFiltersEl) return;
+        const n = sidebarFiltersEl.querySelectorAll('input[type="checkbox"]:checked').length;
+        resetBtn.hidden = n === 0;
+        if (resetCount) resetCount.textContent = n ? '(' + n + ')' : '';
+    }
     if (sidebarFiltersEl) {
         sidebarFiltersEl.addEventListener('change', (e) => {
             if (e.target.matches('input[type="checkbox"]')) {
                 mobilePage = 1;
+                updateResetBtn();
                 renderList();
             }
+        });
+    }
+    if (resetBtn && sidebarFiltersEl) {
+        resetBtn.addEventListener('click', () => {
+            sidebarFiltersEl.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => { cb.checked = false; });
+            mobilePage = 1;
+            updateResetBtn();
+            renderList();
         });
     }
 
