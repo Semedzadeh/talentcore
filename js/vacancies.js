@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Sol paneldəki bütün filtr qruplarının (Fəaliyyət sahəsi, Şirkətlər,
-    // Kateqoriyalar, Vəzifə dərəcəsi, Region, İş qrafiki, İş formatı) aç/bağla
+    // Kateqoriyalar, Vəzifə dərəcəsi, Region, İş qrafiki, İş rejimi) aç/bağla
     // oxu. Checkbox-ların özünün siyahını filtrləmə məntiqi aşağıda,
     // passesSidebarFilters() və "sidebarFiltersEl.addEventListener('change', ...)"
     // bölümlərindədir — statik VACANCIES üzərində TEST məqsədilədir, real
@@ -919,7 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // göstərir (digər aktiv filtrlərlə birgə, AND məntiqi ilə) — bax renderList().
     let showSavedOnly = false;
 
-    // Sol paneldəki "Region" və "İş qrafiki"/"İş formatı" filtrləri üçün ayrıca
+    // Sol paneldəki "Region" və "İş qrafiki"/"İş rejimi" filtrləri üçün ayrıca
     // sahə saxlamırıq — VACANCIES-də onsuz da olan location/type/mode
     // mətnlərini filtr checkbox-larının value-larına uyğunlaşdırırıq. Yalnız
     // "Fəaliyyət sahəsi" (sector) və "Kateqoriyalar" (jobCategory) köhnə
