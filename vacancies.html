@@ -85,6 +85,7 @@
 
             <div class="vacancies-searchbar">
                 <div class="vacancies-searchbar-row">
+                    <div class="searchbar-left">
                     <div class="vacancy-search-wrap">
                             <svg class="vacancy-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
                             <input type="search" id="vacancy-search" class="vacancy-search-input lang-placeholder"
@@ -93,6 +94,26 @@
                                data-en-placeholder="Search job title or company..."
                                aria-label="Vakansiya axtar">
                         </div>
+                    <!-- Native <select> qəsdən istifadə olunmur — açılan siyahının
+                    fon rəngi brauzerin öz native popup-u tərəfindən idarə olunur
+                    və color-scheme ilə belə tünd temaya həmişə tabe olmur (real
+                    brauzerdə test edildi, ağ açılırdı). Ona görə tam JS-idarəli
+                    fərdi dropdown istifadə olunur ki, rəng 100% temaya uysun. -->
+                    <div class="vacancy-sort-dropdown">
+                            <button type="button" class="vacancy-sort-toggle" id="vacancy-sort-toggle" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="lang" id="vacancy-sort-label" data-en="Newest" data-az="Ən yeni">Ən yeni</span>
+                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <ul class="vacancy-sort-menu collapsed" id="vacancy-sort-menu" role="listbox" aria-label="Sırala">
+                                <li role="option" data-value="newest" class="active"><span class="lang" data-en="Newest" data-az="Ən yeni">Ən yeni</span></li>
+                                <li role="option" data-value="oldest"><span class="lang" data-en="Oldest" data-az="Ən köhnə">Ən köhnə</span></li>
+                                <li role="option" data-value="az"><span class="lang" data-en="A-Z" data-az="Əlifba sırası (A-Z)">Əlifba sırası (A-Z)</span></li>
+                                <li role="option" data-value="za"><span class="lang" data-en="Z-A" data-az="Əlifba sırası (Z-A)">Əlifba sırası (Z-A)</span></li>
+                            </ul>
+                        </div>
+                </div>
                     <div class="searchbar-right">
                         <div class="searchbar-select-wrap">
                         <svg class="searchbar-select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
@@ -385,28 +406,6 @@
                 </aside>
 
                 <div class="vacancies-list-panel">
-                    <div class="vacancies-list-toolbar">
-                        <span class="vacancies-count" id="vacancies-count"></span>
-                        <!-- Native <select> qəsdən istifadə olunmur — açılan siyahının
-                             fon rəngi brauzerin öz native popup-u tərəfindən idarə olunur
-                             və color-scheme ilə belə tünd temaya həmişə tabe olmur (real
-                             brauzerdə test edildi, ağ açılırdı). Ona görə tam JS-idarəli
-                             fərdi dropdown istifadə olunur ki, rəng 100% temaya uysun. -->
-                        <div class="vacancy-sort-dropdown">
-                            <button type="button" class="vacancy-sort-toggle" id="vacancy-sort-toggle" aria-haspopup="listbox" aria-expanded="false">
-                                <span class="lang" id="vacancy-sort-label" data-en="Newest" data-az="Ən yeni">Ən yeni</span>
-                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                            <ul class="vacancy-sort-menu collapsed" id="vacancy-sort-menu" role="listbox" aria-label="Sırala">
-                                <li role="option" data-value="newest" class="active"><span class="lang" data-en="Newest" data-az="Ən yeni">Ən yeni</span></li>
-                                <li role="option" data-value="oldest"><span class="lang" data-en="Oldest" data-az="Ən köhnə">Ən köhnə</span></li>
-                                <li role="option" data-value="az"><span class="lang" data-en="A-Z" data-az="Əlifba sırası (A-Z)">Əlifba sırası (A-Z)</span></li>
-                                <li role="option" data-value="za"><span class="lang" data-en="Z-A" data-az="Əlifba sırası (Z-A)">Əlifba sırası (Z-A)</span></li>
-                            </ul>
-                        </div>
-                    </div>
 
                     <div class="vacancies-list" id="vacancies-list">
                         <!-- JS ilə doldurulur: js/vacancies.js -->

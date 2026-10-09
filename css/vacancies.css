@@ -1994,3 +1994,40 @@ body.light-theme .popular-chip.active {
         margin-top: 2px;
     }
 }
+
+/* Sıralama ("Ən yeni") axtarış sahəsinin yanında; orta sütundakı köhnə panel və
+   vakansiya sayı çıxarıldı. */
+.searchbar-left {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+    min-width: 0;
+}
+
+.searchbar-left .vacancy-search-wrap {
+    flex: 1;
+    grid-column: auto;
+}
+
+.searchbar-left .vacancy-sort-dropdown {
+    align-self: stretch;
+    display: flex;
+}
+
+.searchbar-left .vacancy-sort-toggle {
+    height: 100%;
+    padding: 0 16px;
+    font-size: 13.5px;
+}
+
+@media (max-width: 1024px) {
+    .searchbar-left {
+        grid-column: 1;
+        grid-row: auto;
+    }
+    .searchbar-left .vacancy-sort-toggle {
+        height: 46px;
+    }
+}

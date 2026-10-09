@@ -1208,10 +1208,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // qalır. Array.sort stabildir — hər qrupun daxilində seçilmiş sıralama saxlanır.
         filtered = [...filtered.filter(v => v.premium), ...filtered.filter(v => !v.premium)];
 
-        const countEl = document.getElementById('vacancies-count');
-        if (countEl) {
-            countEl.textContent = filtered.length + (document.documentElement.lang === 'en' ? ' vacancies' : ' vakansiya');
-        }
 
         if (filtered.length === 0) {
             listEl.innerHTML = showSavedOnly
