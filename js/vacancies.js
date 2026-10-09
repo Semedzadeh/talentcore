@@ -72,6 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
         countEl.hidden = count === 0;
     }
 
+    // Sağ paneldəki "Yadda saxla" düyməsinin görünüşü kartdakı ilə həmişə eyni olsun.
+    function syncDetailSaveBtn(id) {
+        const saved = isSaved(id);
+        detailEl.querySelectorAll('.detail-save-btn[data-id="' + id + '"]').forEach(b => {
+            b.classList.toggle('saved', saved);
+            b.setAttribute('aria-pressed', String(saved));
+            const label = b.querySelector('span');
+            if (label) label.textContent = saved ? 'Yadda saxlanıb' : 'Yadda saxla';
+        });
+    }
+
     function toggleSaved(id) {
         const savedIds = getSavedIds();
         const idx = savedIds.indexOf(id);
@@ -82,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setSavedIds(savedIds);
         updateSavedCount();
+        syncDetailSaveBtn(id);
 
         // "Yalnız save edilənlər" görünüşü aktivdirsə, save/un-save olunan
         // vakansiya siyahıya girib-çıxmalıdır, ona görə tam yenidən çəkilir.
@@ -1167,7 +1179,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ${listSectionHtml('Tələblər', v.requirements)}
             ${listSectionHtml('Təkliflərimiz', v.offer)}
             ${textSectionHtml('Şirkət haqqında məlumat', COMPANY_ABOUT[v.company] || v.companyAbout)}
-            <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">Müraciət Et</a>
+            <div class="detail-actions">
+                <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">
+                    <span>Müraciət Et</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+                <button type="button" class="detail-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-pressed="${isSaved(v.id)}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    <span>${isSaved(v.id) ? 'Yadda saxlanıb' : 'Yadda saxla'}</span>
+                </button>
+            </div>
             ${similarSectionHtml(v)}
         `;
     }
@@ -1546,5 +1567,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderCompanyFilter();
     updateSavedCount();
+
+    // Detal panelindəki "Yadda saxla" düyməsi (kartdakı bookmark ilə eyni saxlanma).
+    detailEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.detail-save-btn');
+        if (!btn) return;
+        toggleSaved(Number(btn.dataset.id));
+        syncDetailSaveBtn(Number(btn.dataset.id));
+    });
     renderList();
 });
