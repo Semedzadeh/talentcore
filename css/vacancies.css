@@ -2402,3 +2402,20 @@ body.light-theme .detail-deadline-pill {
     opacity: 1;
     color: var(--text-color);
 }
+
+/* "Vakansiya yerləşdir" düyməsinin yazısı daha böyük və qalın */
+.searchbar-right .post-dropdown-toggle {
+    font-size: 15.5px;
+    font-weight: 700;
+    gap: 11px;
+}
+
+.searchbar-right .post-dropdown-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+.searchbar-right .post-dropdown-toggle .post-dropdown-chevron {
+    width: 16px;
+    height: 16px;
+}
