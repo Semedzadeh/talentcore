@@ -2371,3 +2371,25 @@ body.light-theme .detail-deadline-pill {
 .detail-tabs {
     margin-top: 18px;
 }
+
+/* Məlumat sırası: başlıq yazıları (Yer, Məşğulluq...) çıxarıldı — ikon birbaşa
+   dəyərin (Bakı, Tam ştat...) solunda durur. */
+.detail-meta-row {
+    align-items: center;
+    gap: 14px 32px;
+}
+
+.detail-meta-item .value {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.detail-meta-item .value .meta-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.detail-deadline-pill {
+    align-self: center;
+}
