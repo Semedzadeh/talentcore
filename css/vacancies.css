@@ -2255,3 +2255,30 @@ body.light-theme .post-dropdown-menu {
         min-width: 0;
     }
 }
+
+/* "Ən yeni" daha uzun, "Vakansiya yerləşdir"dən isə daha geniş boşluqla ayrılıb */
+.searchbar-right {
+    gap: 28px;
+}
+
+.searchbar-right .vacancy-sort-toggle {
+    min-width: 190px;
+}
+
+@media (max-width: 1150px) {
+    .searchbar-right {
+        gap: 16px;
+    }
+    .searchbar-right .vacancy-sort-toggle {
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 760px) {
+    .searchbar-right {
+        gap: 12px;
+    }
+    .searchbar-right .vacancy-sort-toggle {
+        min-width: 0;
+    }
+}
