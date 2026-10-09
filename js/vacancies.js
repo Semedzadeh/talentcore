@@ -1568,6 +1568,26 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCompanyFilter();
     updateSavedCount();
 
+    // "Vakansiya yerləşdir" açılan menyusu (axtarış panelinin sağında).
+    const postToggle = document.getElementById('post-dropdown-toggle');
+    const postMenu = document.getElementById('post-dropdown-menu');
+    if (postToggle && postMenu) {
+        const setPostOpen = (open) => {
+            postMenu.classList.toggle('collapsed', !open);
+            postToggle.setAttribute('aria-expanded', String(open));
+        };
+        postToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setPostOpen(postMenu.classList.contains('collapsed'));
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.post-dropdown')) setPostOpen(false);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setPostOpen(false);
+        });
+    }
+
     // Detal panelindəki "Yadda saxla" düyməsi (kartdakı bookmark ilə eyni saxlanma).
     detailEl.addEventListener('click', (e) => {
         const btn = e.target.closest('.detail-save-btn');

@@ -96,29 +96,6 @@
                         </div>
                 </div>
                     <div class="searchbar-right">
-                        <div class="searchbar-select-wrap">
-                        <svg class="searchbar-select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
-                        <select id="sector-quick-select" class="searchbar-select" aria-label="Sahə seçin">
-                            <option value="" class="lang" data-en="All fields" data-az="Bütün sahələr">Bütün sahələr</option>
-                            <option value="__multi" class="lang" data-en="Several fields" data-az="Bir neçə sahə" hidden disabled>Bir neçə sahə</option>
-                            <option value="banking-finance" class="lang" data-en="Banking & Financial Services" data-az="Bankçılıq və Maliyyə Xidmətləri">Bankçılıq və Maliyyə Xidmətləri</option>
-                            <option value="real-estate-construction" class="lang" data-en="Real Estate & Construction" data-az="Daşınmaz Əmlak və Tikinti">Daşınmaz Əmlak və Tikinti</option>
-                            <option value="oil-gas-energy" class="lang" data-en="Oil, Gas & Energy" data-az="Neft, Qaz və Energetika">Neft, Qaz və Energetika</option>
-                            <option value="mining-metallurgy" class="lang" data-en="Mining & Metallurgy" data-az="Mədənçilik və Metallurgiya">Mədənçilik və Metallurgiya</option>
-                            <option value="manufacturing-industry" class="lang" data-en="Manufacturing & Industry" data-az="İstehsalat və Sənaye">İstehsalat və Sənaye</option>
-                            <option value="fmcg" class="lang" data-en="FMCG" data-az="FMCG">FMCG</option>
-                            <option value="retail-ecommerce" class="lang" data-en="Retail & E-commerce" data-az="Pərakəndə Ticarət və E-ticarət">Pərakəndə Ticarət və E-ticarət</option>
-                            <option value="tech-telecom" class="lang" data-en="Technology & Telecommunications" data-az="Texnologiya və Telekommunikasiya">Texnologiya və Telekommunikasiya</option>
-                            <option value="healthcare-pharma" class="lang" data-en="Healthcare & Pharmaceuticals" data-az="Səhiyyə və Əczaçılıq">Səhiyyə və Əczaçılıq</option>
-                            <option value="transport-logistics" class="lang" data-en="Transport & Logistics" data-az="Nəqliyyat və Logistika">Nəqliyyat və Logistika</option>
-                            <option value="agriculture" class="lang" data-en="Agriculture" data-az="Kənd Təsərrüfatı">Kənd Təsərrüfatı</option>
-                            <option value="tourism-hospitality" class="lang" data-en="Tourism & Hospitality" data-az="Turizm və Qonaqpərvərlik">Turizm və Qonaqpərvərlik</option>
-                            <option value="education-training" class="lang" data-en="Education & Training" data-az="Təhsil və Təlim">Təhsil və Təlim</option>
-                            <option value="marketing-advertising" class="lang" data-en="Marketing, Advertising & Communication" data-az="Marketinq, Reklam və Kommunikasiya">Marketinq, Reklam və Kommunikasiya</option>
-                            <option value="public-social-nonprofit" class="lang" data-en="Public, Social & Non-profit Sector" data-az="Dövlət, Sosial və Qeyri-kommersiya Sektoru">Dövlət, Sosial və Qeyri-kommersiya Sektoru</option>
-                        </select>
-                        <svg class="searchbar-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
                     <!-- Native <select> qəsdən istifadə olunmur — açılan siyahının
                         fon rəngi brauzerin öz native popup-u tərəfindən idarə olunur
                         və color-scheme ilə belə tünd temaya həmişə tabe olmur (real
@@ -138,10 +115,17 @@
                         <li role="option" data-value="za"><span class="lang" data-en="Z-A" data-az="Əlifba sırası (Z-A)">Əlifba sırası (Z-A)</span></li>
                         </ul>
                         </div>
-                        <button type="button" class="searchbar-btn" id="vacancy-search-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-                        <span class="lang" data-en="Search" data-az="Axtarış et">Axtarış et</span>
-                    </button>
+                        <div class="post-dropdown">
+                            <button type="button" class="searchbar-btn post-dropdown-toggle" id="post-dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="post-dropdown-menu">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                <span class="lang" data-en="Post a Vacancy" data-az="Vakansiya yerləşdir">Vakansiya yerləşdir</span>
+                                <svg class="post-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <ul class="post-dropdown-menu collapsed" id="post-dropdown-menu">
+                                <li><a href="post-job.html"><span class="lang" data-en="Publishing Job Listings" data-az="İş elanlarının dərc olunması">İş elanlarının dərc olunması</span><span class="arrow">→</span></a></li>
+                                <li><a href="ad-banners.html"><span class="lang" data-en="Advertising Banner Placement" data-az="Reklam bannerlərinin yerləşdirilməsi">Reklam bannerlərinin yerləşdirilməsi</span><span class="arrow">→</span></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!-- Hələlik ilk 5 vəzifə dərəcəsi (statik). Backend gələndə burada ən çox axtarılan/ən çox vakansiyası olan
@@ -369,40 +353,6 @@
                         </button>
                     </div>
 
-                    <!-- Filtr deyil, naviqasiya menyusudur — eyni xidmətə qulluq
-                         etmədiyi üçün yuxarıdakı scroll olan filtr blokundan ayrı,
-                         sol sütunun ən alt hissəsində öz qutusunda sabit qalır (aç/bağla
-                         oxu js/vacancies.js-dəki ümumi .filter-group-header handler-i
-                         ilə avtomatik işləyir), içindəki sətirlər checkbox yox, digər
-                         səhifəyə keçid linkidir. -->
-                    <div class="vacancies-post-panel">
-                        <div class="filter-group">
-                            <button type="button" class="filter-group-header" id="post-menu-toggle" aria-expanded="false" aria-controls="post-menu-list">
-                                <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                                <span class="filter-group-title">
-                                    <span class="lang" data-en="Post a Vacancy" data-az="Vakansiya yerləşdir">Vakansiya yerləşdir</span>
-                                </span>
-                                <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-
-                            <ul class="filter-options collapsed" id="post-menu-list">
-                                <li>
-                                    <a href="post-job.html" class="sidebar-menu-link">
-                                        <span class="lang" data-en="Publishing Job Listings" data-az="İş elanlarının dərc olunması">İş elanlarının dərc olunması</span>
-                                        <span class="arrow">→</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ad-banners.html" class="sidebar-menu-link">
-                                        <span class="lang" data-en="Advertising Banner Placement" data-az="Reklam bannerlərinin yerləşdirilməsi">Reklam bannerlərinin yerləşdirilməsi</span>
-                                        <span class="arrow">→</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </aside>
 
                 <div class="vacancies-list-panel">
