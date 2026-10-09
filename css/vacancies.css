@@ -2319,3 +2319,43 @@ body.light-theme .detail-deadline-pill {
 .detail-deadline-pill.urgent svg {
     color: #d97742;
 }
+
+/* Detal panelinin tabları (Vəzifə haqqında / Şirkət haqqında) — altdan xətli. */
+.detail-tabs {
+    display: flex;
+    gap: 30px;
+    margin: 4px 0 22px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-tab {
+    padding: 12px 2px;
+    margin-bottom: -1px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.detail-tab:hover {
+    color: var(--text-color);
+}
+
+.detail-tab.active {
+    color: var(--text-color);
+    border-bottom-color: #d97742;
+}
+
+.detail-tab-panel[hidden] {
+    display: none;
+}
+
+.detail-tab-empty {
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 6px 0 4px;
+}

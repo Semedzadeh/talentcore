@@ -1176,11 +1176,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="detail-meta-item"><span class="label"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>Maaş</span><span class="value">Razılaşma yolu ilə</span></div>
                 ${deadlineHtml(v)}
             </div>
-            ${textSectionHtml('Vəzifənin təsviri / məqsədi', v.description)}
-            ${listSectionHtml('Öhdəliklər', v.responsibilities)}
-            ${listSectionHtml('Tələblər', v.requirements)}
-            ${listSectionHtml('Təkliflərimiz', v.offer)}
-            ${textSectionHtml('Şirkət haqqında məlumat', COMPANY_ABOUT[v.company] || v.companyAbout)}
+            <div class="detail-tabs" role="tablist">
+                <button type="button" class="detail-tab active" role="tab" aria-selected="true" data-tab="job">Vəzifə haqqında</button>
+                <button type="button" class="detail-tab" role="tab" aria-selected="false" data-tab="company">Şirkət haqqında</button>
+            </div>
+            <div class="detail-tab-panel" role="tabpanel" data-panel="job">
+                ${textSectionHtml('Vəzifənin təsviri / məqsədi', v.description)}
+                ${listSectionHtml('Öhdəliklər', v.responsibilities)}
+                ${listSectionHtml('Tələblər', v.requirements)}
+                ${listSectionHtml('Təkliflərimiz', v.offer)}
+            </div>
+            <div class="detail-tab-panel" role="tabpanel" data-panel="company" hidden>
+                ${textSectionHtml('Şirkət haqqında məlumat', COMPANY_ABOUT[v.company] || v.companyAbout) || '<p class="detail-tab-empty">Bu şirkət haqqında məlumat tezliklə əlavə olunacaq.</p>'}
+            </div>
             <div class="detail-actions">
                 <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">
                     <span>Müraciət Et</span>
@@ -1589,6 +1597,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Escape') setPostOpen(false);
         });
     }
+
+    // Detal panelinin tabları: "Vəzifə haqqında" / "Şirkət haqqında".
+    detailEl.addEventListener('click', (e) => {
+        const tab = e.target.closest('.detail-tab');
+        if (!tab) return;
+        detailEl.querySelectorAll('.detail-tab').forEach(t => {
+            const on = t === tab;
+            t.classList.toggle('active', on);
+            t.setAttribute('aria-selected', String(on));
+        });
+        detailEl.querySelectorAll('.detail-tab-panel').forEach(p => {
+            p.hidden = p.dataset.panel !== tab.dataset.tab;
+        });
+    });
 
     // Detal panelindəki "Yadda saxla" düyməsi (kartdakı bookmark ilə eyni saxlanma).
     detailEl.addEventListener('click', (e) => {
