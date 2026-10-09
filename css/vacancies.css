@@ -2084,3 +2084,81 @@ body.light-theme .popular-chip.active {
     opacity: 1;
     color: var(--text-muted);
 }
+
+/* Detal panelinin altı: "Müraciət et →" (geniş) + "Yadda saxla" (kontur) yan-yana. */
+.detail-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.detail-actions .detail-apply-btn {
+    flex: 1.7;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.detail-actions .detail-apply-btn svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.detail-actions .detail-apply-btn:hover svg {
+    transform: translateX(3px);
+}
+
+body.light-theme .detail-actions .detail-apply-btn {
+    background: #0f1d3d;
+}
+
+.detail-save-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 18px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+body.light-theme .detail-save-btn {
+    background: #ffffff;
+    border-color: #e1e9f4;
+}
+
+.detail-save-btn svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.detail-save-btn:hover,
+.detail-save-btn.saved {
+    color: #d97742;
+    border-color: #d97742;
+}
+
+.detail-save-btn.saved svg {
+    fill: #d97742;
+}
+
+@media (max-width: 480px) {
+    .detail-actions {
+        flex-direction: column;
+    }
+    .detail-save-btn {
+        padding: 12px 18px;
+    }
+}
