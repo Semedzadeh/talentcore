@@ -2242,3 +2242,16 @@ body.light-theme .post-dropdown-menu {
         height: 46px;
     }
 }
+
+/* "Ən yeni" bir az enli */
+.searchbar-right .vacancy-sort-toggle {
+    min-width: 150px;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+
+@media (max-width: 760px) {
+    .searchbar-right .vacancy-sort-toggle {
+        min-width: 0;
+    }
+}
