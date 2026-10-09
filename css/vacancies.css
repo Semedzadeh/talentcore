@@ -2393,3 +2393,12 @@ body.light-theme .detail-deadline-pill {
 .detail-deadline-pill {
     align-self: center;
 }
+
+/* Bölmə başlıqları (Vəzifənin təsviri, Öhdəliklər, Tələblər, Təkliflərimiz...) —
+   solğun yox, tam rəngdə qalın. */
+.detail-section h4 {
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 1;
+    color: var(--text-color);
+}
