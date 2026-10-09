@@ -1208,6 +1208,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // qalır. Array.sort stabildir — hər qrupun daxilində seçilmiş sıralama saxlanır.
         filtered = [...filtered.filter(v => v.premium), ...filtered.filter(v => !v.premium)];
 
+        const countEl = document.getElementById('vacancies-count');
+        if (countEl) {
+            countEl.textContent = filtered.length + (document.documentElement.lang === 'en' ? ' vacancies' : ' vakansiya');
+        }
+
         if (filtered.length === 0) {
             listEl.innerHTML = showSavedOnly
                 ? '<p class="vacancy-empty">Hələ heç bir vakansiya yadda saxlanmayıb.</p>'
@@ -1378,8 +1383,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // yoxdursa düymə gizlidir; varsa neçə seçim olduğunu göstərir.
     const resetBtn = document.getElementById('filter-reset-btn');
     const resetCount = document.getElementById('filter-reset-count');
+    // Hər filtr qrupunun başlığının altındakı yüngül yazı: heç nə seçilməyibsə
+    // "Bütün ...", seçilibsə seçilmiş variantların adları (uzunsa "…" ilə kəsilir).
+    function updateGroupSubtitles() {
+        if (!sidebarFiltersEl) return;
+        const lang = document.documentElement.lang === 'en' ? 'en' : 'az';
+        sidebarFiltersEl.querySelectorAll('.filter-group').forEach(group => {
+            const sub = group.querySelector('.filter-group-sub');
+            if (!sub) return;
+            const names = [...group.querySelectorAll('input[type="checkbox"]:checked')]
+                .map(cb => (cb.parentElement.querySelector('span') || {}).textContent)
+                .filter(Boolean);
+            if (names.length) {
+                sub.classList.remove('lang'); // dil dəyişəndə üzərinə yazılmasın
+                sub.textContent = names.join(', ');
+                sub.title = names.join(', ');
+            } else {
+                sub.classList.add('lang');
+                sub.removeAttribute('title');
+                sub.textContent = sub.getAttribute('data-' + lang) || '';
+            }
+        });
+    }
+
     function updateResetBtn() {
         if (!resetBtn || !sidebarFiltersEl) return;
+        updateGroupSubtitles();
+        const qs = document.getElementById('sector-quick-select');
+        if (qs) {
+            const sectors = sidebarFiltersEl.querySelectorAll('#sector-filter-list input[type="checkbox"]:checked');
+            qs.value = sectors.length === 1 ? sectors[0].value : '';
+        }
         const n = sidebarFiltersEl.querySelectorAll('input[type="checkbox"]:checked').length;
         resetBtn.hidden = n === 0;
         if (resetCount) resetCount.textContent = n ? '(' + n + ')' : '';
@@ -1414,6 +1448,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobilePage = 1;
                 renderList();
             }, 150);
+        });
+    }
+
+    // Tam enli axtarış paneli (banner ilə siyahı arasında): "Axtarış et" düyməsi,
+    // Enter və "Populyar axtarışlar" çipləri axtarışı gecikmədən tətbiq edir.
+    function runSearchNow() {
+        if (!searchInput) return;
+        searchQuery = searchInput.value.trim();
+        mobilePage = 1;
+        renderList();
+    }
+    const searchBtn = document.getElementById('vacancy-search-btn');
+    if (searchBtn) searchBtn.addEventListener('click', runSearchNow);
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') runSearchNow();
+        });
+    }
+    document.querySelectorAll('.popular-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            if (!searchInput) return;
+            searchInput.value = chip.dataset.q;
+            runSearchNow();
+        });
+    });
+
+    // "Bütün sahələr" açılan siyahısı sol paneldəki "Fəaliyyət sahəsi" filtri ilə
+    // eyni vəziyyəti göstərir: burda sahə seçmək həmin filtrin yalnız bir
+    // checkbox-ını işarələyir, "Bütün sahələr" isə hamısını təmizləyir.
+    const quickSector = document.getElementById('sector-quick-select');
+    if (quickSector && sidebarFiltersEl) {
+        quickSector.addEventListener('change', () => {
+            const boxes = [...sidebarFiltersEl.querySelectorAll('#sector-filter-list input[type="checkbox"]')];
+            boxes.forEach(cb => { cb.checked = cb.value === quickSector.value; });
+            if (boxes[0]) boxes[0].dispatchEvent(new Event('change', { bubbles: true }));
         });
     }
 
