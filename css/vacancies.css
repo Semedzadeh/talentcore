@@ -2359,3 +2359,15 @@ body.light-theme .detail-deadline-pill {
     font-size: 14px;
     padding: 6px 0 4px;
 }
+
+/* İki üst-üstə xətt (məlumat sırasının alt xətti + tabların xətti) çirkin görünürdü —
+   məlumat sırasının xətti götürüldü, yalnız tabların xətti qalır. */
+.detail-meta-row {
+    margin-bottom: 8px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.detail-tabs {
+    margin-top: 18px;
+}
