@@ -1409,6 +1409,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateResetBtn() {
         if (!resetBtn || !sidebarFiltersEl) return;
         updateGroupSubtitles();
+        document.querySelectorAll('.level-chip').forEach(chip => {
+            const cb = sidebarFiltersEl.querySelector('#level-filter-list input[value="' + chip.dataset.level + '"]');
+            const on = !!(cb && cb.checked);
+            chip.classList.toggle('active', on);
+            chip.setAttribute('aria-pressed', String(on));
+        });
         const qs = document.getElementById('sector-quick-select');
         if (qs) {
             const sectors = sidebarFiltersEl.querySelectorAll('#sector-filter-list input[type="checkbox"]:checked');
@@ -1466,11 +1472,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') runSearchNow();
         });
     }
-    document.querySelectorAll('.popular-chip').forEach(chip => {
+    document.querySelectorAll('.popular-chip[data-q]').forEach(chip => {
         chip.addEventListener('click', () => {
             if (!searchInput) return;
             searchInput.value = chip.dataset.q;
             runSearchNow();
+        });
+    });
+
+    // Vəzifə dərəcəsi çipləri sol paneldəki "Vəzifə dərəcəsi" filtrinə bağlıdır:
+    // çipə basmaq həmin checkbox-ı aç/bağlayır, soldan seçim isə çipi aktiv göstərir
+    // (bax updateResetBtn-dəki sinxronizasiya).
+    document.querySelectorAll('.level-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const cb = sidebarFiltersEl && sidebarFiltersEl.querySelector('#level-filter-list input[value="' + chip.dataset.level + '"]');
+            if (!cb) return;
+            cb.checked = !cb.checked;
+            cb.dispatchEvent(new Event('change', { bubbles: true }));
         });
     });
 

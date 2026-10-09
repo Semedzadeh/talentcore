@@ -1898,3 +1898,31 @@ body.light-theme .popular-chip {
 .vacancies-sidebar-heading {
     gap: 8px;
 }
+
+/* Vəzifə dərəcəsi çipləri — sol paneldəki filtrlə sinxron; aktiv olanda doldurulur. */
+.popular-sep {
+    width: 1px;
+    height: 18px;
+    background: var(--border-color);
+    margin: 0 4px;
+}
+
+.popular-chip.active {
+    color: #ffffff;
+    background: #d97742;
+    border-color: #d97742;
+}
+
+body.light-theme .popular-chip.active {
+    background: #d97742;
+    border-color: #d97742;
+}
+
+/* Sıfırla düyməsi göründükdə başlığa yapışmasın */
+.vacancies-sidebar-heading h2 {
+    font-size: 14.5px;
+}
+
+.vacancies-sidebar-heading .filter-reset-btn {
+    padding: 5px 9px;
+}
