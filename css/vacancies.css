@@ -2063,3 +2063,24 @@ body.light-theme .popular-chip.active {
         justify-content: space-between;
     }
 }
+
+/* Detal panelindəki məlumat başlıqlarının (Yer, Məşğulluq, İş forması, Maaş,
+   Son müraciət tarixi) solunda kiçik ikon. */
+.detail-meta-item .label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.detail-meta-item .meta-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: #d97742;
+    opacity: 1;
+}
+
+.detail-meta-item .label {
+    opacity: 1;
+    color: var(--text-muted);
+}
