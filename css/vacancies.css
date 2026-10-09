@@ -535,7 +535,7 @@ body.light-theme .vacancy-sort-menu {
 .vacancies-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px;
     flex: 1;
     min-height: 0; /* flex sütununda scroll işləməsi üçün vacibdir */
     overflow-y: auto;
