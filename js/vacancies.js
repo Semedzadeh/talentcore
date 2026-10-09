@@ -1418,7 +1418,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const qs = document.getElementById('sector-quick-select');
         if (qs) {
             const sectors = sidebarFiltersEl.querySelectorAll('#sector-filter-list input[type="checkbox"]:checked');
-            qs.value = sectors.length === 1 ? sectors[0].value : '';
+            qs.value = sectors.length === 1 ? sectors[0].value : (sectors.length > 1 ? '__multi' : '');
         }
         const n = sidebarFiltersEl.querySelectorAll('input[type="checkbox"]:checked').length;
         resetBtn.hidden = n === 0;
