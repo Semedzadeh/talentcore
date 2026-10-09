@@ -1851,3 +1851,50 @@ body.light-theme .popular-chip {
         padding: 0 20px;
     }
 }
+
+/* "Sıfırla" indi "Detallı axtarış" başlığının sağında (kiçik, yığcam düymə).
+   Başlıq da bir qədər kiçildildi ki, ikisi bir sətirdə səliqəli yerləşsin. */
+.vacancies-sidebar-heading h2 {
+    font-size: 16.5px;
+    white-space: nowrap;
+}
+
+.sidebar-heading-icon {
+    width: 21px;
+    height: 21px;
+}
+
+.vacancies-sidebar-heading {
+    gap: 9px;
+}
+
+.vacancies-sidebar-heading .filter-reset-btn {
+    width: auto;
+    margin: 0 0 0 auto;
+    padding: 5px 10px;
+    flex-shrink: 0;
+    gap: 5px;
+    font-size: 11.5px;
+    border-style: solid;
+    border-radius: 999px;
+}
+
+.vacancies-sidebar-heading .filter-reset-btn svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* Dar başlıq sırasına sığması üçün: başlıq 15px, düymədə seçim sayı gizli
+   (sayı hər qrupun altındakı yazıda onsuz da görünür). */
+.vacancies-sidebar-heading h2 {
+    font-size: 15px;
+    min-width: 0;
+}
+
+.vacancies-sidebar-heading .filter-reset-count {
+    display: none;
+}
+
+.vacancies-sidebar-heading {
+    gap: 8px;
+}
