@@ -2282,3 +2282,40 @@ body.light-theme .post-dropdown-menu {
         min-width: 0;
     }
 }
+
+/* Son müraciət tarixi — konturlu "həb" (saat ikonu + "Son tarix 08.11.2026"). */
+.detail-deadline-pill {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+body.light-theme .detail-deadline-pill {
+    background: #ffffff;
+    border-color: #dbe3ef;
+}
+
+.detail-deadline-pill svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+}
+
+.detail-deadline-pill.urgent {
+    color: #d97742;
+    border-color: #d97742;
+}
+
+.detail-deadline-pill.urgent svg {
+    color: #d97742;
+}
