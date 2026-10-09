@@ -1498,3 +1498,356 @@ body.light-theme .vacancy-card.premium.active {
 .filter-reset-count {
     color: #d97742;
 }
+
+/* =====================================================================
+   HERO BANNER — Bakı fotosu (Alov Qüllələri).
+   Foto ::before-da (tündləşdirilmiş, qürub tonu), soldan sağa tünd örtük
+   ::after-də — yazı solda oxunaqlı qalır, qüllələr sağda görünür.
+   Banner həm qara, həm ağ rejimdə tünddür (şəkildəki dizayn kimi).
+   ===================================================================== */
+.vacancies-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: clamp(180px, 13vw, 250px);
+    padding: 30px clamp(28px, 4vw, 64px);
+    background: #0a1222;
+    border: none;
+}
+
+body.light-theme .vacancies-hero {
+    border: none;
+}
+
+.vacancies-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: url('../baku_light.jpg') no-repeat 50% 9% / 100% auto;
+    filter: brightness(0.62) saturate(0.85) contrast(1.05);
+}
+
+.vacancies-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 64% 30%, rgba(255, 150, 80, 0.26), transparent 55%),
+        linear-gradient(to top, rgba(8, 14, 28, 0.75) 0%, transparent 45%),
+        linear-gradient(to right, rgba(8, 14, 28, 0.96) 0%, rgba(8, 14, 28, 0.88) 34%, rgba(8, 14, 28, 0.4) 62%, rgba(8, 14, 28, 0.12) 100%);
+}
+
+.vacancies-hero p {
+    max-width: 15em;
+    color: #ffffff;
+    font-size: clamp(22px, 2.6vw, 42px);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 640px) {
+    .vacancies-hero {
+        flex-direction: row;
+        text-align: left;
+        min-height: 150px;
+        padding: 24px 20px;
+    }
+    .vacancies-hero p {
+        padding-left: 16px;
+        border-left: 3px solid #d97742;
+        border-top: none;
+        padding-top: 0;
+    }
+    .vacancies-hero::after {
+        background:
+            linear-gradient(to right, rgba(8, 14, 28, 0.95) 0%, rgba(8, 14, 28, 0.75) 60%, rgba(8, 14, 28, 0.35) 100%);
+    }
+}
+
+.vacancies-hero p {
+    position: relative;
+    z-index: 1;
+}
+
+/* Siluet çıxarıldı — hero: foto fon + solda narıncı xətt, başlıq və alt başlıq. */
+.vacancies-hero-text {
+    position: relative;
+    z-index: 1;
+    padding-left: 28px;
+    border-left: 3px solid #d97742;
+}
+
+.vacancies-hero .vacancies-hero-title {
+    padding: 0;
+    border: none;
+    max-width: 21em;
+}
+
+@media (max-width: 640px) {
+    .vacancies-hero .vacancies-hero-title {
+        border: none;
+        padding: 0;
+    }
+    .vacancies-hero-text {
+        padding-left: 16px;
+    }
+}
+
+/* Banner və başlıq kiçildildi (alt başlıq çıxarıldı). */
+.vacancies-hero {
+    min-height: clamp(110px, 8vw, 150px);
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.vacancies-hero p {
+    font-size: clamp(18px, 2vw, 32px);
+}
+
+.vacancies-hero .vacancies-hero-title {
+    font-size: clamp(18px, 2vw, 32px);
+}
+
+@media (max-width: 640px) {
+    .vacancies-hero {
+        min-height: 110px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+}
+
+/* --- Sol filtr qrupları: cümlə kimi yazılış (yalnız birinci hərf böyük),
+   başlıq qalın, altında yüngül "Bütün ..." yazısı (vakansiya kartındakı
+   başlıq/şirkət yazısı kimi). --- */
+.vacancies-sidebar .filter-group-title {
+    gap: 2px;
+}
+
+.vacancies-sidebar .filter-group-title > span:first-child {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.3;
+    opacity: 1;
+    color: var(--text-color);
+}
+
+body.light-theme .vacancies-sidebar .filter-group-title > span:first-child {
+    opacity: 1;
+}
+
+.filter-group-sub {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Aç/bağla oxu: bağlıda AŞAĞI, açıqda YUXARI baxır (əvvəl sağa baxırdı). */
+.filter-group-header[aria-expanded="false"] .filter-chevron {
+    transform: none;
+}
+
+.filter-group-header[aria-expanded="true"] .filter-chevron {
+    transform: rotate(180deg);
+}
+
+/* =====================================================================
+   TAM ENLİ AXTARIŞ PANELİ — banner ilə vakansiya sütunları arasında.
+   Əvvəl yalnız orta sütunda idi; indi sol/sağ kənarları sütunlarla eyni
+   xəttdə (98%) bütün eni tutur. Altında "Populyar axtarışlar" çipləri.
+   ===================================================================== */
+.vacancies-searchbar {
+    width: 98%;
+    max-width: var(--container-max);
+    margin: 0 auto 26px;
+}
+
+body.vacancy-focused-mode .vacancies-searchbar {
+    display: none;
+}
+
+.vacancies-searchbar-row {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+}
+
+.vacancies-searchbar .vacancy-search-wrap {
+    flex: 1;
+}
+
+.vacancies-searchbar .vacancy-search-input {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 14px;
+}
+
+.searchbar-select-wrap {
+    position: relative;
+    flex: 0 0 clamp(220px, 22vw, 340px);
+}
+
+.searchbar-select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 40px 0 42px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    color-scheme: dark;
+    transition: border-color 0.25s;
+}
+
+.searchbar-select:focus {
+    border-color: #d97742;
+}
+
+.searchbar-select option {
+    background: #141c30;
+    color: #ffffff;
+}
+
+body.light-theme .searchbar-select {
+    background: #ffffff;
+    border-color: #e1e9f4;
+    box-shadow: 0 2px 10px rgba(30, 64, 120, 0.05);
+    color-scheme: light;
+}
+
+body.light-theme .searchbar-select option {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+.searchbar-select-icon,
+.searchbar-select-chevron {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-muted);
+}
+
+.searchbar-select-icon {
+    left: 15px;
+    width: 17px;
+    height: 17px;
+}
+
+.searchbar-select-chevron {
+    right: 14px;
+    width: 15px;
+    height: 15px;
+}
+
+.searchbar-btn {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: clamp(130px, 11vw, 190px);
+    padding: 0 26px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #0f1d3d;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+body:not(.light-theme) .searchbar-btn {
+    background: #c4642f;
+}
+
+.searchbar-btn:hover {
+    background: #d97742;
+    transform: translateY(-1px);
+}
+
+.searchbar-btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.popular-searches {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.popular-searches-label {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-right: 2px;
+}
+
+.popular-chip {
+    padding: 5px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+body.light-theme .popular-chip {
+    background: #eef3fa;
+    border-color: transparent;
+}
+
+.popular-chip:hover {
+    color: #d97742;
+    border-color: #d97742;
+}
+
+/* Orta sütunun başlığı: solda vakansiya sayı, sağda sıralama (axtarış çıxarıldı) */
+.vacancies-count {
+    flex: 1;
+    align-self: center;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+@media (max-width: 760px) {
+    .vacancies-searchbar-row {
+        flex-wrap: wrap;
+    }
+    .vacancies-searchbar .vacancy-search-wrap {
+        flex: 1 1 100%;
+    }
+    .searchbar-select-wrap {
+        flex: 1 1 0;
+        min-width: 0;
+        height: 46px;
+    }
+    .searchbar-btn {
+        min-width: 0;
+        height: 46px;
+        padding: 0 20px;
+    }
+}

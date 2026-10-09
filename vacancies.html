@@ -73,16 +73,64 @@
     <main>
         <section class="vacancies-page">
             <div class="vacancies-hero">
-                <div class="vacancies-hero-icon" aria-hidden="true">
-                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="30" r="9"/><path d="M24 58c1-9 8-14 16-14s15 5 16 14"/><path d="M14 46a28 28 0 0 1 4-24M66 46a28 28 0 0 0-4-24" stroke-width="2"/><circle cx="16" cy="52" r="4.5"/><circle cx="64" cy="52" r="4.5"/><path d="M8 66c.5-5 4-8 8-8s7.500 3 8 8M56 66c.5-5 4-8 8-8s7.5 3 8 8" stroke-width="2.2"/></svg>
+                <div class="vacancies-hero-text">
+                    <p class="vacancies-hero-title lang" data-en="Search by field and find the right role for you." data-az="Sahələr üzrə axtarış edin, sizə uyğun mövqeyi tapın.">Sahələr üzrə axtarış edin, sizə uyğun mövqeyi tapın.</p>
                 </div>
-                <p class="lang" data-en="Search by field and find the right role for you." data-az="Sahələr üzrə axtarış edin, sizə uyğun mövqeyi tapın.">Sahələr üzrə axtarış edin, sizə uyğun mövqeyi tapın.</p>
             </div>
 
             <a href="vacancies.html" class="vacancy-back-link">
                 <span>←</span>
                 <span class="lang" data-en="All Vacancies" data-az="Bütün Vakansiyalar">Bütün Vakansiyalar</span>
             </a>
+
+            <div class="vacancies-searchbar">
+                <div class="vacancies-searchbar-row">
+                    <div class="vacancy-search-wrap">
+                            <svg class="vacancy-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                            <input type="search" id="vacancy-search" class="vacancy-search-input lang-placeholder"
+                               placeholder="Vakansiya və ya şirkət axtar..."
+                               data-az-placeholder="Vakansiya və ya şirkət axtar..."
+                               data-en-placeholder="Search job title or company..."
+                               aria-label="Vakansiya axtar">
+                        </div>
+                    <div class="searchbar-select-wrap">
+                        <svg class="searchbar-select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
+                        <select id="sector-quick-select" class="searchbar-select" aria-label="Sahə seçin">
+                            <option value="" class="lang" data-en="All fields" data-az="Bütün sahələr">Bütün sahələr</option>
+                            <option value="banking-finance" class="lang" data-en="Banking & Financial Services" data-az="Bankçılıq və Maliyyə Xidmətləri">Bankçılıq və Maliyyə Xidmətləri</option>
+                            <option value="real-estate-construction" class="lang" data-en="Real Estate & Construction" data-az="Daşınmaz Əmlak və Tikinti">Daşınmaz Əmlak və Tikinti</option>
+                            <option value="oil-gas-energy" class="lang" data-en="Oil, Gas & Energy" data-az="Neft, Qaz və Energetika">Neft, Qaz və Energetika</option>
+                            <option value="mining-metallurgy" class="lang" data-en="Mining & Metallurgy" data-az="Mədənçilik və Metallurgiya">Mədənçilik və Metallurgiya</option>
+                            <option value="manufacturing-industry" class="lang" data-en="Manufacturing & Industry" data-az="İstehsalat və Sənaye">İstehsalat və Sənaye</option>
+                            <option value="fmcg" class="lang" data-en="FMCG" data-az="FMCG">FMCG</option>
+                            <option value="retail-ecommerce" class="lang" data-en="Retail & E-commerce" data-az="Pərakəndə Ticarət və E-ticarət">Pərakəndə Ticarət və E-ticarət</option>
+                            <option value="tech-telecom" class="lang" data-en="Technology & Telecommunications" data-az="Texnologiya və Telekommunikasiya">Texnologiya və Telekommunikasiya</option>
+                            <option value="healthcare-pharma" class="lang" data-en="Healthcare & Pharmaceuticals" data-az="Səhiyyə və Əczaçılıq">Səhiyyə və Əczaçılıq</option>
+                            <option value="transport-logistics" class="lang" data-en="Transport & Logistics" data-az="Nəqliyyat və Logistika">Nəqliyyat və Logistika</option>
+                            <option value="agriculture" class="lang" data-en="Agriculture" data-az="Kənd Təsərrüfatı">Kənd Təsərrüfatı</option>
+                            <option value="tourism-hospitality" class="lang" data-en="Tourism & Hospitality" data-az="Turizm və Qonaqpərvərlik">Turizm və Qonaqpərvərlik</option>
+                            <option value="education-training" class="lang" data-en="Education & Training" data-az="Təhsil və Təlim">Təhsil və Təlim</option>
+                            <option value="marketing-advertising" class="lang" data-en="Marketing, Advertising & Communication" data-az="Marketinq, Reklam və Kommunikasiya">Marketinq, Reklam və Kommunikasiya</option>
+                            <option value="public-social-nonprofit" class="lang" data-en="Public, Social & Non-profit Sector" data-az="Dövlət, Sosial və Qeyri-kommersiya Sektoru">Dövlət, Sosial və Qeyri-kommersiya Sektoru</option>
+                        </select>
+                        <svg class="searchbar-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <button type="button" class="searchbar-btn" id="vacancy-search-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                        <span class="lang" data-en="Search" data-az="Axtarış et">Axtarış et</span>
+                    </button>
+                </div>
+                <div class="popular-searches">
+                    <span class="popular-searches-label lang" data-en="Popular searches:" data-az="Populyar axtarışlar:">Populyar axtarışlar:</span>
+                    <button type="button" class="popular-chip" data-q="Menecer">Menecer</button>
+                    <button type="button" class="popular-chip" data-q="Maliyyə">Maliyyə</button>
+                    <button type="button" class="popular-chip" data-q="HR">HR</button>
+                    <button type="button" class="popular-chip" data-q="Developer">Developer</button>
+                    <button type="button" class="popular-chip" data-q="Marketinq">Marketinq</button>
+                    <button type="button" class="popular-chip" data-q="Mühəndis">Mühəndis</button>
+                    <button type="button" class="popular-chip" data-q="Satış">Satış</button>
+                </div>
+            </div>
 
             <div class="vacancies-layout">
                 <aside class="vacancies-sidebar-wrap">
@@ -96,6 +144,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Field of Activity" data-az="Fəaliyyət sahəsi">Fəaliyyət sahəsi</span>
+                                <span class="filter-group-sub lang" data-en="All fields" data-az="Bütün sahələr">Bütün sahələr</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -129,6 +178,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Companies" data-az="Şirkətlər">Şirkətlər</span>
+                                <span class="filter-group-sub lang" data-en="All companies" data-az="Bütün şirkətlər">Bütün şirkətlər</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -145,6 +195,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Categories" data-az="Kateqoriyalar">Kateqoriyalar</span>
+                                <span class="filter-group-sub lang" data-en="All categories" data-az="Bütün kateqoriyalar">Bütün kateqoriyalar</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -169,6 +220,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="16" r="2.3"/><circle cx="18" cy="16" r="2.3"/><path d="M9.5 12.5c.7-.4 1.6-.5 2.5-.5s1.8.1 2.5.5M3 21v-.5a3 3 0 0 1 3-3 3 3 0 0 1 3 3V21M15 21v-.5a3 3 0 0 1 3-3 3 3 0 0 1 3 3V21"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Position Level" data-az="Vəzifə dərəcəsi">Vəzifə dərəcəsi</span>
+                                <span class="filter-group-sub lang" data-en="All levels" data-az="Bütün vəzifə dərəcələri">Bütün vəzifə dərəcələri</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -193,6 +245,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Region" data-az="Region">Region</span>
+                                <span class="filter-group-sub lang" data-en="All regions" data-az="Bütün regionlar">Bütün regionlar</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -233,6 +286,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Work Schedule" data-az="İş qrafiki">İş qrafiki</span>
+                                <span class="filter-group-sub lang" data-en="All schedules" data-az="Bütün qrafiklər">Bütün qrafiklər</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -250,6 +304,7 @@
                             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>
                             <span class="filter-group-title">
                                 <span class="lang" data-en="Work Mode" data-az="İş rejimi">İş rejimi</span>
+                                <span class="filter-group-sub lang" data-en="All modes" data-az="Bütün rejimlər">Bütün rejimlər</span>
                             </span>
                             <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -328,14 +383,7 @@
 
                 <div class="vacancies-list-panel">
                     <div class="vacancies-list-toolbar">
-                        <div class="vacancy-search-wrap">
-                            <svg class="vacancy-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-                            <input type="search" id="vacancy-search" class="vacancy-search-input lang-placeholder"
-                               placeholder="Vakansiya və ya şirkət axtar..."
-                               data-az-placeholder="Vakansiya və ya şirkət axtar..."
-                               data-en-placeholder="Search job title or company..."
-                               aria-label="Vakansiya axtar">
-                        </div>
+                        <span class="vacancies-count" id="vacancies-count"></span>
                         <!-- Native <select> qəsdən istifadə olunmur — açılan siyahının
                              fon rəngi brauzerin öz native popup-u tərəfindən idarə olunur
                              və color-scheme ilə belə tünd temaya həmişə tabe olmur (real
