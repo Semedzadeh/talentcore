@@ -2031,3 +2031,35 @@ body.light-theme .popular-chip.active {
         height: 46px;
     }
 }
+
+/* Sıralama indi sağ qrupda — "Bütün sahələr" ilə "Axtarış et" arasında; axtarış sahəsi
+   yenə tək başına sol+orta sütunun üstündədir. */
+.searchbar-right .vacancy-sort-dropdown {
+    flex: 0 0 auto;
+    align-self: stretch;
+    display: flex;
+}
+
+.searchbar-right .vacancy-sort-toggle {
+    height: 100%;
+    padding: 0 16px;
+    font-size: 13.5px;
+}
+
+@media (max-width: 760px) {
+    .searchbar-right {
+        flex-wrap: wrap;
+    }
+    .searchbar-right .searchbar-select-wrap {
+        flex: 1 1 100%;
+    }
+    .searchbar-right .vacancy-sort-dropdown,
+    .searchbar-right .searchbar-btn {
+        flex: 1 1 0;
+    }
+    .searchbar-right .vacancy-sort-toggle {
+        height: 46px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
