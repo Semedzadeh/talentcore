@@ -1101,9 +1101,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof v.deadlineIn !== 'number') return '';
         const d = new Date();
         d.setDate(d.getDate() + v.deadlineIn);
-        const text = `${d.getDate()} ${AZ_MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+        const pad = x => String(x).padStart(2, '0');
+        const text = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()}`;
         const left = v.deadlineIn === 0 ? 'Bu gün son gündür' : `${v.deadlineIn} gün qalıb`;
-        return `<div class="detail-meta-item detail-deadline"><span class="label"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Son müraciət tarixi</span><span class="value">${text} <span class="deadline-left">${left}</span></span></div>`;
+        const urgent = v.deadlineIn <= 3 ? ' urgent' : '';
+        return `<div class="detail-deadline-pill${urgent}" title="${left}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Son tarix ${text}</span></div>`;
     }
 
     // Bölmələr İXTİYARİDİR: şirkət/vakansiya həmin məlumatı verməyibsə (boş, undefined,
