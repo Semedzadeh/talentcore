@@ -56,6 +56,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cv-apply-company').textContent = company;
         document.getElementById('cv-apply-target').hidden = false;
 
+        // Şirkətin loqosu vakansiya detalından "?logo=logos/xxx.png" ilə gəlir. URL-dən gələn
+        // dəyər olduğu üçün YALNIZ saytın öz logos/ qovluğundakı şəkil yoluna icazə verilir
+        // (başqa sayt/javascript: və s. keçmir); əks halda (və ya logo yoxdursa) ümumi bina ikonu qalır.
+        const logoParam = (params.get('logo') || '').trim();
+        if (/^logos\/[\w.-]+\.(png|jpe?g|svg|webp)$/i.test(logoParam)) {
+            const icon = document.querySelector('.cv-apply-icon');
+            if (icon) {
+                const img = document.createElement('img');
+                img.src = logoParam;
+                img.alt = company;
+                icon.replaceChildren(img);
+                icon.classList.add('has-logo');
+            }
+        }
+
         // Vakansiyaya müraciətdə "İstədiyiniz Vəzifə" mənasızdır
         document.getElementById('cv-position-group').hidden = true;
         document.getElementById('cv-position').disabled = true;
