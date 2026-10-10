@@ -527,13 +527,16 @@ input:checked + .slider .sun { opacity: 1; }
     }
     .footer-copyright {
         grid-column: 1;
+        grid-row: 1;
         justify-self: start;
     }
     .footer-tagline {
         grid-column: 2;
+        grid-row: 1;
     }
     .footer-bottom {
         grid-column: 3;
+        grid-row: 1;
         justify-self: end;
     }
 }
