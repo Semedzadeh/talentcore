@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!el) return;
         el.setAttribute('data-az', az);
         el.setAttribute('data-en', en);
-        el.innerHTML = az;
+        el.innerHTML = window.tcText ? window.tcText(el) : az;
     };
 
     const isApplyMode = Boolean(company && vacancy);
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!stepTexts[i]) return;
             stepTexts[i].setAttribute('data-az', az);
             stepTexts[i].setAttribute('data-en', en);
-            stepTexts[i].innerHTML = az;
+            stepTexts[i].innerHTML = window.tcText ? window.tcText(stepTexts[i]) : az;
         });
         setLang('cv-privacy-note',
             'Müraciətiniz məxfi saxlanılır və yalnız bu vakansiya üzrə seçim prosesi üçün istifadə olunur.',
