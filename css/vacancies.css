@@ -2645,7 +2645,7 @@ body.light-theme .detail-meta-item {
 }
 
 body.light-theme .detail-section h4 {
-    color: #475569;
+    color: #0f172a; /* əvvəl #475569 idi — mətndən (#334155) fərqlənsin deyə ən tünd ton */
 }
 
 /* Əsas mətn və siyahı bəndləri: 14px / 400 / sətir arası 1.65, bəndlər arası 8px */
