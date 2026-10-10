@@ -2495,5 +2495,5 @@ body.page-vacancies .glass-header {
    yarı-şəffaf olduğu üçün onlar da avtomatik bir qədər açılır. Açıq rejim
    (öz qradiyenti var) dəyişmir. */
 body:not(.light-theme) .vacancies-page {
-    background: linear-gradient(180deg, #19264a 0%, #131d38 100%);
+    background: linear-gradient(180deg, #131d3a 0%, #0f1830 100%);
 }
