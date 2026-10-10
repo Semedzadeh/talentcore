@@ -14,6 +14,7 @@
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/ad-banners.css">
+    <link rel="stylesheet" href="css/request-modal.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -81,7 +82,7 @@
                    data-az="Şirkətinizin reklam bannerini Talentcore-da nümayiş etdirərək platformamızı hər gün ziyarət edən minlərlə aktiv iş axtaranına və işəgötürənə çatın. Banner yerləri, ölçüləri və qiymət detalları tezliklə bu səhifədə dərc olunacaq — hələlik kampaniyanızı müzakirə etmək üçün komandamızla əlaqə saxlaya bilərsiniz.">
                    Şirkətinizin reklam bannerini Talentcore-da nümayiş etdirərək platformamızı hər gün ziyarət edən minlərlə aktiv iş axtaranına və işəgötürənə çatın. Banner yerləri, ölçüləri və qiymət detalları tezliklə bu səhifədə dərc olunacaq — hələlik kampaniyanızı müzakirə etmək üçün komandamızla əlaqə saxlaya bilərsiniz.
                 </p>
-                <a href="contact.html" class="btn-primary lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</a>
+                <button type="button" class="btn-primary lang" data-request-open data-en="Apply" data-az="Müraciət et">Müraciət et</button>
             </div>
         </section>
     </main>
@@ -120,7 +121,145 @@
         </div>
     </footer>
 
+    <!-- Müraciət modalı — "Müraciət et" düyməsi açır (js/request-modal.js, post-job.html ilə ortaq).
+         Sol paneldə statik xidmət adı var (paket seçimi yoxdur); forma Web3Forms ilə
+         info@talentcore.az-a göndərilir. Burada fayl sahələri (banner, loqo) könüllüdür. -->
+    <div class="request-modal" id="request-modal" data-subject="Talentcore.az — Yeni reklam banneri sorğusu" hidden>
+        <div class="request-dialog" role="dialog" aria-modal="true" aria-labelledby="request-title">
+            <button type="button" class="request-close" id="request-close" aria-label="Bağla">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+
+            <aside class="request-side">
+                <div class="request-brand">
+                    <img src="logo.png" alt="Talentcore Logo" class="site-logo request-logo">
+                    <span class="request-kicker">TALENTCORE</span>
+                </div>
+                <h2 class="request-title lang" id="request-title" data-en="Get in touch with us" data-az="Bizimlə əlaqə saxlayın">Bizimlə əlaqə saxlayın</h2>
+                <p class="request-lead lang"
+                   data-en="Leave your details and our team will contact you to discuss placing your advertising banner."
+                   data-az="Məlumatlarınızı qeyd edin, komandamız sizinlə əlaqə saxlayıb reklam bannerinin yerləşdirilməsi barədə danışsın.">
+                   Məlumatlarınızı qeyd edin, komandamız sizinlə əlaqə saxlayıb reklam bannerinin yerləşdirilməsi barədə danışsın.
+                </p>
+
+                <div class="request-package">
+                    <span class="request-label lang" data-en="Selected service" data-az="Seçilmiş xidmət">Seçilmiş xidmət</span>
+                    <div class="request-package-name" id="request-package-name">
+                        <span class="lang" data-en="Advertising Banner Placement" data-az="Reklam Bannerlərinin Yerləşdirilməsi">Reklam Bannerlərinin Yerləşdirilməsi</span>
+                    </div>
+                </div>
+
+                <div class="request-direct">
+                    <span class="request-label lang" data-en="Or write to us directly" data-az="Və ya birbaşa yazın">Və ya birbaşa yazın</span>
+                    <div class="request-direct-btns">
+                        <!-- NÜMUNƏ ünvan: WhatsApp əlaqə səhifəsindəki nümunə nömrədən qurulub — real nömrə ilə əvəzlənməlidir. -->
+                        <a href="https://wa.me/994120000000" class="request-direct-btn" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.2 7.9L3 21l1.2-4.6A9 9 0 1 1 21 12z"/></svg>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="request-main">
+                <h3 class="request-form-title lang" data-en="Request form" data-az="Sorğu formu">Sorğu formu</h3>
+                <p class="request-sub lang"
+                   data-en="Fields marked with * are required."
+                   data-az="Ulduz (*) ilə işarələnmiş xanalar məcburidir.">
+                   Ulduz (*) ilə işarələnmiş xanalar məcburidir.
+                </p>
+
+                <form id="request-form" novalidate>
+                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" id="request-subject" value="Talentcore.az — Yeni reklam banneri sorğusu">
+                    <input type="hidden" name="package" id="request-package-input" value="Reklam bannerlərinin yerləşdirilməsi">
+                    <input type="hidden" name="name" id="request-fullname" value="">
+                    <input type="checkbox" name="botcheck" class="botcheck-field" tabindex="-1" autocomplete="off">
+
+                    <div class="rq-row">
+                        <div class="rq-field">
+                            <label for="rq-first" class="lang req" data-en="First name" data-az="Ad">Ad</label>
+                            <input type="text" id="rq-first" required name="first_name" class="lang-placeholder" autocomplete="given-name"
+                                   placeholder="Adınız" data-az-placeholder="Adınız" data-en-placeholder="Your first name">
+                        </div>
+                        <div class="rq-field">
+                            <label for="rq-last" class="lang req" data-en="Last name" data-az="Soyad">Soyad</label>
+                            <input type="text" id="rq-last" required name="last_name" class="lang-placeholder" autocomplete="family-name"
+                                   placeholder="Soyadınız" data-az-placeholder="Soyadınız" data-en-placeholder="Your last name">
+                        </div>
+                    </div>
+
+                    <div class="rq-field">
+                        <label for="rq-company" class="lang req" data-en="Company name" data-az="Şirkət adı">Şirkət adı</label>
+                        <input type="text" id="rq-company" required name="company" class="lang-placeholder" autocomplete="organization"
+                               placeholder="Şirkətinizin adı" data-az-placeholder="Şirkətinizin adı" data-en-placeholder="Your company name">
+                    </div>
+
+                    <div class="rq-row">
+                        <div class="rq-field">
+                            <label for="rq-phone" class="lang req" data-en="Phone number" data-az="Telefon nömrəsi">Telefon nömrəsi</label>
+                            <input type="tel" id="rq-phone" required name="phone" autocomplete="tel" placeholder="+994 __ ___ __ __">
+                        </div>
+                        <div class="rq-field">
+                            <label for="rq-email" class="lang req" data-en="Email" data-az="E-poçt">E-poçt</label>
+                            <input type="email" id="rq-email" required name="email" autocomplete="email" placeholder="ad@sirket.az">
+                        </div>
+                    </div>
+
+                    <div class="rq-row">
+                        <div class="rq-field">
+                            <span class="rq-label lang" data-en="Banner file (optional)" data-az="Banner faylı (istəyə bağlı)">Banner faylı (istəyə bağlı)</span>
+                            <label class="rq-upload" for="rq-banner-file">
+                                <input type="file" id="rq-banner-file" name="attachment" accept=".png,.jpg,.jpeg,.svg,.webp,.pdf,image/png,image/jpeg,image/svg+xml,image/webp,application/pdf">
+                                <span class="rq-upload-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg>
+                                </span>
+                                <span class="rq-upload-text">
+                                    <strong class="lang" data-en="Attach a file" data-az="Fayl əlavə edin">Fayl əlavə edin</strong>
+                                    <small class="lang" data-en="PNG, JPG, SVG or PDF" data-az="PNG, JPG, SVG və ya PDF">PNG, JPG, SVG və ya PDF</small>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="rq-field">
+                            <span class="rq-label lang" data-en="Company logo (optional)" data-az="Şirkət loqosu (istəyə bağlı)">Şirkət loqosu (istəyə bağlı)</span>
+                            <label class="rq-upload" for="rq-logo-file">
+                                <input type="file" id="rq-logo-file" name="company_logo" accept=".png,.jpg,.jpeg,.svg,.webp,image/png,image/jpeg,image/svg+xml,image/webp">
+                                <span class="rq-upload-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg>
+                                </span>
+                                <span class="rq-upload-text">
+                                    <strong class="lang" data-en="Attach the logo" data-az="Loqonu əlavə edin">Loqonu əlavə edin</strong>
+                                    <small class="lang" data-en="PNG, JPG, SVG or WebP" data-az="PNG, JPG, SVG və ya WebP">PNG, JPG, SVG və ya WebP</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="rq-field">
+                        <label for="rq-note" class="lang" data-en="Additional note (optional)" data-az="Əlavə qeyd (könüllü)">Əlavə qeyd (könüllü)</label>
+                        <textarea id="rq-note" name="message" rows="3" class="lang-placeholder"
+                                  placeholder="Reklam kampaniyası barədə qısa məlumat"
+                                  data-az-placeholder="Reklam kampaniyası barədə qısa məlumat"
+                                  data-en-placeholder="Brief information about your advertising campaign"></textarea>
+                    </div>
+
+                    <button type="submit" class="request-submit" id="request-submit">
+                        <span class="lang" data-en="Send request" data-az="Sorğunu göndər">Sorğunu göndər</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
+                    <p class="request-status" id="request-status" aria-live="polite"></p>
+                    <p class="request-consent lang"
+                       data-en="By submitting, you consent to your personal data being processed for contact purposes."
+                       data-az="Göndərməklə şəxsi məlumatlarınızın əlaqə məqsədilə emalına razılıq verirsiniz.">
+                       Göndərməklə şəxsi məlumatlarınızın əlaqə məqsədilə emalına razılıq verirsiniz.
+                    </p>
+                </form>
+            </section>
+        </div>
+    </div>
+
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/request-modal.js"></script>
 </body>
 </html>

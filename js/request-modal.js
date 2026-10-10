@@ -1,6 +1,11 @@
-// İş elanı paketləri: "Müraciət et" düyməsi modal sorğu formu açır. Yalnız post-job.html-də işə düşür.
-// Sol paneldə YALNIZ seçilmiş paket göstərilir (dəyişdirilə bilməz); forma Web3Forms ilə
-// info@talentcore.az-a göndərilir (contact.js/cv.js ilə eyni access key — bax CLAUDE.md).
+// Ortaq "Müraciət et" modalı: post-job.html (paket kartları) və ad-banners.html (reklam bannerləri)
+// istifadə edir. Açan düymə: [data-request-open]. Forma Web3Forms ilə info@talentcore.az-a
+// göndərilir (contact.js/cv.js ilə eyni access key — bax CLAUDE.md).
+//  - Düymə .pricing-card daxilindədirsə (post-job): sol panelə YALNIZ həmin paketin adı və
+//    xidmətləri kopyalanır, dəyişdirilə bilməz.
+//  - Əks halda (ad-banners): sol panel HTML-də statikdir, JS ona toxunmur.
+//  - Məcburi sahələr `required` atributu ilə işarələnir (form novalidate-dir, yoxlama burada edilir);
+//    required olmayan sahələr könüllüdür.
 document.addEventListener('DOMContentLoaded', () => {
 
     const modal = document.getElementById('request-modal');
@@ -16,9 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusEl = document.getElementById('request-status');
     const submitBtn = document.getElementById('request-submit');
     const closeBtn = document.getElementById('request-close');
+    const baseSubject = modal.dataset.subject || 'Talentcore.az — Yeni sorğu';
     const MAX_FILE_SIZE = 5 * 1024 * 1024;
     let lastTrigger = null;
-    let currentPackage = { name: '', subject: '' };
+    let currentPackage = { name: packageInput ? packageInput.value : '', subject: subjectInput.value };
 
     function setStatus(text, kind) {
         statusEl.textContent = text;
@@ -39,19 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
         listEl.innerHTML = card.querySelector('ul').innerHTML;
         currentPackage = {
             name: title.getAttribute('data-az'),
-            subject: `Talentcore.az — Yeni elan sorğusu (${title.getAttribute('data-az')})`
+            subject: `${baseSubject} (${title.getAttribute('data-az')})`
         };
-        packageInput.value = currentPackage.name;
+        if (packageInput) packageInput.value = currentPackage.name;
         subjectInput.value = currentPackage.subject;
     }
 
-    function openModal(card, trigger) {
+    function openModal(trigger) {
         lastTrigger = trigger;
-        fillPackage(card);
+        const card = trigger.closest('.pricing-card');
+        if (card) fillPackage(card);
         setStatus('', null);
         modal.hidden = false;
         document.body.classList.add('request-open');
-        const first = document.getElementById('rq-first');
+        const first = formEl.querySelector('input[type="text"]');
         if (first) first.focus();
     }
 
@@ -61,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lastTrigger) lastTrigger.focus();
     }
 
-    document.querySelectorAll('.pricing-cta[data-package]').forEach(btn => {
-        btn.addEventListener('click', () => openModal(btn.closest('.pricing-card'), btn));
+    document.querySelectorAll('[data-request-open]').forEach(btn => {
+        btn.addEventListener('click', () => openModal(btn));
     });
 
     closeBtn.addEventListener('click', closeModal);
@@ -102,39 +109,34 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Məcburi: ad, soyad, şirkət adı, telefon, e-poçt, vakansiya faylı, şirkət loqosu.
-        // Yalnız "Əlavə qeyd" könüllüdür. (Form novalidate-dir, yoxlama burada edilir.)
-        const textFields = ['rq-first', 'rq-last', 'rq-company', 'rq-phone', 'rq-email'].map(id => document.getElementById(id));
-        const vacancyFile = document.getElementById('rq-vacancy-file');
-        const logoFile = document.getElementById('rq-logo-file');
-        textFields.forEach(el => el.classList.remove('invalid'));
-        [vacancyFile, logoFile].forEach(el => el.closest('.rq-upload').classList.remove('invalid'));
-
-        const missing = textFields.filter(el => !el.value.trim());
-        missing.forEach(el => el.classList.add('invalid'));
-        const missingFiles = [vacancyFile, logoFile].filter(el => !el.files[0]);
-        missingFiles.forEach(el => el.closest('.rq-upload').classList.add('invalid'));
-        if (missing.length || missingFiles.length) {
-            (missing[0] || missingFiles[0]).focus();
+        // Məcburi sahələr = `required` atributu olanlar (mətn/e-poçt/telefon + fayl qutuları).
+        const requiredEls = [...formEl.querySelectorAll('[required]')];
+        const markInvalid = (el, on) => (el.type === 'file' ? el.closest('.rq-upload') : el).classList.toggle('invalid', on);
+        requiredEls.forEach(el => markInvalid(el, false));
+        const missing = requiredEls.filter(el => (el.type === 'file' ? !el.files[0] : !el.value.trim()));
+        missing.forEach(el => markInvalid(el, true));
+        if (missing.length) {
+            missing[0].focus();
             setStatus(t('Zəhmət olmasa bütün məcburi xanaları doldurun (qeyd istisna olmaqla).', 'Please fill in all required fields (except the note).'), 'error');
             return;
         }
 
         const emailEl = document.getElementById('rq-email');
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+        if (emailEl && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
             emailEl.classList.add('invalid');
             emailEl.focus();
             setStatus(t('Zəhmət olmasa düzgün email ünvanı daxil edin.', 'Please enter a valid email address.'), 'error');
             return;
         }
         const phoneEl = document.getElementById('rq-phone');
-        if (phoneEl.value.replace(/\D/g, '').length < 7) {
+        if (phoneEl && phoneEl.value.replace(/\D/g, '').length < 7) {
             phoneEl.classList.add('invalid');
             phoneEl.focus();
             setStatus(t('Zəhmət olmasa düzgün telefon nömrəsi daxil edin.', 'Please enter a valid phone number.'), 'error');
             return;
         }
-        if (vacancyFile.files[0].size > MAX_FILE_SIZE || logoFile.files[0].size > MAX_FILE_SIZE) {
+        const files = [...formEl.querySelectorAll('input[type="file"]')].map(i => i.files[0]).filter(Boolean);
+        if (files.some(f => f.size > MAX_FILE_SIZE)) {
             setStatus(t('Fayl 5MB-dan böyükdür, zəhmət olmasa daha kiçik fayl seçin.', 'File is larger than 5MB, please choose a smaller file.'), 'error');
             return;
         }
@@ -143,6 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('request-fullname').value =
             `${document.getElementById('rq-first').value.trim()} ${document.getElementById('rq-last').value.trim()}`;
 
+        // Seçilməyən (könüllü) fayl sahələri boş fayl hissəsi kimi göndərilməsin
+        const formData = new FormData(formEl);
+        formEl.querySelectorAll('input[type="file"]').forEach(input => {
+            if (!input.files[0]) formData.delete(input.name);
+        });
+
         submitBtn.disabled = true;
         setStatus(t('Göndərilir...', 'Sending...'), null);
 
@@ -150,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Accept': 'application/json' },
-                body: new FormData(formEl)
+                body: formData
             });
             const result = await response.json();
 
@@ -160,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // reset() fayl seçimlərini də təmizləyir — qutulardakı fayl adlarını ilkin yazıya qaytar
                 formEl.querySelectorAll('.rq-upload input[type="file"]').forEach(input => input.dispatchEvent(new Event('change')));
                 // reset() gizli sahələri (paket/mövzu) də ilkin boş dəyərə qaytarır — seçilmiş paketi yenidən yaz
-                packageInput.value = currentPackage.name;
+                if (packageInput) packageInput.value = currentPackage.name;
                 subjectInput.value = currentPackage.subject;
             } else {
                 setStatus(t('Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', 'Something went wrong, please try again shortly.'), 'error');
