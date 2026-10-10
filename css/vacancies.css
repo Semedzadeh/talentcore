@@ -2419,3 +2419,52 @@ body.light-theme .detail-deadline-pill {
     width: 16px;
     height: 16px;
 }
+
+/* "Yaddaşa verilmiş vakansiyalar" qutusu — yuxarı sağdakı "Vakansiya yerləşdir"
+   düyməsi (.searchbar-btn) ilə EYNİ rəngdə: qara rejimdə #c4642f, açıq rejimdə
+   tünd navy #0f1d3d, hover-də hər ikisində #d97742, yazı ağ. Qutunun daxili
+   padding-i yoxdur — bütün sahə düymənin özüdür (klik hər yerdən işləsin). */
+.vacancies-saved-panel {
+    padding: 0;
+    background: #c4642f;
+    border-color: transparent;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+body.light-theme .vacancies-saved-panel {
+    background: #0f1d3d;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.vacancies-saved-panel:hover,
+body.light-theme .vacancies-saved-panel:hover {
+    background: #d97742;
+    transform: translateY(-1px);
+}
+
+.saved-toggle-btn {
+    padding: 15px 18px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.saved-toggle-btn:hover,
+.saved-toggle-btn.active {
+    color: #ffffff;
+}
+
+/* Aktiv (yalnız saxlanılanlar göstərilir) — bookmark ağ rəngdə dolu olur */
+.saved-toggle-btn.active svg {
+    fill: #ffffff;
+}
+
+.saved-count {
+    background: #ffffff;
+    color: #c4642f;
+}
+
+body.light-theme .saved-count {
+    color: #0f1d3d;
+}
