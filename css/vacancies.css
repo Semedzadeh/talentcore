@@ -1132,7 +1132,7 @@ body.light-theme .vacancy-share-btn::after {
 
 @media (max-width: 1024px) {
     .vacancies-page {
-        padding-top: 140px;
+        padding-top: 122px;
     }
     .vacancies-layout {
         grid-template-columns: 1fr;
@@ -1448,12 +1448,12 @@ body.vacancy-focused-mode .vacancies-layout {
     }
 }
 
-/* Hero banner menyuya doğru qaldırıldı (150px → 122px yuxarı boşluq) — menyu ilə
-   arasında ~30px nəfəs qalır ki, bitişik görünməsin. Planşet/mobil dəyərləri
-   (aşağıdakı media qaydaları) dəyişməyib. */
+/* Hero banner menyuya doğru qaldırıldı (150px → 122px → 104px yuxarı boşluq) — menyu ilə
+   arasında ~12px nəfəs qalır ki, bitişik görünməsin. Planşet (≤1024px) 140→122px.
+   */
 @media (min-width: 1025px) {
     .vacancies-page {
-        padding-top: 122px;
+        padding-top: 104px;
     }
 }
 
