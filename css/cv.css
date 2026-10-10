@@ -224,3 +224,26 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Vakansiyadan gələndə şirkətin real loqosu (?logo=logos/...) bina ikonunun yerinə oturur —
+   vakansiya kartındakı .vacancy-logo ilə eyni qayda: dairə, PNG-lərə 14% boşluq (kvadrat
+   loqonun künclərini dairə kəsməsin), logos/*.svg isə artıq özü dairədir (boşluqsuz). */
+.cv-apply-icon {
+    overflow: hidden;
+}
+
+.cv-apply-icon.has-logo {
+    background: #ffffff;
+}
+
+.cv-apply-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 14%;
+    box-sizing: border-box;
+}
+
+.cv-apply-icon img[src$=".svg"] {
+    padding: 0;
+}

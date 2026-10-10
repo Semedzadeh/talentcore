@@ -1189,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- "Müraciət Et" və "Yadda saxla" yalnız "Vəzifə haqqında" tabındadır —
                      "Şirkət haqqında" tabında lazım deyil (tələb olunub) -->
                 <div class="detail-actions">
-                    <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">
+                    <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title, ...(v.logo ? { logo: v.logo } : {}) })}" class="btn-primary detail-apply-btn">
                         <span>Müraciət Et</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
