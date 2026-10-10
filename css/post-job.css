@@ -551,3 +551,17 @@ body.request-open {
         grid-template-columns: 1fr;
     }
 }
+
+/* "TALENTCORE" yazısının yanında loqo (class="site-logo" — main.js tema dəyişəndə
+   avtomatik logo.png ↔ logo_light.png dəyişir) */
+.request-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.request-brand .request-logo {
+    height: 24px;
+    width: auto;
+    flex-shrink: 0;
+}
