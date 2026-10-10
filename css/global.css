@@ -496,9 +496,9 @@ input:checked + .slider .sun { opacity: 1; }
 .footer-tagline {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* "Talentcore," alt yazının SOL kənarından başlayır */
     gap: 3px;
-    text-align: center;
+    text-align: left;
 }
 
 .footer-tagline-brand {
@@ -548,7 +548,7 @@ input:checked + .slider .sun { opacity: 1; }
         justify-content: center;
         text-align: center;
     }
-    .footer-tagline { order: 1; }
+    .footer-tagline { order: 1; align-items: center; text-align: center; }
     .footer-bottom { order: 2; justify-content: center; }
     .footer-copyright { order: 3; text-align: center; }
 }
