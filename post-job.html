@@ -94,7 +94,7 @@
                             <li><span class="tick">✓</span><span class="lang" data-en="Listing stays active for 30 days" data-az="Elanın 30 gün müddətində aktiv qalması">Elanın 30 gün müddətində aktiv qalması</span></li>
                             <li><span class="tick">✓</span><span class="lang" data-en="Company profile creation (logo, images and company info)" data-az="Şirkət profilinin yaradılması (loqo, şəkillər və şirkət haqqında məlumat)">Şirkət profilinin yaradılması (loqo, şəkillər və şirkət haqqında məlumat)</span></li>
                         </ul>
-                        <a href="contact.html" class="btn-primary pricing-cta lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</a>
+                        <button type="button" class="btn-primary pricing-cta lang" data-package="standard" data-en="Apply" data-az="Müraciət et">Müraciət et</button>
                     </div>
 
                     <div class="pricing-card pricing-card-premium glass-effect">
@@ -104,7 +104,7 @@
                             <li><span class="tick">✓</span><span class="lang" data-en="Everything included in the Standard package" data-az="Standart paketə daxil olan bütün xidmətlər">Standart paketə daxil olan bütün xidmətlər</span></li>
                             <li><span class="tick">✓</span><span class="lang" data-en="“Premium” status, featured at the top for 3 days" data-az="Elanın “Premium” statusu ilə 3 gün ərzində ön sıralarda yerləşdirilməsi">Elanın "Premium" statusu ilə 3 gün ərzində ön sıralarda yerləşdirilməsi</span></li>
                         </ul>
-                        <a href="contact.html" class="btn-primary pricing-cta lang" data-en="Get in Touch" data-az="Bizimlə Əlaqə">Bizimlə Əlaqə</a>
+                        <button type="button" class="btn-primary pricing-cta lang" data-package="premium" data-en="Apply" data-az="Müraciət et">Müraciət et</button>
                     </div>
 
                 </div>
@@ -147,7 +147,147 @@
         </div>
     </footer>
 
+    <!-- Müraciət modalı — paket kartındakı "Müraciət et" düyməsi açır (js/post-job.js).
+         Sol paneldə yalnız SEÇİLMİŞ paket (ad + xidmətlər) göstərilir, dəyişdirilə bilməz;
+         paketi dəyişmək üçün modalı bağlayıb digər kartın düyməsini basmaq lazımdır.
+         Forma Web3Forms ilə info@talentcore.az-a göndərilir (access key üçün CLAUDE.md-yə bax). -->
+    <div class="request-modal" id="request-modal" hidden>
+        <div class="request-dialog" role="dialog" aria-modal="true" aria-labelledby="request-title">
+            <button type="button" class="request-close" id="request-close" aria-label="Bağla">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+
+            <aside class="request-side">
+                <span class="request-kicker">TALENTCORE</span>
+                <h2 class="request-title lang" id="request-title" data-en="Get in touch with us" data-az="Bizimlə əlaqə saxlayın">Bizimlə əlaqə saxlayın</h2>
+                <p class="request-lead lang"
+                   data-en="Leave your details and our team will contact you to discuss publishing your job listing."
+                   data-az="Məlumatlarınızı qeyd edin, komandamız sizinlə əlaqə saxlayıb iş elanınızın yerləşdirilməsi barədə danışsın.">
+                   Məlumatlarınızı qeyd edin, komandamız sizinlə əlaqə saxlayıb iş elanınızın yerləşdirilməsi barədə danışsın.
+                </p>
+
+                <div class="request-package">
+                    <span class="request-label lang" data-en="Selected package" data-az="Seçilmiş paket">Seçilmiş paket</span>
+                    <div class="request-package-name" id="request-package-name"></div>
+                    <ul class="request-package-list" id="request-package-list"></ul>
+                </div>
+
+                <div class="request-direct">
+                    <span class="request-label lang" data-en="Or write to us directly" data-az="Və ya birbaşa yazın">Və ya birbaşa yazın</span>
+                    <div class="request-direct-btns">
+                        <!-- NÜMUNƏ ünvanlar: WhatsApp əlaqə səhifəsindəki nümunə nömrədən qurulub, Telegram "#" —
+                             real nömrə/ad ilə əvəzlənməlidir. -->
+                        <a href="https://wa.me/994120000000" class="request-direct-btn" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.2 7.9L3 21l1.2-4.6A9 9 0 1 1 21 12z"/></svg>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="#" class="request-direct-btn" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L3 10.5l6 2.2L11.2 20 14 15l4.5 3.5L21 3z"/><path d="M9 12.7L21 3"/></svg>
+                            <span>Telegram</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="request-main">
+                <h3 class="request-form-title lang" data-en="Request form" data-az="Sorğu formu">Sorğu formu</h3>
+                <p class="request-sub lang"
+                   data-en="Please fill in all fields; additional notes are optional."
+                   data-az="Bütün xanaları doldurun, əlavə qeydlər isə könüllüdür.">
+                   Bütün xanaları doldurun, əlavə qeydlər isə könüllüdür.
+                </p>
+
+                <form id="request-form" novalidate>
+                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" id="request-subject" value="Talentcore.az — Yeni elan sorğusu">
+                    <input type="hidden" name="package" id="request-package-input" value="">
+                    <input type="hidden" name="name" id="request-fullname" value="">
+                    <input type="checkbox" name="botcheck" class="botcheck-field" tabindex="-1" autocomplete="off">
+
+                    <div class="rq-row">
+                        <div class="rq-field">
+                            <label for="rq-first" class="lang req" data-en="First name" data-az="Ad">Ad</label>
+                            <input type="text" id="rq-first" name="first_name" class="lang-placeholder" autocomplete="given-name"
+                                   placeholder="Adınız" data-az-placeholder="Adınız" data-en-placeholder="Your first name">
+                        </div>
+                        <div class="rq-field">
+                            <label for="rq-last" class="lang req" data-en="Last name" data-az="Soyad">Soyad</label>
+                            <input type="text" id="rq-last" name="last_name" class="lang-placeholder" autocomplete="family-name"
+                                   placeholder="Soyadınız" data-az-placeholder="Soyadınız" data-en-placeholder="Your last name">
+                        </div>
+                    </div>
+
+                    <div class="rq-field">
+                        <label for="rq-company" class="lang req" data-en="Company name" data-az="Şirkət adı">Şirkət adı</label>
+                        <input type="text" id="rq-company" name="company" class="lang-placeholder" autocomplete="organization"
+                               placeholder="Şirkətinizin adı" data-az-placeholder="Şirkətinizin adı" data-en-placeholder="Your company name">
+                    </div>
+
+                    <div class="rq-row">
+                        <div class="rq-field">
+                            <label for="rq-phone" class="lang req" data-en="Phone number" data-az="Telefon nömrəsi">Telefon nömrəsi</label>
+                            <input type="tel" id="rq-phone" name="phone" autocomplete="tel" placeholder="+994 __ ___ __ __">
+                        </div>
+                        <div class="rq-field">
+                            <label for="rq-email" class="lang req" data-en="Email" data-az="E-poçt">E-poçt</label>
+                            <input type="email" id="rq-email" name="email" autocomplete="email" placeholder="ad@sirket.az">
+                        </div>
+                    </div>
+
+                    <div class="rq-row">
+                        <div class="rq-field">
+                            <span class="rq-label lang req" data-en="Vacancy file (Word)" data-az="Vakansiya faylı (Word)">Vakansiya faylı (Word)</span>
+                            <label class="rq-upload" for="rq-vacancy-file">
+                                <input type="file" id="rq-vacancy-file" name="attachment" accept=".doc,.docx">
+                                <span class="rq-upload-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+                                </span>
+                                <span class="rq-upload-text">
+                                    <strong class="lang" data-en="Attach a file" data-az="Fayl əlavə edin">Fayl əlavə edin</strong>
+                                    <small class="lang" data-en=".doc or .docx" data-az=".doc və ya .docx">.doc və ya .docx</small>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="rq-field">
+                            <span class="rq-label lang req" data-en="Company logo" data-az="Şirkət loqosu">Şirkət loqosu</span>
+                            <label class="rq-upload" for="rq-logo-file">
+                                <input type="file" id="rq-logo-file" name="company_logo" accept=".png,.jpg,.jpeg,.svg,.webp,image/png,image/jpeg,image/svg+xml,image/webp">
+                                <span class="rq-upload-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg>
+                                </span>
+                                <span class="rq-upload-text">
+                                    <strong class="lang" data-en="Attach the logo" data-az="Loqonu əlavə edin">Loqonu əlavə edin</strong>
+                                    <small class="lang" data-en="PNG, JPG, SVG or WebP" data-az="PNG, JPG, SVG və ya WebP">PNG, JPG, SVG və ya WebP</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="rq-field">
+                        <label for="rq-note" class="lang" data-en="Additional note (optional)" data-az="Əlavə qeyd (könüllü)">Əlavə qeyd (könüllü)</label>
+                        <textarea id="rq-note" name="message" rows="3" class="lang-placeholder"
+                                  placeholder="Vakansiya və ya ehtiyacınız barədə qısa məlumat"
+                                  data-az-placeholder="Vakansiya və ya ehtiyacınız barədə qısa məlumat"
+                                  data-en-placeholder="Brief information about the vacancy or your needs"></textarea>
+                    </div>
+
+                    <button type="submit" class="request-submit" id="request-submit">
+                        <span class="lang" data-en="Send request" data-az="Sorğunu göndər">Sorğunu göndər</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
+                    <p class="request-status" id="request-status" aria-live="polite"></p>
+                    <p class="request-consent lang"
+                       data-en="By submitting, you consent to your personal data being processed for contact purposes."
+                       data-az="Göndərməklə şəxsi məlumatlarınızın əlaqə məqsədilə emalına razılıq verirsiniz.">
+                       Göndərməklə şəxsi məlumatlarınızın əlaqə məqsədilə emalına razılıq verirsiniz.
+                    </p>
+                </form>
+            </section>
+        </div>
+    </div>
+
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/post-job.js"></script>
 </body>
 </html>
