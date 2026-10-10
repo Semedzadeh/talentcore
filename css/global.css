@@ -495,9 +495,10 @@ input:checked + .slider .sun { opacity: 1; }
 
 .footer-tagline {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* "Talentcore," alt yazının SOL kənarından başlayır */
-    gap: 3px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline; /* "Talentcore," və cümlə TƏK sətirdə ardıcıl durur */
+    gap: 4px 8px;
     text-align: left;
 }
 
@@ -511,7 +512,6 @@ input:checked + .slider .sun { opacity: 1; }
 
 .footer-tagline-text {
     font-size: 14px;
-    font-style: italic; /* Poppins italic (500) fonta əlavə edilib — saxta (sintetik) italic yox */
     font-weight: 500;
     color: var(--text-color);
     opacity: 0.85;
@@ -549,7 +549,7 @@ input:checked + .slider .sun { opacity: 1; }
         justify-content: center;
         text-align: center;
     }
-    .footer-tagline { order: 1; align-items: center; text-align: center; }
+    .footer-tagline { order: 1; justify-content: center; text-align: center; }
     .footer-bottom { order: 2; justify-content: center; }
     .footer-copyright { order: 3; text-align: center; }
 }
