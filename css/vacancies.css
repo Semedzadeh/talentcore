@@ -746,14 +746,21 @@ body.light-theme .vacancy-sort-menu {
 }
 
 /* Loqolar YUMRU (dairə) — kvadrat yaxşı görünmürdü (JobSearch-dəki kimi).
-   img-də 8% daxili boşluq: dairənin künclərində loqo kəsilməsin. */
+   img-də 14% daxili boşluq (kvadrat loqonun künc nöqtəsi dairəyə sığsın): dairənin künclərində loqo kəsilməsin. */
 .vacancy-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 8%;
+    padding: 14%;
     box-sizing: border-box;
     background: #fff;
+}
+
+/* logos/*.svg nümunə loqoları artıq özləri tam dairədir (fon dairəsi 96x96
+   kətanı doldurur) — onlara daxili boşluq verilməsin, yoxsa ətrafında ağ
+   halqa qalır. PNG loqolar (kvadrat/düzbucaqlı) üçün 14% boşluq qalır. */
+.vacancy-logo img[src$=".svg"] {
+    padding: 0;
 }
 
 /* Tarix indi sağ düymə sütununda, paylaş düyməsinin ALTINDA (kartın özündə
