@@ -291,7 +291,14 @@
     "İxtisaslaşdığımız Sahələr": "Сферы экспертизы",
     "Məsləhətləşmə Alın": "Получить консультацию",
     "İş elanlarının dərc olunması": "Публикация вакансий",
-    "Reklam bannerlərinin yerləşdirilməsi": "Размещение рекламных баннеров"
+    "Reklam bannerlərinin yerləşdirilməsi": "Размещение рекламных баннеров",
+    "Seçilmiş xidmət": "Выбранная услуга",
+    "Məlumatlarınızı qeyd edin, komandamız sizinlə əlaqə saxlayıb reklam bannerinin yerləşdirilməsi barədə danışsın.": "Оставьте свои данные, и наша команда свяжется с вами, чтобы обсудить размещение вашего рекламного баннера.",
+    "Ulduz (*) ilə işarələnmiş xanalar məcburidir.": "Поля, отмеченные *, обязательны.",
+    "Banner faylı (istəyə bağlı)": "Файл баннера (необязательно)",
+    "Şirkət loqosu (istəyə bağlı)": "Логотип компании (необязательно)",
+    "PNG, JPG, SVG və ya PDF": "PNG, JPG, SVG или PDF",
+    "Reklam kampaniyası barədə qısa məlumat": "Краткая информация о вашей рекламной кампании"
   },
   zh: {
     "(Building Leadership Teams That Build Great Companies).": "（打造成就卓越企业的领导团队）。",
@@ -562,7 +569,14 @@
     "İxtisaslaşdığımız Sahələr": "专业领域",
     "Məsləhətləşmə Alın": "获取咨询",
     "İş elanlarının dərc olunması": "发布招聘信息",
-    "Reklam bannerlərinin yerləşdirilməsi": "投放广告横幅"
+    "Reklam bannerlərinin yerləşdirilməsi": "投放广告横幅",
+    "Seçilmiş xidmət": "所选服务",
+    "Məlumatlarınızı qeyd edin, komandamız sizinlə əlaqə saxlayıb reklam bannerinin yerləşdirilməsi barədə danışsın.": "请留下您的信息，我们的团队将与您联系，商讨投放您的广告横幅。",
+    "Ulduz (*) ilə işarələnmiş xanalar məcburidir.": "标有 * 的栏位为必填项。",
+    "Banner faylı (istəyə bağlı)": "横幅文件（选填）",
+    "Şirkət loqosu (istəyə bağlı)": "公司徽标（选填）",
+    "PNG, JPG, SVG və ya PDF": "PNG、JPG、SVG 或 PDF",
+    "Reklam kampaniyası barədə qısa məlumat": "关于您广告活动的简要说明"
   }
   };
   window.TC_I18N = D;
