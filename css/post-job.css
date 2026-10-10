@@ -121,3 +121,433 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* =====================================================================
+   MÜRACİƏT MODALI ("Müraciət et" düyməsi) — iki panelli: solda yalnız
+   SEÇİLMİŞ paket, sağda sorğu formu (js/post-job.js açır/bağlayır).
+   Rənglər .request-modal-dakı dəyişənlərdədir; ağ rejim override edir.
+   ===================================================================== */
+.request-modal {
+    --rq-side: #2a3352;
+    --rq-main: #252c45;
+    --rq-input: #171c35;
+    --rq-border: rgba(255, 255, 255, 0.12);
+    --rq-text: #ffffff;
+    --rq-muted: #aeb8d0;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 8, 18, 0.72);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+}
+
+.request-modal[hidden] {
+    display: none;
+}
+
+body.light-theme .request-modal {
+    --rq-side: #eaf0fa;
+    --rq-main: #ffffff;
+    --rq-input: #f2f5fb;
+    --rq-border: #d9e1ef;
+    --rq-text: #0f172a;
+    --rq-muted: #4a5873;
+    background: rgba(15, 23, 42, 0.45);
+}
+
+body.request-open {
+    overflow: hidden;
+}
+
+.request-dialog {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.5fr);
+    width: 100%;
+    max-width: 960px;
+    margin: auto;
+    border-radius: 24px;
+    border: 1px solid rgba(217, 119, 66, 0.5);
+    overflow: hidden;
+    color: var(--rq-text);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.request-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--rq-border);
+    background: transparent;
+    color: var(--rq-muted);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.request-close:hover {
+    color: #d97742;
+    border-color: #d97742;
+}
+
+.request-close svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Sol panel --- */
+.request-side {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 36px 34px;
+    background: var(--rq-side);
+    border-right: 1px solid var(--rq-border);
+}
+
+.request-kicker {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #d97742;
+}
+
+.request-title {
+    font-size: clamp(24px, 2.4vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--rq-text);
+}
+
+.request-lead {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--rq-muted);
+}
+
+.request-label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--rq-muted);
+    margin-bottom: 10px;
+}
+
+.request-package {
+    margin-top: 10px;
+}
+
+/* Seçilmiş paketin adı — dəyişdirilə bilməz (toggle YOX), sadəcə göstərilir */
+.request-package-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #c4642f;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.request-package-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+}
+
+.request-package-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--rq-text);
+}
+
+.request-package-list .tick {
+    color: #d97742;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.request-direct {
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.request-direct-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.request-direct-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--rq-border);
+    color: var(--rq-text);
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.request-direct-btn:hover {
+    border-color: #d97742;
+    color: #d97742;
+}
+
+.request-direct-btn svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* --- Sağ panel (forma) --- */
+.request-main {
+    padding: 36px 40px 30px;
+    background: var(--rq-main);
+}
+
+.request-form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--rq-text);
+    margin-bottom: 6px;
+    padding-right: 44px;
+}
+
+.request-sub {
+    font-size: 13px;
+    color: var(--rq-muted);
+    margin-bottom: 22px;
+}
+
+#request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rq-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.rq-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.rq-field label,
+.rq-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--rq-text);
+}
+
+.rq-field label.req::after,
+.rq-label.req::after {
+    content: " *";
+    color: #d97742;
+}
+
+.rq-field input[type="text"],
+.rq-field input[type="tel"],
+.rq-field input[type="email"],
+.rq-field textarea {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--rq-text);
+    background: var(--rq-input);
+    border: 1px solid var(--rq-border);
+    border-radius: 12px;
+    padding: 13px 16px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.rq-field input::placeholder,
+.rq-field textarea::placeholder {
+    color: var(--rq-muted);
+    opacity: 0.7;
+}
+
+.rq-field input:focus,
+.rq-field textarea:focus {
+    border-color: #d97742;
+}
+
+.rq-field input.invalid,
+.rq-upload.invalid {
+    border-color: #e5484d;
+}
+
+/* Fayl yükləmə qutusu (nöqtəli sərhəd) — input gizlidir, label bütün sahəni tutur */
+.rq-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 62px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px dashed var(--rq-border);
+    background: var(--rq-input);
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.rq-upload:hover {
+    border-color: #d97742;
+}
+
+.rq-upload input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rq-upload-icon {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(217, 119, 66, 0.14);
+    color: #d97742;
+}
+
+.rq-upload-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.rq-upload-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.rq-upload-text strong {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--rq-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rq-upload-text small {
+    font-size: 11.5px;
+    color: var(--rq-muted);
+}
+
+.request-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #c4642f;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(196, 100, 47, 0.35);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.request-submit:hover:not(:disabled) {
+    background: #d97742;
+    transform: translateY(-1px);
+}
+
+.request-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.request-submit svg {
+    width: 18px;
+    height: 18px;
+}
+
+.request-status {
+    min-height: 18px;
+    font-size: 13px;
+    text-align: center;
+    color: var(--rq-muted);
+}
+
+.request-status.status-success {
+    color: #34c38f;
+}
+
+.request-status.status-error {
+    color: #e5484d;
+}
+
+.request-consent {
+    font-size: 11.5px;
+    text-align: center;
+    color: var(--rq-muted);
+    margin-top: -4px;
+}
+
+@media (max-width: 860px) {
+    .request-dialog {
+        grid-template-columns: 1fr;
+    }
+    .request-side {
+        padding: 28px 24px 22px;
+        border-right: none;
+        border-bottom: 1px solid var(--rq-border);
+    }
+    .request-direct {
+        margin-top: 8px;
+    }
+    .request-main {
+        padding: 26px 22px 24px;
+    }
+}
+
+@media (max-width: 560px) {
+    .request-modal {
+        padding: 12px;
+    }
+    .rq-row {
+        grid-template-columns: 1fr;
+    }
+}
