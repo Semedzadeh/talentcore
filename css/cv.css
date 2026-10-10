@@ -154,7 +154,7 @@
        gələndə burada şirkət loqosu olacaq) */
     width: 54px;
     height: 54px;
-    border-radius: 14px;
+    border-radius: 50%;
     background: var(--bg-color);
     border: 1px solid var(--border-color);
     color: var(--text-muted);
