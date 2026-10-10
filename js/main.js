@@ -1,30 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Dil Dəyişdirici
+    // 1. Dil Dəyişdirici (az | en | ru | zh) — seçilmiş dil localStorage-də ('lang')
+    // saxlanılır və hər səhifə açılanda avtomatik tətbiq olunur (əvvəl səhifə dəyişəndə
+    // AZ-yə qayıdırdı).
     const langSwitch = document.getElementById('lang-switch');
+    const SUPPORTED_LANGS = ['az', 'en', 'ru', 'zh'];
+
+    function applyLanguage(selectedLang) {
+        // <html lang> ƏVVƏL yenilənir — tcText/tcMsg (js/translations.js) və
+        // səhifə skriptləri cari dili buradan oxuyur
+        document.documentElement.lang = selectedLang;
+        // Mətn seçimi window.tcText-dədir: az → data-az, en → data-en, ru/zh →
+        // js/translations.js lüğəti (açar = data-az), tapılmasa data-en ehtiyatı.
+        // translations.js yüklənməyibsə köhnə az/en davranışı saxlanılır.
+        document.querySelectorAll('.lang').forEach(el => {
+            el.innerHTML = window.tcText
+                ? window.tcText(el, selectedLang)
+                : (selectedLang === 'az' ? el.getAttribute('data-az') : el.getAttribute('data-en'));
+        });
+        // input/textarea placeholder-ləri innerHTML ilə tərcümə oluna bilmir,
+        // ona görə eyni məntiq placeholder atributu üçün ayrıca .lang-placeholder
+        // klassı ilə təkrarlanır (bax: vacancies.html)
+        document.querySelectorAll('.lang-placeholder').forEach(el => {
+            el.placeholder = window.tcPlaceholder
+                ? window.tcPlaceholder(el, selectedLang)
+                : (selectedLang === 'az' ? el.getAttribute('data-az-placeholder') : el.getAttribute('data-en-placeholder'));
+        });
+    }
+
     if (langSwitch) {
         langSwitch.addEventListener('change', function() {
-            const selectedLang = this.value; // az | en | ru | zh
-            // <html lang> ƏVVƏL yenilənir — tcText/tcMsg (js/translations.js) və
-            // səhifə skriptləri cari dili buradan oxuyur
-            document.documentElement.lang = selectedLang;
-            // Mətn seçimi window.tcText-dədir: az → data-az, en → data-en, ru/zh →
-            // js/translations.js lüğəti (açar = data-az), tapılmasa data-en ehtiyatı.
-            // translations.js yüklənməyibsə köhnə az/en davranışı saxlanılır.
-            document.querySelectorAll('.lang').forEach(el => {
-                el.innerHTML = window.tcText
-                    ? window.tcText(el, selectedLang)
-                    : (selectedLang === 'az' ? el.getAttribute('data-az') : el.getAttribute('data-en'));
-            });
-            // input/textarea placeholder-ləri innerHTML ilə tərcümə oluna bilmir,
-            // ona görə eyni məntiq placeholder atributu üçün ayrıca .lang-placeholder
-            // klassı ilə təkrarlanır (bax: vacancies.html)
-            document.querySelectorAll('.lang-placeholder').forEach(el => {
-                el.placeholder = window.tcPlaceholder
-                    ? window.tcPlaceholder(el, selectedLang)
-                    : (selectedLang === 'az' ? el.getAttribute('data-az-placeholder') : el.getAttribute('data-en-placeholder'));
-            });
+            applyLanguage(this.value);
+            try { localStorage.setItem('lang', this.value); } catch (e) { /* private rejim və s. — sükutla keçirik */ }
         });
+
+        // Səhifə açılanda yadda saxlanmış dil varsa tətbiq edirik. main.js DOMContentLoaded-də
+        // səhifə skriptlərindən (vacancies.js, cv.js...) ƏVVƏL qeydiyyatdan keçdiyi üçün,
+        // onlar işə düşəndə <html lang> artıq doğru olur.
+        let savedLang = 'az';
+        try { savedLang = localStorage.getItem('lang') || 'az'; } catch (e) { /* ignore */ }
+        if (SUPPORTED_LANGS.includes(savedLang) && savedLang !== 'az') {
+            langSwitch.value = savedLang;
+            applyLanguage(savedLang);
+        }
     }
 
     // 2. Tünd / Açıq Rejim və LOQO idarəetməsi
