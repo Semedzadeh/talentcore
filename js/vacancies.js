@@ -1063,14 +1063,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderServicesShowcase() {
         const item = SERVICES_SHOWCASE[showcaseIndex];
-        const lang = document.documentElement.lang === 'en' ? 'en' : 'az';
-        const ctaText = lang === 'en' ? 'Explore Our Services' : 'Xidmətlərimizə baxın';
-        const hintText = lang === 'en' ? 'Select a vacancy on the left to see its details.' : 'Ətraflı məlumat üçün soldan bir vakansiya seçin.';
+        // 4 dil (az/en/ru/zh): mətnlər window.tcMsg ilə seçilir — az mətni açardır,
+        // ru/zh js/translations.js lüğətindədir, en isə burada ehtiyatdır
+        const ctaText = window.tcMsg('Xidmətlərimizə baxın', 'Explore Our Services');
+        const hintText = window.tcMsg('Ətraflı məlumat üçün soldan bir vakansiya seçin.', 'Select a vacancy on the left to see its details.');
         detailEl.innerHTML = `
             <div class="detail-placeholder">
                 <div class="detail-placeholder-icon">${PLACEHOLDER_ILLUSTRATION}</div>
-                <h3>${item[lang].title}</h3>
-                <p>${item[lang].desc}</p>
+                <h3>${item.az.title}</h3>
+                <p>${window.tcMsg(item.az.desc, item.en.desc)}</p>
                 <a href="services.html" class="btn-primary">${ctaText}</a>
                 <div class="detail-placeholder-hint"><div class="hint-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3"/><circle cx="5.500" cy="10" r="2"/><circle cx="18.500" cy="10" r="2"/><path d="M7 20v-1.500a5 5 0 0 1 10 0V20M1.500 19v-1a3 3 0 0 1 3-3M22.500 19v-1a3 3 0 0 0-3-3"/></svg></div><span>${hintText}</span></div>
             </div>
@@ -1416,7 +1417,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // "Bütün ...", seçilibsə seçilmiş variantların adları (uzunsa "…" ilə kəsilir).
     function updateGroupSubtitles() {
         if (!sidebarFiltersEl) return;
-        const lang = document.documentElement.lang === 'en' ? 'en' : 'az';
         sidebarFiltersEl.querySelectorAll('.filter-group').forEach(group => {
             const sub = group.querySelector('.filter-group-sub');
             if (!sub) return;
@@ -1430,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 sub.classList.add('lang');
                 sub.removeAttribute('title');
-                sub.textContent = sub.getAttribute('data-' + lang) || '';
+                sub.textContent = window.tcText(sub) || '';
             }
         });
     }

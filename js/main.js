@@ -4,17 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const langSwitch = document.getElementById('lang-switch');
     if (langSwitch) {
         langSwitch.addEventListener('change', function() {
-            const selectedLang = this.value;
+            const selectedLang = this.value; // az | en | ru | zh
+            // <html lang> ƏVVƏL yenilənir — tcText/tcMsg (js/translations.js) və
+            // səhifə skriptləri cari dili buradan oxuyur
+            document.documentElement.lang = selectedLang;
+            // Mətn seçimi window.tcText-dədir: az → data-az, en → data-en, ru/zh →
+            // js/translations.js lüğəti (açar = data-az), tapılmasa data-en ehtiyatı.
+            // translations.js yüklənməyibsə köhnə az/en davranışı saxlanılır.
             document.querySelectorAll('.lang').forEach(el => {
-                el.innerHTML = selectedLang === 'az' ? el.getAttribute('data-az') : el.getAttribute('data-en');
+                el.innerHTML = window.tcText
+                    ? window.tcText(el, selectedLang)
+                    : (selectedLang === 'az' ? el.getAttribute('data-az') : el.getAttribute('data-en'));
             });
             // input/textarea placeholder-ləri innerHTML ilə tərcümə oluna bilmir,
-            // ona görə eyni data-az/data-en məntiqi placeholder atributu üçün
-            // ayrıca .lang-placeholder klassı ilə təkrarlanır (bax: vacancies.html)
+            // ona görə eyni məntiq placeholder atributu üçün ayrıca .lang-placeholder
+            // klassı ilə təkrarlanır (bax: vacancies.html)
             document.querySelectorAll('.lang-placeholder').forEach(el => {
-                el.placeholder = selectedLang === 'az' ? el.getAttribute('data-az-placeholder') : el.getAttribute('data-en-placeholder');
+                el.placeholder = window.tcPlaceholder
+                    ? window.tcPlaceholder(el, selectedLang)
+                    : (selectedLang === 'az' ? el.getAttribute('data-az-placeholder') : el.getAttribute('data-en-placeholder'));
             });
-            document.documentElement.lang = selectedLang; // <html lang> də yenilənir (əlçatanlıq/SEO üçün)
         });
     }
 
