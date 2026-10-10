@@ -299,7 +299,8 @@
     "Şirkət loqosu (istəyə bağlı)": "Логотип компании (необязательно)",
     "PNG, JPG, SVG və ya PDF": "PNG, JPG, SVG или PDF",
     "Reklam kampaniyası barədə qısa məlumat": "Краткая информация о вашей рекламной кампании",
-    "Strateji karyera qərarları üçün doğru tərəfdaş": "Надёжный партнёр для стратегических карьерных решений"
+    "Strateji karyera qərarları üçün doğru tərəfdaş": "Надёжный партнёр для стратегических карьерных решений",
+    "Sığorta": "Страхование"
   },
   zh: {
     "(Building Leadership Teams That Build Great Companies).": "（打造成就卓越企业的领导团队）。",
@@ -578,7 +579,8 @@
     "Şirkət loqosu (istəyə bağlı)": "公司徽标（选填）",
     "PNG, JPG, SVG və ya PDF": "PNG、JPG、SVG 或 PDF",
     "Reklam kampaniyası barədə qısa məlumat": "关于您广告活动的简要说明",
-    "Strateji karyera qərarları üçün doğru tərəfdaş": "战略性职业决策的可靠合作伙伴"
+    "Strateji karyera qərarları üçün doğru tərəfdaş": "战略性职业决策的可靠合作伙伴",
+    "Sığorta": "保险"
   }
   };
   window.TC_I18N = D;
