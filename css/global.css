@@ -485,19 +485,20 @@ input:checked + .slider .sun { opacity: 1; }
     transform: translateY(-2px);
 }
 
-/* Footer solu: "Talentcore, / Strateji karyera qərarları üçün doğru tərəfdaş" şüarı,
-   altında hüquq yazısı; sağda sosial ikonlar (order:2). */
+/* Footer 3 hissə: solda hüquq yazısı, ORTADA "Talentcore, / Strateji karyera
+   qərarları üçün doğru tərəfdaş" şüarı, sağda "Bizi İzləyin" ikonları.
+   .footer-left HTML-də wrapper-dir (şüar + hüquq yazısı), amma display:contents
+   ilə "yox olur" — uşaqları birbaşa .footer-container-in grid/flex elementləri sayılır. */
 .footer-left {
-    order: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    display: contents;
 }
 
 .footer-tagline {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    gap: 3px;
+    text-align: center;
 }
 
 .footer-tagline-brand {
@@ -505,6 +506,7 @@ input:checked + .slider .sun { opacity: 1; }
     font-weight: 700;
     color: #d97742;
     line-height: 1.2;
+    letter-spacing: 0.2px;
 }
 
 .footer-tagline-text {
@@ -512,6 +514,40 @@ input:checked + .slider .sun { opacity: 1; }
     font-weight: 500;
     color: var(--text-color);
     opacity: 0.85;
+}
+
+/* Geniş ekran (≥1000px): 3 sütunlu grid — orta sütun (şüar) sol/sağ hissələrin
+   eni fərqli olsa belə dəqiq ORTADA qalır (1fr auto 1fr). */
+@media (min-width: 1000px) {
+    .site-footer .footer-container {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 16px 32px;
+    }
+    .footer-copyright {
+        grid-column: 1;
+        justify-self: start;
+    }
+    .footer-tagline {
+        grid-column: 2;
+    }
+    .footer-bottom {
+        grid-column: 3;
+        justify-self: end;
+    }
+}
+
+/* Dar ekran (<1000px): hamısı alt-alta, ortalanmış: şüar, ikonlar, hüquq yazısı */
+@media (max-width: 999px) {
+    .site-footer .footer-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    .footer-tagline { order: 1; }
+    .footer-bottom { order: 2; justify-content: center; }
+    .footer-copyright { order: 3; text-align: center; }
 }
 
 .footer-copyright {
@@ -524,7 +560,6 @@ input:checked + .slider .sun { opacity: 1; }
 
 @media (max-width: 640px) {
     .site-footer .footer-container { flex-direction: column; justify-content: center; text-align: center; }
-    .footer-left { order: 2; align-items: center; text-align: center; }
     .footer-copyright { text-align: center; }
     .footer-bottom {
         flex-direction: column;
