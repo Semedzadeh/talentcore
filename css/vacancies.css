@@ -2583,7 +2583,7 @@ body.light-theme .vacancy-card .vacancy-share-btn {
    ===================================================================== */
 .vacancy-detail h2 {
     font-family: 'Inter', 'Poppins', sans-serif;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--text-color);
@@ -2595,7 +2595,7 @@ body.light-theme .vacancy-detail h2 {
 
 .vacancy-detail .company-row {
     font-family: 'Inter', 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: #d97706;
 }
@@ -2620,20 +2620,20 @@ body.light-theme .detail-meta-item {
 }
 
 .detail-meta-item .value {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: inherit;
     gap: 7px;
 }
 
 .detail-meta-item .value .meta-icon {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
 }
 
 /* Bölmə başlıqları: kiçik, UPPERCASE, çox qalın + solda 3px narıncı şaquli xətt */
 .detail-section h4 {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -2651,7 +2651,7 @@ body.light-theme .detail-section h4 {
 /* Əsas mətn və siyahı bəndləri: 14px / 400 / sətir arası 1.65, bəndlər arası 8px */
 .detail-section p,
 .detail-section ul li {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 1.65;
     color: #cbd5e1;
@@ -2664,5 +2664,22 @@ body.light-theme .detail-section ul li {
 
 .detail-section ul li {
     margin-bottom: 8px;
+}
+
+/* Bir pillə böyütmə (+1px): tablar, "Son tarix" həbi, oxşar vakansiyalar */
+.detail-tab {
+    font-size: 15px;
+}
+
+.detail-deadline-pill {
+    font-size: 14px;
+}
+
+.similar-title {
+    font-size: 15px;
+}
+
+.similar-meta {
+    font-size: 13px;
 }
 /* ===== /DETAL DİZAYN TESTİ ===== */
