@@ -2499,3 +2499,74 @@ body.light-theme .saved-count {
 body.page-vacancies .glass-header {
     width: 98%;
 }
+
+/* =====================================================================
+   KART DİZAYN TESTİ (typografiya + yüngül çərçivə) — təqdim olunmuş dizayn
+   təklifi sınaqdan keçirilir. Bəyənilməsə BU BLOKU SİLMƏK (və ya bu commit-i
+   revert etmək) kifayətdir, başqa heç nəyə toxunulmayıb.
+   Qaydalar: başlıq 15.5px/700 (açıq rejimdə #0F172A); şirkət 13.5px/500
+   (açıq rejimdə #475569); tarix 11.5px/500 #94A3B8; PREMIUM 10.5px/700/
+   uppercase/letter-spacing .5px; başlıq-şirkət arası 5px; kart kənarı
+   incəldilib + yumşaq kölgə; save/paylaş ikonları solğun, hover-də narıncı.
+   Loqolar QƏSDƏN dairə qalır (istifadəçi yumru istəyib, təklifdəki kvadrat
+   yox) — ölçü artıq 48px-dir.
+   ===================================================================== */
+.vacancy-card {
+    border-left-width: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.vacancy-card h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+body.light-theme .vacancy-card h4 {
+    color: #0f172a;
+}
+
+.vacancy-card .vacancy-company {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+body.light-theme .vacancy-card .vacancy-company {
+    color: #475569;
+}
+
+.vacancy-card .vacancy-posted {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #94a3b8;
+    opacity: 1;
+}
+
+.vacancy-premium-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vacancy-card.premium,
+body.light-theme .vacancy-card.premium {
+    border-top-width: 1px;
+}
+
+.vacancy-card .vacancy-save-btn:not(.saved),
+.vacancy-card .vacancy-share-btn {
+    color: rgba(148, 163, 184, 0.65);
+}
+
+body.light-theme .vacancy-card .vacancy-save-btn:not(.saved),
+body.light-theme .vacancy-card .vacancy-share-btn {
+    color: #94a3b8;
+}
+
+.vacancy-card .vacancy-save-btn:not(.saved):hover,
+.vacancy-card .vacancy-share-btn:hover {
+    color: #d97742;
+}
+/* ===== /KART DİZAYN TESTİ ===== */
