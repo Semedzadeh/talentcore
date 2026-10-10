@@ -522,7 +522,7 @@ input:checked + .slider .sun { opacity: 1; }
     .site-footer .footer-container {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
-        align-items: center;
+        align-items: baseline; /* şüarın 1-ci sətri ("Talentcore,") sol/sağ yazılarla EYNİ baseline-da */
         gap: 16px 32px;
     }
     .footer-copyright {
