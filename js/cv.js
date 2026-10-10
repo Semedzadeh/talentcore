@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!formEl || !statusEl || !submitBtn) return;
 
-    const isAz = () => document.documentElement.lang !== 'en';
+    // Mesajlar 4 dildədir (az/en burada, ru/zh js/translations.js lüğətində — açar az mətnidir)
+    const t = (m) => (window.tcMsg ? window.tcMsg(m.az, m.en) : (document.documentElement.lang === 'az' ? m.az : m.en));
 
     const MESSAGES = {
         sending: { az: 'Göndərilir...', en: 'Sending...' },
@@ -98,13 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const accessKey = formEl.access_key.value.trim();
         if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-            setStatus(MESSAGES.missingKey[isAz() ? 'az' : 'en'], 'error');
+            setStatus(t(MESSAGES.missingKey), 'error');
             return;
         }
 
         // Məcburi sahələr: ad soyad, email, telefon, CV. Form `novalidate`-dir,
         // ona görə yoxlama burada edilir. Motivasiya məktubu qəsdən məcburi DEYİL.
-        const lang = isAz() ? 'az' : 'en';
         const nameEl = document.getElementById('cv-name');
         const emailEl = document.getElementById('cv-email');
         const phoneEl = document.getElementById('cv-phone');
@@ -118,30 +118,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (missing.length) {
             missing.forEach(el => el.classList.add('invalid'));
             missing[0].focus();
-            setStatus(MESSAGES.requiredFields[lang], 'error');
+            setStatus(t(MESSAGES.requiredFields), 'error');
             return;
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
             emailEl.classList.add('invalid');
             emailEl.focus();
-            setStatus(MESSAGES.invalidEmail[lang], 'error');
+            setStatus(t(MESSAGES.invalidEmail), 'error');
             return;
         }
         if (phoneEl.value.replace(/\D/g, '').length < 7) {
             phoneEl.classList.add('invalid');
             phoneEl.focus();
-            setStatus(MESSAGES.invalidPhone[lang], 'error');
+            setStatus(t(MESSAGES.invalidPhone), 'error');
             return;
         }
 
         if ((fileInput.files[0] && fileInput.files[0].size > MAX_FILE_SIZE) ||
             (motivationInput.files[0] && motivationInput.files[0].size > MAX_FILE_SIZE)) {
-            setStatus(MESSAGES.tooLarge[lang], 'error');
+            setStatus(t(MESSAGES.tooLarge), 'error');
             return;
         }
 
         submitBtn.disabled = true;
-        setStatus(MESSAGES.sending[isAz() ? 'az' : 'en'], null);
+        setStatus(t(MESSAGES.sending), null);
 
         try {
             const formData = new FormData(formEl);
@@ -155,13 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.success) {
-                setStatus(MESSAGES[isApplyMode ? 'successApply' : 'success'][isAz() ? 'az' : 'en'], 'success');
+                setStatus(t(MESSAGES[isApplyMode ? 'successApply' : 'success']), 'success');
                 formEl.reset();
             } else {
-                setStatus(MESSAGES.error[isAz() ? 'az' : 'en'], 'error');
+                setStatus(t(MESSAGES.error), 'error');
             }
         } catch (err) {
-            setStatus(MESSAGES.error[isAz() ? 'az' : 'en'], 'error');
+            setStatus(t(MESSAGES.error), 'error');
         } finally {
             submitBtn.disabled = false;
         }

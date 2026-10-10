@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!formEl || !statusEl || !submitBtn) return;
 
-    const isAz = () => document.documentElement.lang !== 'en';
+    // Mesajlar 4 dildədir (az/en burada, ru/zh js/translations.js lüğətində — açar az mətnidir)
+    const t = (m) => (window.tcMsg ? window.tcMsg(m.az, m.en) : (document.documentElement.lang === 'az' ? m.az : m.en));
 
     const MESSAGES = {
         sending: { az: 'Göndərilir...', en: 'Sending...' },
@@ -29,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const accessKey = formEl.access_key.value.trim();
         if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-            setStatus(MESSAGES.missingKey[isAz() ? 'az' : 'en'], 'error');
+            setStatus(t(MESSAGES.missingKey), 'error');
             return;
         }
 
         submitBtn.disabled = true;
-        setStatus(MESSAGES.sending[isAz() ? 'az' : 'en'], null);
+        setStatus(t(MESSAGES.sending), null);
 
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
@@ -45,13 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.success) {
-                setStatus(MESSAGES.success[isAz() ? 'az' : 'en'], 'success');
+                setStatus(t(MESSAGES.success), 'success');
                 formEl.reset();
             } else {
-                setStatus(MESSAGES.error[isAz() ? 'az' : 'en'], 'error');
+                setStatus(t(MESSAGES.error), 'error');
             }
         } catch (err) {
-            setStatus(MESSAGES.error[isAz() ? 'az' : 'en'], 'error');
+            setStatus(t(MESSAGES.error), 'error');
         } finally {
             submitBtn.disabled = false;
         }
