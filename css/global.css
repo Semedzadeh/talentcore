@@ -485,8 +485,36 @@ input:checked + .slider .sun { opacity: 1; }
     transform: translateY(-2px);
 }
 
-.footer-copyright {
+/* Footer solu: "Talentcore, / Strateji karyera qərarları üçün doğru tərəfdaş" şüarı,
+   altında hüquq yazısı; sağda sosial ikonlar (order:2). */
+.footer-left {
     order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-tagline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.footer-tagline-brand {
+    font-size: 17px;
+    font-weight: 700;
+    color: #d97742;
+    line-height: 1.2;
+}
+
+.footer-tagline-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 0.85;
+}
+
+.footer-copyright {
     text-align: left;
     margin: 0;
     font-size: 12px;
@@ -496,7 +524,8 @@ input:checked + .slider .sun { opacity: 1; }
 
 @media (max-width: 640px) {
     .site-footer .footer-container { flex-direction: column; justify-content: center; text-align: center; }
-    .footer-copyright { order: 2; text-align: center; }
+    .footer-left { order: 2; align-items: center; text-align: center; }
+    .footer-copyright { text-align: center; }
     .footer-bottom {
         flex-direction: column;
         text-align: center;
