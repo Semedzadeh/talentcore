@@ -2631,17 +2631,16 @@ body.light-theme .detail-meta-item {
     height: 16px;
 }
 
-/* Bölmə başlıqları: kiçik, UPPERCASE, çox qalın + solda 3px narıncı şaquli xətt */
+/* Bölmə başlıqları: çox qalın; ilk hərf böyük, qalanı balaca (sentence case) — UPPERCASE və
+   soldakı narıncı xətt ləğv edildi (istək) */
 .detail-section h4 {
     font-size: 13px;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    text-transform: none; /* köhnə qayda uppercase idi — açıq şəkildə ləğv */
+    letter-spacing: 0.01em;
     line-height: 1.3;
     color: #ffffff; /* mətndən (#cbd5e1) AYRILSIN deyə tam ağ */
     opacity: 1;
-    padding-left: 10px;
-    border-left: 3px solid #f97316;
 }
 
 body.light-theme .detail-section h4 {
