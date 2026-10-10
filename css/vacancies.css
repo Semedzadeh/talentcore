@@ -2488,12 +2488,3 @@ body.light-theme .saved-count {
 body.page-vacancies .glass-header {
     width: 98%;
 }
-
-/* Qara rejimdə vakansiyalar səhifəsinin arxa fonu bir qədər AÇILDI (əvvəl düz
-   --bg-color #0b1120 — demək olar qara idi). Yumşaq göy-navy qradiyent: yuxarıda
-   bir az daha açıq, aşağıda footer-ə doğru tündləşir. Kart/panel fonları
-   yarı-şəffaf olduğu üçün onlar da avtomatik bir qədər açılır. Açıq rejim
-   (öz qradiyenti var) dəyişmir. */
-body:not(.light-theme) .vacancies-page {
-    background: linear-gradient(180deg, #131d3a 0%, #0f1830 100%);
-}
