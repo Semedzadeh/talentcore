@@ -1264,7 +1264,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         listEl.innerHTML = pageItems.map(v => `
             <a class="vacancy-card${v.premium ? ' premium' : ''}" data-id="${v.id}" href="vacancies.html?vacancy=${v.id}">
-                ${v.premium ? '<span class="vacancy-premium-badge">PREMIUM</span>' : ''}
+                ${v.premium ? '<span class="vacancy-premium-badge">PREMİUM</span>' : ''}
                 <button type="button" class="vacancy-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-label="Yadda saxla">
                     <svg viewBox="0 0 24 24">
                         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
