@@ -2479,3 +2479,12 @@ body.light-theme .vacancies-saved-panel:hover {
 body.light-theme .saved-count {
     color: #0f1d3d;
 }
+
+/* Menyu (header) və altındakı hero banner eyni en/kənarlarda dayansın: səhifənin
+   məzmunu (banner, axtarış, 3 sütun) 98%-dir, header isə global.css-də 95% idi —
+   sağdan-soldan fərq var idi. Əsas götürülən BANNERdir, ona görə header 98%-ə
+   gətirilir. Yalnız vakansiyalar səhifəsində (body.page-vacancies), digər
+   səhifələrin header-i dəyişmir. */
+body.page-vacancies .glass-header {
+    width: 98%;
+}
