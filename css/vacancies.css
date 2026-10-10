@@ -1535,8 +1535,19 @@ body.light-theme .vacancies-hero {
     position: absolute;
     inset: 0;
     z-index: -2;
-    background: url('../baku_light.jpg') no-repeat 50% 9% / 100% auto;
-    filter: brightness(0.62) saturate(0.85) contrast(1.05);
+    /* Banner "PƏNCƏRƏ" kimi işləyir: şəkil səhifənin arxa fon şəkli (baku_light.jpg),
+       background-attachment:fixed ilə VIEWPORT-a bərkidilib — səhifə scroll olanda
+       şəkil yerində qalır, banner isə onun üzərindən sürüşür (paralaks). Tündləşdirmə
+       əvvəl filter ilə idi, amma filter fixed fonla etibarlı işləmir — ona görə tünd
+       örtük şəkillə birgə eyni background-un ikinci qatı kimi verilib. (iOS Safari
+       fixed fonu dəstəkləmir — orada şəkil banner ilə birgə hərəkət edir.) */
+    background:
+        linear-gradient(rgba(6, 11, 24, 0.4), rgba(6, 11, 24, 0.4)),
+        url('../baku_light.jpg');
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+    background-size: cover, cover;
+    background-attachment: fixed, fixed;
 }
 
 .vacancies-hero::after {
