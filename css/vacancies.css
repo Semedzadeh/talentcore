@@ -2634,7 +2634,7 @@ body.light-theme .detail-meta-item {
 /* Bölmə başlıqları: çox qalın; ilk hərf böyük, qalanı balaca (sentence case) — UPPERCASE və
    soldakı narıncı xətt ləğv edildi (istək) */
 .detail-section h4 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 800;
     text-transform: none; /* köhnə qayda uppercase idi — açıq şəkildə ləğv */
     letter-spacing: 0.01em;
@@ -2650,7 +2650,7 @@ body.light-theme .detail-section h4 {
 /* Əsas mətn və siyahı bəndləri: 14px / 400 / sətir arası 1.65, bəndlər arası 8px */
 .detail-section p,
 .detail-section ul li {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.65;
     color: #cbd5e1;
