@@ -511,6 +511,7 @@ input:checked + .slider .sun { opacity: 1; }
 
 .footer-tagline-text {
     font-size: 14px;
+    font-style: italic; /* Poppins italic (500) fonta əlavə edilib — saxta (sintetik) italic yox */
     font-weight: 500;
     color: var(--text-color);
     opacity: 0.85;
