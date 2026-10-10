@@ -1185,19 +1185,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${listSectionHtml('Öhdəliklər', v.responsibilities)}
                 ${listSectionHtml('Tələblər', v.requirements)}
                 ${listSectionHtml('Təkliflərimiz', v.offer)}
+                <!-- "Müraciət Et" və "Yadda saxla" yalnız "Vəzifə haqqında" tabındadır —
+                     "Şirkət haqqında" tabında lazım deyil (tələb olunub) -->
+                <div class="detail-actions">
+                    <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">
+                        <span>Müraciət Et</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </a>
+                    <button type="button" class="detail-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-pressed="${isSaved(v.id)}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                        <span>${isSaved(v.id) ? 'Yadda saxlanıb' : 'Yadda saxla'}</span>
+                    </button>
+                </div>
             </div>
             <div class="detail-tab-panel" role="tabpanel" data-panel="company" hidden>
                 ${textSectionHtml('Şirkət haqqında məlumat', COMPANY_ABOUT[v.company] || v.companyAbout) || '<p class="detail-tab-empty">Bu şirkət haqqında məlumat tezliklə əlavə olunacaq.</p>'}
-            </div>
-            <div class="detail-actions">
-                <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title })}" class="btn-primary detail-apply-btn">
-                    <span>Müraciət Et</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                </a>
-                <button type="button" class="detail-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-pressed="${isSaved(v.id)}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                    <span>${isSaved(v.id) ? 'Yadda saxlanıb' : 'Yadda saxla'}</span>
-                </button>
             </div>
             ${similarSectionHtml(v)}
         `;
