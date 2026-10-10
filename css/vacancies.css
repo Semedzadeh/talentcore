@@ -2570,3 +2570,99 @@ body.light-theme .vacancy-card .vacancy-share-btn {
     color: #d97742;
 }
 /* ===== /KART DİZAYN TESTİ ===== */
+
+/* =====================================================================
+   DETAL DİZAYN TESTİ (sağdakı "detallı baxış") — təqdim olunmuş dizayn
+   təklifi sınaqdan keçirilir. Bəyənilməsə BU BLOKU SİLMƏK + vacancies.html-dəki
+   Inter <link>-ini götürmək (və ya bu commit-i revert etmək) kifayətdir.
+   Təklif açıq fon üçün yazılıb: açıq rejimdə rənglər AYNEN (#0F172A başlıq,
+   #D97706 şirkət, ağ badge #E2E8F0 kənar #334155 yazı, #475569 bölmə başlığı,
+   #334155 mətn); qara rejimdə eyni ölçü/çəki/forma, rənglər tünd fona uyğun
+   açıq tonlara çevrilib. Şrift: Inter (başlıq + şirkət sətri — təklifdə yalnız
+   bunlar üçün şrift göstərilib, qalanı Poppins qalır).
+   ===================================================================== */
+.vacancy-detail h2 {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-color);
+}
+
+body.light-theme .vacancy-detail h2 {
+    color: #0f172a;
+}
+
+.vacancy-detail .company-row {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #d97706;
+}
+
+/* Dairəvi etiketlər (Bakı, Tam ştat, Ofisdən, Maaş...) — "Son tarix" həbi öz üslubunda qalır */
+.detail-meta-row {
+    gap: 10px;
+}
+
+.detail-meta-item {
+    padding: 5px 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    color: #e2e8f0;
+}
+
+body.light-theme .detail-meta-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+.detail-meta-item .value {
+    font-size: 13px;
+    font-weight: 500;
+    color: inherit;
+    gap: 7px;
+}
+
+.detail-meta-item .value .meta-icon {
+    width: 15px;
+    height: 15px;
+}
+
+/* Bölmə başlıqları: kiçik, UPPERCASE, çox qalın + solda 3px narıncı şaquli xətt */
+.detail-section h4 {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    color: #cbd5e1;
+    opacity: 1;
+    padding-left: 10px;
+    border-left: 3px solid #f97316;
+}
+
+body.light-theme .detail-section h4 {
+    color: #475569;
+}
+
+/* Əsas mətn və siyahı bəndləri: 14px / 400 / sətir arası 1.65, bəndlər arası 8px */
+.detail-section p,
+.detail-section ul li {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: #cbd5e1;
+}
+
+body.light-theme .detail-section p,
+body.light-theme .detail-section ul li {
+    color: #334155;
+}
+
+.detail-section ul li {
+    margin-bottom: 8px;
+}
+/* ===== /DETAL DİZAYN TESTİ ===== */
