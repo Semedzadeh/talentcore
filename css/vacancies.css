@@ -114,7 +114,7 @@ body.vacancy-focused-mode .vacancy-detail {
        hündürlüyüdür (calc(100vh + 50px)); məzmun ondan çox olarsa
        .vacancies-sidebar öz daxili scroll-u ilə açılır. align-self:start —
        qısa sütun grid-in mərkəzində üzmür, yuxarıdan başlayır. */
-    max-height: calc(100vh + 50px);
+    max-height: min(calc(100vh + 50px), 1100px);
     align-self: start;
 }
 
@@ -410,7 +410,7 @@ body.light-theme .vacancies-post-panel .sidebar-menu-link:hover {
 .vacancies-list-panel {
     display: flex;
     flex-direction: column;
-    height: calc(100vh + 50px);
+    height: min(calc(100vh + 50px), 1100px);
 }
 
 .vacancies-list-toolbar {
@@ -787,7 +787,7 @@ body.light-theme .vacancy-sort-menu {
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 42px;
-    height: calc(100vh + 50px);
+    height: min(calc(100vh + 50px), 1100px);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) transparent;
