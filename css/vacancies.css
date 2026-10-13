@@ -2682,13 +2682,13 @@ body.light-theme .detail-section ul li {
 /* ===== /DETAL DİZAYN TESTİ ===== */
 
 /* =====================================================================
-   HERO — hazır banner şəkli (images/hero-banner.jpg, 1840×150).
+   HERO — hazır banner şəkli (images/hero-banner.jpg, 1538×150).
    Şəkil özündə yazı daşıdığı üçün Bakı fotosu, tünd örtük və solda yazı
    gizlədilir (yazı ekran oxuyucular üçün DOM-da qalır). Əvvəlki foto
    görünüşünə qayıtmaq üçün bu blok silinməlidir.
    ===================================================================== */
 .vacancies-hero {
-    background: #ff8000;
+    background: #0b2146;
     padding: 0;
     min-height: clamp(110px, 8vw, 150px);
 }
