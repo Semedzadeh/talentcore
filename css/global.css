@@ -8,7 +8,8 @@
     --border-color: rgba(255, 255, 255, 0.15);
     --card-bg: rgba(255, 255, 255, 0.04);
     --card-hover: rgba(255, 255, 255, 0.09);
-    --hero-bg: linear-gradient(135deg, rgba(11, 17, 32, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    --hero-photo: url('../baku_light.jpg'); /* backend-dən (Sayt parametrləri) js/site-settings.js ilə əvəzlənə bilər */
+    --hero-bg: linear-gradient(135deg, rgba(11, 17, 32, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%), var(--hero-photo) no-repeat center center/cover;
 }
 
 body.light-theme {
@@ -18,7 +19,7 @@ body.light-theme {
     /* Foto üzərinə mülayim örtük: nə xam foto (əvvəlki 0.4/0.5 — çox parlaq idi),
        nə də tam ağ vərəq (0.88/0.92 — çox yastı və "ağ" görünürdü). Slate tonlu,
        orta şəffaflıqda örtük fotonun dərinliyini saxlayır, amma göz yormur. */
-    --hero-bg: linear-gradient(150deg, rgba(226, 232, 240, 0.74) 0%, rgba(203, 213, 225, 0.82) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    --hero-bg: linear-gradient(150deg, rgba(226, 232, 240, 0.74) 0%, rgba(203, 213, 225, 0.82) 100%), var(--hero-photo) no-repeat center center/cover;
     /* Mətnlərin tam qara olaraq daha yaxşı oxunması üçün */
     --text-color: #0f172a;
     --text-muted: #334155;

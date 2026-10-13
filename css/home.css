@@ -12,14 +12,14 @@
     /* Yalnız ana səhifə: örtük soldan sağa şəffaflaşır — mətn olan sol tərəf tünd
        (oxunaqlı), sağ tərəf isə Bakı fotosunu aydın göstərir. Digər səhifələr
        global.css-dəki ümumi --hero-bg ilə qalır. */
-    background: linear-gradient(to right, rgba(11, 17, 32, 0.95) 0%, rgba(11, 17, 32, 0.88) 40%, rgba(11, 17, 32, 0.75) 70%, rgba(11, 17, 32, 0.6) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    background: linear-gradient(to right, rgba(11, 17, 32, 0.95) 0%, rgba(11, 17, 32, 0.88) 40%, rgba(11, 17, 32, 0.75) 70%, rgba(11, 17, 32, 0.6) 100%), var(--hero-photo) no-repeat center center/cover;
     background-position: top center;
     background-attachment: fixed;
     transition: background 0.4s ease;
 }
 
 body.light-theme .hero-baku {
-    background: linear-gradient(to right, rgba(226, 232, 240, 0.95) 0%, rgba(226, 232, 240, 0.86) 40%, rgba(226, 232, 240, 0.6) 70%, rgba(226, 232, 240, 0.3) 100%), url('../baku_light.jpg') no-repeat center center/cover;
+    background: linear-gradient(to right, rgba(226, 232, 240, 0.95) 0%, rgba(226, 232, 240, 0.86) 40%, rgba(226, 232, 240, 0.6) 70%, rgba(226, 232, 240, 0.3) 100%), var(--hero-photo) no-repeat center center/cover;
     background-position: top center;
     background-attachment: fixed;
 }

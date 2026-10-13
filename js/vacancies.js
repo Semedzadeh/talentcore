@@ -1062,6 +1062,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let showcaseTimer = null;
 
     function renderServicesShowcase() {
+        // Backend-dən reklam şəkilləri gəlibsə (Sayt parametrləri) xidmətlər əvəzinə onlar göstərilir
+        const ads = window.TC_ADS || [];
+        if (ads.length) {
+            const ad = ads[showcaseIndex % ads.length];
+            const hasLink = ad.url && new RegExp('^https?://', 'i').test(ad.url);
+            const wrap = document.createElement(hasLink ? 'a' : 'div');
+            wrap.className = 'detail-ad';
+            if (hasLink) { wrap.href = ad.url; wrap.target = '_blank'; wrap.rel = 'noopener sponsored'; }
+            const img = document.createElement('img');
+            img.src = ad.image;
+            img.alt = '';
+            wrap.appendChild(img);
+            detailEl.replaceChildren(wrap);
+            return;
+        }
         const item = SERVICES_SHOWCASE[showcaseIndex];
         // 4 dil (az/en/ru/zh): mətnlər window.tcMsg ilə seçilir — az mətni açardır,
         // ru/zh js/translations.js lüğətindədir, en isə burada ehtiyatdır
@@ -1082,10 +1097,18 @@ document.addEventListener('DOMContentLoaded', () => {
         stopShowcaseRotation();
         renderServicesShowcase();
         showcaseTimer = setInterval(() => {
-            showcaseIndex = (showcaseIndex + 1) % SERVICES_SHOWCASE.length;
+            showcaseIndex = (showcaseIndex + 1) % ((window.TC_ADS && window.TC_ADS.length) || SERVICES_SHOWCASE.length);
             renderServicesShowcase();
         }, 5000);
     }
+
+    // Parametrlər (reklamlar) gec gəlirsə: heç nə seçilməyibsə sağ sütunu dərhal yenilə
+    window.addEventListener('tc-settings', function () {
+        if (activeVacancyId === null) {
+            showcaseIndex = 0;
+            startShowcaseRotation();
+        }
+    });
 
     function stopShowcaseRotation() {
         if (showcaseTimer) {
