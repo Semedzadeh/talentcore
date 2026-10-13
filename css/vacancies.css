@@ -746,19 +746,19 @@ body.light-theme .vacancy-sort-menu {
 }
 
 /* Loqolar YUMRU (dairə) — kvadrat yaxşı görünmürdü (JobSearch-dəki kimi).
-   img-də 14% daxili boşluq (kvadrat loqonun künc nöqtəsi dairəyə sığsın): dairənin künclərində loqo kəsilməsin. */
+   img dairəni TAM doldurur (JobSearch kimi): daxili boşluq və ağ halqa yoxdur, şəkil dairəyə görə kəsilir (object-fit: cover). */
 .vacancy-logo img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 14%;
+    object-fit: cover;
+    padding: 0;
     box-sizing: border-box;
     background: #fff;
 }
 
 /* logos/*.svg nümunə loqoları artıq özləri tam dairədir (fon dairəsi 96x96
    kətanı doldurur) — onlara daxili boşluq verilməsin, yoxsa ətrafında ağ
-   halqa qalır. PNG loqolar (kvadrat/düzbucaqlı) üçün 14% boşluq qalır. */
+   halqa qalır. (İndi bütün loqolar boşluqsuz doldurur.) */
 .vacancy-logo img[src$=".svg"] {
     padding: 0;
 }
