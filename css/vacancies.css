@@ -2680,3 +2680,70 @@ body.light-theme .detail-section ul li {
     font-size: 13px;
 }
 /* ===== /DETAL DİZAYN TESTİ ===== */
+
+/* =====================================================================
+   HERO — hazır banner şəkli (images/hero-banner.jpg, 1840×150).
+   Şəkil özündə yazı daşıdığı üçün Bakı fotosu, tünd örtük və solda yazı
+   gizlədilir (yazı ekran oxuyucular üçün DOM-da qalır). Əvvəlki foto
+   görünüşünə qayıtmaq üçün bu blok silinməlidir.
+   ===================================================================== */
+.vacancies-hero {
+    background: #ff8000;
+    padding: 0;
+    min-height: clamp(110px, 8vw, 150px);
+}
+
+.vacancies-hero::before {
+    background: url('../images/hero-banner.jpg') no-repeat center center / cover;
+    filter: none;
+}
+
+.vacancies-hero::after {
+    display: none;
+}
+
+.vacancies-hero .vacancies-hero-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* Telefon/planşetdə banner şəkli yanlardan kəsilməsin: şəkil ekranın enindən asılı
+   ölçüdə (yazı ~88% en tutur) mərkəzdə dayanır, qalan yer şəklin öz narıncı fonu ilə
+   (#ff8000) dolur — fon düzdür, ona görə keçid hiss olunmur. */
+@media (max-width: 900px) {
+    .vacancies-hero {
+        min-height: clamp(64px, 14vw, 120px);
+    }
+
+    .vacancies-hero::before {
+        background-size: 170vw auto;
+        background-position: center center;
+    }
+}
+
+/* Çox dar ekranda "Vakansiya yerləşdir" yazısı düymədən daşmasın */
+@media (max-width: 480px) {
+    .searchbar-right .post-dropdown-toggle {
+        font-size: 13.5px;
+        gap: 7px;
+        padding: 0 12px;
+    }
+    .searchbar-right .post-dropdown-toggle svg {
+        width: 15px;
+        height: 15px;
+    }
+    .searchbar-right .post-dropdown-toggle .post-dropdown-chevron {
+        width: 14px;
+        height: 14px;
+    }
+    .searchbar-right .vacancy-sort-toggle {
+        padding: 0 12px;
+    }
+}
