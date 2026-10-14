@@ -2765,3 +2765,17 @@ body.light-theme .detail-section ul li {
     min-height: 320px;
     object-fit: cover;
 }
+
+/* Planşet (901–1200px): banner bu enlərdə şəklin nisbətindən (≈10.7:1) "dar" olur və
+   cover yazını soldan kəsirdi. Burada şəkil bannerin hündürlüyünə sığdırılır, soldan
+   azacıq çəkilir — yazı tam görünür, sağdakı siluet isə yerinə görə qismən kəsilə bilər. */
+@media (min-width: 901px) and (max-width: 1200px) {
+    .vacancies-hero {
+        min-height: 110px;
+    }
+
+    .vacancies-hero::before {
+        background-size: auto 100%;
+        background-position: 15% center;
+    }
+}
