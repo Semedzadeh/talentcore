@@ -2720,12 +2720,12 @@ body.light-theme .detail-section ul li {
    (#ff8000) dolur — fon düzdür, ona görə keçid hiss olunmur. */
 @media (max-width: 900px) {
     .vacancies-hero {
-        min-height: clamp(50px, 14.5vw, 130px);
+        min-height: clamp(52px, 17.7vw, 140px);
     }
 
     .vacancies-hero::before {
-        background-size: 156vw auto;
-        background-position: 8% center;
+        background-size: 190vw auto;
+        background-position: 7% center;
     }
 }
 
