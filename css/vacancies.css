@@ -2716,16 +2716,16 @@ body.light-theme .detail-section ul li {
 }
 
 /* Telefon/planşetdə banner şəkli yanlardan kəsilməsin: şəkil ekranın enindən asılı
-   ölçüdə (yazı ~88% en tutur) mərkəzdə dayanır, qalan yer şəklin öz narıncı fonu ilə
+   ölçüdə (yazı ~90% en tutur), yazı solda olduğu üçün soldan bir az çəkilmiş vəziyyətdə dayanır, qalan yer şəklin öz narıncı fonu ilə
    (#ff8000) dolur — fon düzdür, ona görə keçid hiss olunmur. */
 @media (max-width: 900px) {
     .vacancies-hero {
-        min-height: clamp(64px, 14vw, 120px);
+        min-height: clamp(50px, 14.5vw, 130px);
     }
 
     .vacancies-hero::before {
-        background-size: 170vw auto;
-        background-position: center center;
+        background-size: 156vw auto;
+        background-position: 8% center;
     }
 }
 
