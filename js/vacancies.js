@@ -1145,19 +1145,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="detail-section"><h4>${title}</h4><ul>${list.map(i => `<li><span class="tick">✓</span><span>${i}</span></li>`).join('')}</ul></div>`;
     }
 
-    // Oxşar vakansiyalar: eyni kateqoriya (ən güclü siqnal), eyni iş kateqoriyası və
-    // ya eyni fəaliyyət sahəsi. Ən çox üst-üstə düşən 3 elan.
+    // Oxşar vakansiyalar: YALNIZ eyni kateqoriyadan (sol paneldəki "Kateqoriyalar" = jobCategory), maks. 3 elan.
+    // Əvvəl PREMİUM, sonra ən yenilər. Kateqoriyası olmayan vakansiyada oxşar siyahısı çıxmır.
+    // (Backend-də eyni qayda: Vacancy::similar().)
     function getSimilarVacancies(v) {
-        const score = o => (o.category === v.category ? 2 : 0)
-            + (o.jobCategory && o.jobCategory === v.jobCategory ? 1 : 0)
-            + (o.sector && o.sector === v.sector ? 1 : 0);
+        if (!v.jobCategory) return [];
         return VACANCIES
-            .filter(o => o.id !== v.id)
-            .map(o => ({ o, s: score(o) }))
-            .filter(x => x.s > 0)
-            .sort((a, b) => b.s - a.s || a.o.id - b.o.id)
-            .slice(0, 3)
-            .map(x => x.o);
+            .filter(o => o.id !== v.id && o.jobCategory === v.jobCategory)
+            .sort((a, b) => (b.premium ? 1 : 0) - (a.premium ? 1 : 0)
+                || getPostedDaysAgo(a.posted) - getPostedDaysAgo(b.posted)
+                || a.id - b.id)
+            .slice(0, 3);
     }
 
     function similarSectionHtml(v) {
