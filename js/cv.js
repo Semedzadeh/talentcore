@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const company = (params.get('company') || '').trim();
     const vacancy = (params.get('vacancy') || '').trim();
+    // Backend-dən gələn vakansiyanın link adı (slug) — "Müraciət Et" linkində ?slug=... kimi gəlir
+    const vacancySlug = /^[a-z0-9-]{1,200}$/i.test((params.get('slug') || '').trim()) ? params.get('slug').trim() : '';
 
     // .lang mexanizmi data-az/data-en oxuyur (main.js) — mətni dəyişəndə hər ikisini yazırıq
     const setLang = (id, az, en) => {
@@ -60,7 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // dəyər olduğu üçün YALNIZ saytın öz logos/ qovluğundakı şəkil yoluna icazə verilir
         // (başqa sayt/javascript: və s. keçmir); əks halda (və ya logo yoxdursa) ümumi bina ikonu qalır.
         const logoParam = (params.get('logo') || '').trim();
-        if (/^logos\/[\w.-]+\.(png|jpe?g|svg|webp)$/i.test(logoParam)) {
+        // Backend loqoları mütləq ünvandır (BACKEND_ÜNVAN/storage/...): yalnız öz backend-imizin ünvanına icazə verilir.
+        const backendLogo = Boolean(window.TC_API_BASE) &&
+            logoParam.indexOf(window.TC_API_BASE + '/storage/') === 0 &&
+            /\.(png|jpe?g|webp)$/i.test(logoParam);
+        if (/^logos\/[\w.-]+\.(png|jpe?g|svg|webp)$/i.test(logoParam) || backendLogo) {
             const icon = document.querySelector('.cv-apply-icon');
             if (icon) {
                 const img = document.createElement('img');
@@ -112,10 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
     formEl.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const accessKey = formEl.access_key.value.trim();
-        if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-            setStatus(t(MESSAGES.missingKey), 'error');
-            return;
+        // Backend ünvanı (js/site-settings.js) varsa form öz backend-imizə (POST /apply) gedir;
+        // boşdursa köhnə Web3Forms yolu (access key tələb olunur).
+        const useBackend = Boolean(window.TC_API_BASE);
+        if (!useBackend) {
+            const accessKey = formEl.access_key.value.trim();
+            if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+                setStatus(t(MESSAGES.missingKey), 'error');
+                return;
+            }
         }
 
         // Məcburi sahələr: ad soyad, email, telefon, CV. Form `novalidate`-dir,
@@ -162,23 +173,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(formEl);
             // Boş seçilmiş motivasiya məktubu sahəsi boş fayl kimi göndərilməsin
             if (!motivationInput.files[0]) formData.delete('motivation_letter');
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: formData
-            });
-            const result = await response.json();
 
-            if (result.success) {
+            let success;
+            let serverMessage = '';
+            if (useBackend) {
+                // Backend vakansiyanı LİNK ADI (slug) ilə tanıyır; slug yoxdursa vakansiyasız ümumi CV sayılır
+                if (vacancySlug) formData.set('vacancy', vacancySlug); else formData.delete('vacancy');
+                formData.set('lang', document.documentElement.lang || 'az');
+                const result = await window.tcSubmit('/apply', formData);
+                success = result.ok;
+                serverMessage = (result.data && result.data.message) || '';
+            } else {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
+                });
+                success = (await response.json()).success;
+            }
+
+            if (success) {
                 setStatus(t(MESSAGES[isApplyMode ? 'successApply' : 'success']), 'success');
                 formEl.reset();
+                if (window.tcTrack) window.tcTrack('form_submit', { form_type: 'cv_application', vacancy: vacancySlug || undefined });
             } else {
-                setStatus(t(MESSAGES.error), 'error');
+                setStatus(serverMessage || t(MESSAGES.error), 'error');
             }
         } catch (err) {
             setStatus(t(MESSAGES.error), 'error');
         } finally {
             submitBtn.disabled = false;
+            if (window.tcResetTurnstile) window.tcResetTurnstile();
         }
     });
 });
