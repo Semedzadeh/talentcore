@@ -1,6 +1,8 @@
 // Vakansiyalar səhifəsi: sahələr üzrə filtrləmə + siyahıdan seçilən vakansiyanın
 // sağ paneldə detallı göstərilməsi. Yalnız vacancies.html-də işə düşür.
-document.addEventListener('DOMContentLoaded', () => {
+// async: backend rejimində (js/site-settings.js-də ünvan yazılıbsa) vakansiyalar və filtrlər
+// backend-dən yüklənənə qədər gözlənilir (bax "BACKEND REJİMİ" bloku VACANCIES massivindən sonra).
+document.addEventListener('DOMContentLoaded', async () => {
 
     // Sol paneldəki bütün filtr qruplarının (Fəaliyyət sahəsi, Şirkətlər,
     // Kateqoriyalar, Vəzifə dərəcəsi, Region, İş qrafiki, İş rejimi) aç/bağla
@@ -114,7 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // paylaşmağa imkan verir. "hardasa paylaşa bilsin" tələbinə görə sabit bir
     // platforma (WhatsApp/Telegram və s.) seçilmədi — link haradasa yapışdırıla bilsin deyə.
     async function shareVacancy(v, btn) {
-        const shareUrl = `${window.location.origin}${window.location.pathname}?vacancy=${v.id}`;
+        // Backend rejimində paylaşma linki vakansiyanın öz (Google-da görünən) səhifəsidir
+        const shareUrl = (BACKEND && v.slug)
+            ? `${window.TC_API_BASE}/vakansiya/${encodeURIComponent(v.slug)}`
+            : `${window.location.origin}${window.location.pathname}?vacancy=${v.id}`;
 
         if (navigator.share) {
             try {
@@ -154,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // --- VAKANSİYALAR (nümunə məlumatlar — real data ilə əvəzlənməlidir) ---
-    const VACANCIES = [
+    let VACANCIES = [
         {
             id: 1,
             premium: true,
@@ -881,6 +886,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // --- BACKEND REJİMİ ---
+    // js/site-settings.js-də backend ünvanı yazılıbsa yuxarıdakı nümunə vakansiyalar İSTİFADƏ OLUNMUR:
+    // vakansiyalar /api/vacancies-dən, filtr seçimləri /filters.json-dan gəlir (js/vacancies-backend.js).
+    // Ünvan boşdursa (indiki vəziyyət) bu blok heç nə etmir və səhifə nümunə datayla işləyir.
+    const BACKEND = Boolean(window.TC_API_BASE && window.tcVacanciesBackend);
+    // Backend filtr qrupları: [{ key, listId }] — passesSidebarFilters() və populyar düymələr bunu oxuyur
+    let FILTER_GROUPS = null;
+    const STATIC_GROUP_LISTS = {
+        sector: 'sector-filter-list', job_category: 'function-filter-list', level: 'level-filter-list',
+        region: 'region-filter-list', schedule: 'schedule-filter-list', work_mode: 'format-filter-list'
+    };
+    const listIdForGroup = (key) => STATIC_GROUP_LISTS[key] || (key + '-filter-list');
+    if (BACKEND) {
+        const backendData = await window.tcVacanciesBackend.load();
+        VACANCIES = backendData.vacancies;
+        FILTER_GROUPS = backendData.groups;
+        // Dil dəyişəndə vakansiya mətnləri də o dildə gəlsin: main.js dili yadda saxladıqdan sonra səhifəni yenilə
+        const langSwitch = document.getElementById('lang-switch');
+        if (langSwitch) langSwitch.addEventListener('change', () => setTimeout(() => location.reload(), 60));
+        // Populyar axtarışlar backend-dən (admin → Sayt parametrləri); parametrlər gec gələ bilər
+        const applyPopular = () => window.tcVacanciesBackend.renderPopular(window.TC_POPULAR);
+        applyPopular();
+        window.addEventListener('tc-settings', applyPopular);
+    }
+
     const MOBILE_BREAKPOINT = 1024; // css/vacancies.css-dəki mobil sərhədlə eynidir
     const MOBILE_PAGE_SIZE = 10; // mobildə hər səhifədə maksimum vakansiya sayı
 
@@ -910,7 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (requestedVacancy) {
         activeVacancyId = requestedVacancy.id;
         document.body.classList.add('vacancy-focused-mode');
-        document.title = `Talentcore | ${requestedVacancy.title}`;
+        document.title = `Talentcore | ${requestedVacancy.titleRaw || requestedVacancy.title}`;
     }
     // Şirkət haqqında məlumat (nümunə) — şirkət adı ilə uyğunlaşdırılır. Qəsdən
     // yalnız bəzi şirkətlər üçün doldurulub: məlumat verməyən şirkətin vakansiyasında
@@ -962,6 +992,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // təsir etmir. Bu, real backend gələnə qədər statik VACANCIES üzərində
     // test üçündür — real data ilə eyni taksonomiya saxlanılmalıdır.
     function passesSidebarFilters(v) {
+        // Backend rejimi: hər filtr qrupu vakansiyanın filters[qrup_açarı] dəyəri ilə müqayisə olunur
+        if (BACKEND) {
+            const companiesB = getCheckedValues('company-filter-list');
+            if (companiesB.length && !companiesB.includes(v.company)) return false;
+            for (const group of (FILTER_GROUPS || [])) {
+                const checked = getCheckedValues(group.listId);
+                if (checked.length && !checked.includes((v.filters || {})[group.key])) return false;
+            }
+            return true;
+        }
+
         const sectors = getCheckedValues('sector-filter-list');
         if (sectors.length && !sectors.includes(v.sector)) return false;
 
@@ -1182,7 +1223,17 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         stopShowcaseRotation();
-        const catLabel = (CATEGORIES.find(c => c.id === v.category) || {}).az || '';
+        const catLabel = (CATEGORIES.find(c => c.id === v.category) || {}).az || v.categoryLabel || '';
+        // "Müraciət Et" hara aparır: backend-də "birbaşa Glorri" seçilibsə xarici link (yeni tabda, bizə müraciət gəlmir),
+        // əks halda cv.html müraciət formu. Nümunə vakansiyalarda həmişə cv.html.
+        const externalApplyUrl = (v.apply && v.apply.method === 'external' && /^https?:\/\//i.test(v.apply.url || '')) ? v.apply.url : '';
+        const applyHref = externalApplyUrl || `cv.html?${new URLSearchParams({
+            company: v.companyRaw || v.company,
+            vacancy: v.titleRaw || v.title,
+            ...(v.slug ? { slug: v.slug } : {}),
+            ...((v.logoRaw || v.logo) ? { logo: v.logoRaw || v.logo } : {})
+        })}`;
+        const applyAttrs = externalApplyUrl ? ' target="_blank" rel="noopener noreferrer" data-apply="external"' : ' data-apply="mail"';
         detailEl.innerHTML = `
             <div class="detail-header">
                 ${companyLogoHtml(v)}
@@ -1210,7 +1261,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- "Müraciət Et" və "Yadda saxla" yalnız "Vəzifə haqqında" tabındadır —
                      "Şirkət haqqında" tabında lazım deyil (tələb olunub) -->
                 <div class="detail-actions">
-                    <a href="cv.html?${new URLSearchParams({ company: v.company, vacancy: v.title, ...(v.logo ? { logo: v.logo } : {}) })}" class="btn-primary detail-apply-btn">
+                    <a href="${applyHref}"${applyAttrs} class="btn-primary detail-apply-btn">
                         <span>Müraciət Et</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
@@ -1225,7 +1276,38 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             ${similarSectionHtml(v)}
         `;
+
+        // Boş qalan başlıq nişanları (məs. yer/qrafik/rejim seçilməyibsə) göstərilmir
+        detailEl.querySelectorAll('.detail-meta-item').forEach(item => {
+            const val = item.querySelector('.value');
+            if (val && !val.textContent.trim()) item.remove();
+        });
+
+        if (BACKEND) {
+            // Siyahı yığcam məlumat gətirir — təsvir və siyahılar vakansiya seçiləndə yüklənir
+            if (!v._detailLoaded && !v._detailLoading) {
+                v._detailLoading = true;
+                window.tcVacanciesBackend.loadDetail(v)
+                    .catch(() => { v._detailLoaded = true; })
+                    .finally(() => {
+                        v._detailLoading = false;
+                        if (activeVacancyId === v.id) renderDetail(v);
+                    });
+            }
+            if (!v._viewTracked) {
+                v._viewTracked = true;
+                if (window.tcTrack) window.tcTrack('vacancy_view', { vacancy: v.slug });
+            }
+        }
     }
+
+    // "Müraciət Et" kliklərinin sayğacı (mail yolu / Glorri yolu ayrıca sayılır)
+    detailEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.detail-apply-btn');
+        if (!btn || !window.tcTrack || !BACKEND) return;
+        const v = VACANCIES.find(x => x.id === activeVacancyId);
+        window.tcTrack(btn.dataset.apply === 'external' ? 'external_apply_click' : 'apply_click', { vacancy: v && v.slug });
+    });
 
     function renderMobilePagination(totalPages) {
         if (!isMobile() || totalPages <= 1) return '';
@@ -1460,7 +1542,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!resetBtn || !sidebarFiltersEl) return;
         updateGroupSubtitles();
         document.querySelectorAll('.level-chip').forEach(chip => {
-            const cb = sidebarFiltersEl.querySelector('#level-filter-list input[value="' + chip.dataset.level + '"]');
+            // Backend populyar düymələri istənilən filtr qrupuna bağlana bilər (data-group + data-value);
+            // köhnə statik düymələr "Vəzifə dərəcəsi" qrupuna (data-level) bağlıdır.
+            const chipList = listIdForGroup(chip.dataset.group || 'level');
+            const chipValue = chip.dataset.value || chip.dataset.level;
+            const cb = sidebarFiltersEl.querySelector('#' + chipList + ' input[value="' + CSS.escape(chipValue) + '"]');
             const on = !!(cb && cb.checked);
             chip.classList.toggle('active', on);
             chip.setAttribute('aria-pressed', String(on));
@@ -1522,25 +1608,33 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') runSearchNow();
         });
     }
-    document.querySelectorAll('.popular-chip[data-q]').forEach(chip => {
-        chip.addEventListener('click', () => {
-            if (!searchInput) return;
-            searchInput.value = chip.dataset.q;
-            runSearchNow();
-        });
-    });
+    // Populyar düymələr (söz tipli və filtr tipli): düymələr backend-dən gec gələ bilər, ona görə
+    // klik konteynerdə dinlənir (delegasiya).
+    const popularBox = document.querySelector('.popular-searches');
+    if (popularBox) {
+        popularBox.addEventListener('click', (e) => {
+            const chip = e.target.closest('.popular-chip');
+            if (!chip) return;
 
-    // Vəzifə dərəcəsi çipləri sol paneldəki "Vəzifə dərəcəsi" filtrinə bağlıdır:
-    // çipə basmaq həmin checkbox-ı aç/bağlayır, soldan seçim isə çipi aktiv göstərir
-    // (bax updateResetBtn-dəki sinxronizasiya).
-    document.querySelectorAll('.level-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            const cb = sidebarFiltersEl && sidebarFiltersEl.querySelector('#level-filter-list input[value="' + chip.dataset.level + '"]');
-            if (!cb) return;
-            cb.checked = !cb.checked;
-            cb.dispatchEvent(new Event('change', { bubbles: true }));
+            if (chip.dataset.q) {
+                if (!searchInput) return;
+                searchInput.value = chip.dataset.q;
+                runSearchNow();
+                return;
+            }
+
+            // Vəzifə dərəcəsi çipləri sol paneldəki müvafiq filtrə bağlıdır: çipə basmaq həmin
+            // checkbox-ı aç/bağlayır, soldan seçim isə çipi aktiv göstərir (bax updateResetBtn).
+            if (chip.classList.contains('level-chip')) {
+                const chipList = listIdForGroup(chip.dataset.group || 'level');
+                const chipValue = chip.dataset.value || chip.dataset.level;
+                const cb = sidebarFiltersEl && sidebarFiltersEl.querySelector('#' + chipList + ' input[value="' + CSS.escape(chipValue) + '"]');
+                if (!cb) return;
+                cb.checked = !cb.checked;
+                cb.dispatchEvent(new Event('change', { bubbles: true }));
+            }
         });
-    });
+    }
 
     // "Bütün sahələr" açılan siyahısı sol paneldəki "Fəaliyyət sahəsi" filtri ilə
     // eyni vəziyyəti göstərir: burda sahə seçmək həmin filtrin yalnız bir

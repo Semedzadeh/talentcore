@@ -1,6 +1,7 @@
-// Əlaqə səhifəsi: form Web3Forms (web3forms.com) vasitəsilə birbaşa
-// info@talentcore.az ünvanına göndərilir — istifadəçinin email tətbiqi
-// açılmır, hər şey səhifə daxilində baş verir. Yalnız contact.html-də işə düşür.
+// Əlaqə səhifəsi: form öz backend-imizə (POST /contact) göndərilir; alıcılar admin paneldən
+// ("Forma alıcıları → Əlaqə forması") təyin olunur. Backend ünvanı (js/site-settings.js) hələ boşdursa
+// köhnə Web3Forms yolu işləyir. İstifadəçinin email tətbiqi açılmır, hər şey səhifə daxilində baş verir.
+// Yalnız contact.html-də işə düşür.
 document.addEventListener('DOMContentLoaded', () => {
 
     const formEl = document.getElementById('contact-form');
@@ -28,33 +29,50 @@ document.addEventListener('DOMContentLoaded', () => {
     formEl.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const accessKey = formEl.access_key.value.trim();
-        if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-            setStatus(t(MESSAGES.missingKey), 'error');
-            return;
+        const useBackend = Boolean(window.TC_API_BASE);
+
+        if (!useBackend) {
+            const accessKey = formEl.access_key.value.trim();
+            if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+                setStatus(t(MESSAGES.missingKey), 'error');
+                return;
+            }
         }
 
         submitBtn.disabled = true;
         setStatus(t(MESSAGES.sending), null);
 
         try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: new FormData(formEl)
-            });
-            const result = await response.json();
+            let success;
+            if (useBackend) {
+                const formData = new FormData(formEl);
+                formData.set('lang', document.documentElement.lang || 'az');
+                const result = await window.tcSubmit('/contact', formData);
+                success = result.ok;
+                if (!success && result.data && result.data.message) {
+                    setStatus(result.data.message, 'error');
+                }
+            } else {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: new FormData(formEl)
+                });
+                success = (await response.json()).success;
+            }
 
-            if (result.success) {
+            if (success) {
                 setStatus(t(MESSAGES.success), 'success');
                 formEl.reset();
-            } else {
+                if (window.tcTrack) window.tcTrack('form_submit', { form_type: 'contact' });
+            } else if (!statusEl.classList.contains('status-error') || statusEl.textContent === t(MESSAGES.sending)) {
                 setStatus(t(MESSAGES.error), 'error');
             }
         } catch (err) {
             setStatus(t(MESSAGES.error), 'error');
         } finally {
             submitBtn.disabled = false;
+            if (window.tcResetTurnstile) window.tcResetTurnstile();
         }
     });
 });

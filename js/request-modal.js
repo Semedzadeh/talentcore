@@ -103,10 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
     formEl.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const accessKey = formEl.access_key.value.trim();
-        if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-            setStatus(t('Form hələ qoşulmayıb (access key əlavə olunmayıb).', 'The form is not connected yet (missing access key).'), 'error');
-            return;
+        // Backend ünvanı (js/site-settings.js) varsa sorğu öz backend-imizə (POST /request) gedir;
+        // boşdursa köhnə Web3Forms yolu (access key tələb olunur).
+        const useBackend = Boolean(window.TC_API_BASE);
+        if (!useBackend) {
+            const accessKey = formEl.access_key.value.trim();
+            if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+                setStatus(t('Form hələ qoşulmayıb (access key əlavə olunmayıb).', 'The form is not connected yet (missing access key).'), 'error');
+                return;
+            }
         }
 
         // Məcburi sahələr = `required` atributu olanlar (mətn/e-poçt/telefon + fayl qutuları).
@@ -154,15 +159,31 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         setStatus(t('Göndərilir...', 'Sending...'), null);
 
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: formData
-            });
-            const result = await response.json();
+        // Sorğunun növü (backend alıcıları buna görə seçir): ad-banners.html → banner, qalanı → iş elanı
+        const requestType = /ad-banners/i.test(location.pathname) ? 'banner_request' : 'job_post_request';
 
-            if (result.success) {
+        try {
+            let success;
+            let serverMessage = '';
+            if (useBackend) {
+                formData.set('type', requestType);
+                // backend "qeyd" sahəsini note adı ilə gözləyir
+                formData.set('note', formData.get('message') || '');
+                formData.delete('message');
+                const result = await window.tcSubmit('/request', formData);
+                success = result.ok;
+                serverMessage = (result.data && result.data.message) || '';
+            } else {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
+                });
+                success = (await response.json()).success;
+            }
+
+            if (success) {
+                if (window.tcTrack) window.tcTrack('form_submit', { form_type: requestType });
                 setStatus(t('Sorğunuz uğurla göndərildi. Tezliklə sizinlə əlaqə saxlayacağıq.', 'Your request has been sent. We will contact you shortly.'), 'success');
                 formEl.reset();
                 // reset() fayl seçimlərini də təmizləyir — qutulardakı fayl adlarını ilkin yazıya qaytar
@@ -171,12 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (packageInput) packageInput.value = currentPackage.name;
                 subjectInput.value = currentPackage.subject;
             } else {
-                setStatus(t('Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', 'Something went wrong, please try again shortly.'), 'error');
+                setStatus(serverMessage || t('Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', 'Something went wrong, please try again shortly.'), 'error');
             }
         } catch (err) {
             setStatus(t('Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', 'Something went wrong, please try again shortly.'), 'error');
         } finally {
             submitBtn.disabled = false;
+            if (window.tcResetTurnstile) window.tcResetTurnstile();
         }
     });
 });
