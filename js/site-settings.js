@@ -12,7 +12,7 @@
 
     // Cloudflare Turnstile "site key" (İCTİMAİ açardır, gizli deyil; gizli açar yalnız backend-in .env-indədir).
     // Boşdursa robot widget-i göstərilmir.
-    var TURNSTILE_SITE_KEY = '';
+    var TURNSTILE_SITE_KEY = '0x4AAAAAAFafgEAWE0jObHgs';
 
     var base = API_BASE.replace(/\/$/, '');
     window.TC_API_BASE = base;
