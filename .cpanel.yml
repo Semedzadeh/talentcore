@@ -1,0 +1,9 @@
+---
+# cPanel → Git Version Control → Deploy. Statik sayt backend-in sənəd qovluğuna (~/app/public) kopyalanır.
+# --delete YOXDUR: Laravel faylları (index.php, .htaccess, storage, filament) silinməsin.
+deployment:
+  tasks:
+    - export DEST=$HOME/app/public
+    - /bin/mkdir -p $DEST
+    - /bin/cp -a 404.html about.html ad-banners.html contact.html cv.html faq.html index.html industries.html post-job.html services.html vacancies.html robots.txt sitemap.xml sitemap-pages.xml baku_light.jpg baku_light_2.jpg logo.png logo_light.png $DEST/
+    - /bin/cp -a css js images logos $DEST/
