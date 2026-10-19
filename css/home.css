@@ -48,12 +48,6 @@ body.light-theme .hero-baku {
     color: var(--text-color); /* Qlobal rəng (gecə/gündüzə görə dəyişir) */
 }
 
-.subtitle-text {
-    font-size: clamp(16px, 1.5vw, 20px);
-    color: var(--text-muted);
-    margin-bottom: 25px;
-}
-
 .description {
     font-size: clamp(14px, 1.1vw, 16px);
     margin-bottom: 40px;

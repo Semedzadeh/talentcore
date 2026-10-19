@@ -23,7 +23,6 @@
     "İstedad bazarı, biznes ehtiyacları və təşkilati prioritetlər daim dəyişir. Biz bu dəyişiklikləri qabaqlayır, hər bir layihənin spesifik tələblərinə uyğun çevik və fərdiləşdirilmiş yanaşmalar formalaşdırırıq. Fərqli sənaye sahələri, vəzifə səviyyələri və biznes modelləri üzrə yanaşmamızı adaptasiya edərək hər bir tərəfdaş üçün ən effektiv həlli təqdim edirik. Çeviklik bizim üçün dəyişikliklərə uyğunlaşmaq deyil — dəyişiklikləri vaxtında görərək daha yaxşı nəticəyə çevirməkdir.": "The talent market, business needs and organizational priorities are constantly changing. We anticipate these changes and develop flexible, tailored approaches to the specific requirements of each project. By adapting our approach across different industries, seniority levels and business models, we deliver the most effective solution for every partner. For us, flexibility is not about adapting to change — it is about seeing changes in time and turning them into better results."
   },
   ru: {
-    "(Building Leadership Teams That Build Great Companies).": "(Создаём управленческие команды, которые строят великие компании).",
     "1 iş elanının saytda dərc olunması": "Публикация 1 вакансии на сайте",
     "100% Məxfilik və Etik Standartlar": "100% конфиденциальность и этические стандарты",
     "90 Günlük Pulsuz Əvəzetmə Zəmanəti": "Бесплатная замена в течение 90 дней",
@@ -303,7 +302,6 @@
     "Sığorta": "Страхование"
   },
   zh: {
-    "(Building Leadership Teams That Build Great Companies).": "（打造成就卓越企业的领导团队）。",
     "1 iş elanının saytda dərc olunması": "在网站上发布1条职位信息",
     "100% Məxfilik və Etik Standartlar": "100%保密与职业道德标准",
     "90 Günlük Pulsuz Əvəzetmə Zəmanəti": "90天免费更换保证",
