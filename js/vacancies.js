@@ -164,30 +164,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         {
             id: 34,
             premium: true,
-            title: 'Baş İcraçı Direktor (CEO)',
+            title: 'Hüquq Direktoru',
             company: 'Oba Market',
             logo: 'logos/oba-market.png',
-            category: 'marketing',
+            category: 'hr',
             sector: 'retail-ecommerce',
             jobCategory: 'legal-management',
-            level: 'ceo',
+            level: 'director',
             location: 'Bakı',
             type: 'Tam ştat',
             mode: 'Ofisdən',
             posted: 'Bu gün',
-            deadlineIn: 30,
-            description: 'Ölkə üzrə mağazalar şəbəkəsinin strateji idarə olunması, böyümə planlarının icrası və komandanın rəhbərliyi üçün təcrübəli Baş İcraçı Direktor axtarılır.',
+            deadlineIn: 28,
+            description: 'Şirkətin hüquqi təhlükəsizliyini, müqavilə münasibətlərini və normativ uyğunluğunu təmin edəcək, hüquq departamentinə rəhbərlik edəcək təcrübəli Hüquq Direktoru axtarılır.',
             responsibilities: [
-                'Şirkətin strateji hədəflərinin müəyyən edilməsi və icrasına nəzarət',
-                'Şəbəkənin genişləndirilməsi və yeni bazarlara çıxış planlarının idarə olunması',
-                'İdarə heyəti və səhmdarlarla əlaqələr, hesabatlılığın təmin edilməsi',
-                'Rəhbər komandanın formalaşdırılması və performansının idarə olunması'
+                'Şirkətin hüquqi strategiyasının hazırlanması və icrasına nəzarət',
+                'Müqavilələrin, tərəfdaşlıq və icarə sənədlərinin hüquqi ekspertizası',
+                'Normativ tələblərə uyğunluğun (compliance) təmin edilməsi və risklərin idarə olunması',
+                'Məhkəmə və dövlət orqanları ilə münasibətlərdə şirkətin maraqlarının təmsil olunması',
+                'Hüquq departamentinin komandasının idarə olunması'
             ],
             requirements: [
-                'Pərakəndə satış və ya FMCG sahəsində 10+ il, o cümlədən 5+ il yüksək rəhbər təcrübəsi',
-                'Böyük şəbəkələrin idarə olunmasında uğurlu nəticələr',
-                'Strateji və analitik düşüncə, liderlik bacarıqları',
-                'Azərbaycan və ingilis dillərində səlis ünsiyyət'
+                'Hüquq üzrə ali təhsil, 10+ il təcrübə, o cümlədən 4+ il rəhbər vəzifədə',
+                'Kommersiya və əmək hüququ, korporativ idarəetmə sahəsində dərin biliklər',
+                'Pərakəndə satış və ya geniş şəbəkəli şirkətlərdə iş təcrübəsi üstünlükdür',
+                'Azərbaycan və ingilis dillərində səlis ünsiyyət, güclü danışıqlar aparma bacarığı'
             ],
             offer: ['Rəqabətqabiliyyətli kompensasiya paketi və illik bonus', 'Sağlamlıq sığortası', 'Xidməti avtomobil', 'Karyera və liderlik inkişafı imkanları']
         },
