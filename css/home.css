@@ -117,3 +117,17 @@ body.light-theme .hero-baku {
         width: 100%;
     }
 }
+/* Hero mətni sağa doğru genişləndi (əvvəl 850px-də sıxılıb sətirlərə bölünürdü):
+   başlıq daha enli sahədə iki sətirə yaxın düşür, təsvir isə oxunaqlı uzunluqda qalır. */
+.hero-content {
+    max-width: 1240px;
+}
+
+.hero-content h1 {
+    font-size: clamp(32px, 3.5vw, 50px);
+    max-width: 1180px;
+}
+
+.hero-content .description {
+    max-width: 980px;
+}
