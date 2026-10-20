@@ -442,3 +442,59 @@ body.request-open {
     width: auto;
     flex-shrink: 0;
 }
+
+/* Premium paket: elanın müddəti (3 gün / 30 gün) seçimi — formanın yuxarısında */
+.rq-duration[hidden] {
+    display: none;
+}
+
+.rq-duration-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.rq-duration-opt {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 11px 18px;
+    border: 1px solid var(--rq-border);
+    border-radius: 10px;
+    background: var(--rq-input);
+    cursor: pointer;
+    font-size: 13.5px;
+    color: var(--rq-text);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.rq-duration-opt input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rq-duration-opt strong {
+    font-size: 15px;
+    color: #d97742;
+}
+
+.rq-duration-opt:hover {
+    border-color: #d97742;
+}
+
+.rq-duration-opt:has(input:checked) {
+    border-color: #d97742;
+    background: rgba(217, 119, 66, 0.14);
+    box-shadow: 0 0 0 1px #d97742 inset;
+}
+
+.rq-duration-opt:has(input:focus-visible) {
+    outline: 2px solid #d97742;
+    outline-offset: 2px;
+}
+
+.rq-duration.invalid .rq-duration-opt {
+    border-color: #ef4444;
+}

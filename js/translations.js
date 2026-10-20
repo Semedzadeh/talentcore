@@ -25,6 +25,8 @@
     "Əmək bazarının dinamikasını və bizneslərin dəyişən ehtiyaclarını nəzərə alaraq hər bir layihəyə çevik və fərdi yanaşırıq. Dəyişən prioritetlərə operativ uyğunlaşır, qərarvermə və icra proseslərində sürəti peşəkarlıqla uzlaşdırırıq. Məqsədimiz dəyişən şərtlərdə belə müştərinin prioritetlərini qorumaq, effektiv həllər və yeni imkanlar təklif etməkdir.": "Taking into account the dynamics of the labor market and the changing needs of businesses, we approach every project flexibly and individually. We adapt promptly to changing priorities and combine speed with professionalism in decision-making and execution. Our goal is to protect the client's priorities even under changing conditions, and to offer effective solutions and new opportunities.",
   },
   ru: {
+    "Elanın müddətini seçin": "Выберите срок размещения",
+    "Zəhmət olmasa elanın müddətini seçin (3 gün və ya 30 gün).": "Пожалуйста, выберите срок размещения (3 или 30 дней).",
     "Vakansiya elanınızı dərc edin.": "Опубликуйте свою вакансию.",
     "Standart paket – iş elanı": "Стандартный пакет — вакансия",
     "Premium paket – iş elanı": "Премиум-пакет — вакансия",
@@ -353,6 +355,8 @@
     "Sığorta": "Страхование"
   },
   zh: {
+    "Elanın müddətini seçin": "选择发布时长",
+    "Zəhmət olmasa elanın müddətini seçin (3 gün və ya 30 gün).": "请选择发布时长（3天或30天）。",
     "Vakansiya elanınızı dərc edin.": "发布您的职位。",
     "Standart paket – iş elanı": "标准套餐 – 职位发布",
     "Premium paket – iş elanı": "高级套餐 – 职位发布",
