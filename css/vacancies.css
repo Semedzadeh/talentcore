@@ -2779,32 +2779,6 @@ body.light-theme .detail-section ul li {
         background-position: 15% center;
     }
 }
-
-/* Sağ panel reklam/afişa göstərəndə: kənar boşluq və çərçivə yoxdur, panel afişanın
-   öz hündürlüyü qədərdir (4:5 şəkil kəsilmir), yuxarıdan başlayır. Vakansiya seçiləndə
-   .is-ad götürülür və panel adi sabit hündürlüyünə qayıdır. */
-.vacancy-detail.is-ad {
-    padding: 0;
-    height: auto;
-    align-self: start;
-    overflow: hidden;
-    border: none;
-    background: transparent;
-}
-
-.vacancy-detail.is-ad .detail-ad {
-    height: auto;
-    min-height: 0;
-    border-radius: 16px;
-}
-
-.vacancy-detail.is-ad .detail-ad img {
-    height: auto;
-    min-height: 0;
-    object-fit: contain;
-    border-radius: 16px;
-}
-
 /* Real şirkət loqoları (PNG) kvadrat/üçbucaq formalıdır — dairədə kəsilməsin deyə
    şəkil dairəyə sığdırılır (contain) və ətrafında kiçik ağ boşluq qalır. SVG nümunələr
    əvvəlki kimi dairəni doldurur. */
