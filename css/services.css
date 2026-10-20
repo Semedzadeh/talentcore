@@ -202,3 +202,27 @@
 .service-keypoints-title + ul {
     margin-top: 0;
 }
+
+/* Etibar kartları: ikon + (qalın başlıq, altında yüngül izah) */
+.trust-badge {
+    align-items: flex-start;
+}
+
+.trust-badge-text {
+    min-width: 0;
+}
+
+.trust-badge .trust-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.35;
+    margin-bottom: 6px;
+}
+
+.trust-badge .trust-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
