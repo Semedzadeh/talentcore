@@ -291,3 +291,21 @@
 .about-hero .quote {
     text-wrap: pretty;
 }
+
+/* Giriş mətni daha nəfəsli: daha geniş sahə, bir qədər iri şrift, sətir və abzas aralığı artırıldı —
+   əvvəl sıx və üst-üstə görünürdü. */
+.about-hero .about-desc {
+    max-width: min(1320px, 92%);
+    font-size: clamp(15px, 1.05vw, 18px);
+    line-height: 1.9;
+}
+
+.about-hero .about-desc + .about-desc {
+    margin-top: 26px;
+}
+
+.about-hero .quote {
+    max-width: min(1320px, 92%);
+    margin-bottom: 30px;
+    line-height: 1.45;
+}
