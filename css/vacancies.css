@@ -2804,3 +2804,11 @@ body.light-theme .detail-section ul li {
     object-fit: contain;
     border-radius: 16px;
 }
+
+/* Real şirkət loqoları (PNG) kvadrat/üçbucaq formalıdır — dairədə kəsilməsin deyə
+   şəkil dairəyə sığdırılır (contain) və ətrafında kiçik ağ boşluq qalır. SVG nümunələr
+   əvvəlki kimi dairəni doldurur. */
+.vacancy-logo img[src$=".png"] {
+    object-fit: contain;
+    padding: 8px;
+}
