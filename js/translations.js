@@ -25,6 +25,7 @@
     "Əmək bazarının dinamikasını və bizneslərin dəyişən ehtiyaclarını nəzərə alaraq hər bir layihəyə çevik və fərdi yanaşırıq. Dəyişən prioritetlərə operativ uyğunlaşır, qərarvermə və icra proseslərində sürəti peşəkarlıqla uzlaşdırırıq. Məqsədimiz dəyişən şərtlərdə belə müştərinin prioritetlərini qorumaq, effektiv həllər və yeni imkanlar təklif etməkdir.": "Taking into account the dynamics of the labor market and the changing needs of businesses, we approach every project flexibly and individually. We adapt promptly to changing priorities and combine speed with professionalism in decision-making and execution. Our goal is to protect the client's priorities even under changing conditions, and to offer effective solutions and new opportunities.",
   },
   ru: {
+    "Vakansiya elanınızı dərc edin.": "Опубликуйте свою вакансию.",
     "Standart paket – iş elanı": "Стандартный пакет — вакансия",
     "Premium paket – iş elanı": "Премиум-пакет — вакансия",
     "1 vakansiyanın platformada dərc edilməsi": "Публикация 1 вакансии на платформе",
@@ -352,6 +353,7 @@
     "Sığorta": "Страхование"
   },
   zh: {
+    "Vakansiya elanınızı dərc edin.": "发布您的职位。",
     "Standart paket – iş elanı": "标准套餐 – 职位发布",
     "Premium paket – iş elanı": "高级套餐 – 职位发布",
     "1 vakansiyanın platformada dərc edilməsi": "在平台上发布1个职位",
