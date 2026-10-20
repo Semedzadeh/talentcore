@@ -269,3 +269,7 @@
         flex: 1 1 100%;
     }
 }
+/* Giriş mətni üç abzasdır — aralarında məsafə */
+.about-hero .about-desc + .about-desc {
+    margin-top: 16px;
+}
