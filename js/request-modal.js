@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseSubject = modal.dataset.subject || 'Talentcore.az — Yeni sorğu';
     const MAX_FILE_SIZE = 5 * 1024 * 1024;
     let lastTrigger = null;
+    const durationBox = document.getElementById('rq-duration');
+    const durationOpts = document.getElementById('rq-duration-options');
+    let baseName = '';
     let currentPackage = { name: packageInput ? packageInput.value : '', subject: subjectInput.value };
 
     function setStatus(text, kind) {
@@ -47,6 +50,52 @@ document.addEventListener('DOMContentLoaded', () => {
             name: title.getAttribute('data-az'),
             subject: `${baseSubject} (${title.getAttribute('data-az')})`
         };
+        if (packageInput) packageInput.value = currentPackage.name;
+        subjectInput.value = currentPackage.subject;
+        baseName = currentPackage.name;
+        buildDuration(card);
+    }
+
+    // Kartda qiymət seçimləri (.price-opt) varsa (Premium) forma yanında "3 gün / 30 gün"
+    // seçimi göstərilir; seçim paket adına əlavə olunur: "Premium paket – iş elanı (30 gün – 60 AZN)".
+    // Radio-ların name atributu YOXDUR (formaya ayrıca sahə kimi getməsin), nəticə paket adındadır.
+    function buildDuration(card) {
+        if (!durationBox) return;
+        const opts = [...card.querySelectorAll('.price-opt')];
+        durationOpts.replaceChildren();
+        durationBox.hidden = opts.length === 0;
+        durationBox.classList.remove('invalid');
+        opts.forEach((opt, i) => {
+            const term = opt.querySelector('.price-term');
+            const price = opt.querySelector('.price-val').textContent.trim();
+            const label = document.createElement('label');
+            label.className = 'rq-duration-opt';
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.value = String(i);
+            input.dataset.termAz = term.getAttribute('data-az');
+            input.dataset.price = price;
+            input.addEventListener('change', () => { durationBox.classList.remove('invalid'); applyDuration(); });
+            const termSpan = document.createElement('span');
+            termSpan.className = 'rq-duration-term lang';
+            termSpan.setAttribute('data-az', term.getAttribute('data-az'));
+            termSpan.setAttribute('data-en', term.getAttribute('data-en'));
+            termSpan.textContent = window.tcText ? window.tcText(term) : term.textContent;
+            const priceEl = document.createElement('strong');
+            priceEl.textContent = price;
+            label.append(input, termSpan, priceEl);
+            durationOpts.appendChild(label);
+        });
+    }
+
+    function selectedDuration() {
+        return durationOpts ? durationOpts.querySelector('input[type="radio"]:checked') : null;
+    }
+
+    function applyDuration() {
+        const sel = selectedDuration();
+        const name = sel ? baseName + ' (' + sel.dataset.termAz + ' – ' + sel.dataset.price + ')' : baseName;
+        currentPackage = { name, subject: baseSubject + ' (' + name + ')' };
         if (packageInput) packageInput.value = currentPackage.name;
         subjectInput.value = currentPackage.subject;
     }
@@ -126,6 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        if (durationBox && !durationBox.hidden && !selectedDuration()) {
+            durationBox.classList.add('invalid');
+            durationBox.scrollIntoView({ block: 'center' });
+            setStatus(t('Zəhmət olmasa elanın müddətini seçin (3 gün və ya 30 gün).', 'Please choose the listing duration (3 or 30 days).'), 'error');
+            return;
+        }
+
         const emailEl = document.getElementById('rq-email');
         if (emailEl && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
             emailEl.classList.add('invalid');
@@ -189,8 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // reset() fayl seçimlərini də təmizləyir — qutulardakı fayl adlarını ilkin yazıya qaytar
                 formEl.querySelectorAll('.rq-upload input[type="file"]').forEach(input => input.dispatchEvent(new Event('change')));
                 // reset() gizli sahələri (paket/mövzu) də ilkin boş dəyərə qaytarır — seçilmiş paketi yenidən yaz
-                if (packageInput) packageInput.value = currentPackage.name;
-                subjectInput.value = currentPackage.subject;
+                applyDuration();
             } else {
                 setStatus(serverMessage || t('Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', 'Something went wrong, please try again shortly.'), 'error');
             }
