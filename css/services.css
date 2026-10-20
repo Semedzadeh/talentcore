@@ -192,3 +192,13 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* "Xidmətin əsas üstünlükləri" başlığı siyahı ilə birgə kartın altına yığılır
+   (əvvəl yalnız siyahı aşağıda idi, başlıq yuxarıda qalırdı və aralarında boşluq açılırdı) */
+.service-keypoints-title {
+    margin-top: auto;
+}
+
+.service-keypoints-title + ul {
+    margin-top: 0;
+}
