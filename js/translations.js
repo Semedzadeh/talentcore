@@ -25,6 +25,14 @@
     "İstedad bazarı, biznes ehtiyacları və təşkilati prioritetlər daim dəyişir. Biz bu dəyişiklikləri qabaqlayır, hər bir layihənin spesifik tələblərinə uyğun çevik və fərdiləşdirilmiş yanaşmalar formalaşdırırıq. Fərqli sənaye sahələri, vəzifə səviyyələri və biznes modelləri üzrə yanaşmamızı adaptasiya edərək hər bir tərəfdaş üçün ən effektiv həlli təqdim edirik. Çeviklik bizim üçün dəyişikliklərə uyğunlaşmaq deyil — dəyişiklikləri vaxtında görərək daha yaxşı nəticəyə çevirməkdir.": "The talent market, business needs and organizational priorities are constantly changing. We anticipate these changes and develop flexible, tailored approaches to the specific requirements of each project. By adapting our approach across different industries, seniority levels and business models, we deliver the most effective solution for every partner. For us, flexibility is not about adapting to change — it is about seeing changes in time and turning them into better results."
   },
   ru: {
+    "90 günlük pulsuz əvəzetmə zəmanəti": "Бесплатная замена в течение 90 дней",
+    "İşə qəbul edilmiş namizəd ilk 80 gün ərzində işdən ayrıldığı təqdirdə, eyni vakansiya üzrə əlavə xidmət haqqı olmadan yeni namizəd təqdim edirik.": "Если принятый на работу кандидат уйдёт в течение первых 80 дней, мы предоставим нового кандидата на ту же вакансию без дополнительной платы за услуги.",
+    "Tam məxfilik və etik peşəkar standartlar": "Полная конфиденциальность и этические профессиональные стандарты",
+    "Namizədlərin və müştərilərin məlumatlarının məxfiliyini qoruyur, bütün proseslərdə yüksək etik standartlara və peşəkar prinsiplərə riayət edirik.": "Мы защищаем конфиденциальность данных кандидатов и клиентов и соблюдаем высокие этические стандарты и профессиональные принципы во всех процессах.",
+    "Bazar araşdırması və passiv namizədlərə çıxış": "Исследование рынка и доступ к пассивным кандидатам",
+    "Əmək bazarını təhlil edir, ənənəvi axtarış kanallarından kənarda olan peşəkarları müəyyənləşdirərək biznesiniz üçün yeni istedad hovuzu yaradırıq.": "Мы анализируем рынок труда и выявляем специалистов за пределами традиционных каналов поиска, формируя для вашего бизнеса новый пул талантов.",
+    "Fərdi məsləhətçi dəstəyi və müntəzəm hesabatlılıq": "Персональная поддержка консультанта и регулярная отчётность",
+    "Sizə fərdi məsləhətçi dəstəyi təqdim edir, axtarış prosesinin gedişatı, namizəd hovuzundakı dinamika və əldə olunan nəticələr barədə müntəzəm hesabatlar təqdim edirik.": "Мы предоставляем вам персонального консультанта и регулярные отчёты о ходе поиска, динамике в пуле кандидатов и достигнутых результатах.",
     "Xidmətin əsas üstünlükləri": "Основные преимущества услуги",
     "Şirkətin strateji hədəflərinə və idarəetmə ehtiyaclarına uyğun rəhbərlərin və yüksək səviyyəli liderlərin axtarışı və seçim prosesini həyata keçiririk.": "Мы находим и привлекаем руководителей высшего звена и стратегических лидеров, чей опыт и лидерские качества соответствуют стратегическим целям и управленческим потребностям вашей компании.",
     "Rəhbər və C-level vəzifələr üzrə namizəd axtarışı": "Поиск руководителей и топ-менеджеров уровня C-suite",
@@ -335,6 +343,14 @@
     "Sığorta": "Страхование"
   },
   zh: {
+    "90 günlük pulsuz əvəzetmə zəmanəti": "90天免费更换保证",
+    "İşə qəbul edilmiş namizəd ilk 80 gün ərzində işdən ayrıldığı təqdirdə, eyni vakansiya üzrə əlavə xidmət haqqı olmadan yeni namizəd təqdim edirik.": "如果录用的候选人在入职后的前80天内离职，我们将在不额外收取服务费的情况下，为同一职位重新推荐候选人。",
+    "Tam məxfilik və etik peşəkar standartlar": "完全保密与职业道德标准",
+    "Namizədlərin və müştərilərin məlumatlarının məxfiliyini qoruyur, bütün proseslərdə yüksək etik standartlara və peşəkar prinsiplərə riayət edirik.": "我们保护候选人和客户信息的机密性，并在所有流程中遵循高标准的职业道德与专业准则。",
+    "Bazar araşdırması və passiv namizədlərə çıxış": "市场研究与被动候选人触达",
+    "Əmək bazarını təhlil edir, ənənəvi axtarış kanallarından kənarda olan peşəkarları müəyyənləşdirərək biznesiniz üçün yeni istedad hovuzu yaradırıq.": "我们分析劳动力市场，发掘传统寻访渠道之外的专业人才，为贵公司建立全新的人才库。",
+    "Fərdi məsləhətçi dəstəyi və müntəzəm hesabatlılıq": "专属顾问支持与定期汇报",
+    "Sizə fərdi məsləhətçi dəstəyi təqdim edir, axtarış prosesinin gedişatı, namizəd hovuzundakı dinamika və əldə olunan nəticələr barədə müntəzəm hesabatlar təqdim edirik.": "我们为您提供专属顾问支持，并定期汇报寻访进展、候选人库动态及已取得的成果。",
     "Xidmətin əsas üstünlükləri": "服务核心优势",
     "Şirkətin strateji hədəflərinə və idarəetmə ehtiyaclarına uyğun rəhbərlərin və yüksək səviyyəli liderlərin axtarışı və seçim prosesini həyata keçiririk.": "我们寻访并吸引专业能力与领导力契合贵公司战略目标和管理需求的高级管理人员与战略型领导者。",
     "Rəhbər və C-level vəzifələr üzrə namizəd axtarışı": "高管及 C-Suite 寻访",
