@@ -273,3 +273,21 @@
 .about-hero .about-desc + .about-desc {
     margin-top: 16px;
 }
+
+/* Giriş mətni enləndirildi (əvvəl 800px-də dar sütun kimi dururdu): 3 abzas daha geniş
+   sahədə iki-üç sətirə yığılır və oxunaqlı uzunluqda qalır. */
+.about-hero .about-desc {
+    max-width: 1080px;
+}
+
+.about-hero .quote {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Son sətirdə tək söz qalmasın ("edirik." kimi) */
+.about-hero .about-desc,
+.about-hero .quote {
+    text-wrap: pretty;
+}
