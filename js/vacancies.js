@@ -1115,30 +1115,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = ad.image;
             img.alt = '';
             wrap.appendChild(img);
+            detailEl.classList.add('is-ad');
             detailEl.replaceChildren(wrap);
             return;
         }
-        const item = SERVICES_SHOWCASE[showcaseIndex];
-        // 4 dil (az/en/ru/zh): mətnlər window.tcMsg ilə seçilir — az mətni açardır,
-        // ru/zh js/translations.js lüğətindədir, en isə burada ehtiyatdır
-        const ctaText = window.tcMsg('Xidmətlərimizə baxın', 'Explore Our Services');
-        const hintText = window.tcMsg('Ətraflı məlumat üçün soldan bir vakansiya seçin.', 'Select a vacancy on the left to see its details.');
-        detailEl.innerHTML = `
-            <div class="detail-placeholder">
-                <div class="detail-placeholder-icon">${PLACEHOLDER_ILLUSTRATION}</div>
-                <h3>${item.az.title}</h3>
-                <p>${window.tcMsg(item.az.desc, item.en.desc)}</p>
-                <a href="services.html" class="btn-primary">${ctaText}</a>
-                <div class="detail-placeholder-hint"><div class="hint-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3"/><circle cx="5.500" cy="10" r="2"/><circle cx="18.500" cy="10" r="2"/><path d="M7 20v-1.500a5 5 0 0 1 10 0V20M1.500 19v-1a3 3 0 0 1 3-3M22.500 19v-1a3 3 0 0 0-3-3"/></svg></div><span>${hintText}</span></div>
-            </div>
-        `;
+        // Backend reklamı yoxdursa: statik afişa (images/detail-ad.webp, 840×1050 — 4:5).
+        // Reklam backend-dən gələndə yuxarıdakı blok bunu əvəz edir.
+        detailEl.classList.add('is-ad');
+        detailEl.innerHTML = '<div class="detail-ad"><img src="images/detail-ad.webp" alt="Talent Core — Executive Search, Professional Recruitment, Talent Assessment, Immigration services" width="840" height="1050"></div>';
+        return;
     }
 
     function startShowcaseRotation() {
         stopShowcaseRotation();
         renderServicesShowcase();
+        // Yalnız backend-dən 2+ reklam gəlibsə növbələşir; statik afişa yenilənmir (şəkil təkrar yüklənməsin)
+        if (!(window.TC_ADS && window.TC_ADS.length > 1)) return;
         showcaseTimer = setInterval(() => {
-            showcaseIndex = (showcaseIndex + 1) % ((window.TC_ADS && window.TC_ADS.length) || SERVICES_SHOWCASE.length);
+            showcaseIndex = (showcaseIndex + 1) % window.TC_ADS.length;
             renderServicesShowcase();
         }, 5000);
     }
@@ -1217,6 +1211,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function renderDetail(v) {
+        detailEl.classList.remove('is-ad');
         if (!v) {
             stopShowcaseRotation();
             detailEl.innerHTML = '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
