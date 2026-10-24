@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Kartda qiymət seçimləri (.price-opt) varsa (Premium) forma yanında "3 gün / 30 gün"
     // seçimi göstərilir; seçim paket adına əlavə olunur: "Premium paket – iş elanı (30 gün – 60 AZN)".
-    // Radio-ların name atributu YOXDUR (formaya ayrıca sahə kimi getməsin), nəticə paket adındadır.
+    // Radio-lar eyni name daşıyır (yalnız biri seçilir), amma forma ilə əlaqələndirilməyib — nəticə paket adındadır.
     function buildDuration(card) {
         if (!durationBox) return;
         const opts = [...card.querySelectorAll('.price-opt')];
@@ -72,6 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
             label.className = 'rq-duration-opt';
             const input = document.createElement('input');
             input.type = 'radio';
+            // Eyni name — yalnız biri seçilsin; form="..." isə mövcud olmayan formaya bağlayır ki, bu radio
+            // sorğu formasına ayrıca sahə kimi getməsin (nəticə paket adındadır)
+            input.name = 'rq-duration';
+            input.setAttribute('form', 'rq-duration-detached');
             input.value = String(i);
             input.dataset.termAz = term.getAttribute('data-az');
             input.dataset.price = price;
@@ -86,6 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
             label.append(input, termSpan, priceEl);
             durationOpts.appendChild(label);
         });
+        // Tək seçim varsa (Standart paket: 30 gün) seçilmiş sayılır — istifadəçidən ayrıca seçim tələb olunmasın
+        if (opts.length === 1) {
+            durationOpts.querySelector('input[type="radio"]').checked = true;
+            applyDuration();
+        }
     }
 
     function selectedDuration() {
