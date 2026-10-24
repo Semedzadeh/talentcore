@@ -132,3 +132,17 @@ a.contact-info-value:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* İş saatları: günlər adi dəyər kimi, saatlar altında narıncı "həb" şəklində */
+.contact-hours {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 14px;
+    border-radius: 999px;
+    background: rgba(217, 119, 66, 0.14);
+    border: 1px solid rgba(217, 119, 66, 0.38);
+    color: #d97742;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}

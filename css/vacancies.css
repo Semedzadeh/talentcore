@@ -1133,7 +1133,9 @@ body.light-theme .vacancy-share-btn::after {
     min-height: 320px;
     border-radius: inherit;
     overflow: hidden;
-    background: #111a33;
+    /* Kart uzaqlaşanda ətrafda görünən sahnə: sayta uyğun yumşaq lacivərd, mərkəzdə işıqlı */
+    background:
+        radial-gradient(circle at 58% 42%, #2b3b6b 0%, #1d2850 48%, #151d3b 100%);
 }
 
 .detail-zoom::before {
@@ -1150,16 +1152,26 @@ body.light-theme .vacancy-share-btn::after {
     position: relative;
     height: 100%;
     min-height: 320px;
-    background: #1a2340;
-    border-radius: calc(16px * max(0, 1 - var(--zoom)));
-    border: 1px solid rgba(255, 255, 255, calc(0.12 * max(0, 1 - var(--zoom))));
-    box-shadow: 0 18px 50px rgba(0, 0, 0, calc(0.45 * max(0, 1 - var(--zoom))));
+    background: linear-gradient(165deg, #25345f 0%, #1b2547 55%, #172040 100%);
+    border-radius: calc(20px * max(0, 1 - var(--zoom)));
+    border: 1px solid rgba(217, 119, 66, calc(0.4 * max(0, 1 - var(--zoom))));
+    box-shadow:
+        0 24px 60px rgba(6, 10, 28, calc(0.5 * max(0, 1 - var(--zoom)))),
+        0 0 40px rgba(217, 119, 66, calc(0.16 * max(0, 1 - var(--zoom)))),
+        inset 0 1px 0 rgba(255, 255, 255, calc(0.1 * max(0, 1 - var(--zoom))));
     transform: scale(calc(0.66 + 0.34 * var(--zoom))) rotate(calc(-4deg * max(0, 1 - var(--zoom))));
     will-change: transform;
 }
 
+body.light-theme .detail-zoom {
+    background: radial-gradient(circle at 58% 42%, #f4f7fd 0%, #e3eaf6 50%, #d3dcee 100%);
+}
+
 body.light-theme .detail-zoom-card {
-    background: #ffffff;
+    background: linear-gradient(165deg, #ffffff 0%, #f6f8fc 100%);
+    box-shadow:
+        0 24px 60px rgba(40, 60, 110, calc(0.22 * max(0, 1 - var(--zoom)))),
+        0 0 40px rgba(217, 119, 66, calc(0.14 * max(0, 1 - var(--zoom))));
 }
 
 .detail-zoom .detail-placeholder {
@@ -2802,7 +2814,7 @@ body.light-theme .detail-section ul li {
     min-height: 320px;
     border-radius: inherit;
     overflow: hidden;
-    background: #111a33;
+    background: radial-gradient(circle at 58% 42%, #2b3b6b 0%, #1d2850 48%, #151d3b 100%);
 }
 
 /* Arxa fonda şüalar (kartın "açıldığı" sahnə); kart böyüdükcə solur */
