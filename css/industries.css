@@ -37,6 +37,8 @@
     color: var(--text-muted);
     max-width: 700px;
     margin: 0 auto;
+    text-align: left; /* blok ortada qalır, mətn soldan başlayır */
+    text-wrap: pretty;
 }
 
 /* Sahələr — bölmə/alt bölmə yoxdur, hamısı tək-tək qısa adla düz, ortalanmış siyahıdadır
