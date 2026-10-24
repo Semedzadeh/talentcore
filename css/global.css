@@ -214,7 +214,7 @@ button, input, select, textarea, summary {
 }
 
 .logo-container { margin-right: auto; }
-.site-logo { height: clamp(28px, 2.5vw, 38px); object-fit: contain; } /* loqo PNG-si kənar boşluqlardan kəsilib — görünən loqo böyük, menyu çubuğu isə eyni qalır */
+.site-logo { height: clamp(20px, 1.8vw, 27px); width: auto; object-fit: contain; } /* loqo PNG-si kənar boşluqlardan kəsilib — görünən loqo böyük, menyu çubuğu isə eyni qalır */
 
 /* Hamburger İkonu - Kompüterdə gizlidir */
 .hamburger {
