@@ -839,7 +839,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ? tr('Bu gün son gündür', 'Last day today', 'Сегодня последний день', '今天是最后一天')
             : tr(`${v.deadlineIn} gün qalıb`, `${v.deadlineIn} days left`, `Осталось дней: ${v.deadlineIn}`, `剩余 ${v.deadlineIn} 天`);
         const urgent = v.deadlineIn <= 3 ? ' urgent' : '';
-        return `<div class="detail-deadline-pill${urgent}" title="${left}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>${tr('Son tarix', 'Deadline', 'Срок', '截止日期')} ${text}</span></div>`;
+        return `<div class="detail-deadline-pill${urgent}" title="${left}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>${tr('Son tarix', 'Deadline', 'Крайний срок', '截止日期')} ${text}</span></div>`;
     }
 
     // Bölmələr İXTİYARİDİR: şirkət/vakansiya həmin məlumatı verməyibsə (boş, undefined,
