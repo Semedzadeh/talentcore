@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const listEl = document.getElementById('vacancies-list');
     const detailEl = document.getElementById('vacancy-detail');
 
+    // Panelin sabit yazıları 4 dildə (az/en/ru/zh): seçilmiş dil <html lang>-dan oxunur, boş qalan dil üçün ingiliscə ehtiyat.
+    function tr(az, en, ru, zh) {
+        const lang = document.documentElement.lang || 'az';
+        return lang === 'az' ? az : ((lang === 'ru' ? ru : lang === 'zh' ? zh : en) || en || az);
+    }
+
     // "Şirkətlər" filtri statik deyil — yalnız aktiv elanı olan şirkətlər
     // göstərilməlidir, ona görə VACANCIES-dən (aşağıda təyin olunur) törəmə
     // siyahı kimi qurulur. VACANCIES elan olunmazdan əvvəl çağırıla bilməz,
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             b.classList.toggle('saved', saved);
             b.setAttribute('aria-pressed', String(saved));
             const label = b.querySelector('span');
-            if (label) label.textContent = saved ? 'Yadda saxlanıb' : 'Yadda saxla';
+            if (label) label.textContent = saved ? tr('Yadda saxlanıb', 'Saved', 'Сохранено', '已收藏') : tr('Yadda saxla', 'Save', 'Сохранить', '收藏');
         });
     }
 
@@ -481,6 +487,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         region: 'region-filter-list', schedule: 'schedule-filter-list', work_mode: 'format-filter-list'
     };
     const listIdForGroup = (key) => STATIC_GROUP_LISTS[key] || (key + '-filter-list');
+    if (!BACKEND) {
+        const langSwitchStatic = document.getElementById('lang-switch');
+        if (langSwitchStatic) langSwitchStatic.addEventListener('change', () => setTimeout(() => {
+            renderList();
+            const current = VACANCIES.find(x => x.id === activeVacancyId);
+            if (current) renderDetail(current);
+        }, 80));
+    }
     if (BACKEND) {
         const backendData = await window.tcVacanciesBackend.load();
         VACANCIES = backendData.vacancies;
@@ -640,14 +654,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Kartdakı tarix: "2 gün əvvəl" əvəzinə "Bu gün" / "Dünən" / "03 okt" (qısa, 3 hərfli ay).
     // Real tarix sahəsi yoxdur, ona görə posted mətnindən hesablanan gün sayı
     // bu günkü tarixdən çıxılır (getPostedDaysAgo ilə eyni təxmini məntiq).
-    const AZ_MONTHS = ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'];
+    const MONTHS = {
+        az: ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'],
+        en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        ru: ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
+    };
     function formatPostedDate(postedText) {
         const daysAgo = getPostedDaysAgo(postedText);
-        if (daysAgo === 0) return 'Bu gün';
-        if (daysAgo === 1) return 'Dünən';
+        if (daysAgo === 0) return tr('Bu gün', 'Today', 'Сегодня', '今天');
+        if (daysAgo === 1) return tr('Dünən', 'Yesterday', 'Вчера', '昨天');
         const d = new Date();
         d.setDate(d.getDate() - daysAgo);
-        return `${String(d.getDate()).padStart(2, '0')} ${AZ_MONTHS[d.getMonth()]}`;
+        const lang = document.documentElement.lang || 'az';
+        if (lang === 'zh') return `${d.getMonth() + 1}月${d.getDate()}日`;
+        return `${String(d.getDate()).padStart(2, '0')} ${(MONTHS[lang] || MONTHS.en)[d.getMonth()]}`;
     }
 
     function sortVacancies(vacancies) {
@@ -795,9 +815,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         d.setDate(d.getDate() + v.deadlineIn);
         const pad = x => String(x).padStart(2, '0');
         const text = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()}`;
-        const left = v.deadlineIn === 0 ? 'Bu gün son gündür' : `${v.deadlineIn} gün qalıb`;
+        const left = v.deadlineIn === 0
+            ? tr('Bu gün son gündür', 'Last day today', 'Сегодня последний день', '今天是最后一天')
+            : tr(`${v.deadlineIn} gün qalıb`, `${v.deadlineIn} days left`, `Осталось дней: ${v.deadlineIn}`, `剩余 ${v.deadlineIn} 天`);
         const urgent = v.deadlineIn <= 3 ? ' urgent' : '';
-        return `<div class="detail-deadline-pill${urgent}" title="${left}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Son tarix ${text}</span></div>`;
+        return `<div class="detail-deadline-pill${urgent}" title="${left}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>${tr('Son tarix', 'Deadline', 'Срок', '截止日期')} ${text}</span></div>`;
     }
 
     // Bölmələr İXTİYARİDİR: şirkət/vakansiya həmin məlumatı verməyibsə (boş, undefined,
@@ -830,7 +852,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const similar = getSimilarVacancies(v);
         if (!similar.length) return '';
         return `<div class="detail-section detail-similar">
-            <h4>Oxşar vakansiyalar</h4>
+            <h4>${tr('Oxşar vakansiyalar', 'Similar vacancies', 'Похожие вакансии', '相似职位')}</h4>
             <div class="similar-list">${similar.map(o => `
                 <a class="similar-vacancy" data-id="${o.id}" href="vacancies.html?vacancy=${o.id}">
                     ${companyLogoHtml(o)}
@@ -846,7 +868,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderDetail(v) {
         if (!v) {
             stopShowcaseRotation();
-            detailEl.innerHTML = '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
+            detailEl.innerHTML = `<p class="vacancy-empty">${tr('Bu sahədə hazırda açıq vakansiya yoxdur.', 'There are currently no open vacancies in this area.', 'В этой области сейчас нет открытых вакансий.', '该领域目前没有开放职位。')}</p>`;
             return;
         }
         stopShowcaseRotation();
@@ -870,36 +892,36 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             </div>
             <div class="detail-meta-row">
-                <div class="detail-meta-item" title="Yer"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${v.location}</span></div>
-                <div class="detail-meta-item" title="Məşğulluq"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>${v.type}</span></div>
-                <div class="detail-meta-item" title="İş forması"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>${v.mode}</span></div>
-                <div class="detail-meta-item" title="Maaş"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>Razılaşma yolu ilə</span></div>
+                <div class="detail-meta-item" title="${tr('Yer', 'Location', 'Место', '地点')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${v.location}</span></div>
+                <div class="detail-meta-item" title="${tr('Məşğulluq', 'Employment', 'Занятость', '工作类型')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>${v.type}</span></div>
+                <div class="detail-meta-item" title="${tr('İş forması', 'Work mode', 'Формат работы', '工作方式')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>${v.mode}</span></div>
+                <div class="detail-meta-item" title="${tr('Maaş', 'Salary', 'Зарплата', '薪资')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>${tr('Razılaşma yolu ilə', 'Negotiable', 'По договорённости', '面议')}</span></div>
                 ${deadlineHtml(v)}
             </div>
             <div class="detail-tabs" role="tablist">
-                <button type="button" class="detail-tab active" role="tab" aria-selected="true" data-tab="job">Vəzifə haqqında</button>
-                <button type="button" class="detail-tab" role="tab" aria-selected="false" data-tab="company">Şirkət haqqında</button>
+                <button type="button" class="detail-tab active" role="tab" aria-selected="true" data-tab="job">${tr('Vəzifə haqqında', 'About the role', 'О должности', '关于职位')}</button>
+                <button type="button" class="detail-tab" role="tab" aria-selected="false" data-tab="company">${tr('Şirkət haqqında', 'About the company', 'О компании', '关于公司')}</button>
             </div>
             <div class="detail-tab-panel" role="tabpanel" data-panel="job">
-                ${textSectionHtml('Vəzifənin təsviri / məqsədi', v.description)}
-                ${listSectionHtml('Öhdəliklər', v.responsibilities)}
-                ${listSectionHtml('Tələblər', v.requirements)}
-                ${listSectionHtml('Təkliflərimiz', v.offer)}
+                ${textSectionHtml(tr('Vəzifənin təsviri / məqsədi', 'Job description / purpose', 'Описание должности / цель', '职位描述 / 目标'), v.description)}
+                ${listSectionHtml(tr('Öhdəliklər', 'Responsibilities', 'Обязанности', '岗位职责'), v.responsibilities)}
+                ${listSectionHtml(tr('Tələblər', 'Requirements', 'Требования', '任职要求'), v.requirements)}
+                ${listSectionHtml(tr('Təkliflərimiz', 'What we offer', 'Мы предлагаем', '我们提供'), v.offer)}
                 <!-- "Müraciət Et" və "Yadda saxla" yalnız "Vəzifə haqqında" tabındadır —
                      "Şirkət haqqında" tabında lazım deyil (tələb olunub) -->
                 <div class="detail-actions">
                     <a href="${applyHref}"${applyAttrs} class="btn-primary detail-apply-btn">
-                        <span>Müraciət Et</span>
+                        <span>${tr('Müraciət Et', 'Apply', 'Откликнуться', '申请职位')}</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
                     <button type="button" class="detail-save-btn${isSaved(v.id) ? ' saved' : ''}" data-id="${v.id}" aria-pressed="${isSaved(v.id)}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                        <span>${isSaved(v.id) ? 'Yadda saxlanıb' : 'Yadda saxla'}</span>
+                        <span>${isSaved(v.id) ? tr('Yadda saxlanıb', 'Saved', 'Сохранено', '已收藏') : tr('Yadda saxla', 'Save', 'Сохранить', '收藏')}</span>
                     </button>
                 </div>
             </div>
             <div class="detail-tab-panel" role="tabpanel" data-panel="company" hidden>
-                ${textSectionHtml('Şirkət haqqında məlumat', COMPANY_ABOUT[v.company] || v.companyAbout) || '<p class="detail-tab-empty">Bu şirkət haqqında məlumat tezliklə əlavə olunacaq.</p>'}
+                ${textSectionHtml(tr('Şirkət haqqında məlumat', 'About the company', 'О компании', '公司简介'), COMPANY_ABOUT[v.company] || v.companyAbout) || `<p class="detail-tab-empty">${tr('Bu şirkət haqqında məlumat tezliklə əlavə olunacaq.', 'Information about this company will be added soon.', 'Информация об этой компании скоро появится.', '公司信息即将添加。')}</p>`}
             </div>
             ${similarSectionHtml(v)}
         `;
