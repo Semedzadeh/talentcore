@@ -25,6 +25,7 @@
     "Əmək bazarının dinamikasını və bizneslərin dəyişən ehtiyaclarını nəzərə alaraq hər bir layihəyə çevik və fərdi yanaşırıq. Dəyişən prioritetlərə operativ uyğunlaşır, qərarvermə və icra proseslərində sürəti peşəkarlıqla uzlaşdırırıq. Məqsədimiz dəyişən şərtlərdə belə müştərinin prioritetlərini qorumaq, effektiv həllər və yeni imkanlar təklif etməkdir.": "Taking into account the dynamics of the labor market and the changing needs of businesses, we approach every project flexibly and individually. We adapt promptly to changing priorities and combine speed with professionalism in decision-making and execution. Our goal is to protect the client's priorities even under changing conditions, and to offer effective solutions and new opportunities.",
   },
   ru: {
+    "sahə üzrə dərin ekspertiza": "отраслей с глубокой экспертизой",
     "Neft və qaz": "Нефть и газ",
     "Tikinti və infrastruktur": "Строительство и инфраструктура",
     "Daşınmaz əmlak": "Недвижимость",
@@ -367,6 +368,7 @@
     "Sığorta": "Страхование"
   },
   zh: {
+    "sahə üzrə dərin ekspertiza": "个行业的深度专长",
     "Neft və qaz": "石油与天然气",
     "Tikinti və infrastruktur": "建筑与基础设施",
     "Daşınmaz əmlak": "房地产",
