@@ -30,6 +30,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         return lang === 'az' ? az : ((lang === 'ru' ? ru : lang === 'zh' ? zh : en) || en || az);
     }
 
+    // Nümunə (statik) vakansiyalarda yer, qrafik, iş forması və sahə dəyərləri Azərbaycan dilində saxlanır — onların
+    // başqa dillərdəki qarşılığı burada: [en, ru, zh]. Backend rejimində dəyərlər artıq API-dən seçilmiş dildə gəlir,
+    // onlar bu cədvəldə olmadığı üçün olduğu kimi qalır.
+    const VALUE_TR = {
+        'Bakı': ['Baku', 'Баку', '巴库'], 'Gəncə': ['Ganja', 'Гянджа', '占贾'], 'Sumqayıt': ['Sumgait', 'Сумгайыт', '苏姆盖特'],
+        'Tam ştat': ['Full-time', 'Полная занятость', '全职'], 'Yarım ştat': ['Part-time', 'Частичная занятость', '兼职'],
+        'Ofisdən': ['Office', 'Офис', '办公室'], 'Hibrid': ['Hybrid', 'Гибрид', '混合办公'], 'Uzaqdan': ['Remote', 'Удалённо', '远程'],
+        'İT və Texnologiya': ['IT & Technology', 'ИТ и технологии', 'IT与科技'],
+        'Maliyyə və Mühasibatlıq': ['Finance & Accounting', 'Финансы и бухгалтерия', '财务与会计'],
+        'Marketinq və Satış': ['Marketing & Sales', 'Маркетинг и продажи', '市场与销售'],
+        'Tikinti və Mühəndislik': ['Construction & Engineering', 'Строительство и инженерия', '建筑与工程'],
+        'Logistika və Anbar': ['Logistics & Warehousing', 'Логистика и склад', '物流与仓储'],
+        'Bank və Sığorta': ['Banking & Insurance', 'Банки и страхование', '银行与保险'],
+        'İnsan Resursları': ['Human Resources', 'Управление персоналом', '人力资源']
+    };
+    function trVal(value) {
+        const t = VALUE_TR[value];
+        return t ? tr(value, t[0], t[1], t[2]) : value;
+    }
+
     // "Şirkətlər" filtri statik deyil — yalnız aktiv elanı olan şirkətlər
     // göstərilməlidir, ona görə VACANCIES-dən (aşağıda təyin olunur) törəmə
     // siyahı kimi qurulur. VACANCIES elan olunmazdan əvvəl çağırıla bilməz,
@@ -888,13 +908,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ${companyLogoHtml(v)}
                 <div class="detail-header-text">
                     <h2>${v.title}</h2>
-                    <div class="company-row">${v.company}${catLabel ? ' · ' + catLabel : ''}</div>
+                    <div class="company-row">${v.company}${catLabel ? ' · ' + trVal(catLabel) : ''}</div>
                 </div>
             </div>
             <div class="detail-meta-row">
-                <div class="detail-meta-item" title="${tr('Yer', 'Location', 'Место', '地点')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${v.location}</span></div>
-                <div class="detail-meta-item" title="${tr('Məşğulluq', 'Employment', 'Занятость', '工作类型')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>${v.type}</span></div>
-                <div class="detail-meta-item" title="${tr('İş forması', 'Work mode', 'Формат работы', '工作方式')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>${v.mode}</span></div>
+                <div class="detail-meta-item" title="${tr('Yer', 'Location', 'Место', '地点')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${trVal(v.location)}</span></div>
+                <div class="detail-meta-item" title="${tr('Məşğulluq', 'Employment', 'Занятость', '工作类型')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>${trVal(v.type)}</span></div>
+                <div class="detail-meta-item" title="${tr('İş forması', 'Work mode', 'Формат работы', '工作方式')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>${trVal(v.mode)}</span></div>
                 <div class="detail-meta-item" title="${tr('Maaş', 'Salary', 'Зарплата', '薪资')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>${tr('Razılaşma yolu ilə', 'Negotiable', 'По договорённости', '面议')}</span></div>
                 ${deadlineHtml(v)}
             </div>
