@@ -27,7 +27,7 @@
   ru: {
     "Elanın müddətini seçin": "Выберите срок размещения",
     "Zəhmət olmasa elanın müddətini seçin (3 gün və ya 30 gün).": "Пожалуйста, выберите срок размещения (3 или 30 дней).",
-    "Vakansiya elanınızı dərc edin.": "Опубликуйте свою вакансию.",
+    "Vakansiya elanınızı dərc edin:": "Опубликуйте свою вакансию:",
     "Standart paket – iş elanı": "Стандартный пакет — вакансия",
     "Premium paket – iş elanı": "Премиум-пакет — вакансия",
     "1 vakansiyanın platformada dərc edilməsi": "Публикация 1 вакансии на платформе",
@@ -360,7 +360,7 @@
   zh: {
     "Elanın müddətini seçin": "选择发布时长",
     "Zəhmət olmasa elanın müddətini seçin (3 gün və ya 30 gün).": "请选择发布时长（3天或30天）。",
-    "Vakansiya elanınızı dərc edin.": "发布您的职位。",
+    "Vakansiya elanınızı dərc edin:": "发布您的职位：",
     "Standart paket – iş elanı": "标准套餐 – 职位发布",
     "Premium paket – iş elanı": "高级套餐 – 职位发布",
     "1 vakansiyanın platformada dərc edilməsi": "在平台上发布1个职位",
