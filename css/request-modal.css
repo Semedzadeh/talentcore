@@ -438,7 +438,7 @@ body.request-open {
 }
 
 .request-brand .request-logo {
-    height: 32px;
+    height: 22px;
     width: auto;
     flex-shrink: 0;
 }
