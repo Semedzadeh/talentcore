@@ -533,6 +533,11 @@ input:focus-visible + .slider { outline: 2px solid #c4642f; outline-offset: 2px;
     letter-spacing: 0.2px;
 }
 
+/* "Talent" hissəsi mövzunun əsas mətn rəngində (tünd rejimdə ağ, ağ rejimdə tünd), "core." narıncı qalır */
+.footer-brand-talent {
+    color: var(--text-color);
+}
+
 .footer-tagline-text {
     font-size: 14px;
     font-weight: 500;
