@@ -675,19 +675,57 @@ document.addEventListener('DOMContentLoaded', async () => {
     // "sağa lazım olsa sonra reklam qoyacağıq" — ona görə bu, ayrıca funksiya kimi
     // saxlanılıb ki, gələcəkdə asanlıqla bir statik reklam bloku ilə əvəzlənsin.
     const SERVICES_SHOWCASE = [
-        { icon: '🔍', az: { title: 'Executive Search', desc: 'Gələcəyi quracaq liderlərin və C-level rəhbərlərin tapılması.' }, en: { title: 'Executive Search', desc: 'Finding the leaders who will build the future.' } },
-        { icon: '🤝', az: { title: 'Professional Recruitment', desc: 'Peşəkar komandaların səmərəli və sürətli formalaşdırılması.' }, en: { title: 'Professional Recruitment', desc: 'Building professional teams, efficiently and fast.' } },
-        { icon: '📊', az: { title: 'Talent Assessment', desc: 'Namizədlərin və komandaların bacarıq və potensialına görə qiymətləndirilməsi.' }, en: { title: 'Talent Assessment', desc: 'Evaluating candidates and teams against their true potential.' } },
-        { icon: '🌟', az: { title: 'Employer Branding', desc: 'İstedadları cəlb edən və özündə saxlayan güclü işəgötürən imicinin formalaşdırılması.' }, en: { title: 'Employer Branding', desc: 'Building an employer image that attracts and retains top talent.' } }
+        { az: { title: "Executive Search", desc: "Şirkətin strateji hədəflərinə və idarəetmə ehtiyaclarına uyğun rəhbərlərin və yüksək səviyyəli liderlərin axtarışı və seçim prosesini həyata keçiririk." }, en: { title: "Executive Search", desc: "We identify and attract senior executives and strategic leaders whose expertise and leadership capabilities align with your company’s strategic objectives and leadership needs." } },
+        { az: { title: "Professional Recruitment", desc: "Biznesinizin tələblərinə uyğun peşəkar mütəxəssisləri müəyyənləşdirir, strukturlaşdırılmış seçim prosesi vasitəsilə komandalarınıza dəyər qatacaq istedadların cəlb olunmasını təmin edirik." }, en: { title: "Professional Recruitment", desc: "We identify qualified professionals aligned with your business needs and leverage a structured selection process to attract talent that strengthens your teams and drives business success." } },
+        { az: { title: "Talent Assessment", desc: "Namizədlərin və əməkdaşların səriştə və potensialını qiymətləndirərək, biznesin strateji hədəflərinə uyğun doğru istedad qərarların verilməsinə dəstək oluruq." }, en: { title: "Talent Assessment", desc: "We assess candidates’ and employees’ competencies and potential to support informed talent decisions aligned with your business’s strategic objectives." } },
+        { az: { title: "Immigration Services", desc: "Xarici mütəxəssislərin cəlb olunması və miqrasiya prosedurlarının peşəkar idarə edilməsi ilə işçi qüvvənizin beynəlxalq mobilliyini dəstəkləyirik." }, en: { title: "Immigration Services", desc: "We support international workforce mobility by facilitating the recruitment of foreign professionals and professionally managing immigration procedures." } }
     ];
     // SaÄ panelin default illÃ¼strasiyasÄ± (CV + bÃ¶yÃ¼dÃ¼cÃ¼ ÅÃ¼ÅÉ) â dÃ¶rd xidmÉtin hamÄ±sÄ± Ã¼Ã§Ã¼n eynidir.
     const PLACEHOLDER_ILLUSTRATION = `<svg class="placeholder-illustration" viewBox="0 0 220 200" fill="none" aria-hidden="true"><g transform="rotate(-8 90 90)"><rect x="34" y="40" width="110" height="130" rx="14" fill="#dbe8fb" stroke="#bcd3f5" stroke-width="2"/><rect x="48" y="54" width="82" height="102" rx="8" fill="#fff" opacity=".9"/></g><rect x="58" y="62" width="104" height="76" rx="10" fill="#fff" stroke="#c6d9f7" stroke-width="2"/><circle cx="82" cy="88" r="11" fill="#2563eb"/><path d="M64 118c2-11 10-16 18-16s16 5 18 16z" fill="#2563eb"/><rect x="108" y="80" width="42" height="7" rx="3.500" fill="#b7cdf3"/><rect x="108" y="95" width="34" height="7" rx="3.500" fill="#cfdef7"/><rect x="108" y="110" width="40" height="7" rx="3.500" fill="#cfdef7"/><circle cx="150" cy="128" r="30" fill="#e6f0ff" stroke="#1d4ed8" stroke-width="9"/><path d="M172 150l24 24" stroke="#1d4ed8" stroke-width="12" stroke-linecap="round"/><path d="M172 50l8-14M186 62l14-6M162 40l2-16" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/></svg>`;
+    // Sınaq üçün: backend-dən reklam gəlməyəndə göstəriləcək poster (hazırda boşdur — xidmətlər göstərilir).
+    // Sınamaq üçün: [{ image: 'images/detail-ad.webp', url: '' }] yaz. ---
+    const TEST_DETAIL_ADS = [];
+    function getDetailAds() {
+        return (window.TC_ADS && window.TC_ADS.length) ? window.TC_ADS : TEST_DETAIL_ADS;
+    }
+
+    // Sağ panel yaxınlaşma effekti (pageexecutive.com kimi): sayt açılanda panel adi (tam) görünür; siçan
+    // panelin üstündə ikən təkəri aşağı fırladanda məzmun yaxınlaşır (çərçivədən kənara çıxan hissə kəsilir),
+    // yuxarı fırladanda uzaqlaşır və kiçik, əyri kart halına düşür. Sərhədə (tam kiçik/tam böyük) çatanda təkər səhifəyə ötürülür —
+    // yəni səhifənin sürüşdürülməsi tutulub qalmır. Toxunma ekranında və "hərəkəti azalt" rejimində
+    // məzmun birbaşa tam göstərilir. CSS dəyişəni --zoom (0..1) görünüşü idarə edir (.detail-zoom, .detail-ad).
+    // Xidmətlər hər 5 saniyədən bir dəyişəndə element yenidən yaradılır, ona görə vəziyyət (zoomTarget/zoomCurrent)
+    // elementdən kənarda saxlanır və yaxınlaşma dəyişmir.
+    const ZOOM_STILL = window.matchMedia('(hover: none), (prefers-reduced-motion: reduce)').matches;
+    let zoomTarget = 1; // 1 = normal görünüş (sayt açılanda belədir); 0 = kiçik əyri kart; 2 = 1,34x yaxınlaşmış
+    let zoomCurrent = zoomTarget;
+    let zoomRaf = null;
+    let zoomEl = null;
+    function zoomApply() { if (zoomEl) zoomEl.style.setProperty('--zoom', zoomCurrent.toFixed(4)); }
+    function zoomTick() {
+        zoomCurrent += (zoomTarget - zoomCurrent) * 0.16;
+        if (Math.abs(zoomTarget - zoomCurrent) < 0.002) zoomCurrent = zoomTarget;
+        zoomApply();
+        zoomRaf = zoomCurrent === zoomTarget ? null : requestAnimationFrame(zoomTick);
+    }
+    function setupDetailZoom(el) {
+        zoomEl = el;
+        zoomApply();
+        if (ZOOM_STILL) return;
+        el.addEventListener('wheel', e => {
+            const next = Math.min(2, Math.max(0, zoomTarget + e.deltaY * 0.002));
+            if (next === zoomTarget) return; // sərhəddədir: təkər səhifəni sürüşdürsün
+            e.preventDefault();
+            zoomTarget = next;
+            if (!zoomRaf) zoomRaf = requestAnimationFrame(zoomTick);
+        }, { passive: false });
+    }
     let showcaseIndex = 0;
     let showcaseTimer = null;
 
     function renderServicesShowcase() {
         // Backend-dən reklam şəkilləri gəlibsə (Sayt parametrləri) xidmətlər əvəzinə onlar göstərilir
-        const ads = window.TC_ADS || [];
+        const ads = getDetailAds();
         if (ads.length) {
             const ad = ads[showcaseIndex % ads.length];
             const hasLink = ad.url && new RegExp('^https?://', 'i').test(ad.url);
@@ -699,6 +737,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.alt = '';
             wrap.appendChild(img);
             detailEl.replaceChildren(wrap);
+            setupDetailZoom(wrap);
             return;
         }
         const item = SERVICES_SHOWCASE[showcaseIndex];
@@ -707,21 +746,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         const ctaText = window.tcMsg('Xidmətlərimizə baxın', 'Explore Our Services');
         const hintText = window.tcMsg('Ətraflı məlumat üçün soldan bir vakansiya seçin.', 'Select a vacancy on the left to see its details.');
         detailEl.innerHTML = `
+            <div class="detail-zoom"><div class="detail-zoom-card">
             <div class="detail-placeholder">
                 <div class="detail-placeholder-icon">${PLACEHOLDER_ILLUSTRATION}</div>
-                <h3>${item.az.title}</h3>
+                <h3>${window.tcMsg(item.az.title, item.en.title)}</h3>
                 <p>${window.tcMsg(item.az.desc, item.en.desc)}</p>
                 <a href="services.html" class="btn-primary">${ctaText}</a>
                 <div class="detail-placeholder-hint"><div class="hint-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3"/><circle cx="5.500" cy="10" r="2"/><circle cx="18.500" cy="10" r="2"/><path d="M7 20v-1.500a5 5 0 0 1 10 0V20M1.500 19v-1a3 3 0 0 1 3-3M22.500 19v-1a3 3 0 0 0-3-3"/></svg></div><span>${hintText}</span></div>
             </div>
+            </div></div>
         `;
+        setupDetailZoom(detailEl.querySelector('.detail-zoom'));
     }
 
     function startShowcaseRotation() {
         stopShowcaseRotation();
         renderServicesShowcase();
         showcaseTimer = setInterval(() => {
-            showcaseIndex = (showcaseIndex + 1) % ((window.TC_ADS && window.TC_ADS.length) || SERVICES_SHOWCASE.length);
+            // Tək poster varsa yenidən çəkmirik, yoxsa yaxınlaşma vəziyyəti hər 5 saniyədən bir sıfırlanardı
+            if (getDetailAds().length === 1 && detailEl.querySelector('.detail-ad')) return;
+            showcaseIndex = (showcaseIndex + 1) % (getDetailAds().length || SERVICES_SHOWCASE.length);
             renderServicesShowcase();
         }, 5000);
     }
