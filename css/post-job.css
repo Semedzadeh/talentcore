@@ -151,3 +151,8 @@
     font-weight: 700;
     color: #d97742;
 }
+
+/* FAQ-dakı linklər (post-job.html#standard / #premium) kartı sabit menyunun altında qalmadan göstərsin */
+.pricing-card {
+    scroll-margin-top: 140px;
+}

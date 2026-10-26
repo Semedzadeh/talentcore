@@ -464,6 +464,22 @@ input:focus-visible + .slider { outline: 2px solid #c4642f; outline-offset: 2px;
     line-height: 1.7;
 }
 
+/* Cavabdakı linklər (məs. "İxtisaslaşdığımız sahələr") narıncı, altından xətli */
+.faq-item p a {
+    color: #d97742;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.faq-item p a:hover {
+    color: #c4642f;
+}
+
+.faq-item p strong {
+    color: var(--text-color);
+}
+
 .footer-bottom {
     display: flex;
     order: 2;
