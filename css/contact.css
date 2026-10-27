@@ -43,8 +43,8 @@
     align-items: start;
 }
 
-.contact-info h3,
-.contact-form-card h3 {
+.contact-info h2,
+.contact-form-card h2 {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-color);

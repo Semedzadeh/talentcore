@@ -6,9 +6,15 @@
 // Backend ünvanı BOŞDURSA bu skript heç nə etmir: sayt öz standart (nümunə) görünüşündə qalır,
 // formalar köhnə Web3Forms yolu ilə işləyir. Backend əlçatmazdırsa da səssizcə standart qalır.
 (function () {
-    // Backend ünvanı (məs. 'https://talentcore.az' — sayt və backend eyni domendədirsə sayt ünvanının özü).
-    // Backend serverə qoyulandan sonra bura real ünvan yazılır.
-    var API_BASE = '';
+    // Backend ünvanı səhifənin açıldığı ünvandan götürülür, ona görə deploy zamanı bu faylı dəyişmək lazım deyil:
+    // talentcore.az (və www) — sayt və backend eyni domendədir; localhost — lokal backend; qalan hallarda
+    // (GitHub Pages, fayl kimi açılış) boş qalır və sayt statik nümunə məlumatla işləyir.
+    var API_BASE = (function () {
+        var host = location.hostname;
+        if (host === 'talentcore.az' || host === 'www.talentcore.az') return location.origin;
+        if (host === 'localhost' || host === '127.0.0.1') return 'http://127.0.0.1:8000';
+        return '';
+    })();
 
     // Cloudflare Turnstile "site key" (İCTİMAİ açardır, gizli deyil; gizli açar yalnız backend-in .env-indədir).
     // Boşdursa robot widget-i göstərilmir.
@@ -65,7 +71,8 @@
     window.tcTrack('page_view');
 
     // Robot yoxlaması: üç formanın göndər düyməsindən əvvəl widget qoyulur
-    if (TURNSTILE_SITE_KEY) {
+    // Lokal işlədəndə widget yüklənmir: açar yalnız talentcore.az domenləri üçün qeydiyyatdadır (lokalda Cloudflare xəta qaytarır)
+    if (TURNSTILE_SITE_KEY && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         ['contact-form', 'cv-form', 'request-form'].forEach(function (id) {
             var form = document.getElementById(id);
             var btn = form && form.querySelector('button[type="submit"]');

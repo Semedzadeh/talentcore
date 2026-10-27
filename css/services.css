@@ -57,7 +57,7 @@
     margin-bottom: 16px;
 }
 
-.service-card h3 {
+.service-card h2 {
     color: #d97742;
     font-size: clamp(15px, 1.3vw, 20px);
     font-weight: 700;
@@ -148,7 +148,7 @@
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: #c4642f;
+    background: #b85a26;
     display: flex;
     align-items: center;
     justify-content: center;

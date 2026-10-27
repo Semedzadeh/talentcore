@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Seçilmiş kartın adını və xidmətlərini sol panelə KOPYALAYIR. Kopyalanan
     // elementlər .lang olaraq qalır, ona görə dil dəyişəndə (AZ/EN/RU/ZH) onlar da tərcümə olunur.
     function fillPackage(card) {
-        const title = card.querySelector('h3');
+        const title = card.querySelector('h2');
         const span = document.createElement('span');
         span.className = 'lang';
         span.setAttribute('data-az', title.getAttribute('data-az'));

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sending: { az: 'Göndərilir...', en: 'Sending...' },
         success: { az: 'Mesajınız uğurla göndərildi. Tezliklə sizinlə əlaqə saxlayacağıq.', en: 'Your message has been sent. We will get back to you soon.' },
         error: { az: 'Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', en: 'Something went wrong, please try again shortly.' },
+        invalid: { az: 'Zəhmət olmasa adınızı, düzgün e-poçt ünvanınızı və mesajınızı yazın.', en: 'Please enter your name, a valid email address and a message.' },
         missingKey: { az: 'Form hələ qoşulmayıb (access key əlavə olunmayıb).', en: 'The form is not connected yet (missing access key).' }
     };
 
@@ -28,6 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     formEl.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const field = name => formEl.elements[name] ? formEl.elements[name].value.trim() : '';
+        if (!field('name') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field('email')) || !field('message')) {
+            setStatus(t(MESSAGES.invalid), 'error');
+            return;
+        }
 
         const useBackend = Boolean(window.TC_API_BASE);
 

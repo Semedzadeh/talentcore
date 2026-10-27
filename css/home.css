@@ -63,27 +63,6 @@ body.light-theme .hero-baku {
     flex-wrap: wrap;
 }
 
-.btn-transparent {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 30px);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: clamp(14px, 1.5vw, 16px);
-    text-decoration: none;
-    transition: all 0.3s;
-    text-align: center;
-    display: inline-block;
-    backdrop-filter: blur(10px);
-}
-
-.btn-transparent:hover {
-    background-color: var(--card-hover);
-    border-color: #d97742;
-    transform: translateY(-3px);
-}
-
 /* --- MOBİL VƏ PLANŞET UYĞUNLAŞDIRMA --- */
 @media (max-width: 1024px) {
     .hero-baku {

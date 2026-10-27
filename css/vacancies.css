@@ -99,12 +99,9 @@ body.vacancy-focused-mode .vacancy-detail {
     min-width: 0;
 }
 
-/* Sol sütun — grid xanasının özü indi bir "wrap"dır (əvvəlki ümumi hündürlük
-   BURADA qalır ki, sütun sırf öz daxilində iki hissəyə bölünsün, amma 3
-   sütunun bir-birinə görə düzülüşü/hündürlüyü DƏYİŞMƏSİN): yuxarıda scroll
-   olan filtr blokları (.vacancies-sidebar), altında isə ayrıca, sabit
-   "Vakansiya yerləşdir" qutusu (.vacancies-post-panel) — bunlar eyni
-   xidmətə qulluq etmədiyi üçün fiziki olaraq ayrılıb. */
+/* Sol sütun — grid xanasının özü bir "wrap"dır: yuxarıda scroll olan filtr blokları
+   (.vacancies-sidebar), altında isə ayrıca "Yaddaşa verilmiş vakansiyalar" qutusu.
+   Ümumi hündürlük burada qalır ki, 3 sütunun düzülüşü dəyişməsin. */
 .vacancies-sidebar-wrap {
     display: flex;
     flex-direction: column;
@@ -132,30 +129,6 @@ body.vacancy-focused-mode .vacancy-detail {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) transparent;
-}
-
-/* "Vakansiya yerləşdir" — yuxarıdakı scroll olan filtr blokundan ayrı, sol
-   sütunun lap altında sabit qalan öz qutusu. Rəngi qəsdən DÖNDƏRİLİB (əksinə
-   çevrilib) ki, səhifənin qalan hissəsindən seçilsin: qara rejimdə ağ qutu
-   (+ içi sarı yazı), ağ rejimdə isə qara qutu (+ içi ağ yazı) — bax aşağıda
-   body.light-theme override-i və "iç yazı" rəngləri üçün digər qaydalar. */
-.vacancies-post-panel {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.15);
-    border-radius: 14px;
-    padding: 18px;
-    flex-shrink: 0;
-}
-
-body.light-theme .vacancies-post-panel {
-    background: #0f172a;
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.vacancies-post-panel .filter-group {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border-bottom: none;
 }
 
 /* "Yaddaşa verilmiş vakansiyalar" — "Vakansiya yerləşdir" ilə eyni səbəbdən
@@ -233,6 +206,10 @@ body.light-theme .vacancies-post-panel {
     color: #d97742;
 }
 
+body.light-theme .vacancies-sidebar-heading h2 {
+    color: #b05423;
+}
+
 /* Filtr Qrupu — sidebar-da 7 qrup (Fəaliyyət sahəsi, Şirkətlər, Kateqoriyalar,
    Vəzifə dərəcəsi, Region, İş qrafiki, İş rejimi) alt-alta düzülür, hər biri
    arasında incə ayırıcı xətt; başlığa (oxa) basanda checkbox siyahısı aç/bağlanır */
@@ -278,43 +255,9 @@ body.light-theme .vacancies-post-panel {
     opacity: 0.55;
 }
 
-/* Qutunun (yuxarıdakı .vacancies-post-panel) fonu döndərildiyi üçün içindəki
-   bütün mətn/ikon da uyğun ("əks") rəngə keçir ki, oxuna bilsin: qara
-   rejimdə (qutu ağdır) səhifənin ümumi arxa fon rəngi (--bg-color, qara
-   rejimdə #0b1120) — belə ki mətn sanki qutunun "arxasındakı" səhifəni
-   göstərir, ağ rejimdə (qutu qaradır) isə ağ. Bura başlıq (Vakansiya
-   yerləşdir), açılış oxu (chevron) və altındakı 2 keçid linki (İş elanları
-   / Reklam bannerləri) daxildir — hamısı eyni "iç yazı" kimi nəzərdən
-   keçirilib. Başlıq və linklərin şrifti də digər filtr qruplarından bir az
-   böyüdülüb ki, qutu daha çox seçilsin. */
-.vacancies-post-panel .filter-group-title > span:first-child,
-.vacancies-post-panel .sidebar-menu-link {
-    font-size: 14px;
-}
-
-.vacancies-post-panel .filter-group-title > span:first-child,
-.vacancies-post-panel .filter-chevron,
-.vacancies-post-panel .sidebar-menu-link {
-    color: var(--bg-color);
-    opacity: 1;
-}
-
-body.light-theme .vacancies-post-panel .filter-group-title > span:first-child,
-body.light-theme .vacancies-post-panel .filter-chevron,
-body.light-theme .vacancies-post-panel .sidebar-menu-link {
-    color: #ffffff;
-}
-
 /* Linklərin hover fonu --card-hover əvəzinə buradadır — --card-hover tünd/ağ
    qutuların ÖZ rənginə görə ayarlanıb, amma bu qutu artıq əksinə çevrilib,
    ona görə --card-hover üzərində demək olar görünməz qalardı. */
-.vacancies-post-panel .sidebar-menu-link:hover {
-    background: rgba(0, 0, 0, 0.06);
-}
-
-body.light-theme .vacancies-post-panel .sidebar-menu-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
 
 .filter-chevron {
     width: 16px;
@@ -373,34 +316,6 @@ body.light-theme .vacancies-post-panel .sidebar-menu-link:hover {
     font-weight: 600;
 }
 
-/* "Vakansiya yerləşdir" menyusu — checkbox yox, digər səhifəyə keçid */
-.sidebar-menu-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px 6px;
-    border-radius: 8px;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #d97742;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-.sidebar-menu-link:hover {
-    background: var(--card-hover);
-}
-
-.sidebar-menu-link .arrow {
-    flex-shrink: 0;
-    transition: transform 0.2s;
-}
-
-.sidebar-menu-link:hover .arrow {
-    transform: translateX(3px);
-}
-
 /* Orta: Vakansiya siyahısı paneli — üstdə axtarış+sıralama paneli sabit qalır,
    altdakı kartlar isə öz müstəqil daxili scroll-una malikdir (flex:1 + öz
    overflow-y-si). Panel özü sol/sağ sütunlarla eyni sabit hündürlükdə
@@ -411,13 +326,6 @@ body.light-theme .vacancies-post-panel .sidebar-menu-link:hover {
     display: flex;
     flex-direction: column;
     height: min(calc(100vh + 50px), 1100px);
-}
-
-.vacancies-list-toolbar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 14px;
-    flex-shrink: 0;
 }
 
 .vacancy-search-input {
@@ -958,21 +866,6 @@ body.light-theme .vacancy-share-btn::after {
     margin: 26px 0 14px 0;
 }
 
-/* Son müraciət tarixi — digər meta sahələrindən seçilsin deyə accent rəngdə */
-.detail-deadline .value {
-    color: #d97742;
-}
-
-.deadline-left {
-    display: inline-block;
-    margin-left: 6px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: rgba(217, 119, 66, 0.14);
-    font-size: 11.5px;
-    font-weight: 600;
-}
-
 /* Oxşar vakansiyalar — "Müraciət Et" düyməsinin altında, namizədi saytda
    saxlamaq üçün qısa keçid kartları */
 .detail-similar {
@@ -1249,7 +1142,7 @@ body.light-theme .detail-zoom-card {
     }
 
     .mobile-page-btn.primary {
-        background: #c4642f;
+        background: #b85a26;
         border-color: #b35624;
         color: #fff;
     }
@@ -1311,17 +1204,6 @@ body.light-theme .vacancies-hero {
     border-color: #dbe7f8;
 }
 
-.vacancies-hero-icon {
-    flex-shrink: 0;
-    color: var(--heading-navy);
-}
-
-.vacancies-hero-icon svg {
-    display: block;
-    width: clamp(56px, 5.2vw, 84px);
-    height: auto;
-}
-
 .vacancies-hero p {
     margin: 0;
     padding-left: 28px;
@@ -1357,14 +1239,6 @@ body.light-theme .vacancies-hero {
 .filter-group-title {
     flex: 1;
     min-width: 0;
-}
-
-.vacancies-post-panel .filter-icon {
-    color: var(--bg-color);
-}
-
-body.light-theme .vacancies-post-panel .filter-icon {
-    color: #ffffff;
 }
 
 /* --- Axtarış sahəsi: içində lupa --- */
@@ -1459,20 +1333,6 @@ body.light-theme .detail-placeholder h3 {
 /* Açıq rejimdə filtr başlıqları daha qatı oxunsun */
 body.light-theme .vacancies-sidebar .filter-group-title > span:first-child {
     opacity: 0.85;
-}
-
-/* "Vakansiya yerləşdir" bir sətirdə qalsın (alt-alta düşməsin) */
-.vacancies-post-panel .filter-group-title > span:first-child {
-    font-size: 12px;
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-}
-
-/* Dar sol sütunda (≤1150px, 230px) sığmaya bilər — orada yenə sətirə düşməyə icazə */
-@media (min-width: 1025px) and (max-width: 1150px) {
-    .vacancies-post-panel .filter-group-title > span:first-child {
-        white-space: normal;
-    }
 }
 
 /* Sol (Detallı axtarış) və sağ (Detallı baxış) bölmələr kənarlara doğru çəkilib —
@@ -1765,71 +1625,6 @@ body.vacancy-focused-mode .vacancies-searchbar {
     font-size: 14px;
 }
 
-.searchbar-select-wrap {
-    position: relative;
-    flex: 0 0 clamp(220px, 22vw, 340px);
-}
-
-.searchbar-select {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    height: 100%;
-    padding: 0 40px 0 42px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--text-color);
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    color-scheme: dark;
-    transition: border-color 0.25s;
-}
-
-.searchbar-select:focus {
-    border-color: #d97742;
-}
-
-.searchbar-select option {
-    background: #141c30;
-    color: #ffffff;
-}
-
-body.light-theme .searchbar-select {
-    background: #ffffff;
-    border-color: #e1e9f4;
-    box-shadow: 0 2px 10px rgba(30, 64, 120, 0.05);
-    color-scheme: light;
-}
-
-body.light-theme .searchbar-select option {
-    background: #ffffff;
-    color: #0f172a;
-}
-
-.searchbar-select-icon,
-.searchbar-select-chevron {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: var(--text-muted);
-}
-
-.searchbar-select-icon {
-    left: 15px;
-    width: 17px;
-    height: 17px;
-}
-
-.searchbar-select-chevron {
-    right: 14px;
-    width: 15px;
-    height: 15px;
-}
-
 .searchbar-btn {
     flex: 0 0 auto;
     display: flex;
@@ -1849,7 +1644,7 @@ body.light-theme .searchbar-select option {
 }
 
 body:not(.light-theme) .searchbar-btn {
-    background: #c4642f;
+    background: #b85a26;
 }
 
 .searchbar-btn:hover {
@@ -1900,26 +1695,12 @@ body.light-theme .popular-chip {
     border-color: #d97742;
 }
 
-/* Orta sütunun başlığı: solda vakansiya sayı, sağda sıralama (axtarış çıxarıldı) */
-.vacancies-count {
-    flex: 1;
-    align-self: center;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
 @media (max-width: 760px) {
     .vacancies-searchbar-row {
         flex-wrap: wrap;
     }
     .vacancies-searchbar .vacancy-search-wrap {
         flex: 1 1 100%;
-    }
-    .searchbar-select-wrap {
-        flex: 1 1 0;
-        min-width: 0;
-        height: 46px;
     }
     .searchbar-btn {
         min-width: 0;
@@ -1976,12 +1757,6 @@ body.light-theme .popular-chip {
 }
 
 /* Vəzifə dərəcəsi çipləri — sol paneldəki filtrlə sinxron; aktiv olanda doldurulur. */
-.popular-sep {
-    width: 1px;
-    height: 18px;
-    background: var(--border-color);
-    margin: 0 4px;
-}
 
 .popular-chip.active {
     color: #ffffff;
@@ -2033,11 +1808,6 @@ body.light-theme .popular-chip.active {
     min-width: 0;
 }
 
-.searchbar-right .searchbar-select-wrap {
-    flex: 1 1 auto;
-    min-width: 0;
-}
-
 .popular-searches {
     grid-column: 1 / 3;
     grid-row: 2;
@@ -2059,9 +1829,6 @@ body.light-theme .popular-chip.active {
     .popular-searches {
         grid-column: 1;
         grid-row: auto;
-    }
-    .searchbar-right .searchbar-select-wrap {
-        height: 46px;
     }
     .searchbar-btn {
         height: 46px;
@@ -2125,9 +1892,6 @@ body.light-theme .popular-chip.active {
 @media (max-width: 760px) {
     .searchbar-right {
         flex-wrap: wrap;
-    }
-    .searchbar-right .searchbar-select-wrap {
-        flex: 1 1 100%;
     }
     .searchbar-right .vacancy-sort-dropdown,
     .searchbar-right .searchbar-btn {
@@ -2502,7 +2266,7 @@ body.light-theme .detail-deadline-pill {
    padding-i yoxdur — bütün sahə düymənin özüdür (klik hər yerdən işləsin). */
 .vacancies-saved-panel {
     padding: 0;
-    background: #c4642f;
+    background: #b85a26;
     border-color: transparent;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
@@ -2595,6 +2359,10 @@ body.light-theme .vacancy-card .vacancy-company {
     font-weight: 500;
     color: #94a3b8;
     opacity: 1;
+}
+
+body.light-theme .vacancy-card .vacancy-posted {
+    color: #64748b;
 }
 
 .vacancy-premium-badge {

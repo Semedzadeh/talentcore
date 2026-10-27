@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const listEl = document.getElementById('vacancies-list');
     const detailEl = document.getElementById('vacancy-detail');
 
+    // Atribut daxilinə yazılan ünvanda dırnaq və < & işarələri atributu bağlayıb yeni atribut əlavə edə bilməsin
+    function escapeAttr(value) {
+        return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
     // Panelin sabit yazıları 4 dildə (az/en/ru/zh): seçilmiş dil <html lang>-dan oxunur, boş qalan dil üçün ingiliscə ehtiyat.
     function tr(az, en, ru, zh) {
         const lang = document.documentElement.lang || 'az';
@@ -722,13 +727,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ];
     // SaÄ panelin default illÃ¼strasiyasÄ± (CV + bÃ¶yÃ¼dÃ¼cÃ¼ ÅÃ¼ÅÉ) â dÃ¶rd xidmÉtin hamÄ±sÄ± Ã¼Ã§Ã¼n eynidir.
     const PLACEHOLDER_ILLUSTRATION = `<svg class="placeholder-illustration" viewBox="0 0 220 200" fill="none" aria-hidden="true"><g transform="rotate(-8 90 90)"><rect x="34" y="40" width="110" height="130" rx="14" fill="#dbe8fb" stroke="#bcd3f5" stroke-width="2"/><rect x="48" y="54" width="82" height="102" rx="8" fill="#fff" opacity=".9"/></g><rect x="58" y="62" width="104" height="76" rx="10" fill="#fff" stroke="#c6d9f7" stroke-width="2"/><circle cx="82" cy="88" r="11" fill="#2563eb"/><path d="M64 118c2-11 10-16 18-16s16 5 18 16z" fill="#2563eb"/><rect x="108" y="80" width="42" height="7" rx="3.500" fill="#b7cdf3"/><rect x="108" y="95" width="34" height="7" rx="3.500" fill="#cfdef7"/><rect x="108" y="110" width="40" height="7" rx="3.500" fill="#cfdef7"/><circle cx="150" cy="128" r="30" fill="#e6f0ff" stroke="#1d4ed8" stroke-width="9"/><path d="M172 150l24 24" stroke="#1d4ed8" stroke-width="12" stroke-linecap="round"/><path d="M172 50l8-14M186 62l14-6M162 40l2-16" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/></svg>`;
-    // Sınaq üçün: backend-dən reklam gəlməyəndə göstəriləcək poster (hazırda boşdur — xidmətlər göstərilir).
-    // Sınamaq üçün: [{ image: 'images/detail-ad.webp', url: '' }] yaz. ---
-    const TEST_DETAIL_ADS = [];
-    function getDetailAds() {
-        return (window.TC_ADS && window.TC_ADS.length) ? window.TC_ADS : TEST_DETAIL_ADS;
-    }
-
+    const getDetailAds = () => window.TC_ADS || [];
     // Sağ panel yaxınlaşma effekti (pageexecutive.com kimi): sayt açılanda panel adi (tam) görünür; siçan
     // panelin üstündə ikən təkəri aşağı fırladanda məzmun yaxınlaşır (çərçivədən kənara çıxan hissə kəsilir),
     // yuxarı fırladanda uzaqlaşır və kiçik, əyri kart halına düşür. Sərhədə (tam kiçik/tam böyük) çatanda təkər səhifəyə ötürülür —
@@ -825,7 +824,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    const AZ_MONTHS_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avqust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr'];
 
     // Son müraciət tarixi — real tarix sahəsi yoxdur, `deadlineIn` (bu gündən neçə gün
     // sonra) saxlanılır, nümunə datadır. Verilməyibsə sətir ümumiyyətlə göstərilmir.
@@ -930,7 +928,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <!-- "Müraciət Et" və "Yadda saxla" yalnız "Vəzifə haqqında" tabındadır —
                      "Şirkət haqqında" tabında lazım deyil (tələb olunub) -->
                 <div class="detail-actions">
-                    <a href="${applyHref}"${applyAttrs} class="btn-primary detail-apply-btn">
+                    <a href="${escapeAttr(applyHref)}"${applyAttrs} class="btn-primary detail-apply-btn">
                         <span>${tr('Müraciət Et', 'Apply', 'Откликнуться', '申请职位')}</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>

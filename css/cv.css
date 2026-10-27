@@ -43,8 +43,8 @@
     align-items: start;
 }
 
-.cv-info h3,
-.cv-form-card h3 {
+.cv-info h2,
+.cv-form-card h2 {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-color);
