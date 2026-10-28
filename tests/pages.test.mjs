@@ -153,7 +153,7 @@ test('.cpanel.yml copies every page and asset the site needs', () => {
         assert.ok(yml.includes(f), `${f} deploy siyahısında yoxdur`);
         assert.ok(exists(f), `${f} faylı yoxdur`);
     }
-    for (const dir of ['css', 'js', 'images', 'logos']) assert.ok(yml.includes(dir) && exists(dir));
+    for (const dir of ['css', 'js', 'images', 'logos', 'fonts']) assert.ok(yml.includes(dir) && exists(dir));
     assert.equal(path.basename(root), 'frontend');
 });
 
