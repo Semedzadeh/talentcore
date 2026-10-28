@@ -2631,3 +2631,32 @@ body.light-theme .detail-section ul li {
     object-fit: contain;
     padding: 8px;
 }
+
+/* Sağ düymə sütunu genişləndi (48px → 62px): ingilis "Yesterday" və rus "Сегодня"/"Вчера" kimi
+   uzun tarix yazıları artıq kartın kənarından çıxmır. Ayırıcı xətt, "PREMIUM" nişanı və mətnin sağ
+   boşluğu eyni miqdarda sürüşdürülüb. */
+.vacancy-card {
+    padding-right: 76px;
+}
+
+.vacancy-card::after {
+    right: 62px;
+}
+
+.vacancy-premium-badge {
+    right: 76px;
+}
+
+.vacancy-card .vacancy-save-btn {
+    right: 17px;
+}
+
+.vacancy-card .vacancy-share-btn {
+    right: 17px;
+}
+
+.vacancy-card .vacancy-posted {
+    width: 62px;
+    font-size: 11px;
+    letter-spacing: -0.1px;
+}
