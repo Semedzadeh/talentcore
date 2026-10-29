@@ -4,7 +4,7 @@ import { pages, read, exists, stripped, attr, tags, root } from './helpers.mjs';
 import path from 'node:path';
 
 const PUBLIC_PAGES = pages.filter(p => p !== '404.html');
-// Vakansiyalar səhifəsində <h1> qəsdən yoxdur (CLAUDE.md)
+// Vakansiyalar səhifəsində <h1> qəsdən yoxdur
 const NO_H1 = new Set(['vacancies.html']);
 const KNOWN_HEADING_SKIPS = new Set();
 

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // passesSidebarFilters() və "sidebarFiltersEl.addEventListener('change', ...)"
     // bölümlərindədir — statik VACANCIES üzərində TEST məqsədilədir, real
     // backend gələndə eyni taksonomiya (sector/jobCategory/level sahələri)
-    // real data ilə doldurulmalıdır, bax CLAUDE.md.
+    // real data ilə doldurulmalıdır.
     document.querySelectorAll('.filter-group-header').forEach(header => {
         const list = document.getElementById(header.getAttribute('aria-controls'));
         if (!list) return;

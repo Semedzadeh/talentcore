@@ -1,6 +1,6 @@
 // Ortaq "Müraciət et" modalı: post-job.html (paket kartları) və ad-banners.html (reklam bannerləri)
 // istifadə edir. Açan düymə: [data-request-open]. Forma Web3Forms ilə info@talentcore.az-a
-// göndərilir (contact.js/cv.js ilə eyni access key — bax CLAUDE.md).
+// göndərilir (contact.js/cv.js ilə eyni access key).
 //  - Düymə .pricing-card daxilindədirsə (post-job): sol panelə YALNIZ həmin paketin adı və
 //    xidmətləri kopyalanır, dəyişdirilə bilməz.
 //  - Əks halda (ad-banners): sol panel HTML-də statikdir, JS ona toxunmur.
