@@ -6,4 +6,4 @@ deployment:
     - export DEST=$HOME/app/public
     - /bin/mkdir -p $DEST
     - /bin/cp -a 404.html about.html ad-banners.html contact.html cv.html faq.html index.html industries.html post-job.html services.html vacancies.html robots.txt sitemap.xml sitemap-pages.xml baku_light.jpg logo.png logo_light.png favicon.png og-image.png $DEST/
-    - /bin/cp -a css js images logos fonts $DEST/
+    - /bin/cp -a css js images fonts $DEST/

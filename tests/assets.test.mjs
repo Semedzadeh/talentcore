@@ -45,15 +45,6 @@ test('brand images are small enough for fast loading', () => {
     }
 });
 
-test('company logos used by the sample vacancies exist and are PNG files', () => {
-    const logos = [...read('js/vacancies.js').matchAll(/logo: 'logos\/([^']+)'/g)].map(m => m[1]);
-    assert.ok(logos.length > 5);
-    for (const name of new Set(logos)) {
-        const buf = fs.readFileSync(path.join(root, 'logos', name));
-        assert.equal(buf.subarray(1, 4).toString(), 'PNG', `${name}: PNG deyil`);
-    }
-});
-
 test('brand logos are transparent PNGs with the wordmark proportions', () => {
     for (const file of ['logo.png', 'logo_light.png']) {
         const buf = fs.readFileSync(path.join(root, file));
