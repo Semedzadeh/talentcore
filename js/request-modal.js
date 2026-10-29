@@ -139,6 +139,64 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && !modal.hidden) closeModal();
     });
 
+    // Telefon: "+994 " sabit başlanğıcdır, istifadəçi yalnız 9 rəqəm yazır və nömrə "+994 50 263 46 46" kimi formatlanır.
+    // Yapışdırılan "0502634646", "+994502634646" və ya "994502634646" də eyni formaya düşür.
+    const phoneEl = document.getElementById('rq-phone');
+    const PHONE_PREFIX = '+994 ';
+    function nationalDigits(value) {
+        if (PHONE_PREFIX.startsWith(value)) return '';
+        let d = (value.startsWith('+994') ? value.slice(4) : value).replace(/\D/g, '');
+        if (d.length > 9 && d.startsWith('994')) d = d.slice(3);
+        if (d.startsWith('0')) d = d.slice(1);
+        return d.slice(0, 9);
+    }
+    function formatPhone(d) {
+        const groups = [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean);
+        return PHONE_PREFIX + groups.join(' ');
+    }
+    if (phoneEl) {
+        const caretToEnd = () => setTimeout(() => phoneEl.setSelectionRange(phoneEl.value.length, phoneEl.value.length));
+        phoneEl.addEventListener('focus', () => {
+            if (!phoneEl.value) phoneEl.value = PHONE_PREFIX;
+            caretToEnd();
+        });
+        // Yalnız "+994" qalıbsa sahə boş sayılsın (placeholder qayıtsın, məcburi sahə yoxlaması düzgün işləsin)
+        phoneEl.addEventListener('blur', () => { if (!nationalDigits(phoneEl.value)) phoneEl.value = ''; });
+        // Kursor "+994" hissəsinin içinə düşməsin
+        phoneEl.addEventListener('click', () => {
+            if (phoneEl.selectionStart < PHONE_PREFIX.length && phoneEl.selectionStart === phoneEl.selectionEnd) caretToEnd();
+        });
+        phoneEl.addEventListener('input', () => {
+            const digitsBeforeCaret = nationalDigits(phoneEl.value.slice(0, phoneEl.selectionStart)).length;
+            const formatted = formatPhone(nationalDigits(phoneEl.value));
+            phoneEl.value = formatted;
+            // Kursor yazı yerində qalsın (ortadan düzəliş edəndə sona tullanmasın)
+            let pos = PHONE_PREFIX.length;
+            for (let seen = 0; pos < formatted.length && seen < digitsBeforeCaret; pos++) {
+                if (/\d/.test(formatted[pos])) seen++;
+            }
+            phoneEl.setSelectionRange(pos, pos);
+        });
+    }
+
+    // Fayl tipi: inputun `accept` atributundakı uzantılar. Brauzerin fayl pəncərəsində "Bütün fayllar" seçib başqa tip
+    // də göndərmək olur, ona görə tipi özümüz yoxlayırıq və səbəbi istifadəçiyə göstəririk.
+    function allowedExtensions(input) {
+        return (input.getAttribute('accept') || '').split(',').map(s => s.trim().toLowerCase()).filter(s => s.startsWith('.'));
+    }
+    function fileTypeOk(input) {
+        const file = input.files[0];
+        if (!file) return true;
+        const ext = (file.name.match(/\.[^.]+$/) || [''])[0].toLowerCase();
+        return allowedExtensions(input).includes(ext);
+    }
+    function fileTypeMessage(input) {
+        const hint = input.closest('.rq-upload').querySelector('small');
+        return t('Fayl tipi uyğun deyil. İcazə verilən formatlar:', 'Unsupported file type. Allowed formats:') + ' ' +
+            (hint ? hint.textContent : allowedExtensions(input).join(', '));
+    }
+    let fileErrorInput = null;
+
     // Fayl seçiləndə qutuda faylın adı göstərilir; seçim ləğv olunsa ilkin yazı qayıdır.
     formEl.querySelectorAll('.rq-upload input[type="file"]').forEach(input => {
         const label = input.closest('.rq-upload');
@@ -146,6 +204,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const original = { az: strong.getAttribute('data-az'), en: strong.getAttribute('data-en') };
         input.addEventListener('change', () => {
             label.classList.remove('invalid');
+            if (input.files[0] && !fileTypeOk(input)) {
+                setStatus(fileTypeMessage(input), 'error');
+                fileErrorInput = input;
+                input.value = '';
+                label.classList.add('invalid');
+            } else if (fileErrorInput === input) {
+                setStatus('', null);
+                fileErrorInput = null;
+            }
             if (input.files[0]) {
                 strong.classList.remove('lang'); // dil dəyişəndə fayl adı üzərinə yazılmasın
                 strong.textContent = input.files[0].name;
@@ -198,11 +265,16 @@ document.addEventListener('DOMContentLoaded', () => {
             setStatus(t('Zəhmət olmasa düzgün email ünvanı daxil edin.', 'Please enter a valid email address.'), 'error');
             return;
         }
-        const phoneEl = document.getElementById('rq-phone');
-        if (phoneEl && phoneEl.value.replace(/\D/g, '').length < 7) {
+        if (phoneEl && nationalDigits(phoneEl.value).length !== 9) {
             phoneEl.classList.add('invalid');
             phoneEl.focus();
             setStatus(t('Zəhmət olmasa düzgün telefon nömrəsi daxil edin.', 'Please enter a valid phone number.'), 'error');
+            return;
+        }
+        const badType = [...formEl.querySelectorAll('input[type="file"]')].find(i => !fileTypeOk(i));
+        if (badType) {
+            badType.closest('.rq-upload').classList.add('invalid');
+            setStatus(fileTypeMessage(badType), 'error');
             return;
         }
         const files = [...formEl.querySelectorAll('input[type="file"]')].map(i => i.files[0]).filter(Boolean);
@@ -238,6 +310,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await window.tcSubmit('/request', formData);
                 success = result.ok;
                 serverMessage = (result.data && result.data.message) || '';
+                // Backend yoxlaması fayl sahəsini rədd edibsə (tip/ölçü) mesajı yoxdur, yalnız `errors` var — səbəbi göstər
+                const errs = result.data && result.data.errors;
+                if (!serverMessage && errs && (errs.attachment || errs.company_logo)) {
+                    serverMessage = t('Fayl tipi və ya ölçüsü uyğun deyil, zəhmət olmasa faylları yoxlayın.', 'The file type or size is not accepted, please check the files.');
+                }
             } else {
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',

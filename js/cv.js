@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         error: { az: 'Xəta baş verdi, zəhmət olmasa bir az sonra yenidən cəhd edin.', en: 'Something went wrong, please try again shortly.' },
         missingKey: { az: 'Form hələ qoşulmayıb (access key əlavə olunmayıb).', en: 'The form is not connected yet (missing access key).' },
         tooLarge: { az: 'Fayl 5MB-dan böyükdür, zəhmət olmasa daha kiçik fayl seçin.', en: 'File is larger than 5MB, please choose a smaller file.' },
+        badFileType: { az: 'Fayl tipi uyğun deyil. İcazə verilən formatlar:', en: 'Unsupported file type. Allowed formats:' },
+        badFile: { az: 'Fayl tipi və ya ölçüsü uyğun deyil, zəhmət olmasa faylları yoxlayın.', en: 'The file type or size is not accepted, please check the files.' },
         requiredFields: { az: 'Zəhmət olmasa məcburi sahələri doldurun: ad soyad, email, telefon və CV.', en: 'Please fill in the required fields: full name, email, phone and CV.' },
         invalidEmail: { az: 'Zəhmət olmasa düzgün email ünvanı daxil edin.', en: 'Please enter a valid email address.' },
         invalidPhone: { az: 'Zəhmət olmasa düzgün telefon nömrəsi daxil edin.', en: 'Please enter a valid phone number.' }
@@ -137,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileInput = document.getElementById('cv-file');
         const motivationInput = document.getElementById('cv-motivation');
 
-        [nameEl, emailEl, phoneEl, fileInput].forEach(el => el.classList.remove('invalid'));
+        [nameEl, emailEl, phoneEl, fileInput, motivationInput].forEach(el => el.classList.remove('invalid'));
 
         const missing = [nameEl, emailEl, phoneEl].filter(el => !el.value.trim());
         if (!fileInput.files[0]) missing.push(fileInput);
@@ -157,6 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
             phoneEl.classList.add('invalid');
             phoneEl.focus();
             setStatus(t(MESSAGES.invalidPhone), 'error');
+            return;
+        }
+
+        // Fayl tipi: brauzerin "Bütün fayllar" seçimi ilə başqa tip də seçmək olur, bunu özümüz yoxlayırıq
+        const allowedTypes = ['.pdf', '.doc', '.docx'];
+        const badFile = [fileInput, motivationInput].find(input => {
+            const file = input.files[0];
+            return file && !allowedTypes.includes((file.name.match(/\.[^.]+$/) || [''])[0].toLowerCase());
+        });
+        if (badFile) {
+            badFile.classList.add('invalid');
+            setStatus(t(MESSAGES.badFileType) + ' PDF, DOC, DOCX', 'error');
             return;
         }
 
@@ -183,6 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await window.tcSubmit('/apply', formData);
                 success = result.ok;
                 serverMessage = (result.data && result.data.message) || '';
+                // Backend fayl sahəsini rədd edibsə mesaj yoxdur, yalnız `errors` var — səbəbi göstər
+                const errs = result.data && result.data.errors;
+                if (!serverMessage && errs && (errs.attachment || errs.motivation_letter)) serverMessage = t(MESSAGES.badFile);
             } else {
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',

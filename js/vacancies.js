@@ -987,6 +987,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
     }
 
+    // Müvəqqəti: vakansiya olmayan müddətdə orta sütunda göstərilən açılış tarixi (15.11.2026; ay 0-dan sayılır).
+    // Tarix keçəndən sonra yazı özü silinir, kodu dəyişmək lazım deyil.
+    const LAUNCH_DATE = new Date(2026, 10, 15);
+
     function renderList() {
         let filtered = activeCategory === 'all'
             ? VACANCIES
@@ -1014,10 +1018,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
         if (filtered.length === 0) {
-            listEl.innerHTML = showSavedOnly
-                ? '<p class="vacancy-empty">Hələ heç bir vakansiya yadda saxlanmayıb.</p>'
-                : '<p class="vacancy-empty">Bu sahədə hazırda açıq vakansiya yoxdur.</p>';
-            renderDetail(null);
+            // Vakansiya ümumiyyətlə yoxdursa (sayt yeni açılıb) açılış tarixi yazılır; tarix keçəndən sonra adi yazı qayıdır
+            let emptyText = 'Bu sahədə hazırda açıq vakansiya yoxdur.';
+            if (showSavedOnly) {
+                emptyText = 'Hələ heç bir vakansiya yadda saxlanmayıb.';
+            } else if (VACANCIES.length === 0 && new Date() < LAUNCH_DATE) {
+                emptyText = tr('Vakansiyalar 15.11.2026-dan etibarən dərc olunacaqdır.', 'Vacancies will be published starting from 15.11.2026.', 'Вакансии будут опубликованы начиная с 15.11.2026.', '职位将自2026年11月15日起发布。');
+            }
+            listEl.innerHTML = `<p class="vacancy-empty">${emptyText}</p>`;
+            // Sağ panel siyahı boş olanda da xidmətləri göstərir ("vakansiya yoxdur" yazısı yalnız orta sütundadır)
+            if (!document.body.classList.contains('vacancy-focused-mode')) activeVacancyId = null;
+            if (activeVacancyId === null) startShowcaseRotation(); else renderDetail(VACANCIES.find(v => v.id === activeVacancyId));
             return;
         }
 
