@@ -520,8 +520,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (current) renderDetail(current);
         }, 80));
     }
-    if (BACKEND) {
-        const backendData = await window.tcVacanciesBackend.load();
+    // Sorğu dərhal başlayır, amma səhifə onu gözləmir: server ləng cavab verəndə (soyuq start) orta və sağ panel
+    // əvvəlcədən görünür, data gələndə siyahı yenilənir. Yalnız "?vacancy=" ilə açılış (aşağıda) datanı əvvəl gözləyir.
+    let vacanciesLoading = BACKEND;
+    const backendLoad = BACKEND ? window.tcVacanciesBackend.load() : null;
+    async function applyBackendData() {
+        if (!vacanciesLoading) return;
+        const backendData = await backendLoad;
+        vacanciesLoading = false;
         VACANCIES = backendData.vacancies;
         FILTER_GROUPS = backendData.groups;
         // Dil dəyişəndə vakansiya mətnləri də o dildə gəlsin: main.js dili yadda saxladıqdan sonra səhifəni yenilə
@@ -532,6 +538,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         applyPopular();
         window.addEventListener('tc-settings', applyPopular);
     }
+    if (new URLSearchParams(window.location.search).has('vacancy')) await applyBackendData();
 
     const MOBILE_BREAKPOINT = 1024; // css/vacancies.css-dəki mobil sərhədlə eynidir
     const MOBILE_PAGE_SIZE = 10; // mobildə hər səhifədə maksimum vakansiya sayı
@@ -1020,7 +1027,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (filtered.length === 0) {
             // Vakansiya ümumiyyətlə yoxdursa (sayt yeni açılıb) açılış tarixi yazılır; tarix keçəndən sonra adi yazı qayıdır
             let emptyText = 'Bu sahədə hazırda açıq vakansiya yoxdur.';
-            if (showSavedOnly) {
+            if (vacanciesLoading) {
+                emptyText = tr('Vakansiyalar yüklənir…', 'Loading vacancies…', 'Загрузка вакансий…', '正在加载职位…');
+            } else if (showSavedOnly) {
                 emptyText = 'Hələ heç bir vakansiya yadda saxlanmayıb.';
             } else if (VACANCIES.length === 0 && new Date() < LAUNCH_DATE) {
                 emptyText = tr('Vakansiyalar 15.11.2026-dan etibarən dərc olunacaqdır.', 'Vacancies will be published starting from 15.11.2026.', 'Вакансии будут опубликованы начиная с 15.11.2026.', '职位将自2026年11月15日起发布。');
@@ -1414,5 +1423,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         toggleSaved(Number(btn.dataset.id));
         syncDetailSaveBtn(Number(btn.dataset.id));
     });
+    if (vacanciesLoading) {
+        renderList(); // gözləmə zamanı: "Yüklənir…" və sağ paneldə xidmətlər
+        await applyBackendData();
+        renderCompanyFilter();
+        updateSavedCount();
+    }
     renderList();
 });
