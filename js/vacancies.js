@@ -578,8 +578,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         stopShowcaseRotation();
         const catLabel = (CATEGORIES.find(c => c.id === v.category) || {}).az || v.categoryLabel || '';
-        // "Müraciət Et" hara aparır: backend-də "birbaşa Glorri" seçilibsə xarici link (yeni tabda, bizə müraciət gəlmir),
-        // əks halda cv.html müraciət formu. Nümunə vakansiyalarda həmişə cv.html.
+        // "Müraciət Et" hara aparır: backend-də "sayta keçid" seçilibsə xarici link (yeni tabda, bizə müraciət gəlmir),
+        // əks halda cv.html müraciət formu.
         const externalApplyUrl = (v.apply && v.apply.method === 'external' && /^https?:\/\//i.test(v.apply.url || '')) ? v.apply.url : '';
         const applyHref = externalApplyUrl || `cv.html?${new URLSearchParams({
             company: v.companyRaw || v.company,
@@ -600,7 +600,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="detail-meta-item" title="${tr('Yer', 'Location', 'Место', '地点')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>${trVal(v.location)}</span></div>
                 <div class="detail-meta-item" title="${tr('Məşğulluq', 'Employment', 'Занятость', '工作类型')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>${trVal(v.type)}</span></div>
                 <div class="detail-meta-item" title="${tr('İş forması', 'Work mode', 'Формат работы', '工作方式')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>${trVal(v.mode)}</span></div>
-                <div class="detail-meta-item" title="${tr('Maaş', 'Salary', 'Зарплата', '薪资')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>${tr('Razılaşma yolu ilə', 'Negotiable', 'По договорённости', '面议')}</span></div>
+                <div class="detail-meta-item" title="${tr('Maaş', 'Salary', 'Зарплата', '薪资')}"><span class="value"><svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>${v.salary || tr('Razılaşma yolu ilə', 'Negotiable', 'По договорённости', '面议')}</span></div>
                 ${deadlineHtml(v)}
             </div>
             <div class="detail-tabs" role="tablist">
@@ -655,7 +655,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // "Müraciət Et" kliklərinin sayğacı (mail yolu / Glorri yolu ayrıca sayılır)
+    // "Müraciət Et" kliklərinin sayğacı (forma yolu / sayta keçid ayrıca sayılır)
     detailEl.addEventListener('click', (e) => {
         const btn = e.target.closest('.detail-apply-btn');
         if (!btn || !window.tcTrack || !BACKEND) return;

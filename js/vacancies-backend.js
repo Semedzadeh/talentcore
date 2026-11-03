@@ -83,6 +83,7 @@
             type: esc(item.employment || ''),
             mode: esc(item.mode || ''),
             categoryLabel: esc(item.category || ''),
+            salary: esc(item.salary || ''),
             category: f.job_category || 'other',
             sector: f.sector || null,
             jobCategory: f.job_category || null,
