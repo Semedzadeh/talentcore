@@ -50,8 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     // querySelectorAll: yeni .site-logo əlavə olunsa, tema dəyişəndə avtomatik yenilənsin.
     const siteLogos = document.querySelectorAll('.site-logo');
+    // Loqonun qovluğu elementin ilkin src-sindən götürülür: statik səhifələrdə "logo.png", /vakansiya/... səhifələrində
+    // "/logo.png". Nisbi ad yazılsa brauzer onu /vakansiya/logo.png kimi axtarıb tapmazdı.
     function setLogoSrc(src) {
-        siteLogos.forEach(logo => { logo.src = src; });
+        siteLogos.forEach(logo => {
+            const dir = (logo.getAttribute('src') || '').replace(/[^/]*$/, '');
+            logo.setAttribute('src', dir + src);
+        });
     }
 
     if (themeCheckbox) {

@@ -99,3 +99,9 @@ test('values placed inside href attributes by template strings are attribute-esc
     const raw = [...code.matchAll(/href="\$\{(?!escapeAttr\()([^}]*)\}/g)].map(m => m[1]).filter(expr => !/^o\.id|^v\.id|^encodeURIComponent/.test(expr));
     assert.deepEqual(raw, [], 'ekranlaşdırılmamış href interpolyasiyası');
 });
+
+test('main.js swaps the header logo inside the logo\'s own folder (nested URLs such as /vakansiya/slug must not break it)', () => {
+    const code = read('js/main.js');
+    assert.doesNotMatch(code, /logo\.src\s*=\s*src/, 'loqo nisbi adla yazılır');
+    assert.match(code, /getAttribute\('src'\)[\s\S]{0,80}replace\(\/\[\^\/\]\*\$\//);
+});
