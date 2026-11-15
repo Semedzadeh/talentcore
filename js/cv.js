@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         badFile: { az: 'Fayl tipi və ya ölçüsü uyğun deyil, zəhmət olmasa faylları yoxlayın.', en: 'The file type or size is not accepted, please check the files.' },
         requiredFields: { az: 'Zəhmət olmasa məcburi sahələri doldurun: ad soyad, email, telefon və CV.', en: 'Please fill in the required fields: full name, email, phone and CV.' },
         invalidEmail: { az: 'Zəhmət olmasa düzgün email ünvanı daxil edin.', en: 'Please enter a valid email address.' },
-        invalidPhone: { az: 'Zəhmət olmasa düzgün telefon nömrəsi daxil edin.', en: 'Please enter a valid phone number.' }
+        invalidPhone: { az: 'Zəhmət olmasa düzgün telefon nömrəsi daxil edin.', en: 'Please enter a valid phone number.' },
+        consentRequired: { az: 'Davam etmək üçün şəxsi məlumatların işlənməsinə razılıq verməlisiniz.', en: 'To continue, please agree to the processing of your personal data.' }
     };
 
     // vacancies.html-dəki "Müraciət Et" düyməsi ?company=...&vacancy=... ilə gəlir —
@@ -111,6 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
+    // Razılıq qutusu işarələnən kimi qırmızı çərçivə və xəta mətni silinir
+    document.getElementById('cv-consent').addEventListener('change', (e) => {
+        if (!e.target.checked) return;
+        e.target.closest('.cv-consent').classList.remove('invalid');
+        if (statusEl.classList.contains('status-error') && statusEl.textContent === t(MESSAGES.consentRequired)) setStatus('', null);
+    });
+
     function setStatus(text, kind) {
         statusEl.textContent = text;
         statusEl.classList.remove('status-success', 'status-error');
@@ -138,8 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const phoneEl = document.getElementById('cv-phone');
         const fileInput = document.getElementById('cv-file');
         const motivationInput = document.getElementById('cv-motivation');
+        const consentEl = document.getElementById('cv-consent');
+        const consentLabel = consentEl.closest('.cv-consent');
 
         [nameEl, emailEl, phoneEl, fileInput, motivationInput].forEach(el => el.classList.remove('invalid'));
+        consentLabel.classList.remove('invalid');
 
         const missing = [nameEl, emailEl, phoneEl].filter(el => !el.value.trim());
         if (!fileInput.files[0]) missing.push(fileInput);
@@ -159,6 +170,14 @@ document.addEventListener('DOMContentLoaded', () => {
             phoneEl.classList.add('invalid');
             phoneEl.focus();
             setStatus(t(MESSAGES.invalidPhone), 'error');
+            return;
+        }
+
+        // Şəxsi məlumatların işlənməsinə razılıq (qutu işarələnməyibsə heç nə göndərilmir)
+        if (!consentEl.checked) {
+            consentLabel.classList.add('invalid');
+            consentEl.focus();
+            setStatus(t(MESSAGES.consentRequired), 'error');
             return;
         }
 
@@ -200,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Backend fayl sahəsini rədd edibsə mesaj yoxdur, yalnız `errors` var — səbəbi göstər
                 const errs = result.data && result.data.errors;
                 if (!serverMessage && errs && (errs.attachment || errs.motivation_letter)) serverMessage = t(MESSAGES.badFile);
+                if (!serverMessage && errs && errs.consent) serverMessage = t(MESSAGES.consentRequired);
             } else {
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',

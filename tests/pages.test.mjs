@@ -164,3 +164,17 @@ test('the request modal reads the package name from the heading level the pricin
     assert.ok(cards.length >= 2);
     for (const card of cards) assert.match(card, new RegExp(`<${modal[1]}\\b`), 'kartda JS-in axtardığı başlıq yoxdur');
 });
+
+test('the CV form refuses to send without the personal-data consent checkbox', () => {
+    const consent = tags(read('cv.html'), 'input').find(t => attr(t, 'id') === 'cv-consent');
+    assert.ok(consent, 'razılıq qutusu yoxdur');
+    assert.equal(attr(consent, 'name'), 'consent', 'qutunun name-i olmalıdır, yoxsa FormData-ya düşmür və backend razılığı görmür');
+    assert.match(consent, /\brequired\b/);
+
+    const js = read('js/cv.js');
+    const check = js.indexOf('!consentEl.checked');
+    assert.ok(check > 0, 'cv.js razılıq qutusunu yoxlamır');
+    assert.ok(check < js.indexOf('tcSubmit('), 'razılıq yoxlaması serverə sorğudan əvvəl olmalıdır');
+    assert.ok(check < js.indexOf('api.web3forms.com'), 'razılıq yoxlaması Web3Forms yolundan əvvəl olmalıdır');
+    assert.match(js, /errs\.consent/, 'backend razılığı rədd edəndə istifadəçiyə mesaj göstərilməlidir');
+});

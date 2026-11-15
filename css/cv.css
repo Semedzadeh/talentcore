@@ -121,6 +121,16 @@
     cursor: pointer;
 }
 
+.cv-consent.invalid {
+    color: #e5484d;
+}
+
+.cv-consent.invalid input {
+    outline: 2px solid #e5484d;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
 .cv-form-card .btn-primary {
     align-self: flex-start;
 }
