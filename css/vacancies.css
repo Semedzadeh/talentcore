@@ -1902,6 +1902,13 @@ body.light-theme .popular-chip.active {
         width: 100%;
         justify-content: space-between;
     }
+    /* Düymə solda dar durur, menyu isə sağa yapışanda solda ekrandan çıxırdı —
+       indi düymənin sol kənarından açılır və ekrandan kənara çıxmır. */
+    .vacancy-sort-menu {
+        left: 0;
+        right: auto;
+        max-width: calc(100vw - 32px);
+    }
 }
 
 /* Detal panelindəki məlumat başlıqlarının (Yer, Məşğulluq, İş forması, Maaş,
@@ -2659,4 +2666,124 @@ body.light-theme .detail-section ul li {
     width: 62px;
     font-size: 11px;
     letter-spacing: -0.1px;
+}
+
+/* Telefon/planşetdə banner: şəkil enə sığır (yazı tam görünür), amma bu halda yalnız ~50px
+   hündür zolaq alınırdı. İndi banner şəklin altından-üstündən 22px böyüdülüb: arxa fon eyni
+   şəklin bulanıq, tam ölçüyə uzadılmış nüsxəsidir (rənglər şəklin özündən gəlir), iti şəkil
+   isə ortada qalır və kənarları bulanıq fona yumşaq keçir — dəyişdirilmiş (--banner-photo)
+   şəkil üçün də eyni işləyir. Header ilə banner arasındakı artıq boşluq da azaldıldı. */
+@media (max-width: 900px) {
+    .vacancies-hero {
+        min-height: calc(13.21vw + 44px);
+    }
+
+    .vacancies-hero::before {
+        background-size: 100% 100%;
+        background-position: center;
+        filter: blur(14px);
+        transform: scale(1.12);
+    }
+
+    .vacancies-hero::after {
+        display: block;
+        background: var(--banner-photo, url('../images/hero-banner.jpg')) no-repeat 6% center / 142vw auto;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 8px, #000 30px, #000 calc(100% - 30px), transparent calc(100% - 8px));
+        mask-image: linear-gradient(to bottom, transparent 8px, #000 30px, #000 calc(100% - 30px), transparent calc(100% - 8px));
+    }
+}
+
+@media (max-width: 768px) {
+    .vacancies-page {
+        padding-top: 84px;
+    }
+}
+
+/* Telefonda detal paneli və axtarış altındakı populyar sorğular səliqəyə salındı:
+   panelin daxili boşluğu 42px → 18px (məzmun enli qalır), logo kiçildi ki, başlıq 4 sətrə
+   düşməsin, etiketlər (Bakı, Tam ştat...) yığcamlaşdı ki, 3 sıraya bölünməsin, tablar
+   panelin eninə bərabər bölündü, populyar sorğular isə alt-alta düzülmək əvəzinə tək sırada
+   yana sürüşdürülür. */
+@media (max-width: 640px) {
+    .vacancy-detail {
+        padding: 20px 18px;
+    }
+
+    .detail-header {
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .detail-header .vacancy-logo {
+        width: 56px;
+        height: 56px;
+    }
+
+    .detail-header .vacancy-logo svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .vacancy-detail h1,
+    .vacancy-detail h2 {
+        font-size: 20px;
+        line-height: 1.3;
+    }
+
+    .vacancy-detail .company-row {
+        font-size: 14px;
+    }
+
+    .detail-meta-row {
+        gap: 8px;
+    }
+
+    .detail-meta-item {
+        padding: 4px 11px;
+    }
+
+    .detail-meta-item .value {
+        font-size: 13px;
+        gap: 6px;
+    }
+
+    .detail-meta-item .value .meta-icon {
+        width: 15px;
+        height: 15px;
+    }
+
+    .detail-deadline-pill {
+        padding: 5px 12px;
+        font-size: 13px;
+    }
+
+    .detail-tabs {
+        gap: 0;
+        margin-top: 14px;
+    }
+
+    .detail-tab {
+        flex: 1;
+        padding: 12px 4px;
+        font-size: 14px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .popular-searches {
+        flex-wrap: nowrap;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .popular-searches::-webkit-scrollbar {
+        display: none;
+    }
+
+    .popular-searches-label,
+    .popular-chip {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
 }
