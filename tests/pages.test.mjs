@@ -178,3 +178,14 @@ test('the CV form refuses to send without the personal-data consent checkbox', (
     assert.ok(check < js.indexOf('api.web3forms.com'), 'razılıq yoxlaması Web3Forms yolundan əvvəl olmalıdır');
     assert.match(js, /errs\.consent/, 'backend razılığı rədd edəndə istifadəçiyə mesaj göstərilməlidir');
 });
+
+test('the CV form never silently turns a vacancy application into a vacancy-less CV', () => {
+    const js = read('js/cv.js');
+    // link adı yoxdursa vakansiyanın adı serverə ayrıca gedir
+    assert.match(js, /formData\.set\('vacancy_title', vacancy\)/);
+    // link adı yalnız uzunluğa görə yoxlanılır: qəribə simvollu (məs. alt xətt) link adı müraciəti "vakansiyasız" etməsin
+    assert.doesNotMatch(js, /\^\[a-z0-9-\]/, 'cv.js link adını dar regex ilə rədd etməməlidir');
+    assert.match(js, /slugParam\.length <= 255/);
+    // fayl limiti aşılanda aydın mesaj
+    assert.match(js, /result\.status === 413/);
+});

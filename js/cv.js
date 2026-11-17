@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const company = (params.get('company') || '').trim();
     const vacancy = (params.get('vacancy') || '').trim();
     // Backend-dən gələn vakansiyanın link adı (slug) — "Müraciət Et" linkində ?slug=... kimi gəlir
-    const vacancySlug = /^[a-z0-9-]{1,200}$/i.test((params.get('slug') || '').trim()) ? params.get('slug').trim() : '';
+    // Link adı serverə olduğu kimi gedir və orada bazadan yoxlanılır (HTML-ə yazılmır), ona görə yalnız uzunluq və idarəedici simvollar yoxlanır
+    const slugParam = (params.get('slug') || '').trim();
+    const vacancySlug = slugParam.length >= 1 && slugParam.length <= 255 && !/[\u0000-\u001f]/.test(slugParam) ? slugParam : '';
 
     // .lang mexanizmi data-az/data-en oxuyur (main.js) — mətni dəyişəndə hər ikisini yazırıq
     const setLang = (id, az, en) => {
@@ -211,7 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
             let serverMessage = '';
             if (useBackend) {
                 // Backend vakansiyanı LİNK ADI (slug) ilə tanıyır; slug yoxdursa vakansiyasız ümumi CV sayılır
-                if (vacancySlug) formData.set('vacancy', vacancySlug); else formData.delete('vacancy');
+                // Link adı yoxdursa vakansiyanın adı ayrıca göndərilir: server şirkət + ad ilə vakansiyanı tapa bilir,
+                // tapmasa adlar Talentcore-un mailində görünür (CV "vakansiyasız" kimi səssizcə itməsin)
+                if (vacancySlug) {
+                    formData.set('vacancy', vacancySlug);
+                } else {
+                    formData.delete('vacancy');
+                    if (vacancy) formData.set('vacancy_title', vacancy);
+                }
                 formData.set('lang', document.documentElement.lang || 'az');
                 const result = await window.tcSubmit('/apply', formData);
                 success = result.ok;
@@ -220,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const errs = result.data && result.data.errors;
                 if (!serverMessage && errs && (errs.attachment || errs.motivation_letter)) serverMessage = t(MESSAGES.badFile);
                 if (!serverMessage && errs && errs.consent) serverMessage = t(MESSAGES.consentRequired);
+                if (!serverMessage && result.status === 413) serverMessage = t(MESSAGES.tooLarge);
             } else {
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
