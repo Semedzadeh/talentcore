@@ -655,13 +655,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // "Müraciət Et" kliklərinin sayğacı (forma yolu / sayta keçid ayrıca sayılır)
-    detailEl.addEventListener('click', (e) => {
+    // "Müraciət Et" kliklərinin sayğacı (forma yolu / sayta keçid ayrıca sayılır).
+    // auxclick: orta düymə ilə yeni tabda açmaq da sayılır (adi "click" onu tutmur).
+    function trackApplyClick(e) {
+        if (e.type === 'auxclick' && e.button !== 1) return;
         const btn = e.target.closest('.detail-apply-btn');
         if (!btn || !window.tcTrack || !BACKEND) return;
         const v = VACANCIES.find(x => x.id === activeVacancyId);
         window.tcTrack(btn.dataset.apply === 'external' ? 'external_apply_click' : 'apply_click', { vacancy: v && v.slug });
-    });
+    }
+    detailEl.addEventListener('click', trackApplyClick);
+    detailEl.addEventListener('auxclick', trackApplyClick);
 
     function renderMobilePagination(totalPages) {
         if (!isMobile() || totalPages <= 1) return '';
