@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { pages, read, exists, stripped, attr, tags, root } from './helpers.mjs';
+import { pages, read, exists, stripped, attr, tags, root, runScript } from './helpers.mjs';
 import path from 'node:path';
 
 const PUBLIC_PAGES = pages.filter(p => p !== '404.html');
@@ -190,16 +190,84 @@ test('the CV form never silently turns a vacancy application into a vacancy-less
     assert.match(js, /result\.status === 413/);
 });
 
-test('the CV page has a Telegram and WhatsApp contact card under the process card, with safe external links', () => {
-    const html = read('cv.html');
-    assert.match(html, /<div class="cv-aside">[\s\S]*class="cv-info glass-effect"[\s\S]*class="cv-contact glass-effect"/, 'əlaqə kartı proses kartının altında olmalıdır');
-    const links = tags(html, 'a').filter(t => /cv-contact-link/.test(attr(t, 'class') || ''));
-    assert.deepEqual(links.map(t => attr(t, 'data-social')), ['telegram', 'whatsapp']);
-    for (const link of links) {
-        assert.match(attr(link, 'href'), /^https:\/\//, 'ehtiyat ünvan https olmalıdır');
-        assert.equal(attr(link, 'target'), '_blank');
-        assert.match(attr(link, 'rel'), /noopener/);
+test('the CV and contact pages have a "follow us" Telegram/WhatsApp card under the left info card, with safe external links', () => {
+    for (const [page, aside, info] of [['cv.html', 'cv-aside', 'cv-info'], ['contact.html', 'contact-aside', 'contact-info']]) {
+        const html = read(page);
+        assert.match(html, new RegExp(`<div class="${aside}">[\\s\\S]*class="${info} glass-effect"[\\s\\S]*class="follow-card[^"]* glass-effect"`), `${page}: kart sol məlumat kartının altında olmalıdır`);
+        const links = tags(html, 'a').filter(t => /\bfollow-link\b/.test(attr(t, 'class') || ''));
+        assert.deepEqual(links.map(t => attr(t, 'data-social')), ['telegram', 'whatsapp'], page);
+        for (const link of links) {
+            assert.match(attr(link, 'href'), /^https:\/\//, `${page}: ehtiyat ünvan https olmalıdır`);
+            assert.equal(attr(link, 'target'), '_blank', page);
+            assert.match(attr(link, 'rel'), /noopener/, page);
+        }
     }
-    // admin parametrləri bu düymələrə də tətbiq olunur
+    // ikonların ölçüsü HTML-də də yazılıb: CSS keşdə köhnə qalsa (deploy-dan sonrakı ilk dəqiqələr) ikon səhifəni tutan nəhəng dairəyə çevrilməsin
+    for (const page of ['cv.html', 'contact.html']) {
+        const card = read(page).match(/class="follow-card[^"]*glass-effect"[\s\S]*?(?=Sağ: )/);
+        assert.ok(card, `${page}: kart tapılmadı`);
+        const sizes = [...card[0].matchAll(/<svg\b([^>]*)>/g)].map(m => /\bwidth="\d+"/.test(m[1]) && /\bheight="\d+"/.test(m[1]));
+        assert.equal(sizes.length, 4, `${page}: kartda 4 ikon olmalıdır (2 marka + 2 ox)`);
+        assert.ok(sizes.every(Boolean), `${page}: kartdakı hər svg-nin width/height atributu olmalıdır`);
+    }
+    // admin parametrləri bu düymələrə də tətbiq olunur; ortaq stil global.css-dədir
     assert.match(read('js/site-settings.js'), /\[data-social\]/);
+    // kartın bütün stili AYRI css/follow.css-dədir və iki səhifə onu yükləyir: yeni faylın köhnə keşi olmur,
+    // paylaşılan global/cv/contact.css isə deploy-dan sonra bir neçə dəqiqə köhnə qala bilər (o zaman kart pozulurdu)
+    const follow = read('css/follow.css');
+    for (const rule of ['.follow-card', '.follow-link', '.follow-icon', '.cv-aside', '.contact-aside']) assert.ok(follow.includes(rule), `follow.css-də ${rule} yoxdur`);
+    for (const page of ['cv.html', 'contact.html']) assert.match(read(page), /<link rel="stylesheet" href="css\/follow\.css">/, `${page} follow.css-i yükləmir`);
+    for (const shared of ['css/global.css', 'css/cv.css', 'css/contact.css']) assert.doesNotMatch(read(shared), /follow-|-aside/, `${shared}-də kartın qaydası olmamalıdır (follow.css-də olmalıdır)`);
+});
+
+test('two-column form rows can shrink with their card instead of pushing the second field out of it', () => {
+    const css = read('css/global.css');
+    const row = css.match(/\.form-row\s*\{[^}]*\}/)[0];
+    assert.match(row, /grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/, '1fr 1fr xananın minimum enini aşa bilmir və kartdan çıxır');
+    assert.match(css.match(/\.form-group\s*\{[^}]*\}/)[0], /min-width:\s*0/);
+});
+
+// ---- "Bizi sosial mediada izlə!" bildirişi (ilk dəfə gələnlərə, sağ aşağıda) ----
+
+test('the follow notification is wired through main.js only for first-time visitors and never on pages that already have the card', () => {
+    const main = read('js/main.js');
+    const toast = read('js/follow-toast.js');
+    // eyni yaddaş açarı: main.js "görüb" üçün faylı yükləmir, follow-toast.js onu yazır
+    const key = toast.match(/var KEY = '([^']+)'/)[1];
+    assert.ok(main.includes(`getItem('${key}')`), 'main.js eyni yaddaş açarına baxmalıdır');
+    assert.match(main, /new URL\('follow-toast\.js', TC_MAIN_SRC/, 'skript main.js-in yanından yüklənməlidir (/vakansiya/... daxil)');
+    assert.match(main, /querySelector\('\.follow-card'\)/, 'kart olan səhifələrdə (cv, contact) fayl yüklənməməlidir');
+    assert.match(toast, /querySelector\('\.follow-card'\)/);
+    // yaddaş yoxdursa (məxfi rejim) göstərilmir: hər səhifədə çıxıb bezdirməsin
+    assert.match(toast, /catch \(e\) \{ return; \}/);
+    // klaviatura, ayarlar, üslub faylı
+    assert.match(toast, /e\.key === 'Escape'/);
+    assert.match(toast, /addEventListener\('tc-settings'/);
+    assert.match(toast, /follow-toast\.css/);
+    assert.match(read('js/site-settings.js'), /window\.TC_SOCIALS = socials/);
+    // yalnız http(s) ünvanlar qəbul edilir
+    assert.match(toast, /\^https\?:/);
+});
+
+test('the follow notification styles cover themes, phones, reduced motion and stay under the request modal', () => {
+    const css = read('css/follow-toast.css');
+    assert.match(css, /\.tc-toast\.is-visible/);
+    assert.match(css, /body\.light-theme \.tc-toast\b/);
+    assert.match(css, /@media \(max-width: 560px\)/);
+    assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+    assert.match(css, /@media print/);
+    const z = Number(css.match(/\.tc-toast \{[^}]*z-index:\s*(\d+)/)[1]);
+    assert.ok(z > 1001 && z < 2000, `z-index (${z}) başlığın (1001) üstündə, sorğu pəncərəsinin (2000) altında olmalıdır`);
+});
+
+test('every text of the follow notification has RU and ZH translations', () => {
+    const toast = read('js/follow-toast.js');
+    const sandbox = runScript('js/translations.js', { document: { documentElement: { lang: 'az' } } });
+    const dict = sandbox.window.TC_I18N;
+    const keys = [...toast.matchAll(/data-az="([^"]+)"/g)].map(m => m[1]);
+    keys.push(...[...toast.matchAll(/msg\('([^']+)'/g)].map(m => m[1]));
+    assert.ok(keys.length >= 4, 'bildirişin mətnləri tapılmadı');
+    for (const key of keys) {
+        for (const lang of ['ru', 'zh']) assert.ok(dict[lang][key], `${lang} tərcüməsi yoxdur: ${key}`);
+    }
 });

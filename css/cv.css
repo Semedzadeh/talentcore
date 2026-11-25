@@ -44,122 +44,11 @@
 }
 
 .cv-info h2,
-.cv-contact h2,
 .cv-form-card h2 {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-color);
     margin-bottom: 24px;
-}
-
-/* Sol sütun: proses kartı + altında birbaşa əlaqə kartı */
-.cv-aside {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-/* Sol (aşağı): Telegram / WhatsApp */
-.cv-contact h2 {
-    margin-bottom: 8px;
-}
-
-.cv-contact-text {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.cv-contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.cv-contact-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 16px 12px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--text-color);
-    text-decoration: none;
-    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-body.light-theme .cv-contact-link {
-    background: rgba(255, 255, 255, 0.75);
-}
-
-.cv-contact-link:hover,
-.cv-contact-link:focus-visible {
-    border-color: #d97742;
-    background: rgba(217, 119, 66, 0.08);
-    transform: translateX(3px);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-    outline: none;
-}
-
-.cv-contact-icon {
-    flex-shrink: 0;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-}
-
-.cv-contact-icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.cv-contact-telegram .cv-contact-icon {
-    background: linear-gradient(135deg, #3cb4ec, #1d93c9);
-    box-shadow: 0 6px 16px rgba(42, 171, 238, 0.3);
-}
-
-.cv-contact-whatsapp .cv-contact-icon {
-    background: linear-gradient(135deg, #34d878, #1aa656);
-    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
-}
-
-.cv-contact-body {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.cv-contact-body strong {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-.cv-contact-body span {
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.cv-contact-arrow {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    color: var(--text-muted);
-    transition: transform 0.25s ease, color 0.25s ease;
-}
-
-.cv-contact-link:hover .cv-contact-arrow,
-.cv-contact-link:focus-visible .cv-contact-arrow {
-    color: #d97742;
-    transform: translateX(4px);
 }
 
 /* Sol: Necə İşləyir addımları */
@@ -332,13 +221,6 @@ body.light-theme .cv-contact-link {
     .cv-grid {
         grid-template-columns: 1fr;
     }
-    /* Telefonda sıra: proses izahı → form → birbaşa əlaqə (əlaqə kartı formu aşağı itələməsin) */
-    .cv-aside {
-        display: contents;
-    }
-    .cv-info { order: 1; }
-    .cv-form-card { order: 2; }
-    .cv-contact { order: 3; }
 }
 
 @media (max-width: 768px) {

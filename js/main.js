@@ -1,3 +1,6 @@
+// js/follow-toast.js bu faylın yanından yüklənir (yol hər səhifədə düzgün olsun: /vakansiya/... daxil)
+const TC_MAIN_SRC = document.currentScript && document.currentScript.src;
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Dil Dəyişdirici (az | en | ru | zh) — seçilmiş dil localStorage-də ('lang')
@@ -100,4 +103,22 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburgerBtn.setAttribute('aria-expanded', isActive); // ekran oxuyucuları üçün menyu vəziyyəti
         });
     }
+
+    // 4. "Bizi sosial mediada izlə!" bildirişi — YALNIZ saytı ilk dəfə açanlara (ayrıca fayl: js/follow-toast.js + css/follow-toast.css).
+    // Yaddaşda qeyd varsa (artıq görüb) və ya səhifədə kart artıq varsa (cv.html, contact.html) fayl heç yüklənmir.
+    (function () {
+        const preview = /[?&]toast=1(&|$)/.test(location.search);
+        if (!preview) {
+            try {
+                if (window.localStorage.getItem('tc_follow_toast_v1') !== null) return;
+            } catch (e) {
+                return;
+            }
+            if (document.querySelector('.follow-card')) return;
+        }
+        const script = document.createElement('script');
+        script.src = new URL('follow-toast.js', TC_MAIN_SRC || '/js/main.js').href;
+        script.async = true;
+        document.body.appendChild(script);
+    })();
 });

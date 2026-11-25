@@ -1,0 +1,170 @@
+/* "Bizi izləyin" kartı (Telegram / WhatsApp) — cv.html və contact.html.
+   Qəsdən AYRI fayldadır: yeni faylın köhnə nüsxəsi brauzerdə/Cloudflare-də keşlənə bilməz, ona görə deploy-dan sonra
+   köhnə global.css / cv.css / contact.css ilə birləşəndə də kart düzgün görünür (kartın bütün qaydaları və sütun
+   qabları burada toplanıb). Düymələrin ünvanları admin → Sayt parametrləri-dən gəlir (js/site-settings.js, data-social). */
+
+/* Sol sütun: məlumat kartı + altında "bizi izləyin" kartı */
+.cv-aside,
+.contact-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* contact.html: sol sütun və form eyni xəttdə bitsin (cv.html-də forma hündürdür, orada "start" qalır) */
+.contact-grid {
+    align-items: stretch;
+}
+
+/* Kart */
+.follow-card h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+.follow-card-text {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.follow-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.follow-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px 12px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body.light-theme .follow-link {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.follow-link:hover,
+.follow-link:focus-visible {
+    border-color: #d97742;
+    background: rgba(217, 119, 66, 0.08);
+    transform: translateX(3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+    outline: none;
+}
+
+.follow-icon {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.follow-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.follow-link-telegram .follow-icon {
+    background: linear-gradient(135deg, #3cb4ec, #1d93c9);
+    box-shadow: 0 6px 16px rgba(42, 171, 238, 0.3);
+}
+
+.follow-link-whatsapp .follow-icon {
+    background: linear-gradient(135deg, #34d878, #1aa656);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+}
+
+.follow-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.follow-body strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.follow-body span {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.follow-arrow {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.follow-link:hover .follow-arrow,
+.follow-link:focus-visible .follow-arrow {
+    color: #d97742;
+    transform: translateX(4px);
+}
+
+/* Yığcam variant (contact.html): sol sütunda boş yer azdır — sətirlər yan-yana, eni çatmayanda (dar sütun, telefon) avtomatik alt-alta */
+.follow-card--compact {
+    padding: 22px 24px;
+}
+
+.follow-card--compact .follow-card-text {
+    margin-bottom: 16px;
+}
+
+.follow-card--compact .follow-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+}
+
+.follow-card--compact .follow-link {
+    padding: 10px 12px 10px 10px;
+    gap: 10px;
+}
+
+.follow-card--compact .follow-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.follow-card--compact .follow-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.follow-card--compact .follow-arrow {
+    display: none;
+}
+
+/* Telefon/planşet: sütunlar alt-alta; sıra: məlumat → form → "bizi izləyin" (kart formu aşağı itələməsin) */
+@media (max-width: 900px) {
+    .cv-aside,
+    .contact-aside {
+        display: contents;
+    }
+    .cv-info,
+    .contact-info { order: 1; }
+    .cv-form-card,
+    .contact-form-card { order: 2; }
+    .follow-card { order: 3; }
+}

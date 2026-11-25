@@ -97,6 +97,7 @@
 
             // Sosial ikonlar (footer): aria-label-ə görə
             var socials = s.socials || {};
+            window.TC_SOCIALS = socials;   // js/follow-toast.js (bildiriş) ünvanları buradan oxuyur
             document.querySelectorAll('.social-icon').forEach(function (a) {
                 var key = (a.getAttribute('aria-label') || '').toLowerCase();
                 var url = safeUrl(socials[key]);

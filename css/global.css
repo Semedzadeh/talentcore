@@ -104,7 +104,8 @@ button, input, select, textarea, summary {
 /* Ortaq Form Komponentləri (contact.css və cv.css-də istifadə olunur) */
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* minmax(0, 1fr): xananın öz minimum eni (input ~220px) sütunu şişirib kartdan çıxarmasın (kiçik noutbuk enlərində Email xanası kəsilirdi) */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
 }
 
@@ -112,6 +113,7 @@ button, input, select, textarea, summary {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 0;
 }
 
 .form-group label {

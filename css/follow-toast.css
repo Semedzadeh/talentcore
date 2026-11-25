@@ -1,0 +1,276 @@
+/* "Bizi sosial mediada izlə!" bildirişi — js/follow-toast.js (saytı ilk dəfə açanlara, sağ aşağıda, bir dəfə).
+   Özünə məxsus fayldır; rənglər açıq/tünd tema üçün burada verilib (body.light-theme). */
+.tc-toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1200;
+    width: min(392px, calc(100vw - 32px));
+    padding: 22px 22px 20px;
+    border-radius: 22px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(217, 119, 66, 0.2) 0%, rgba(217, 119, 66, 0) 55%),
+        linear-gradient(160deg, rgba(22, 36, 72, 0.97) 0%, rgba(11, 17, 32, 0.98) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+        0 30px 70px rgba(2, 6, 18, 0.55),
+        0 8px 24px rgba(2, 6, 18, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+    transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.18, 0.9, 0.25, 1.08);
+}
+
+/* Yuxarıda nazik narıncı xətt */
+.tc-toast::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #c4642f, #e8a15f 55%, #c4642f);
+}
+
+.tc-toast.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.tc-toast.is-leaving {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tc-toast-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-right: 28px;
+}
+
+.tc-toast-badge {
+    position: relative;
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, #d97742, #b9521e);
+    box-shadow: 0 10px 22px rgba(196, 100, 47, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Diqqət çəkən yumşaq dalğa (iki dəfə) */
+.tc-toast-badge::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    border: 2px solid rgba(217, 119, 66, 0.65);
+    opacity: 0;
+    animation: tcToastPing 2.2s ease-out 0.9s 2;
+}
+
+@keyframes tcToastPing {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+.tc-toast-title {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    text-wrap: balance;
+}
+
+.tc-toast-text {
+    margin: 5px 0 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(226, 232, 240, 0.86);
+    text-wrap: balance;
+}
+
+.tc-toast-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.35s ease;
+}
+
+.tc-toast-close:hover,
+.tc-toast-close:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    transform: rotate(90deg);
+    outline: none;
+}
+
+.tc-toast-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tc-toast-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 9px 12px 9px 9px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tc-toast-link:hover,
+.tc-toast-link:focus-visible {
+    transform: translateY(-2px);
+    border-color: #d97742;
+    background: rgba(217, 119, 66, 0.14);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    outline: none;
+}
+
+.tc-toast-icon {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+}
+
+.tc-toast-telegram .tc-toast-icon {
+    background: linear-gradient(135deg, #3cb4ec, #1d93c9);
+    box-shadow: 0 5px 14px rgba(42, 171, 238, 0.35);
+}
+
+.tc-toast-whatsapp .tc-toast-icon {
+    background: linear-gradient(135deg, #34d878, #1aa656);
+    box-shadow: 0 5px 14px rgba(37, 211, 102, 0.35);
+}
+
+.tc-toast-linktext {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+}
+
+.tc-toast-linktext strong {
+    font-size: 13.5px;
+    font-weight: 700;
+}
+
+.tc-toast-linktext span {
+    font-size: 11.5px;
+    color: rgba(226, 232, 240, 0.75);
+}
+
+/* Açıq tema */
+body.light-theme .tc-toast {
+    color: #0f1d3d;
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(217, 119, 66, 0.14) 0%, rgba(217, 119, 66, 0) 55%),
+        linear-gradient(160deg, #ffffff 0%, #f1f5fa 100%);
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow:
+        0 30px 70px rgba(15, 23, 42, 0.22),
+        0 8px 24px rgba(15, 23, 42, 0.12),
+        inset 0 1px 0 #ffffff;
+}
+
+body.light-theme .tc-toast-title {
+    color: #0f1d3d;
+}
+
+body.light-theme .tc-toast-text {
+    color: #475569;
+}
+
+body.light-theme .tc-toast-close {
+    border-color: rgba(15, 23, 42, 0.12);
+    background: rgba(15, 23, 42, 0.05);
+    color: #475569;
+}
+
+body.light-theme .tc-toast-close:hover,
+body.light-theme .tc-toast-close:focus-visible {
+    background: rgba(15, 23, 42, 0.1);
+    color: #0f1d3d;
+}
+
+body.light-theme .tc-toast-link {
+    border-color: rgba(15, 23, 42, 0.12);
+    background: #ffffff;
+    color: #0f1d3d;
+}
+
+body.light-theme .tc-toast-link:hover,
+body.light-theme .tc-toast-link:focus-visible {
+    background: #fff7f1;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+}
+
+body.light-theme .tc-toast-linktext span {
+    color: #64748b;
+}
+
+/* Telefon: ekranın aşağısına yayılır */
+@media (max-width: 560px) {
+    .tc-toast {
+        left: 12px;
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        width: auto;
+        padding: 20px 18px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tc-toast,
+    .tc-toast.is-leaving {
+        transform: none;
+        transition: opacity 0.2s ease;
+    }
+    .tc-toast-badge::after {
+        animation: none;
+    }
+    .tc-toast-close:hover,
+    .tc-toast-link:hover {
+        transform: none;
+    }
+}
+
+@media print {
+    .tc-toast {
+        display: none;
+    }
+}
