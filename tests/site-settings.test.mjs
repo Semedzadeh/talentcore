@@ -14,6 +14,10 @@ function loadSite({ hostname = 'talentcore.az', origin = 'https://talentcore.az'
     const icons = ['Instagram', 'LinkedIn', 'Facebook'].map(label => ({
         label, href: '#', getAttribute(n) { return n === 'aria-label' ? label : null; }, setAttribute(n, v) { if (n === 'href') this.href = v; },
     }));
+    // cv.html-dəki "Sualınız var?" kartının Telegram/WhatsApp düymələri (data-social; HTML-dəki ünvan ehtiyatdır)
+    const contact = ['telegram', 'whatsapp'].map(key => ({
+        key, href: 'default-' + key, getAttribute(n) { return n === 'data-social' ? key : null; }, setAttribute(n, v) { if (n === 'href') this.href = v; },
+    }));
     const forms = Object.fromEntries(['contact-form', 'cv-form', 'request-form'].map(id => {
         const button = { parentNode: { insertBefore: (box, btn) => inserted.push({ id, box, btn }) } };
         return [id, { querySelector: () => button }];
@@ -33,14 +37,14 @@ function loadSite({ hostname = 'talentcore.az', origin = 'https://talentcore.az'
         createElement: () => ({ style: {}, setAttribute() {}, className: '' }),
         head: { appendChild: el => appended.push(el) },
         documentElement: { style: { setProperty: (k, v) => { props[k] = v; } } },
-        querySelectorAll: sel => (sel === '.social-icon' ? icons : []),
+        querySelectorAll: sel => (sel === '.social-icon' ? icons : sel === '[data-social]' ? contact : []),
     };
     const window = { dispatchEvent: e => dispatched.push(e.type) };
     const sandbox = runScript('js/site-settings.js', {
         window, document, fetch, navigator, location: { hostname, origin, pathname: '/vakansiyalar', search: '?x=1' },
         CustomEvent: class { constructor(type) { this.type = type; } },
     }, src => src.replace(/var TURNSTILE_SITE_KEY = '[^']*';/, `var TURNSTILE_SITE_KEY = '${siteKey ?? ''}';`));
-    return { w: sandbox.window, fetchCalls, beacons, props, icons, inserted, appended, dispatched };
+    return { w: sandbox.window, fetchCalls, beacons, props, icons, contact, inserted, appended, dispatched };
 }
 
 test('without a known host (GitHub Pages, local file) the script stays inert: no requests, no tracking', async () => {
@@ -184,4 +188,16 @@ test('no widget or script is added without a site key', async () => {
 
     assert.equal(inserted.length, 0);
     assert.equal(appended.length, 0);
+});
+
+test('the contact buttons on the CV page take their Telegram/WhatsApp links from the admin settings, unsafe or missing ones keep the default', async () => {
+    const { contact } = loadSite({ settings: { socials: { telegram: 'https://t.me/talentcore_az', whatsapp: 'javascript:alert(1)' } } });
+    await tick();
+
+    assert.equal(contact[0].href, 'https://t.me/talentcore_az');   // adminin yazdığı Telegram linki
+    assert.equal(contact[1].href, 'default-whatsapp');             // təhlükəli link qəbul edilmir, ehtiyat qalır
+
+    const none = loadSite({ settings: {} });
+    await tick();
+    assert.deepEqual(none.contact.map(a => a.href), ['default-telegram', 'default-whatsapp']);
 });

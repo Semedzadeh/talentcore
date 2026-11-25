@@ -189,3 +189,17 @@ test('the CV form never silently turns a vacancy application into a vacancy-less
     // fayl limiti aşılanda aydın mesaj
     assert.match(js, /result\.status === 413/);
 });
+
+test('the CV page has a Telegram and WhatsApp contact card under the process card, with safe external links', () => {
+    const html = read('cv.html');
+    assert.match(html, /<div class="cv-aside">[\s\S]*class="cv-info glass-effect"[\s\S]*class="cv-contact glass-effect"/, 'əlaqə kartı proses kartının altında olmalıdır');
+    const links = tags(html, 'a').filter(t => /cv-contact-link/.test(attr(t, 'class') || ''));
+    assert.deepEqual(links.map(t => attr(t, 'data-social')), ['telegram', 'whatsapp']);
+    for (const link of links) {
+        assert.match(attr(link, 'href'), /^https:\/\//, 'ehtiyat ünvan https olmalıdır');
+        assert.equal(attr(link, 'target'), '_blank');
+        assert.match(attr(link, 'rel'), /noopener/);
+    }
+    // admin parametrləri bu düymələrə də tətbiq olunur
+    assert.match(read('js/site-settings.js'), /\[data-social\]/);
+});

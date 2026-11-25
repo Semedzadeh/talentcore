@@ -102,6 +102,11 @@
                 var url = safeUrl(socials[key]);
                 if (url) a.setAttribute('href', url);
             });
+            // Səhifə daxilindəki əlaqə düymələri (məs. cv.html): data-social="telegram|whatsapp" — HTML-dəki ünvan ehtiyatdır
+            document.querySelectorAll('[data-social]').forEach(function (a) {
+                var url = safeUrl(socials[(a.getAttribute('data-social') || '').toLowerCase()]);
+                if (url) a.setAttribute('href', url);
+            });
 
             // Ana səhifə (və hero istifadə edən səhifələr) arxa fon şəkli
             var hero = safeUrl(s.hero_image);
